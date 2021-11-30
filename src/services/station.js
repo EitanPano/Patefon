@@ -37,8 +37,8 @@ var station = {
   "songs": [
     {
       "mini-artist": {
-          "id": "ma101",
-          "name": "Drake"
+        "id": "ma101",
+        "name": "Drake"
       },
       "id": "s1001",
       "title": "The Meters - Cissy Strut",
@@ -54,19 +54,19 @@ var station = {
       "addedBy": {}
     },
   ],
-  "msgs": [
-    {
-      id: 'm101',
-      from: '{mini-user}',
-      txt: 'Manish?'
-    }
-  ]
+  // "msgs": [
+  //   {
+  //     id: 'm101',
+  //     from: '{mini-user}',
+  //     txt: 'Manish?'
+  //   }
+  // ]
 }
 
 // var artist = {
 //   "_id": '',
 //   "fullname": '',
-  
+
 //   "songs": [
 //     {
 

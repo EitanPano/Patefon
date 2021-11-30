@@ -9,7 +9,6 @@ import { utilService } from './util.service';
 
 const KEY = 'stationsDB';
 _createStations();
-query();
 export const stationService = {
     query,
     getById,

@@ -1,5 +1,7 @@
 <template>
-    <h1>Station view</h1>
+    <section class="main-layout">
+        <h1>Station view</h1>
+    </section>
 </template>
 
 <script>

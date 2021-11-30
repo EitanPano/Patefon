@@ -1,0 +1,57 @@
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: $side-nav;
+    background: rgb(0, 0, 0);
+
+    .router-link-exact-active {
+        background: rgba(128, 128, 128, 0.35);
+        color: white;
+    }
+
+    .logo-container {
+        height: 4.6em;
+        padding-right: 2em;
+        max-width: $side-nav;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 3.5em;
+        }
+
+        h1 {
+            margin: 0.3em 0.1em 0;
+        }
+    }
+
+    .main-nav {
+        display: flex;
+        flex-direction: column;
+
+        .main-links {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.2em;
+        }
+
+        a {
+            padding-left: 1em;
+            font-size: 0.9em;
+            margin: 0 0.5em;
+            font-weight: bold;
+            line-height: 2.8em;
+            border-radius: 0.25em;
+
+            transition: 0.3s;
+
+            &:hover {
+                color: white;
+            }
+        }
+    }
+
+}

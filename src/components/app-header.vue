@@ -1,12 +1,13 @@
 <template>
-    <h1>Home page</h1>
+    <h1>Header</h1>
 </template>
 
 <script>
-
 export default {
-  name: 'Home',
-  components: {
-  }
+    
 }
 </script>
+
+<style>
+
+</style>

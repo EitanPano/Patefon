@@ -1,3 +1,4 @@
+// import { filter } from 'core-js/core/array';
 import { storageService } from './async-storage.service'
 import { localStorageService } from './local-storage.service'
 import { utilService } from './util.service';
@@ -24,6 +25,11 @@ window.stationService = stationService
 
 function query(filterBy) {
     return storageService.query(KEY)
+        .then(stations => {
+            if (filterBy) { }
+
+            return stations
+        })
     // return httpService.get(`station`, filterBy)
 }
 
@@ -59,12 +65,6 @@ async function save(station) {
 function getEmptystation() {
     return {
         name: '',
-        price: 0,
-        labels: [],
-        createdAt: Date.now(),
-        inStock: true,
-        reviews: ['worth your money'],
-        imgUrl: 'https://cdn-icons-png.flaticon.com/512/3082/3082060.png'
     }
 }
 function _createStations() {

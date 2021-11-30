@@ -71,8 +71,6 @@ var artist = {
     {
       "albumCover": 'URL//////',
       "publishedAt": 'TIME//////'
-
-
     }
   ]
 }

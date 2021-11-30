@@ -10,6 +10,9 @@ import "./styles/styles.scss";
 Vue.config.productionTip = false
 
 new Vue({
+  created() {
+    this.$store.dispatch({ type: "loadStations" });
+  },
   router,
   store,
   render: h => h(app)

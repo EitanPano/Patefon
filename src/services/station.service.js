@@ -1,3 +1,4 @@
+// import { filter } from 'core-js/core/array';
 import { storageService } from './async-storage.service'
 import { localStorageService } from './local-storage.service'
 import { utilService } from './util.service';
@@ -9,7 +10,6 @@ import { utilService } from './util.service';
 
 const KEY = 'stationsDB';
 _createStations();
-
 export const stationService = {
     query,
     getById,
@@ -24,6 +24,11 @@ window.stationService = stationService
 
 function query(filterBy) {
     return storageService.query(KEY)
+        .then(stations => {
+            if (filterBy) { }
+
+            return stations
+        })
     // return httpService.get(`station`, filterBy)
 }
 
@@ -59,19 +64,14 @@ async function save(station) {
 function getEmptystation() {
     return {
         name: '',
-        price: 0,
-        labels: [],
-        createdAt: Date.now(),
-        inStock: true,
-        reviews: ['worth your money'],
-        imgUrl: 'https://cdn-icons-png.flaticon.com/512/3082/3082060.png'
     }
 }
 function _createStations() {
     var stations = localStorageService.load(KEY)
     if (!stations || !stations.length) {
         stations = [
-            _createStation('Rap Caviar', ['Rap', 'Pop'], [
+            _createStation('Rap Caviar','https://ichef.bbci.co.uk/news/976/cpsprodpb/7648/production/_120408203_gettyimages-1153762018.jpg',
+             ['Rap', 'Pop'], [
                 {
                     _id: utilService.makeId(),
                     title: 'Gods Plan',
@@ -94,7 +94,8 @@ function _createStations() {
                 }
             ]
             ),
-            _createStation('Rock Bands', ['Rock', 'Alternative', '80s'], [
+            _createStation('Rock Bands','https://media.pitchfork.com/photos/61322a5f38b5d9c727b0d17e/4:3/w_2364,h_1773,c_limit/Drake.jpg',
+             ['Rock', 'Alternative', '80s'], [
                 {
                     _id: utilService.makeId(),
                     title: 'Californication',
@@ -122,10 +123,11 @@ function _createStations() {
     return stations;
 }
 
-function _createStation(name, tags, songs) {
+function _createStation(name,imgUrl, tags, songs) {
     return {
         _id: utilService.makeId(),
         name,
+        imgUrl,
         createdAt: Date.now(),
         tags,
         songs,

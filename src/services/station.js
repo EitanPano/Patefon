@@ -63,15 +63,18 @@ var station = {
   // ]
 }
 
-// var artist = {
-//   "_id": '',
-//   "fullname": '',
+var artist = {
+  "_id": '',
+  "fullname": '',
 
-//   "songs": [
-//     {
+  "albums": [
+    {
+      "albumCover": 'URL//////',
+      "publishedAt": 'TIME//////'
 
-//     }
-//   ]
-// }
+
+    }
+  ]
+}
 
 const user = {}

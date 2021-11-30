@@ -1,5 +1,7 @@
 <template>
-    <h1>Header</h1>
+    <aside class="top-bar">
+        <h1>TOP BAR</h1>
+    </aside>
 </template>
 
 <script>

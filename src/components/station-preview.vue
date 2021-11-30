@@ -4,7 +4,9 @@
     <ul class="station-preview-tags">
       <li v-for="(tag, index) in station.tags" :key="index">{{ tag }}</li>
     </ul>
-      <router-link :to="'/station/' + station._id">  <img :src="station.imgUrl" > </router-link>
+    <router-link :to="'/station/' + station._id">
+      <img :src="station.imgUrl" />
+    </router-link>
   </section>
 </template>
 
@@ -15,12 +17,8 @@ export default {
     return {};
   },
   created() {},
-  methods: {
-
-  },
-  computed: {
-
-  },
+  methods: {},
+  computed: {},
 };
 </script>
 

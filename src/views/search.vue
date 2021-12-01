@@ -1,7 +1,7 @@
 <template>
-    <section class="main-layout">
-        <h1>Search View</h1>
-    </section>
+  <section class="main-layout">
+    <h1>Search View</h1>
+  </section>
 </template>
 
 <script>

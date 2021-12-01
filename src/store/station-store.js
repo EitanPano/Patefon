@@ -13,10 +13,10 @@ export const stationStore = {
         }
     },
     mutations: {
-        setStations(state, stations) {
+        setStations(state, { stations }) {
             state.stations = stations;
         },
-        setFilter(state, filterBy) {
+        setFilter(state, { filterBy }) {
             state.filterBy = filterBy;
         }
     },

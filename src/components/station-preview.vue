@@ -1,24 +1,28 @@
 <template>
-  <section class="station-preview">
-    <router-link :to="'/station/' + station._id">
-      <img :src="station.imgUrl" />
-    </router-link>
-    <p>{{ station.name }}</p>
-    <ul class="station-preview-tags">
-      <li v-for="(tag, index) in station.tags" :key="index">{{ tag }}</li>
-    </ul>
-  </section>
+    <article @mouseleave="isHover = false" @mouseenter="isHover = true" @click="enterStation(station._id)" class="station-preview">
+        <img :src="station.imgUrl" />
+        <p>{{ station.name }}</p>
+        <p>By {{ station.createdBy.name }}</p>
+        <transition name=fade>
+            <button class="btn btn-play" v-if="isHover">▶</button>
+        </transition>
+    </article>
 </template>
 
 <script>
 export default {
-  props: ["station"],
-  data() {
-    return {};
-  },
-  created() {},
-  methods: {},
-  computed: {},
+    props: ["station"],
+    data() {
+        return {
+            isHover: false
+        };
+    },
+    methods: {
+        enterStation(stationId) {
+            this.$router.push('/station/' + stationId)
+        }
+    },
+    computed: {},
 };
 </script>
 

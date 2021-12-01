@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import stationSongList from "../components/station-song-list.vue";
+import stationSongList from "../components/song-list.vue";
 import { stationService } from "../services/station.service.js";
 export default {
   components: {

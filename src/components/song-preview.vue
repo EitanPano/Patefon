@@ -1,8 +1,10 @@
 <template>
-  <section class="station-song-preview">
-    <p>{{ song.title }}</p>
+  <section class="song-preview">
+    <iframe width="100" height="100" :src=" `https://www.youtube.com/embed/${song.url}`"></iframe>
+    <div>{{ song.title }}</div>
     <img :src="song.imgUrl">
-    <iframe width="300" height="300" :src=" `https://www.youtube.com/embed/${song.url}`"></iframe>
+    <button> Delete </button>
+
   </section>
 </template>
 

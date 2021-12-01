@@ -31,6 +31,11 @@ const routes = [
     component: edit
   },
   {
+    path: '/station/liked',
+    name: 'Station',
+    component: station
+  },
+  {
     path: '/station/:id?',
     name: 'Station',
     component: station

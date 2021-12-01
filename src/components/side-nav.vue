@@ -11,8 +11,8 @@
                     <router-link to="/search">Search</router-link>
                     <router-link to="/library">Library</router-link>
                 </div>
-                <router-link to="edit">Create Playlist</router-link>
-                <router-link to="station/liked">Liked Songs</router-link>
+                <router-link to="/edit">Create Playlist</router-link>
+                <router-link to="/station/liked">Liked Songs</router-link>
             </ul>
         </nav>
         <div class="burger-menu" @click="toggleMenu" :class="menuOpen">

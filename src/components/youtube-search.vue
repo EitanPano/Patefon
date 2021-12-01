@@ -27,7 +27,7 @@ export default {
        async searchYoutube() {
            try {
                const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${this.searchInput}&key=AIzaSyAomDP_lSwHk85kO2WgJnTRrKAlQ_jTxKM`);
-                console.log(res.data);
+                // console.log(res.data);
                 this.youtubeItems = res.data;
          }
            catch(err) {

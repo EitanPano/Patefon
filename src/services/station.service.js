@@ -9,6 +9,7 @@ import { utilService } from './util.service';
 
 // TEST DATA
 import { default as stationsDB } from '../data/stationsDB.json';
+// import { filter } from 'core-js/core/array';
 
 const KEY = 'stationsDB';
 
@@ -23,26 +24,98 @@ export const stationService = {
 
 // Debug technique
 window.stationService = stationService;
+// const likedSongs = stations.reduce((acc, station) => {
+//     const songs = station.songs.filter(song => song.isLiked) ;
+//     if(songs.length) acc.push(...songs)
+//     return acc;
+// }, []);
 
 async function query(filterBy = {}) {
     try {
         let stations = await storageService.query(KEY);
         if (filterBy.isLiked) {
-            const likedSongs = stations.reduce((acc, station) => {
-                const songs = station.songs.filter(song => song.isLiked) ;
-                if(songs.length) acc.push(...songs)
-                return acc;
-            }, []);
-            // const likedSongs = [] 
-            // stations.forEach(station => {station.songs.forEach(song => song.isLiked ? likedSongs.push(song) : null)})
-            console.log('line 38', likedSongs);
+            const likedSongs = [] 
+            stations.forEach(station => {station.songs.forEach(song => song.isLiked ? likedSongs.push(song) : null)})
             return likedSongs;
         }
 
+        // var dataObjectMap = stations.reduce(function (data, station) {
+        //     var songs = station.songs.filter(song => song.title.toLowerCase().includes(filterBy.txt.toLowerCase())) || []
+        //     console.log('songs', songs);
+        //     console.log('station', station);
+        //     if (songs.length) {
+        //         songs.forEach(song => {
+        //             if (station.songs.includes(song) && !data.stations.includes(station)) {
+        //                 data.stations.push(station);
+        //             }
+        //             if (data.songs.includes(song)) return
+        //             data.songs.push(song);
+        //             // console.log('went through If');
+        //         })
+        //     }
+        //     console.log(data);
+        //     return data
+        // }, { songs: [], stations: [] })
+
+        // if (dataObjectMap.songs.length > 1) {
+        //     console.log('longer than 1');
+        //     return dataObjectMap
+        // }
+        // else if (dataObjectMap.songs.length === 1) {
+        //     var artistName = dataObjectMap.songs[0].title;
+        //     console.log(artistName);
+        //     //with real data after having the artist name we can add more songs of the same artist to the dataObjectMap . with dataObjectMap.relatedSongs
+        //     return dataObjectMap
+        // }
+
+
         return stations;
-    } catch {}
-    // return httpService.get(`station`, filterBy)
+        // return httpService.get(`station`, filterBy)
+    } catch {
+
+    }
 }
+
+
+// function query(filterBy) {
+//     return storageService.query(KEY)
+//         .then(stations => {
+//             if (filterBy) {
+//                 console.log(filterBy.txt);
+//                 var dataObjectMap = stations.reduce(function (data, station) {
+//                     var songs = station.songs.filter(song => song.title.toLowerCase().includes(filterBy.txt.toLowerCase())) || []
+//                     console.log('songs', songs);
+//                     console.log('station', station);
+//                     if (songs.length) {
+//                         songs.forEach(song => {
+//                             if (station.songs.includes(song) && !data.stations.includes(station)) {
+//                                 data.stations.push(station);
+//                             }
+//                             if (data.songs.includes(song)) return
+//                             data.songs.push(song);
+//                             // console.log('went through If');
+//                         })
+//                     }
+//                     console.log(data);
+//                     return data
+//                 }, { songs: [], stations: [] })
+
+//                 if (dataObjectMap.songs.length > 1) {
+//                     console.log('longer than 1');
+//                     return dataObjectMap
+//                 }
+//                 else if (dataObjectMap.songs.length === 1) {
+//                     var artistName = dataObjectMap.songs[0].title;
+//                     console.log(artistName);
+//                     //with real data after having the artist name we can add more songs of the same artist to the dataObjectMap . with dataObjectMap.relatedSongs
+//                     return dataObjectMap
+//                 }
+
+//             }
+//             return stations
+//         })
+    
+// }
 
 async function getById(stationId) {
     const station = await storageService.get(KEY, stationId);

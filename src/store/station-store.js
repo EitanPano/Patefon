@@ -11,6 +11,7 @@ export const stationStore = {
     },
     getters: {
         getStations(state) {
+            console.log(state.stations);
             return state.stations
         },
         currStation(state) {

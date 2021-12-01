@@ -2,7 +2,9 @@
     width: calc(100% - $side-nav);
     margin-left: $side-nav;
     margin-top: $top-bar;
-    background: white;
+    margin-bottom: 4em;
+    padding: 0 20px;
+    // overflow-x: hidden;
 
     display: grid;
     grid-template-columns: $layoutPadding 1fr $layoutPadding;
@@ -28,10 +30,9 @@
     }
 }
 
-.toyd-grid {
-    margin-top: 2.5em;
+.grid-container {
     display: grid;
-    grid-template-columns: repeat( auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat( auto-fit, minmax(10em, 1fr));
     gap: 20px;
     grid-auto-flow: dense;
 }

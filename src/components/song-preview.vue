@@ -16,12 +16,8 @@ export default {
     return {};
   },
   created() {},
-  methods: {
-
-  },
-  computed: {
-
-  },
+  methods: {},
+  computed: {},
 };
 </script>
 

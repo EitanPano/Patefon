@@ -30,11 +30,11 @@ const routes = [
     name: 'Edit',
     component: edit
   },
-  {
-    path: '/station/liked',
-    name: 'Station',
-    component: station
-  },
+  // {
+  //   path: '/station/liked',
+  //   name: 'likedStation',
+  //   component: station
+  // },
   {
     path: '/station/:id?',
     name: 'Station',

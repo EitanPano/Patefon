@@ -15,24 +15,26 @@
 </template>
 
 <script>
-import stationPreview from '@/components/station-preview.vue'
+import stationPreview from "@/components/station-preview.vue";
 export default {
     methods: {
         goLikedSongs() {
-            this.$router.push('station/liked')
-        }
+            this.$router.push("station/liked");
+        },
+    },
+    created() {
+        this.$store.dispatch({ type: "loadStations", filterBy: {isLiked: false} });
     },
     computed: {
         stations() {
-            return this.$store.getters.getStations
-        }
+            return this.$store.getters.getStations;
+        },
     },
     components: {
-        stationPreview
-    }
-}
+        stationPreview,
+    },
+};
 </script>
 
 <style>
-
 </style>

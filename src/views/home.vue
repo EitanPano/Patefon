@@ -1,7 +1,8 @@
 <template>
   <section class="main-layout home-page">
     <h1>Home page</h1>
-    <station-list :stations="showStations" />
+    <!-- <station-list :stations="showStations" /> -->
+    <station-list v-if="showStations" :stations="showStations" />
   </section>
 </template>
 

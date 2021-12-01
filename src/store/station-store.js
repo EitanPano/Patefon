@@ -4,30 +4,58 @@ export { stationService } from '../services/station.service.js';
 
 export const stationStore = {
     state: {
+        likedStation: [],
+        currStation: [],
+        mappedStations: [],
         stations: [],
         filterBy: ''
     },
     getters: {
         getStations(state) {
+            // console.log(state.stations);
             return state.stations
+        },
+        currStation(state) {
+            return state.currStation
+        },
+        likedStation(state) {
+            return state.likedStation;
         }
     },
     mutations: {
         setStations(state, { stations }) {
             state.stations = stations;
         },
+        setCurrStation(state, {station}) {
+            state.currStation = station;
+        },
         setFilter(state, { filterBy }) {
             state.filterBy = filterBy;
         },
         addStation(state, {addedStation}) {
             state.stations.push(addedStation)
+        },
+        setLikedStation(state, {stations}){
+            state.likedStation = stations
         }
     },
     actions: {
+        async getById({commit}, {id}) {
+            console.log(id);
+            try{
+                const station = stationService.getById(id);
+                if (station) {
+                    commit({type: 'setCurrStation', station})
+                    return station
+                }
+            }
+            catch{}
+        },
         async loadStations({ commit }, { filterBy }) {
             try {
                 const stations = await stationService.query(filterBy)
-                commit({ type: 'setStations', stations })
+                const type = (filterBy && filterBy.isLiked) ? 'setLikedStation' : 'setStations';
+                commit({ type, stations })
             }
             catch (err) {
                 console.log(err);

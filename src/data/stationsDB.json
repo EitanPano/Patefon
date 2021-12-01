@@ -4,12 +4,15 @@
         "name": "Disney Songs",
         "description": "All time favorite songs from Disney's Movies!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600813979/lybllxgacr5kiu5qsxwe.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Easy",
         "createdBy": {
             "name": "Eitan",
             "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/w_100,h_100,c_thumb,g_face/v1601183977/clr5fhfweew2fyaixprr.jpg",
-            "id": "123"
+            "id": "u013"
         },
         "songs": [
             {
@@ -17,63 +20,72 @@
                 "youtubeId": "GC_mV1IpjWA",
                 "title": "The Little Mermaid - Under the Sea (from The Little Mermaid) ",
                 "imgUrl": "https://i.ytimg.com/vi/GC_mV1IpjWA/hqdefault.jpg",
-                "duration": "3:27"
+                "duration": "3:27",
+                "isLiked": true
             },
             {
                 "id": "6pKG6Tx2",
                 "youtubeId": "LBktP-YRUKE",
                 "title": "Sick Ppl - \"GG\"  @realsickppl",
                 "duration": "3:22",
-                "imgUrl": "https://i.ytimg.com/vi/LBktP-YRUKE/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/LBktP-YRUKE/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "B0k5cCDI",
                 "youtubeId": "k8nrfGOuOzM",
                 "title": "Spithes final round - FDF 2019",
                 "duration": "11:31",
-                "imgUrl": "https://i.ytimg.com/vi/k8nrfGOuOzM/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/k8nrfGOuOzM/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "911PMhQL",
                 "youtubeId": "PgVSbU4Eqk0",
                 "title": "Christina Aguilera - Reflection (\"Mulan\" 2020) ",
                 "duration": "3:44",
-                "imgUrl": "https://i.ytimg.com/vi/PgVSbU4Eqk0/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/PgVSbU4Eqk0/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "0MxulhivCvI",
                 "youtubeId": "0MxulhivCvI",
                 "title": "Hakuna Matata (From \"The Lion King\")",
                 "imgUrl": "https://i.ytimg.com/vi/0MxulhivCvI/hqdefault.jpg",
-                "duration": "4:44"
+                "duration": "4:44",
+                "isLiked": false
             },
             {
                 "id": "98fj3KWL",
                 "youtubeId": "uh4dTLJ9q9o",
                 "title": "Disney Music - Lava (Official Lyric Video from \"Lava\")",
                 "duration": "5:44",
-                "imgUrl": "https://i.ytimg.com/vi/uh4dTLJ9q9o/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/uh4dTLJ9q9o/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "nzd1PdIK",
                 "youtubeId": "GibiNy4d4gc",
                 "title": "Carmen Twillie, Lebo M. - Circle Of Life (Official Video from \"The Lion King\")",
                 "duration": "4:07",
-                "imgUrl": "https://i.ytimg.com/vi/GibiNy4d4gc/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/GibiNy4d4gc/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "oIN5fT5n",
                 "youtubeId": "eGLSPyGszjo",
                 "title": "Will Smith - Prince Ali (From \"Aladdin\")",
                 "imgUrl": "https://i.ytimg.com/vi/eGLSPyGszjo/hqdefault.jpg",
-                "duration": "4:08"
+                "duration": "4:08",
+                "isLiked": true
             },
             {
                 "id": "ldBFNRp7",
                 "youtubeId": "ysb_gxJ8LE4",
                 "title": "I Just Can't Wait to Be King (From \"The Lion King\")",
                 "duration": "3:32",
-                "imgUrl": "https://i.ytimg.com/vi/ysb_gxJ8LE4/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/ysb_gxJ8LE4/hqdefault.jpg",
+                "isLiked": false
             }
         ]
     },
@@ -82,12 +94,15 @@
         "name": "Rap Israeli",
         "description": "ראפ ישראלי בועט, גם מחתרתי ומסחרי",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600845807/zmq5ltfawme2h4czvonw.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Israeli",
         "createdBy": {
             "name": "Nir",
             "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/c_thumb,w_200,g_face/v1600700980/h1xxkhwainjt1kzrwebq.jpg",
-            "id": "014a"
+            "id": "u14a"
         },
         "songs": [
             {
@@ -95,14 +110,16 @@
                 "youtubeId": "jP4XtOEs-1s",
                 "title": "רביד פלוטניק - כפרה שלי / Ravid Plotnik - Kapara Sheli",
                 "imgUrl": "https://i.ytimg.com/vi/jP4XtOEs-1s/hqdefault.jpg",
-                "duration": "4:27"
+                "duration": "4:27",
+                "isLiked": false
             },
             {
                 "id": "3PJmE-ucx_o",
                 "youtubeId": "3PJmE-ucx_o",
                 "title": "טונה - גם זה יעבור // Tuna - Gam Ze Ya'avor",
                 "imgUrl": "https://i.ytimg.com/vi/3PJmE-ucx_o/hqdefault.jpg",
-                "duration": "5:11"
+                "duration": "5:11",
+                "isLiked": false
             }
         ]
     },
@@ -111,12 +128,65 @@
         "name": "Singer/Songwriter",
         "description": "The best Singer/Songwriter compilation.\nEnchanting vocal and a guitar.",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600814004/ikjsopbdamtaqbqydccs.png",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Easy",
         "createdBy": {
             "name": "Mark",
             "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/c_thumb,w_200,g_face/v1600701457/j6w7qrjtrtzu2ufks64z.jpg",
-            "id": "015a"
+            "id": "u015"
+        },
+        "songs": [
+            {
+                "id": "7k0CAhyi",
+                "youtubeId": "RBumgq5yVrA",
+                "title": "Passenger | Let Her Go ",
+                "duration": "4:15",
+                "imgUrl": "https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg",
+                "isLiked": false
+            },
+            {
+                "id": "quWkzuH7",
+                "youtubeId": "ZAYZmIfHEiU",
+                "title": "Passenger | Home (Official Album Audio)",
+                "duration": "5:50",
+                "imgUrl": "https://i.ytimg.com/vi/ZAYZmIfHEiU/hqdefault.jpg",
+                "isLiked": false
+            },
+            {
+                "id": "zfKNUYZ9",
+                "youtubeId": "YrprvL0FX-E",
+                "title": "Girls Here First | Only Come Out At Night | Official Music Video",
+                "duration": "1:40",
+                "imgUrl": "https://i.ytimg.com/vi/YrprvL0FX-E/hqdefault.jpg",
+                "isLiked": false
+            },
+            {
+                "id": "MSr6OLqD",
+                "youtubeId": "vq2wZyi4vBE",
+                "title": "Passenger | And I Love Her ",
+                "duration": "2:45",
+                "imgUrl": "https://i.ytimg.com/vi/vq2wZyi4vBE/hqdefault.jpg",
+                "isLiked": false
+            }
+        ]
+    },
+    {
+        "_id": "5f70c27fa9489f73a54f8a68",
+        "name": "Best of Coldplay",
+        "description": "Probably the most popular band in the world!",
+        "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600813315/q0jxukjnvzfnspcltont.webp",
+        "tags": [
+            "love",
+            "happy"
+        ],
+        "genre": "Pop",
+        "createdBy": {
+            "name": "Mark",
+            "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/w_100,h_100,c_thumb,g_face/v1601183977/clr5fhfweew2fyaixprr.jpg",
+            "id": "u015"
         },
         "songs": [
             {
@@ -127,89 +197,60 @@
                 "imgUrl": "https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg"
             },
             {
-                "id": "quWkzuH7",
-                "youtubeId": "ZAYZmIfHEiU",
-                "title": "Passenger | Home (Official Album Audio)",
-                "duration": "5:50",
-                "imgUrl": "https://i.ytimg.com/vi/ZAYZmIfHEiU/hqdefault.jpg"
-            },
-            {
-                "id": "zfKNUYZ9",
-                "youtubeId": "YrprvL0FX-E",
-                "title": "Girls Here First | Only Come Out At Night | Official Music Video",
-                "duration": "1:40",
-                "imgUrl": "https://i.ytimg.com/vi/YrprvL0FX-E/hqdefault.jpg"
-            },
-            {
-                "id": "MSr6OLqD",
-                "youtubeId": "vq2wZyi4vBE",
-                "title": "Passenger | And I Love Her ",
-                "duration": "2:45",
-                "imgUrl": "https://i.ytimg.com/vi/vq2wZyi4vBE/hqdefault.jpg"
-            }
-        ]
-    },
-    {
-        "_id": "5f70c27fa9489f73a54f8a68",
-        "name": "Best of Coldplay",
-        "description": "Probably the most popular band in the world!",
-        "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600813315/q0jxukjnvzfnspcltont.webp",
-        "tags": ["love", "happy"],
-        "genre": "Pop",
-        "createdBy": {
-            "name": "Mark",
-            "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/w_100,h_100,c_thumb,g_face/v1601183977/clr5fhfweew2fyaixprr.jpg",
-            "id": "123"
-        },
-        "songs": [
-            {
                 "id": "VawCW0tw",
                 "youtubeId": "1G4isv_Fylg",
                 "title": "Coldplay - Paradise ",
                 "duration": "4:21",
-                "imgUrl": "https://i.ytimg.com/vi/1G4isv_Fylg/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/1G4isv_Fylg/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "JuqNuVcF",
                 "youtubeId": "k4V3Mo61fJM",
                 "title": "Coldplay - Fix You ",
                 "duration": "4:56",
-                "imgUrl": "https://i.ytimg.com/vi/k4V3Mo61fJM/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/k4V3Mo61fJM/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "7olRycp2",
                 "youtubeId": "YykjpeuMNEk",
                 "title": "Coldplay - Hymn For The Weekend ",
                 "duration": "4:21",
-                "imgUrl": "https://i.ytimg.com/vi/YykjpeuMNEk/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/YykjpeuMNEk/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "5YzxQAB3",
                 "youtubeId": "VPRjCeoBqrI",
                 "title": "Coldplay - A Sky Full Of Stars ",
                 "duration": "4:14",
-                "imgUrl": "https://i.ytimg.com/vi/VPRjCeoBqrI/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/VPRjCeoBqrI/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "OvR0yAL5",
                 "youtubeId": "yKNxeF4KMsY",
                 "title": "Coldplay - Yellow ",
                 "duration": "4:33",
-                "imgUrl": "https://i.ytimg.com/vi/yKNxeF4KMsY/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/yKNxeF4KMsY/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "O7M2xx8u",
                 "youtubeId": "1G4isv_Fylg",
                 "title": "Coldplay - Paradise ",
                 "duration": "4:21",
-                "imgUrl": "https://i.ytimg.com/vi/1G4isv_Fylg/hqdefault.jpg"
+                "imgUrl": "https://i.ytimg.com/vi/1G4isv_Fylg/hqdefault.jpg",
+                "isLiked": false
             },
             {
                 "id": "bDGYFacD",
                 "youtubeId": "QtXby3twMmI",
                 "title": "Coldplay - Adventure Of A Lifetime ",
                 "imgUrl": "https://i.ytimg.com/vi/QtXby3twMmI/hqdefault.jpg",
-                "duration": "5:16"
+                "duration": "5:16",
+                "isLiked": false
             }
         ]
     },
@@ -218,12 +259,15 @@
         "name": "Rock with Muse",
         "description": "It is the best progressive rock band nowadays... ",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600815277/uwngqfoqlijwp0fss8xe.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Rock",
         "createdBy": {
             "name": "Nir",
             "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/w_100,h_100,c_thumb,g_face/v1601183977/clr5fhfweew2fyaixprr.jpg",
-            "id": "123"
+            "id": "u014"
         },
         "songs": [
             {
@@ -231,35 +275,40 @@
                 "youtubeId": "dbB-mICjkQM",
                 "title": "Muse - Plug In Baby ",
                 "imgUrl": "https://i.ytimg.com/vi/dbB-mICjkQM/hqdefault.jpg",
-                "duration": "3:41"
+                "duration": "3:41",
+                "isLiked": false
             },
             {
                 "id": "G_sBOsh-vyI",
                 "youtubeId": "G_sBOsh-vyI",
                 "title": "Muse - Knights Of Cydonia  (Video)",
                 "imgUrl": "https://i.ytimg.com/vi/G_sBOsh-vyI/hqdefault.jpg",
-                "duration": "6:06"
+                "duration": "6:06",
+                "isLiked": true
             },
             {
                 "id": "3dm_5qWWDV8",
                 "youtubeId": "3dm_5qWWDV8",
                 "title": "Muse - Hysteria [Official Music Video]",
                 "imgUrl": "https://i.ytimg.com/vi/3dm_5qWWDV8/hqdefault.jpg",
-                "duration": "3:47"
+                "duration": "3:47",
+                "isLiked": true
             },
             {
                 "id": "Pgum6OT_VH8",
                 "youtubeId": "Pgum6OT_VH8",
                 "title": "Muse - Starlight [Official Music Video]",
                 "imgUrl": "https://i.ytimg.com/vi/Pgum6OT_VH8/hqdefault.jpg",
-                "duration": "4:05"
+                "duration": "4:05",
+                "isLiked": false
             },
             {
                 "id": "zhAmug6Ts6o",
                 "youtubeId": "zhAmug6Ts6o",
                 "title": "Muse - Time Is Running Out (Official Music Video)",
                 "imgUrl": "https://i.ytimg.com/vi/zhAmug6Ts6o/hqdefault.jpg",
-                "duration": "4:02"
+                "duration": "4:02",
+                "isLiked": false
             }
         ]
     },
@@ -268,12 +317,15 @@
         "name": "Queen",
         "description": "Fun fun fun! Playlist of Queen!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600815410/x5vckj6lovsxgmab6uhm.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Rock",
         "createdBy": {
             "name": "Eitan",
             "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/w_100,h_100,c_thumb,g_face/v1601183977/clr5fhfweew2fyaixprr.jpg",
-            "id": "123"
+            "id": "u013"
         },
         "songs": [
             {
@@ -281,49 +333,56 @@
                 "youtubeId": "f4Mc-NYPHaQ",
                 "title": "Queen - I Want To Break Free ",
                 "imgUrl": "https://i.ytimg.com/vi/f4Mc-NYPHaQ/hqdefault.jpg",
-                "duration": "4:32"
+                "duration": "4:32",
+                "isLiked": false
             },
             {
                 "id": "fJ9rUzIMcZQ",
                 "youtubeId": "fJ9rUzIMcZQ",
                 "title": "Queen – Bohemian Rhapsody (Official Video Remastered)",
                 "imgUrl": "https://i.ytimg.com/vi/fJ9rUzIMcZQ/hqdefault.jpg",
-                "duration": "6:00"
+                "duration": "6:00",
+                "isLiked": false
             },
             {
                 "id": "HgzGwKwLmgM",
                 "youtubeId": "HgzGwKwLmgM",
                 "title": "Queen - Don't Stop Me Now ",
                 "imgUrl": "https://i.ytimg.com/vi/HgzGwKwLmgM/hqdefault.jpg",
-                "duration": "3:37"
+                "duration": "3:37",
+                "isLiked": false
             },
             {
                 "id": "kijpcUv-b8M",
                 "youtubeId": "kijpcUv-b8M",
                 "title": "Queen - Somebody To Love ",
                 "imgUrl": "https://i.ytimg.com/vi/kijpcUv-b8M/hqdefault.jpg",
-                "duration": "5:10"
+                "duration": "5:10",
+                "isLiked": false
             },
             {
                 "id": "t99KH0TR-J4",
                 "youtubeId": "t99KH0TR-J4",
                 "title": "Queen - The Show Must Go On ",
                 "imgUrl": "https://i.ytimg.com/vi/t99KH0TR-J4/hqdefault.jpg",
-                "duration": "4:23"
+                "duration": "4:23",
+                "isLiked": false
             },
             {
                 "id": "rY0WxgSXdEE",
                 "youtubeId": "rY0WxgSXdEE",
                 "title": "Queen - Another One Bites the Dust ",
                 "imgUrl": "https://i.ytimg.com/vi/rY0WxgSXdEE/hqdefault.jpg",
-                "duration": "3:43"
+                "duration": "3:43",
+                "isLiked": false
             },
             {
                 "id": "o-0ygW-B_gI",
                 "youtubeId": "o-0ygW-B_gI",
                 "title": "Queen - Radio Ga Ga (Live Aid 1985)",
                 "imgUrl": "https://i.ytimg.com/vi/o-0ygW-B_gI/hqdefault.jpg",
-                "duration": "4:02"
+                "duration": "4:02",
+                "isLiked": true
             }
         ]
     },
@@ -332,12 +391,15 @@
         "name": "Melodic Trance",
         "description": "Trance that will send shivers down your spine!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600816521/anl1pxsisnjrqkgicqii.png",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Electronic",
         "createdBy": {
             "name": "Eitan",
             "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/w_100,h_100,c_thumb,g_face/v1601183977/clr5fhfweew2fyaixprr.jpg",
-            "id": "123"
+            "id": "u013"
         },
         "songs": [
             {
@@ -345,35 +407,40 @@
                 "youtubeId": "NcPg80JqNX8",
                 "title": "Gaia - Tuvan (Original Mix)",
                 "imgUrl": "https://i.ytimg.com/vi/NcPg80JqNX8/hqdefault.jpg",
-                "duration": "8:15"
+                "duration": "8:15",
+                "isLiked": false
             },
             {
                 "id": "pgU0E4MgieE",
                 "youtubeId": "pgU0E4MgieE",
                 "title": "Ferry Corsten - Take Me (Original Extended)",
                 "imgUrl": "https://i.ytimg.com/vi/pgU0E4MgieE/hqdefault.jpg",
-                "duration": "8:07"
+                "duration": "8:07",
+                "isLiked": false
             },
             {
                 "id": "u5jIjBdmm9w",
                 "youtubeId": "u5jIjBdmm9w",
                 "title": "William Orbit - Adagio For Strings (Ferry Corsten Mix)",
                 "imgUrl": "https://i.ytimg.com/vi/u5jIjBdmm9w/hqdefault.jpg",
-                "duration": "6:32"
+                "duration": "6:32",
+                "isLiked": true
             },
             {
                 "id": "LBJo2KvFOCQ",
                 "youtubeId": "LBJo2KvFOCQ",
                 "title": "Above & Beyond - Anjunabeach (Original Mix)",
                 "imgUrl": "https://i.ytimg.com/vi/LBJo2KvFOCQ/hqdefault.jpg",
-                "duration": "8:19"
+                "duration": "8:19",
+                "isLiked": false
             },
             {
                 "id": "JynnHicr0ug",
                 "youtubeId": "JynnHicr0ug",
                 "title": "Daniel Kandi - Venice Beach (Original Mix)",
                 "imgUrl": "https://i.ytimg.com/vi/JynnHicr0ug/hqdefault.jpg",
-                "duration": "5:29"
+                "duration": "5:29",
+                "isLiked": false
             }
         ]
     }

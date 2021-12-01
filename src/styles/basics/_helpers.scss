@@ -8,3 +8,31 @@
 .ratio-toyd { @include aspect-ratio(100, 80); }
 
 .ratio-poster { @include aspect-ratio(100, 150); }
+
+//FLEX
+
+.flex{
+    display: flex;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+.justify-center{
+    justify-content: center;
+}
+
+.align-center{
+    align-items: center;
+}
+.space-between{
+    justify-content: space-between;
+}
+
+//Buttons
+
+.clear-btn{
+    padding: 0;
+    border: none;
+    background: none;
+}

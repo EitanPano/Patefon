@@ -9,6 +9,7 @@ import { utilService } from './util.service';
 
 
 const KEY = 'stationsDB';
+
 _createStations();
 export const stationService = {
     query,
@@ -35,7 +36,7 @@ function query(filterBy) {
 async function getById(stationId) {
     const station = await storageService.get(KEY, stationId)
     // const station = await httpService.get(`station/${stationId}`)
-    // gWatchedstation = station;
+    // gWatchedStation = station;
     return station;
 }
 function remove(stationId) {
@@ -74,8 +75,8 @@ function _createStations() {
     var stations = localStorageService.load(KEY)
     if (!stations || !stations.length) {
         stations = [
-            _createStation('Rap Caviar','https://ichef.bbci.co.uk/news/976/cpsprodpb/7648/production/_120408203_gettyimages-1153762018.jpg',
-             ['Rap', 'Pop'], [
+            _createStation('Rap Caviar', 'https://ichef.bbci.co.uk/news/976/cpsprodpb/7648/production/_120408203_gettyimages-1153762018.jpg',
+                ['Rap', 'Pop'], [
                 {
                     _id: utilService.makeId(),
                     title: 'Gods Plan',
@@ -98,8 +99,8 @@ function _createStations() {
                 }
             ]
             ),
-            _createStation('Rock Bands','https://media.pitchfork.com/photos/61322a5f38b5d9c727b0d17e/4:3/w_2364,h_1773,c_limit/Drake.jpg',
-             ['Rock', 'Alternative', '80s'], [
+            _createStation('Rock Bands', 'https://media.pitchfork.com/photos/61322a5f38b5d9c727b0d17e/4:3/w_2364,h_1773,c_limit/Drake.jpg',
+                ['Rock', 'Alternative', '80s'], [
                 {
                     _id: utilService.makeId(),
                     title: 'Californication',
@@ -127,7 +128,7 @@ function _createStations() {
     return stations;
 }
 
-function _createStation(name,imgUrl, tags, songs) {
+function _createStation(name, imgUrl, tags, songs) {
     return {
         _id: utilService.makeId(),
         name,

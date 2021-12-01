@@ -2,7 +2,12 @@
   <section class="station-list">
     <ul>
       <li v-for="station in stations" :key="station._id">
-        <station-preview :station="station" @remove="remove" @update="update" />
+        <station-preview
+          class="station-card"
+          :station="station"
+          @remove="remove"
+          @update="update"
+        />
       </li>
     </ul>
   </section>
@@ -16,9 +21,7 @@ export default {
   },
   props: ["stations"],
   data() {
-    return {
-      
-    };
+    return {};
   },
 
   created() {},

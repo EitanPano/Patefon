@@ -35,3 +35,13 @@ button {
 p {
     color: white;
 }
+
+.station-preview {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    img{
+        width: 150px;
+        height: 170px;
+    }
+}

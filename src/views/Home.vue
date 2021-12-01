@@ -1,36 +1,34 @@
 <template>
-    <section class="main-layout">
-        <h1>Home page</h1>
-        <station-list :stations="stations"/>
-    </section>
+  <section class="main-layout home-page">
+    <h1>Home page</h1>
+    <station-list :stations="stations" />
+  </section>
 </template>
 
 <script>
-import {stationService} from '../services/station.service.js'
-import stationList from '../components/station-list.vue';
+import { stationService } from "../services/station.service.js";
+import stationList from "../components/station-list.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    stationList
+    stationList,
   },
-  created () {
-this.loadStations()
+  created() {
+    this.loadStations();
   },
   data() {
     return {
-          stations: [],
-    }
+      stations: [],
+    };
   },
   methods: {
     async loadStations() {
-     try {
-  this.stations = await stationService.query()
-     }
-     catch (err) {
-       console.log(err)
-     }
-  
-    }
-  }
-}
+      try {
+        this.stations = await stationService.query();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
+};
 </script>

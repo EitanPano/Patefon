@@ -27,7 +27,7 @@ export default {
     },
     methods : {
         addSong(song) {
-            console.log(song)
+            // console.log(song)
             // this.emptyStation.songs.push(song)
         }
     }

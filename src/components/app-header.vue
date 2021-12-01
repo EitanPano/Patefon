@@ -42,6 +42,20 @@ export default {
       },
     };
   },
+watch: {
+    $route: {
+      async handler() {
+        try {
+          console.log(this.$route);
+          if (this.$route.name === "Search") this.isSearch = true;
+          else this.isSearch = false;
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      immediate: true,
+    },
+}
 };
 </script>
 

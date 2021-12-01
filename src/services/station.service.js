@@ -1,17 +1,14 @@
 // import { filter } from 'core-js/core/array';
-import { storageService } from './async-storage.service'
-import { localStorageService } from './local-storage.service'
+import { storageService } from './async-storage.service';
+import { localStorageService } from './local-storage.service';
 import { utilService } from './util.service';
 // import { httpService } from './http.service'
 // import { socketService, SOCKET_EVENT_station_UPDATED } from './socket.service'
 // const STORAGE_KEY_LOGGEDIN_station = 'loggedinstation'
 // var gWatchedstation = null;
 
-
 // TEST DATA
 import { default as stationsDB } from '../data/stationsDB.json';
-
-
 
 const KEY = 'stationsDB';
 
@@ -21,31 +18,40 @@ export const stationService = {
     getById,
     remove,
     save,
-    getEmptystation
-}
+    getEmptystation,
+};
 
 // Debug technique
-window.stationService = stationService
+window.stationService = stationService;
 
+async function query(filterBy = {}) {
+    try {
+        let stations = await storageService.query(KEY);
+        if (filterBy.isLiked) {
+            const likedSongs = stations.reduce((acc, station) => {
+                const songs = station.songs.filter(song => song.isLiked) ;
+                if(songs.length) acc.push(...songs)
+                return acc;
+            }, []);
+            // const likedSongs = [] 
+            // stations.forEach(station => {station.songs.forEach(song => song.isLiked ? likedSongs.push(song) : null)})
+            console.log('line 38', likedSongs);
+            return likedSongs;
+        }
 
-function query(filterBy) {
-    return storageService.query(KEY)
-        .then(stations => {
-            if (filterBy) { }
-
-            return stations
-        })
+        return stations;
+    } catch {}
     // return httpService.get(`station`, filterBy)
 }
 
 async function getById(stationId) {
-    const station = await storageService.get(KEY, stationId)
+    const station = await storageService.get(KEY, stationId);
     // const station = await httpService.get(`station/${stationId}`)
     // gWatchedStation = station;
     return station;
 }
 function remove(stationId) {
-    return storageService.remove(KEY, stationId)
+    return storageService.remove(KEY, stationId);
     // return httpService.delete(`station/${stationId}`)
 }
 
@@ -56,7 +62,6 @@ async function save(station) {
     } else {
         const addedStation = await storageService.post(KET, station);
         return addedStation;
-
     }
 
     // if (station._id) station = await httpService.put(`station/${station._id}`, station)
@@ -74,12 +79,12 @@ function getEmptystation() {
         createdAt: Date.now(),
         tags: [],
         songs: [],
-    }
+    };
 }
 function _createStations() {
-    var stations = localStorageService.load(KEY)
+    var stations = localStorageService.load(KEY);
     if (!stations || !stations.length) {
-        stations = stationsDB
+        stations = stationsDB;
         console.log(stations);
         // [
         //     _createStation('Rap Caviar','https://ichef.bbci.co.uk/news/976/cpsprodpb/7648/production/_120408203_gettyimages-1153762018.jpg',
@@ -130,7 +135,7 @@ function _createStations() {
         //         },
         //     ])
         // ]
-        localStorageService.store(KEY, stations)
+        localStorageService.store(KEY, stations);
     }
 }
 
@@ -142,9 +147,8 @@ function _createStation(name, imgUrl, tags, songs) {
         createdAt: Date.now(),
         tags,
         songs,
-    }
+    };
 }
-
 
 // (async ()=>{
 //     await stationService.signup({fullname: 'Puki Norma', stationname: 'station1', password:'123',score: 10000, isAdmin: false})
@@ -152,9 +156,7 @@ function _createStation(name, imgUrl, tags, songs) {
 //     await stationService.signup({fullname: 'Muki G', stationname: 'muki', password:'123', score: 10000})
 // })();
 
-
-
-// This IIFE functions for Dev purposes 
+// This IIFE functions for Dev purposes
 // It allows testing of real time updates (such as sockets) by listening to storage events
 // (async () => {
 // var station = getLoggedinstation()

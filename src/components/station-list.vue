@@ -1,6 +1,6 @@
 <template>
   <section class="station-list">
-    <ul>
+    <ul v-if="stations.length">
       <li v-for="station in stations" :key="station._id">
         <station-preview
           class="station-card"

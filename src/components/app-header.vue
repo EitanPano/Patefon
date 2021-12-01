@@ -46,7 +46,7 @@ watch: {
     $route: {
       async handler() {
         try {
-          console.log(this.$route);
+          console.log('Full path: ',this.$route.fullPath);
           if (this.$route.name === "Search") this.isSearch = true;
           else this.isSearch = false;
         } catch (err) {

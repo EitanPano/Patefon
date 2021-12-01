@@ -8,6 +8,11 @@ import { utilService } from './util.service';
 // var gWatchedstation = null;
 
 
+// TEST DATA
+import { default as stationsDB } from '../data/stationsDB.json';
+
+
+
 const KEY = 'stationsDB';
 _createStations();
 export const stationService = {
@@ -73,58 +78,59 @@ function getEmptystation() {
 function _createStations() {
     var stations = localStorageService.load(KEY)
     if (!stations || !stations.length) {
-        stations = [
-            _createStation('Rap Caviar','https://ichef.bbci.co.uk/news/976/cpsprodpb/7648/production/_120408203_gettyimages-1153762018.jpg',
-             ['Rap', 'Pop'], [
-                {
-                    _id: utilService.makeId(),
-                    title: 'Gods Plan',
-                    imgUrl: 'https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg'
-                },
-                {
-                    _id: utilService.makeId(),
-                    title: 'ESCAPE PLAN',
-                    imgUrl: 'https://resources.tidal.com/images/6e6d7dd0/4f6b/4ff1/b599/cfb5bfef810b/640x640.jpg'
-                },
-                {
-                    id: utilService.makeId(),
-                    title: 'MAFIA',
-                    imgUrl: 'https://resources.tidal.com/images/6e6d7dd0/4f6b/4ff1/b599/cfb5bfef810b/640x640.jpg'
-                },
-                {
-                    id: utilService.makeId(),
-                    title: 'Praise God',
-                    imgUrl: 'https://www.genius-lyrics.com/wp-content/uploads/2021/07/Come-To-Life-Lyrics-Kanye-West-1.jpg'
-                }
-            ]
-            ),
-            _createStation('Rock Bands','https://media.pitchfork.com/photos/61322a5f38b5d9c727b0d17e/4:3/w_2364,h_1773,c_limit/Drake.jpg',
-             ['Rock', 'Alternative', '80s'], [
-                {
-                    _id: utilService.makeId(),
-                    title: 'Californication',
-                    imgUrl: 'https://pictures.abebooks.com/isbn/9780634012327-us.jpg'
-                },
-                {
-                    _id: utilService.makeId(),
-                    title: 'Colors',
-                    imgUrl: 'https://f4.bcbits.com/img/a4290355765_10.jpg'
-                },
-                {
-                    _id: utilService.makeId(),
-                    title: 'The Suburbs',
-                    imgUrl: 'https://img.discogs.com/c7ECdhQmb-AfJXVBNiDjNUP4ARc=/fit-in/600x534/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-2751600-1301254396.jpeg.jpg'
-                },
-                {
-                    _id: utilService.makeId(),
-                    title: 'Do I Wanna Know',
-                    imgUrl: 'https://i1.sndcdn.com/artworks-000116476440-0klyjt-t500x500.jpg'
-                },
-            ])
-        ]
+        stations = stationsDB
+        console.log(stations);
+        // [
+        //     _createStation('Rap Caviar','https://ichef.bbci.co.uk/news/976/cpsprodpb/7648/production/_120408203_gettyimages-1153762018.jpg',
+        //      ['Rap', 'Pop'], [
+        //         {
+        //             _id: utilService.makeId(),
+        //             title: 'Gods Plan',
+        //             imgUrl: 'https://upload.wikimedia.org/wikipedia/en/9/90/Scorpion_by_Drake.jpg'
+        //         },
+        //         {
+        //             _id: utilService.makeId(),
+        //             title: 'ESCAPE PLAN',
+        //             imgUrl: 'https://resources.tidal.com/images/6e6d7dd0/4f6b/4ff1/b599/cfb5bfef810b/640x640.jpg'
+        //         },
+        //         {
+        //             id: utilService.makeId(),
+        //             title: 'MAFIA',
+        //             imgUrl: 'https://resources.tidal.com/images/6e6d7dd0/4f6b/4ff1/b599/cfb5bfef810b/640x640.jpg'
+        //         },
+        //         {
+        //             id: utilService.makeId(),
+        //             title: 'Praise God',
+        //             imgUrl: 'https://www.genius-lyrics.com/wp-content/uploads/2021/07/Come-To-Life-Lyrics-Kanye-West-1.jpg'
+        //         }
+        //     ]
+        //     ),
+        //     _createStation('Rock Bands','https://media.pitchfork.com/photos/61322a5f38b5d9c727b0d17e/4:3/w_2364,h_1773,c_limit/Drake.jpg',
+        //      ['Rock', 'Alternative', '80s'], [
+        //         {
+        //             _id: utilService.makeId(),
+        //             title: 'Californication',
+        //             imgUrl: 'https://pictures.abebooks.com/isbn/9780634012327-us.jpg'
+        //         },
+        //         {
+        //             _id: utilService.makeId(),
+        //             title: 'Colors',
+        //             imgUrl: 'https://f4.bcbits.com/img/a4290355765_10.jpg'
+        //         },
+        //         {
+        //             _id: utilService.makeId(),
+        //             title: 'The Suburbs',
+        //             imgUrl: 'https://img.discogs.com/c7ECdhQmb-AfJXVBNiDjNUP4ARc=/fit-in/600x534/filters:strip_icc():format(webp):mode_rgb():quality(90)/discogs-images/R-2751600-1301254396.jpeg.jpg'
+        //         },
+        //         {
+        //             _id: utilService.makeId(),
+        //             title: 'Do I Wanna Know',
+        //             imgUrl: 'https://i1.sndcdn.com/artworks-000116476440-0klyjt-t500x500.jpg'
+        //         },
+        //     ])
+        // ]
         localStorageService.store(KEY, stations)
     }
-    return stations;
 }
 
 function _createStation(name,imgUrl, tags, songs) {

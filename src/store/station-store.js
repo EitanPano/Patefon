@@ -6,12 +6,13 @@ export const stationStore = {
     state: {
         likedStation: [],
         currStation: [],
+        mappedStations: [],
         stations: [],
         filterBy: ''
     },
     getters: {
         getStations(state) {
-            console.log(state.stations);
+            // console.log(state.stations);
             return state.stations
         },
         currStation(state) {
@@ -50,7 +51,7 @@ export const stationStore = {
         async loadStations({ commit }, { filterBy }) {
             try {
                 const stations = await stationService.query(filterBy)
-                const type = (filterBy && filterBy.isLiked)? 'setLikedStation': 'setStations'
+                const type = (filterBy && filterBy.isLiked) ? 'setLikedStation' : 'setStations';
                 commit({ type, stations })
             }
             catch (err) {

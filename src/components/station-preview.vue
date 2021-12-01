@@ -17,9 +17,6 @@ export default {
             isHover: false
         };
     },
-    created(){
-        console.log(this.station);
-    },
     methods: {
         enterStation(stationId) {
             this.$router.push('/station/' + stationId)

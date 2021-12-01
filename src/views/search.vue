@@ -36,11 +36,11 @@ export default {
   methods: {},
   computed: {
     stations() {
-      console.log(this.$store.getters.getStations);
+      // console.log(this.$store.getters.getStations);
       return this.$store.getters.getStations.stations;
     },
     songs() {
-      console.log(this.$store.getters.getStations.songs);
+      // console.log(this.$store.getters.getStations.songs);
       return this.$store.getters.getStations.songs;
     },
     relatedSongs() {

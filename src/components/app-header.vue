@@ -11,7 +11,13 @@
     </div>
 
     <form>
-      <input type="search" placeholder="Search" v-if="isSearch" />
+      <input
+        type="search"
+        placeholder="Search"
+        v-if="isSearch"
+        @input="filterSongs"
+        v-model="filterBy.txt"
+      />
       <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
     </form>
 
@@ -34,6 +40,7 @@
 
 <script>
 // import func from "vue-editor-bridge";
+import { eventBusService } from "../services/event-bus.service.js";
 export default {
   data() {
     return {
@@ -41,13 +48,31 @@ export default {
       loggedUser: {
         name: "Mark Fishman",
       },
+      filterBy: {
+        txt: "",
+      },
     };
+  },
+  methods: {
+    async filterSongs() {
+      console.log(this.filterBy.txt, "from appheader cmp");
+      try {
+        var stations = await this.$store.dispatch({
+          type: "loadStations",
+          filterBy: this.filterBy,
+        });
+        // eventBusService.$emit("getStations", stations);
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
   },
   watch: {
     $route: {
       async handler() {
         try {
-          console.log(this.$route);
+          // console.log(this.$route);
           if (this.$route.name === "Search") this.isSearch = true;
           else this.isSearch = false;
         } catch (err) {
@@ -56,6 +81,9 @@ export default {
       },
       immediate: true,
     },
+  },
+  components: {
+    eventBusService,
   },
 };
 </script>

@@ -10,6 +10,7 @@ import { utilService } from './util.service';
 
 // TEST DATA
 import { default as stationsDB } from '../data/stationsDB.json';
+// import { filter } from 'core-js/core/array';
 
 
 
@@ -31,8 +32,38 @@ window.stationService = stationService
 function query(filterBy) {
     return storageService.query(KEY)
         .then(stations => {
-            if (filterBy) { }
+            if (filterBy) {
+                console.log(filterBy.txt);
+                var dataObjectMap = stations.reduce(function (data, station) {
+                    var songs = station.songs.filter(song => song.title.toLowerCase().includes(filterBy.txt.toLowerCase())) || []
+                    console.log('songs', songs);
+                    console.log('station', station);
+                    if (songs.length) {
+                        songs.forEach(song => {
+                            if (station.songs.includes(song) && !data.stations.includes(station)) {
+                                data.stations.push(station);
+                            }
+                            if (data.songs.includes(song)) return
+                            data.songs.push(song);
+                            // console.log('went through If');
+                        })
+                    }
+                    console.log(data);
+                    return data
+                }, { songs: [], stations: [] })
 
+                if (dataObjectMap.songs.length > 1) {
+                    console.log('longer than 1');
+                    return dataObjectMap
+                }
+                else if (dataObjectMap.songs.length === 1) {
+                    var artistName = dataObjectMap.songs[0].title;
+                    console.log(artistName);
+                    //with real data after having the artist name we can add more songs of the same artist to the dataObjectMap . with dataObjectMap.relatedSongs
+                    return dataObjectMap
+                }
+
+            }
             return stations
         })
     // return httpService.get(`station`, filterBy)

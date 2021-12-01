@@ -4,7 +4,10 @@
         "name": "Disney Songs",
         "description": "All time favorite songs from Disney's Movies!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600813979/lybllxgacr5kiu5qsxwe.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Easy",
         "createdBy": {
             "name": "Eitan",
@@ -82,7 +85,10 @@
         "name": "Rap Israeli",
         "description": "ראפ ישראלי בועט, גם מחתרתי ומסחרי",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600845807/zmq5ltfawme2h4czvonw.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Israeli",
         "createdBy": {
             "name": "Nir",
@@ -111,7 +117,10 @@
         "name": "Singer/Songwriter",
         "description": "The best Singer/Songwriter compilation.\nEnchanting vocal and a guitar.",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600814004/ikjsopbdamtaqbqydccs.png",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Easy",
         "createdBy": {
             "name": "Mark",
@@ -154,7 +163,10 @@
         "name": "Best of Coldplay",
         "description": "Probably the most popular band in the world!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600813315/q0jxukjnvzfnspcltont.webp",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Pop",
         "createdBy": {
             "name": "Mark",
@@ -162,6 +174,13 @@
             "id": "123"
         },
         "songs": [
+            {
+                "id": "7k0CAhyi",
+                "youtubeId": "RBumgq5yVrA",
+                "title": "Passenger | Let Her Go ",
+                "duration": "4:15",
+                "imgUrl": "https://i.ytimg.com/vi/RBumgq5yVrA/hqdefault.jpg"
+            },
             {
                 "id": "VawCW0tw",
                 "youtubeId": "1G4isv_Fylg",
@@ -218,7 +237,10 @@
         "name": "Rock with Muse",
         "description": "It is the best progressive rock band nowadays... ",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600815277/uwngqfoqlijwp0fss8xe.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Rock",
         "createdBy": {
             "name": "Nir",
@@ -268,7 +290,10 @@
         "name": "Queen",
         "description": "Fun fun fun! Playlist of Queen!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600815410/x5vckj6lovsxgmab6uhm.jpg",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Rock",
         "createdBy": {
             "name": "Eitan",
@@ -332,7 +357,10 @@
         "name": "Melodic Trance",
         "description": "Trance that will send shivers down your spine!",
         "imgUrl": "https://res.cloudinary.com/daqs7x8my/image/upload/v1600816521/anl1pxsisnjrqkgicqii.png",
-        "tags": ["love", "happy"],
+        "tags": [
+            "love",
+            "happy"
+        ],
         "genre": "Electronic",
         "createdBy": {
             "name": "Eitan",

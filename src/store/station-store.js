@@ -9,6 +9,7 @@ export const stationStore = {
     },
     getters: {
         getStations(state) {
+            console.log(state.stations);
             return state.stations
         }
     },
@@ -25,6 +26,7 @@ export const stationStore = {
             try {
                 const stations = await stationService.query(filterBy)
                 commit({ type: 'setStations', stations })
+                return stations
             }
             catch (err) {
                 console.log(err);

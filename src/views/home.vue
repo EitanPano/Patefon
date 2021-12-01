@@ -1,7 +1,7 @@
 <template>
   <section class="main-layout home-page">
     <h1>Home page</h1>
-    <station-list :stations="stations" />
+    <station-list :stations="showStations" />
   </section>
 </template>
 
@@ -14,7 +14,7 @@ export default {
     stationList,
   },
   created() {
-    this.loadStations();
+    this.setGuestUser();
   },
   data() {
     return {
@@ -22,13 +22,14 @@ export default {
     };
   },
   methods: {
-    async loadStations() {
-      try {
-        this.stations = await stationService.query();
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    setGuestUser() {
+      sessionStorage.setItem('logginUser', JSON.stringify({name:'Patefone', imgUrl:'https://res.cloudinary.com/nir-cloudinary/image/upload/v1638375320/patefon_olzyeg.png' , id: '111'}));
+    }
   },
+  computed : {
+    showStations () {
+        return this.$store.getters.getStations;
+    }
+  }
 };
 </script>

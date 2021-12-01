@@ -11,11 +11,10 @@ import { utilService } from './util.service';
 // TEST DATA
 import { default as stationsDB } from '../data/stationsDB.json';
 
-
-
 const KEY = 'stationsDB';
 
 _createStations();
+
 export const stationService = {
     query,
     getById,
@@ -54,7 +53,7 @@ async function save(station) {
         const addedStation = await storageService.put(KEY, station);
         return addedStation;
     } else {
-        const addedStation = await storageService.post(KET, station);
+        const addedStation = await storageService.post(KEY, station);
         return addedStation;
 
     }
@@ -70,12 +69,16 @@ async function save(station) {
 function getEmptystation() {
     return {
         name: '',
+        description : '',
         imgUrl: '',
-        createdAt: Date.now(),
         tags: [],
+        genre : '',
+        createdAt: Date.now(),
+        createdBy : {},
         songs: [],
     }
 }
+
 function _createStations() {
     var stations = localStorageService.load(KEY)
     if (!stations || !stations.length) {

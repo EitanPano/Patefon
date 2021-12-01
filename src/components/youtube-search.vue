@@ -1,7 +1,5 @@
 <template>
     <section class="youtube-search">
-    <h1>Edit View</h1>
-
     <input type="text" v-model="searchInput"/> 
     <button @click="searchYoutube" > Search </button>
     <search-list :youtubeItems="youtubeItems.items" @addSong="addSong"/>

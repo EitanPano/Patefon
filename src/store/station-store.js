@@ -18,6 +18,9 @@ export const stationStore = {
         },
         setFilter(state, { filterBy }) {
             state.filterBy = filterBy;
+        },
+        addStation(state, {addedStation}) {
+            state.stations.push(addedStation)
         }
     },
     actions: {
@@ -34,8 +37,19 @@ export const stationStore = {
         setFilter({ commit, dispatch }, { filterBy }) {
             commit({ type: 'setFilter', filterBy });
             dispatch({ type: 'loadStations', filterBy })
-        }
+        },
+        async addStation ({commit}, {newStation}) {
+            try {
+                const addedStation = await stationService.save(newStation)
+                commit({type:'addStation', addedStation})
+            }
+            catch(err) {
+                console.log(err)
+            }
+        },
+
     },
+
     modules: {
     },
 };

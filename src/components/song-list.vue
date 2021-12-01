@@ -1,18 +1,18 @@
 <template>
-  <section class="station-song-list">
+  <section class="song-list">
     <ul>
       <li v-for="song in songs" :key="song._id">
-        <station-song-preview :song="song" @remove="remove" @update="update" />
+        <song-preview :song="song" @remove="remove" @update="update" />
       </li>
     </ul>
   </section>
 </template>
 
 <script>
-import stationSongPreview from "./station-song-preview.vue";
+import songPreview from "./song-preview.vue";
 export default {
   components: {
-    stationSongPreview,
+    songPreview,
   },
   props: ["songs"],
   data() {

@@ -1,0 +1,21 @@
+
+    .song-list ul {
+        display: flex;
+        flex-direction: column;
+        // align-items: flex-start;
+        justify-content: center;
+        gap: 10px;
+
+        .song-preview {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            img {
+                height: 100px;
+            }
+        }
+    }
+
+
+

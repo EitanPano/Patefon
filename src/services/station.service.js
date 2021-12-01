@@ -64,7 +64,7 @@ async function save(station) {
 function getEmptystation() {
     return {
         name: '',
-        imgUrl,
+        imgUrl : '',
         createdAt: Date.now(),
         tags: [],
         songs: [],

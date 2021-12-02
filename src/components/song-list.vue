@@ -11,7 +11,7 @@
         </div>
         <ul>
             <li v-for="(song, idx) in songs" :key="song._id">
-                <song-preview :song="song" :idx="idx" @remove="remove" @update="update" />
+                <song-preview :song="song" :idx="idx" @removeSong="removeSong" />
             </li>
         </ul>
     </section>
@@ -27,15 +27,10 @@ export default {
     data() {
         return {};
     },
-
     created() {},
-
     methods: {
-        remove(songId) {
-            this.$emit("remove", songId);
-        },
-        update(song) {
-            this.$emit("update", song);
+        removeSong(songId) {
+            this.$emit("removeSong", songId);
         },
     },
     computed: {},

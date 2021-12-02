@@ -11,7 +11,7 @@
                 </div>
             </div>
         </main>
-        <song-list v-if="station" :songs="station.songs" />
+        <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" />
         <song-list v-if="likedSongs" :songs="likedSongs" />
     </section>
 </template>
@@ -32,6 +32,18 @@ export default {
             type: "setFilter",
             filterBy: {},
         });
+    },
+        methods : {
+        async removeSong(songId) { 
+            try {
+            const idx = this.station.songs.findIndex(song=> song.id === songId);
+            this.station.songs.splice(idx,1);
+            this.$store.dispatch({type: 'updateStationAfterRemoveSong', station : this.station})
+            }
+            catch(err) {
+                console.log(err);
+            }
+    },
     },
     computed: {
         currStation() {

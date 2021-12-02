@@ -15,7 +15,7 @@
         <div class="song-actions">
           <button v-if="isHover" class="btn btn-like">❤</button>
           <p>{{ song.duration }}</p>
-          <button v-if="isHover" class="btn btn-delete">✖</button>
+          <button @click="removeSong(song.id)" v-if="isHover" class="btn btn-delete">✖</button>
         </div>
     </article>
 </template>
@@ -29,9 +29,14 @@ export default {
         };
     },
     created() {},
-    methods: {},
-    computed: {},
-};
+    methods: {
+        removeSong (songId) {
+            if (confirm('Remove Song?')) this.$emit('removeSong', songId)
+        }
+    },
+    computed: {
+    },
+}
 </script>
 
 <style>

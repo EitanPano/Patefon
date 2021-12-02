@@ -44,6 +44,10 @@ export const stationStore = {
     setExpandedStations(state, { stations }) {
       state.expandedStations = stations;
     },
+    updateStation(state, {updatedStation}) {
+        const idx = state.stations.findIndex(currStation=> currStation._id === updatedStation._id);
+        state.stations.splice(idx,0,updatedStation);
+    }
   },
   actions: {
     async getById({ commit }, { id }) {
@@ -81,6 +85,16 @@ export const stationStore = {
         console.log(err);
       }
     },
+   async updateStationAfterRemoveSong({commit},{station}) {
+        try {
+         const updatedStation =  await stationService.save(station);
+         commit({type:'updateStation',updatedStation})
+        }
+        catch(err) {
+            console.log(err);
+            throw err;
+        }
+    }
   },
 
   modules: {},

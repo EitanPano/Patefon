@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 
 new Vue({
   created() {
-    this.$store.dispatch({ type: "loadStations" });
+    this.$store.dispatch({ type: "loadStations", filterBy: {} });
   },
   router,
   store,

@@ -62,8 +62,8 @@ export const stationStore = {
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
         if (filterBy.txt) type = "setExpandedStations";
-        console.log("filterBy", filterBy);
-        console.log("filterBy.txt", filterBy.txt);
+        // console.log("filterBy", filterBy);
+        // console.log("filterBy.txt", filterBy.txt);
         commit({ type, stations });
       } catch (err) {
         console.log(err);

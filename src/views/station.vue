@@ -12,7 +12,7 @@
             </div>
         </main>
         <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" />
-        <song-list v-if="likedSongs && likedSongs.length" :songs="likedSongs" />
+        <song-list v-if="likedSongs && isLikedStation" :songs="likedSongs" />
     </section>
 </template>
 
@@ -54,6 +54,9 @@ export default {
         },
         likedSongs() {
             return this.$store.getters.likedStation;
+        },
+        isLikedStation() {
+            return this.$store.getters.isLikedStation;
         }
     },
     watch: {

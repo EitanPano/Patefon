@@ -15,7 +15,7 @@ export const stationStore = {
       // console.log(state.stations);
       return state.stations;
     },
-    getExpStations(state) {
+    getExpandedStations(state) {
       return state.expandedStations;
     },
     currStation(state) {
@@ -62,6 +62,8 @@ export const stationStore = {
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
         if (filterBy.txt) type = "setExpandedStations";
+        console.log("filterBy", filterBy);
+        console.log("filterBy.txt", filterBy.txt);
         commit({ type, stations });
       } catch (err) {
         console.log(err);

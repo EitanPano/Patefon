@@ -47,6 +47,23 @@ async function query(filterBy = {}) {
           ) || [];
       });
       console.log(' expandedStations["songs"]', expandedStations["songs"]);
+
+      if (expandedStations.songs.length) {
+        songs.forEach((song) => {
+          if (
+            station.songs.includes(song) &&
+            !data.stations.includes(station)
+          ) {
+            expandedStations.push(station);
+            //   data.stations.push(station);
+          }
+          if (data.songs.has(song)) return;
+          console.log("song34567", song);
+          //   data.songs.add(song);
+          //   data.songs.push(song);
+          //   console.log("went through If");
+        });
+      }
       //   var expandedStations = stations.reduce(
       //     function (data, station) {
       //       var songs =

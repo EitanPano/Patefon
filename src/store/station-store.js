@@ -8,14 +8,15 @@ export const stationStore = {
     currStation: [],
     expandedStations: [],
     stations: [],
+    searchHistory: [],
     filterBy: "",
   },
   getters: {
     getStations(state) {
-      // console.log(state.stations);
       return state.stations;
     },
     getExpandedStations(state) {
+      console.log("state.expandedStations", state.expandedStations);
       return state.expandedStations;
     },
     currStation(state) {
@@ -24,6 +25,9 @@ export const stationStore = {
     likedStation(state) {
       return state.likedStation;
     },
+    // getSearchHistory(state) {
+    //     if(state.searchHistory.length)
+    // },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -44,6 +48,11 @@ export const stationStore = {
     setExpandedStations(state, { stations }) {
       state.expandedStations = stations;
     },
+    setSavedSongs(state, { stations }) {
+      if (state.searchHistory.length <= 10) {
+        state.searchHistory.push(stations.songs);
+      }
+    },
   },
   actions: {
     async getById({ commit }, { id }) {
@@ -61,9 +70,10 @@ export const stationStore = {
         const stations = await stationService.query(filterBy);
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
-        if (filterBy.txt) type = "setExpandedStations";
-        // console.log("filterBy", filterBy);
-        // console.log("filterBy.txt", filterBy.txt);
+        if (filterBy.txt) {
+          type = "setExpandedStations";
+          commit({ type: "setSavedSongs", stations });
+        }
         commit({ type, stations });
       } catch (err) {
         console.log(err);

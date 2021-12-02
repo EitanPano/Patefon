@@ -3,7 +3,7 @@
     <h1>Search View</h1>
     <div class="songs-preview-search">
       <h1>Songs</h1>
-      <song-list :songs="songs" />
+      <song-list :songs="songs" isSearch="true" />
     </div>
     <div class="stations-preview-search">
       <h1>Stations</h1>
@@ -36,11 +36,11 @@ export default {
   methods: {},
   computed: {
     stations() {
-      // console.log(this.$store.getters.getStations);
+      //   console.log(this.$store.getters.getExpandedStations.stations, "stations");
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
-      // console.log(this.$store.getters.getStations.songs);
+      //   console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
     relatedSongs() {

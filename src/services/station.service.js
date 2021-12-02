@@ -39,36 +39,47 @@ async function query(filterBy = {}) {
       return likedSongs;
     }
     if (filterBy.txt) {
-      var expandedStations = stations.reduce(
-        function (data, station) {
-          var songs =
-            station.songs.filter((song) =>
-              song.title.toLowerCase().includes(filterBy.txt.toLowerCase())
-            ) || [];
-          console.log("songs", songs);
-          console.log("station", station);
-          if (songs.length) {
-            songs.forEach((song) => {
-              if (
-                station.songs.includes(song) &&
-                !data.stations.includes(station)
-              ) {
-                data.stations.push(station);
-              }
-              if (data.songs.includes(song)) return;
-              data.songs.push(song);
-              // console.log('went through If');
-            });
-          }
-          console.log(data);
-          return data;
-        },
-        { songs: [], stations: [] }
-      );
-      if (expandedStations.songs.length > 1) {
+      var expandedStations;
+      expandedStations["songs"] = stations.map((station) => {
+        var songs =
+          station.songs.filter((song) =>
+            song.title.toLowerCase().includes(filterBy.txt.toLowerCase())
+          ) || [];
+      });
+      console.log(' expandedStations["songs"]', expandedStations["songs"]);
+      //   var expandedStations = stations.reduce(
+      //     function (data, station) {
+      //       var songs =
+      //         station.songs.filter((song) =>
+      //           song.title.toLowerCase().includes(filterBy.txt.toLowerCase())
+      //         ) || [];
+      //       console.log("songs", songs);
+      //       //   console.log("station", station);
+      //       //   data.songs = new Set();
+      //       //   data.stations = new Set();
+      //       if (songs.length) {
+      //         songs.forEach((song) => {
+      //           if (station.songs.includes(song) && !data.stations.has(station)) {
+      //             data.stations.add(station);
+      //             //   data.stations.push(station);
+      //           }
+      //           if (data.songs.has(song)) return;
+      //           console.log("song34567", song);
+      //           //   data.songs.add(song);
+      //           //   data.songs.push(song);
+      //           //   console.log("went through If");
+      //         });
+      //       }
+      //       //   console.log(data);
+      //       return data;
+      //     },
+      //     { songs: new Set(), stations: new Set() }
+      //   );
+
+      if (expandedStations.songs.size > 1) {
         console.log("longer than 1");
         return expandedStations;
-      } else if (expandedStations.songs.length === 1) {
+      } else if (expandedStations.songs.size === 1) {
         var artistName = expandedStations.songs[0].title;
         console.log(artistName);
         //with real data after having the artist name we can add more songs of the same artist to the expandedStations . with expandedStations.relatedSongs

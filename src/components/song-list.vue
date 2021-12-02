@@ -1,13 +1,17 @@
 <template>
   <section class="song-list">
+    <div class="actions">
+      <button class="btn btn-play">▶</button>
+    </div>
+    <div class="sort-bar">
+      <p>#</p>
+      <p>TITLE</p>
+      <p>DATE ADDED</p>
+      <p>⏱</p>
+    </div>
     <ul>
-      <li v-for="song in songs" :key="song._id">
-        <song-preview
-          :song="song"
-          @remove="remove"
-          @update="update"
-          :isSearh="isSearch"
-        />
+      <li v-for="(song, idx) in songs" :key="song._id">
+        <song-preview :song="song" :idx="idx" @removeSong="removeSong" />
       </li>
     </ul>
   </section>
@@ -23,15 +27,10 @@ export default {
   data() {
     return {};
   },
-
   created() {},
-
   methods: {
-    remove(songId) {
-      this.$emit("remove", songId);
-    },
-    update(song) {
-      this.$emit("update", song);
+    removeSong(songId) {
+      this.$emit("removeSong", songId);
     },
   },
   computed: {},

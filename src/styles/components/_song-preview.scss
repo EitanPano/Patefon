@@ -1,0 +1,45 @@
+.song-preview {
+    // position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+
+    button {
+        background-color: transparent;
+        color: white;
+        border: none;
+    }
+
+    &:hover {
+        background: gray;
+
+    }
+
+    .song-details {
+        display: flex;
+        align-items: center;
+
+        .song-idx {
+            margin-inline-end: 1.2em;
+        }
+
+        img {
+            height: em(40px);
+            width: em(40px);
+            object-fit: fill;
+        }
+
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    .song-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        // width: 12em;
+    }
+}

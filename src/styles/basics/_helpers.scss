@@ -5,18 +5,16 @@
 
 .ratio-square { @include aspect-ratio(100, 100); }
 
-.ratio-toyd { @include aspect-ratio(100, 80); }
-
 .ratio-poster { @include aspect-ratio(100, 150); }
 
 //FLEX
 
 .flex{
     display: flex;
-}
-.flex-column{
-    display: flex;
-    flex-direction: column;
+    &.column{
+        display: flex;
+        flex-direction: column;
+    }
 }
 .justify-center{
     justify-content: center;
@@ -35,4 +33,17 @@
     padding: 0;
     border: none;
     background: none;
+}
+
+.btn-play {
+    padding-left: 0.5em;
+    padding-top: 0.1em;
+    width: 2.2em;
+    height: 2.2em;
+    font-size: 1.1em;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(24, 177, 75);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }

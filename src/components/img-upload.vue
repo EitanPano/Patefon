@@ -71,15 +71,15 @@ export default {
 
 <style scoped>
 .loader {
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 label {
   cursor: pointer;
   transition: background-color 0.3s;
 }
 label img {
- width: 150px;
+ width: 100px;
 }
 input {
   width: 0;
@@ -93,8 +93,8 @@ input {
   color: grey;
   background-color: rgb(245, 245, 245);
   padding: 30px 5px;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border: 1px dashed gray;
   border-radius: 8px;
    font-size: 0.5rem;
@@ -107,8 +107,8 @@ input {
   justify-content: center;
   align-items: center;
   padding: 30px 5px;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border: 1px dashed gray;
   border-radius: 8px;
   font-size: 0.5rem;

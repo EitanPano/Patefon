@@ -16,6 +16,10 @@ body {
     min-height: 90vh;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    margin: 0.5em 0;
+}
+
 ul{
     list-style: none;
     padding: 0;
@@ -34,6 +38,8 @@ button {
 
 p {
     color: white;
+    margin: 0;
+    line-height: em(36px);
 }
 
 .station-preview {

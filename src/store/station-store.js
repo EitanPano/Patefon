@@ -53,10 +53,15 @@ export const stationStore = {
         state.searchHistory.push(stations.songs);
       }
     },
+    updateStation(state, { updatedStation }) {
+      const idx = state.stations.findIndex(
+        (currStation) => currStation._id === updatedStation._id
+      );
+      state.stations.splice(idx, 0, updatedStation);
+    },
   },
   actions: {
     async getById({ commit }, { id }) {
-      console.log(id);
       try {
         const station = stationService.getById(id);
         if (station) {
@@ -90,6 +95,15 @@ export const stationStore = {
         commit({ type: "addStation", addedStation });
       } catch (err) {
         console.log(err);
+      }
+    },
+    async updateStationAfterRemoveSong({ commit }, { station }) {
+      try {
+        const updatedStation = await stationService.save(station);
+        commit({ type: "updateStation", updatedStation });
+      } catch (err) {
+        console.log(err);
+        throw err;
       }
     },
   },

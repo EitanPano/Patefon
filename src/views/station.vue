@@ -1,8 +1,18 @@
 <template>
-    <section class="main-layout">
-        <h1>Station view</h1>
-        <song-list v-if="station" :songs="station.songs" />
-        <!-- {{ currStation }} -->
+    <section class="main-layout station">
+        <main>
+            <img class="station-img" src="" alt="">
+            <div class="flex column">
+                <p>PLAYLIST</p>
+                <h1>Liked Songs</h1>
+                <div class="">
+                    <img class="user-img" src="" alt="">
+                    <p><span>"Created By"</span>  •  {{ likedSongs.length }} Songs</p>
+                </div>
+            </div>
+        </main>
+        <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" />
+        <song-list v-if="likedSongs" :songs="likedSongs" />
     </section>
 </template>
 
@@ -23,28 +33,37 @@ export default {
             filterBy: {},
         });
     },
+        methods : {
+        async removeSong(songId) { 
+            try {
+            const idx = this.station.songs.findIndex(song=> song.id === songId);
+            this.station.songs.splice(idx,1);
+            this.$store.dispatch({type: 'updateStationAfterRemoveSong', station : this.station})
+            }
+            catch(err) {
+                console.log(err);
+            }
+    },
+    },
     computed: {
         currStation() {
             return this.$store.getters.currStation;
         },
+        likedSongs() {
+            return this.$store.getters.likedStation;
+        }
     },
     watch: {
         "$route.params.id": {
-            async handler(newVal) {
-              console.log('newVal',newVal);
+            async handler() {
+            //   console.log('newVal',newVal);
                 try {
                     const id = this.$route.params.id;
-                    const station = await this.$store.dispatch({
-                        type: "getById",
-                        id,
-                    });
-                    // const station = await stationService.getById(id);
+                    const station = await this.$store.dispatch({ type: "getById", id });
                     if (!station && id === "liked") {
-                      console.log('here');
-                        this.$store.dispatch({type: "setFilter", filterBy: { isLiked: true }});
+                        this.$store.dispatch({type: "loadStations", filterBy: { isLiked: true }});
                         this.station = this.currStation;
                     }
-                    // console.log(station || 'Liked station');
                     this.station = station;
                 } catch (err) {
                     console.log(err);

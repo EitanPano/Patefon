@@ -47,7 +47,6 @@ export const stationStore = {
   },
   actions: {
     async getById({ commit }, { id }) {
-      console.log(id);
       try {
         const station = stationService.getById(id);
         if (station) {

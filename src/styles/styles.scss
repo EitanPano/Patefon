@@ -1,5 +1,4 @@
 // SETUP
-
 @import 'setup/variables';
 @import 'setup/mixins';
 @import 'setup/functions';
@@ -11,13 +10,15 @@
 
 // COMPONENTS
 @import 'components/side-nav';
-@import 'components/top-bar';
 @import 'components/play-bar';
+@import 'components/top-bar';
 @import 'components/station-list';
+@import 'components/station-preview';
+@import 'components/song-list';
+@import 'components/song-preview';
+@import 'components/youtube-search';
 
 //Views
 @import 'views/home';
-@import 'components/youtube-search';
-@import 'components/song-list';
-@import 'components/station-preview';
 @import 'views/edit';
+@import 'views/station';

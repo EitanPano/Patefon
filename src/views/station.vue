@@ -12,7 +12,7 @@
             </div>
         </main>
         <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" />
-        <song-list v-if="likedSongs" :songs="likedSongs" />
+        <song-list v-if="likedSongs && likedSongs.length" :songs="likedSongs" />
     </section>
 </template>
 
@@ -26,6 +26,9 @@ export default {
         return {
             station: null,
         };
+    },
+    created () {
+        console.log(this.$route)
     },
     destroyed() {
         this.$store.dispatch({

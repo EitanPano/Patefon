@@ -41,7 +41,7 @@
       <img-upload @imageSaved="saveImageUrl" />
 
       <button @click="saveStation">Save</button>
-      <song-list :songs="emptyStation.songs" @removeSong="removeSong" />
+      <song-list v-if="emptyStation.songs.length" :songs="emptyStation.songs" @removeSong="removeSong" />
       <youtube-search @addSong="addSong" />
     </section>
   </section>

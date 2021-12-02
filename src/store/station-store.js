@@ -24,6 +24,9 @@ export const stationStore = {
     likedStation(state) {
       return state.likedStation;
     },
+    isLikedStation(state) {
+      return (state.filterBy.isLiked) ? true : false;
+    }
   },
   mutations: {
     setStations(state, { stations }) {
@@ -65,6 +68,7 @@ export const stationStore = {
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
         if (filterBy.txt) type = "setExpandedStations";
+        commit({type: 'setFilter', filterBy})
         // console.log("filterBy", filterBy);
         // console.log("filterBy.txt", filterBy.txt);
         commit({ type, stations });

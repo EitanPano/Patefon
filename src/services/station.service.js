@@ -1,144 +1,146 @@
 // import { filter } from 'core-js/core/array';
-import { storageService } from './async-storage.service';
-import { localStorageService } from './local-storage.service';
-import { utilService } from './util.service';
+import { storageService } from "./async-storage.service";
+import { localStorageService } from "./local-storage.service";
+import { utilService } from "./util.service";
 // import { httpService } from './http.service'
 // import { socketService, SOCKET_EVENT_station_UPDATED } from './socket.service'
 // const STORAGE_KEY_LOGGEDIN_station = 'loggedinstation'
 // var gWatchedstation = null;
 
 // TEST DATA
-import { default as stationsDB } from '../data/stationsDB.json';
+import { default as stationsDB } from "../data/stationsDB.json";
 // import { filter } from 'core-js/core/array';
 
-const KEY = 'stationsDB';
+const KEY = "stationsDB";
 
 _createStations();
 
 export const stationService = {
-    query,
-    getById,
-    remove,
-    save,
-    getEmptystation,
+  query,
+  getById,
+  remove,
+  save,
+  getEmptystation,
 };
 
 // Debug technique
 window.stationService = stationService;
 
 async function query(filterBy = {}) {
-    try {
-        let stations = await storageService.query(KEY);
-        if (filterBy.isLiked) {
-            const likedSongs = [] 
-            stations.forEach(station => {station.songs.forEach(song => song.isLiked ? likedSongs.push(song) : null)})
-            return likedSongs;
-        }
-
-        return stations;
-        // return httpService.get(`station`, filterBy)
-    } catch {
-
+  try {
+    let stations = await storageService.query(KEY);
+    if (filterBy.isLiked) {
+      const likedSongs = [];
+      stations.forEach((station) => {
+        station.songs.forEach((song) =>
+          song.isLiked ? likedSongs.push(song) : null
+        );
+      });
+      return likedSongs;
     }
+    if (filterBy.txt) {
+      var expandedStations = stations.reduce(
+        function (data, station) {
+          var songs =
+            station.songs.filter((song) =>
+              song.title.toLowerCase().includes(filterBy.txt.toLowerCase())
+            ) || [];
+          console.log("songs", songs);
+          console.log("station", station);
+          if (songs.length) {
+            songs.forEach((song) => {
+              if (
+                station.songs.includes(song) &&
+                !data.stations.includes(station)
+              ) {
+                data.stations.push(station);
+              }
+              if (data.songs.includes(song)) return;
+              data.songs.push(song);
+              // console.log('went through If');
+            });
+          }
+          console.log(data);
+          return data;
+        },
+        { songs: [], stations: [] }
+      );
+      if (expandedStations.songs.length > 1) {
+        console.log("longer than 1");
+        return expandedStations;
+      } else if (expandedStations.songs.length === 1) {
+        var artistName = expandedStations.songs[0].title;
+        console.log(artistName);
+        //with real data after having the artist name we can add more songs of the same artist to the expandedStations . with expandedStations.relatedSongs
+        return expandedStations;
+      }
+    }
+
+    return stations;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 }
-
-
-// function query(filterBy) {
-//     return storageService.query(KEY)
-//         .then(stations => {
-//             if (filterBy) {
-//                 console.log(filterBy.txt);
-//                 var dataObjectMap = stations.reduce(function (data, station) {
-//                     var songs = station.songs.filter(song => song.title.toLowerCase().includes(filterBy.txt.toLowerCase())) || []
-//                     console.log('songs', songs);
-//                     console.log('station', station);
-//                     if (songs.length) {
-//                         songs.forEach(song => {
-//                             if (station.songs.includes(song) && !data.stations.includes(station)) {
-//                                 data.stations.push(station);
-//                             }
-//                             if (data.songs.includes(song)) return
-//                             data.songs.push(song);
-//                             // console.log('went through If');
-//                         })
-//                     }
-//                     console.log(data);
-//                     return data
-//                 }, { songs: [], stations: [] })
-
-//                 if (dataObjectMap.songs.length > 1) {
-//                     console.log('longer than 1');
-//                     return dataObjectMap
-//                 }
-//                 else if (dataObjectMap.songs.length === 1) {
-//                     var artistName = dataObjectMap.songs[0].title;
-//                     console.log(artistName);
-//                     //with real data after having the artist name we can add more songs of the same artist to the dataObjectMap . with dataObjectMap.relatedSongs
-//                     return dataObjectMap
-//                 }
-//             }
-//             return stations
-//         })
-// }
 
 async function getById(stationId) {
-    const station = await storageService.get(KEY, stationId);
-    // const station = await httpService.get(`station/${stationId}`)
-    // gWatchedStation = station;
-    return station;
+  const station = await storageService.get(KEY, stationId);
+  // const station = await httpService.get(`station/${stationId}`)
+  // gWatchedStation = station;
+  return station;
 }
 function remove(stationId) {
-    return storageService.remove(KEY, stationId);
-    // return httpService.delete(`station/${stationId}`)
+  return storageService.remove(KEY, stationId);
+  // return httpService.delete(`station/${stationId}`)
 }
 
 async function save(station) {
-    if (station._id) {
-        const addedStation = await storageService.put(KEY, station);
-        return addedStation;
-    } else {
-        const addedStation = await storageService.post(KEY, station);
-        return addedStation;
-    }
+  if (station._id) {
+    const addedStation = await storageService.put(KEY, station);
+    return addedStation;
+  } else {
+    const addedStation = await storageService.post(KEY, station);
+    return addedStation;
+  }
 
-    // if (station._id) station = await httpService.put(`station/${station._id}`, station)
-    // else station = await httpService.post(`station/`, station)
+  // if (station._id) station = await httpService.put(`station/${station._id}`, station)
+  // else station = await httpService.post(`station/`, station)
 
-    // Handle case in which admin updates other station's details
-    // console.log(station)
-    // return station;
+  // Handle case in which admin updates other station's details
+  // console.log(station)
+  // return station;
 }
 
 function getEmptystation() {
-    return {
-        name: '',
-        description : '',
-        imgUrl: '',
-        tags: [],
-        genre : '',
-        createdAt: Date.now(),
-        createdBy : {},
-        songs: [],
-    };
+  return {
+    name: "",
+    description: "",
+    imgUrl: "",
+    tags: [],
+    genre: "",
+    createdAt: Date.now(),
+    createdBy: {},
+    songs: [],
+  };
 }
 
 function _createStations() {
-    var stations = localStorageService.load(KEY);
-    if (!stations || !stations.length) {
-        stations = stationsDB;
-        localStorageService.store(KEY, stations);
-    }
+  var stations = localStorageService.load(KEY);
+  if (!stations || !stations.length) {
+    stations = stationsDB;
+    localStorageService.store(KEY, stations);
+  }
 }
 
 function _createStation(name, imgUrl, tags, songs) {
-    return {
-        _id: utilService.makeId(),
-        name,
-        imgUrl,
-        createdAt: Date.now(),
-        tags,
-        songs,
-    };
+  return {
+    _id: utilService.makeId(),
+    name,
+    imgUrl,
+    createdAt: Date.now(),
+    tags,
+    songs,
+  };
 }
 
 // (async ()=>{
@@ -172,3 +174,44 @@ function _createStation(name, imgUrl, tags, songs) {
 //     var station = getLoggedinstation()
 //     if (station) socketService.emit('set-station-socket', station._id)
 // })();
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+// function query(filterBy) {
+//     return storageService.query(KEY)
+//         .then(stations => {
+//             if (filterBy) {
+//                 console.log(filterBy.txt);
+//                 var expandedStations = stations.reduce(function (data, station) {
+//                     var songs = station.songs.filter(song => song.title.toLowerCase().includes(filterBy.txt.toLowerCase())) || []
+//                     console.log('songs', songs);
+//                     console.log('station', station);
+//                     if (songs.length) {
+//                         songs.forEach(song => {
+//                             if (station.songs.includes(song) && !data.stations.includes(station)) {
+//                                 data.stations.push(station);
+//                             }
+//                             if (data.songs.includes(song)) return
+//                             data.songs.push(song);
+//                             // console.log('went through If');
+//                         })
+//                     }
+//                     console.log(data);
+//                     return data
+//                 }, { songs: [], stations: [] })
+
+//                 if (expandedStations.songs.length > 1) {
+//                     console.log('longer than 1');
+//                     return expandedStations
+//                 }
+//                 else if (expandedStations.songs.length === 1) {
+//                     var artistName = expandedStations.songs[0].title;
+//                     console.log(artistName);
+//                     //with real data after having the artist name we can add more songs of the same artist to the expandedStations . with expandedStations.relatedSongs
+//                     return expandedStations
+//                 }
+//             }
+//             return stations
+//         })
+// }

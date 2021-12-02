@@ -59,6 +59,7 @@ export default {
     methods : {
         addSong(song) {
             // console.log(song)
+            song.isLiked = false;
             this.emptyStation.songs.push(song)
         },
         addTag() {
@@ -69,7 +70,7 @@ export default {
             this.emptyStation.imgUrl = imgUrl;
         },
            async saveStation() {
-               this.emptyStation.createdBy = JSON.parse(sessionStorage.getItem('logginUser'))
+               this.emptyStation.createdBy = JSON.parse(sessionStorage.getItem('loggedInUser'))
             try {
                 await this.$store.dispatch({type:'addStation',newStation: this.emptyStation})
                 this.emptyStation = stationService.getEmptystation();

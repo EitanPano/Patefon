@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     setGuestUser() {
-      sessionStorage.setItem('logginUser', JSON.stringify({name:'Patefone', imgUrl:'https://res.cloudinary.com/nir-cloudinary/image/upload/v1638375320/patefon_olzyeg.png' , id: '111'}));
+      sessionStorage.setItem('loggedInUser', JSON.stringify({name:'Patefon', imgUrl:'https://res.cloudinary.com/nir-cloudinary/image/upload/v1638375320/patefon_olzyeg.png' , id: '111'}));
     }
   },
   computed : {

@@ -4,6 +4,7 @@ export { stationService } from '../services/station.service.js';
 
 export const stationStore = {
     state: {
+        // likedSongs
         likedStation: [],
         currStation: [],
         mappedStations: [],

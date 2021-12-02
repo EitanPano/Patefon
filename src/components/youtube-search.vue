@@ -8,8 +8,7 @@
 </template>
 
 <script>
-// import Axios from 'axios'; var axios = Axios.create({ withCredentials: true, });
-import Axios from 'axios'; var axios = Axios.create();
+import {fetchService} from '../services/fetch.service.js'
 import searchList from './search-list.vue';
 export default {
     components : {
@@ -24,9 +23,22 @@ export default {
     methods : {
        async searchYoutube() {
            try {
-               const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${this.searchInput}&key=AIzaSyAomDP_lSwHk85kO2WgJnTRrKAlQ_jTxKM`);
-                // console.log(res.data);
-                this.youtubeItems = res.data;
+                let youtubeItems = await fetchService.fetchYoutubeVideos(this.searchInput);
+                let prmDurations = [];
+                for (var i = 0; i <5; i++ ) {
+                    const prm = fetchService.fetchYoutubeDuration(youtubeItems.items[i].id.videoId)
+                    prmDurations.push(prm);
+                }
+                //    console.log(prmDurations)
+                Promise.all(prmDurations).then(durations => {
+                    for (var i = 0; i<durations.length; i++) {
+                        youtubeItems.items[i].duration = durations[i];
+                    }    
+                    this.youtubeItems = youtubeItems;
+                    // console.log(this.youtubeItems)
+                })
+                 
+            
          }
            catch(err) {
                console.log(err)
@@ -42,3 +54,4 @@ export default {
 <style>
 
 </style>
+

@@ -4,7 +4,7 @@
     <div>{{ song.title }}</div>
     <img :src="song.imgUrl">
     <div> {{song.duration}} </div>
-    <button> Delete </button>
+    <button @click="removeSong(song.id)"> Remove </button>
 
   </section>
 </template>
@@ -15,8 +15,14 @@ export default {
   data() {
     return {};
   },
-  created() {},
-  methods: {},
+  created() {
+    
+  },
+  methods: {
+    removeSong (songId) {
+      if (confirm('Remove Song?')) this.$emit('removeSong', songId)
+    }
+  },
   computed: {},
 };
 </script>

@@ -2,7 +2,7 @@
   <section class="song-list">
     <ul>
       <li v-for="song in songs" :key="song._id">
-        <song-preview :song="song" @remove="remove" @update="update" />
+        <song-preview :song="song" @removeSong="removeSong" />
       </li>
     </ul>
   </section>
@@ -24,11 +24,8 @@ export default {
   created() {},
 
   methods: {
-    remove(songId) {
-      this.$emit("remove", songId);
-    },
-    update(song) {
-      this.$emit("update", song);
+    removeSong(songId) {
+      this.$emit("removeSong", songId);
     },
   },
   computed: {},

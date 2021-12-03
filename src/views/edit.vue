@@ -41,7 +41,7 @@
       <img-upload @imageSaved="saveImageUrl" />
 
       <button @click="saveStation">Save</button>
-      <song-list v-if="emptyStation.songs.length" :songs="emptyStation.songs" @removeSong="removeSong" />
+      <song-list v-if="emptyStation.songs.length" :songs="emptyStation.songs" @removeSong="removeSong" @songToPlayer="songToPlayer" />
       <youtube-search @addSong="addSong" />
     </section>
   </section>
@@ -102,6 +102,9 @@ export default {
         console.log(err);
       }
     },
+       songToPlayer(song,idx) {
+             this.$store.commit({type:'songToPlayer', song,idx,station:{songs :this.emptyStation.songs}})
+        }
   },
 };
 </script>

@@ -1,13 +1,8 @@
 <template>
     <!-- @mouseleave="isHover = false" @mouseover="isHover = true" -->
     <article class="song-preview">
-        <iframe
-            width="100"
-            height="100"
-            :src="`https://www.youtube.com/embed/${song.youtubeId}`"
-        ></iframe>
         <div class="song-details">
-          <button v-if="isHover">▶</button>
+          <button v-if="isHover" @click="songToPlayer(song,idx)">▶</button>
           <p v-else class="song-idx">{{ idx + 1 }}</p>
           <img :src="song.imgUrl" />
           <p class="song-title">{{ song.title }}</p>
@@ -32,6 +27,9 @@ export default {
     methods: {
         removeSong (songId) {
             if (confirm('Remove Song?')) this.$emit('removeSong', songId)
+        },
+        songToPlayer(song,idx) {
+          this.$emit('songToPlayer', song,idx)
         }
     },
     computed: {

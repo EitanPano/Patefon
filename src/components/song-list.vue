@@ -11,7 +11,7 @@
         </div>
         <ul>
             <li v-for="(song, idx) in songs" :key="song._id">
-                <song-preview :song="song" :idx="idx" @removeSong="removeSong" />
+                <song-preview :song="song" :idx="idx" @removeSong="removeSong" @songToPlayer="songToPlayer" />
             </li>
         </ul>
     </section>
@@ -32,6 +32,9 @@ export default {
         removeSong(songId) {
             this.$emit("removeSong", songId);
         },
+          songToPlayer(song,idx) {
+          this.$emit('songToPlayer', song,idx)
+        }
     },
     computed: {},
 };

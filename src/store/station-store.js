@@ -5,7 +5,9 @@ export { stationService } from "../services/station.service.js";
 export const stationStore = {
   state: {
     likedStation: [],
-    currStation: [],
+    currStation: null,
+    currSong : null,
+    currSongIdx: 0,
     expandedStations: [],
     stations: [],
     filterBy: "",
@@ -21,6 +23,12 @@ export const stationStore = {
     currStation(state) {
       return state.currStation;
     },
+    currSong (state) {
+        return state.currSong;
+    },
+    currSongIdx (state) {
+      return state.currSongIdx;
+  },
     likedStation(state) {
       return state.likedStation;
     },
@@ -50,7 +58,16 @@ export const stationStore = {
     updateStation(state, {updatedStation}) {
         const idx = state.stations.findIndex(currStation=> currStation._id === updatedStation._id);
         state.stations.splice(idx,0,updatedStation);
-    }
+    },
+    songToPlayer(state,{song,idx,station}) {
+        state.currSong = song;
+        state.currSongIdx = idx;
+        state.currStation = station;
+    },
+    // setInitalStation(state) {
+    //   state.currStation = state.stations[0];
+    //   state.currSong = state.stations[0].songs[0];
+    // }
   },
   actions: {
     async getById({ commit }, { id }) {

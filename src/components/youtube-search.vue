@@ -21,10 +21,16 @@ export default {
       searchInput: "",
     };
   },
+  // destroyed() {
+  //   this.allYoutubeItems= [];
+  //     this.youtubeItemsDurations = [];
+  //     this.youtubeItems= [];
+  //     this.searchInput= "";
+  // },
   methods: {
     async searchYoutube() {
       try {
-        this.allYoutubeItems = await fetchService.fetchYoutubeVideos(  this.searchInput );
+        this.allYoutubeItems = await fetchService.fetchYoutubeVideos( this.searchInput );
         let youtubeItems = this.allYoutubeItems.items;
         let prmDurations = [];
         for (var i = 0; i < youtubeItems.length; i++) {

@@ -11,7 +11,7 @@
                 </div>
             </div>
         </main>
-        <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" />
+        <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" @songToPlayer="songToPlayer" />
         <song-list v-if="likedSongs && isLikedStation" :songs="likedSongs" />
     </section>
 </template>
@@ -47,6 +47,9 @@ export default {
                 console.log(err);
             }
     },
+         songToPlayer(song,idx) {
+             this.$store.commit({type:'songToPlayer', song,idx,station:this.station})
+        }
     },
     computed: {
         currStation() {

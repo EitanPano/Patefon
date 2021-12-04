@@ -35,11 +35,11 @@ export default {
   created() {
     this.$store.dispatch({ type: "loadHistorySearch" });
     // this.searchHistory = this.$store.getters.getSearchHistory.length;
-    console.log(
-      "this.searchHistory",
-      this.$store.getters.getSearchHistory.length
-    );
-    console.log(this.$store.getters.getLoggedInUser);
+    // console.log(
+    //   "this.searchHistory",
+    //   this.$store.getters.getSearchHistory.length
+    // );
+    // console.log(this.$store.getters.getLoggedInUser);
   },
   methods: {
     songToPlayer(song, idx) {
@@ -53,11 +53,11 @@ export default {
   },
   computed: {
     stations() {
-      console.log(this.$store.getters.getExpandedStations.stations, "stations");
+      // console.log(this.$store.getters.getExpandedStations.stations, "stations");
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
-      console.log(this.$store.getters.getExpandedStations.songs, "songs");
+      // console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {

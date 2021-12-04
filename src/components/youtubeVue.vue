@@ -53,15 +53,6 @@ export default {
       playingSong: null,
     };
   },
-<<<<<<< HEAD
-  // created() {
-  //  console.log(this.playListData)
-  // },
-=======
-  created() {
-    //  console.log(this.playListData)
-  },
->>>>>>> 4b79e50bfc16ec7b038a7642106327373f3eb350
   destroyed() {
     if (this.currTimeInterval) clearInterval(this.currTimeInterval);
   },
@@ -141,11 +132,7 @@ export default {
   },
   watch: {
     playListData: {
-<<<<<<< HEAD
-       handler() {
-=======
       handler() {
->>>>>>> 4b79e50bfc16ec7b038a7642106327373f3eb350
         // console.log(this.playListData)
         if (this.playListData) this.loadPlayList();
         // else if (this.playListData.song) {

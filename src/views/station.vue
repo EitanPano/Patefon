@@ -61,11 +61,6 @@ export default {
         station: this.station,
       });
     },
-<<<<<<< HEAD
-    // created () {
-    //     console.log(this.$route)
-    // },
-=======
     likedSongToPlayer(song, idx) {
       this.$store.commit({
         type: "songToPlayer",
@@ -74,7 +69,6 @@ export default {
         station: { songs: JSON.parse(JSON.stringify(this.likedSongs)) },
       });
     },
->>>>>>> 4b79e50bfc16ec7b038a7642106327373f3eb350
     destroyed() {
       this.$store.dispatch({
         type: "updateStationAfterRemoveSong",

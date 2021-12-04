@@ -1,16 +1,15 @@
 <template>
-    <!-- @mouseleave="isHover = false" @mouseover="isHover = true" -->
-    <article class="song-preview">
+    <article class="song-preview" @mouseleave="isHover = false" @mouseover="isHover = true">
+          <button v-if="isHover" @click="songToPlayer(song,idx)" class="size-btn first">▶</button>
+          <p v-else class="first song-idx">{{ idx + 1 }}</p>
         <div class="song-details">
-          <button v-if="isHover" @click="songToPlayer(song,idx)">▶</button>
-          <p v-else class="song-idx">{{ idx + 1 }}</p>
           <img :src="song.imgUrl" />
           <p class="song-title">{{ song.title }}</p>
         </div>
-        <div class="song-actions">
-          <button v-if="isHover" class="btn btn-like">❤</button>
+        <div class="last song-actions">
+          <button class="btn btn-like">❤</button>
           <p>{{ song.duration }}</p>
-          <button @click="removeSong(song.id)" v-if="isHover" class="btn btn-delete">✖</button>
+          <button @click="removeSong(song.id)" v-if="isHover && !isLikedStation" class="btn btn-delete">✖</button>
         </div>
     </article>
 </template>
@@ -20,7 +19,7 @@ export default {
     props: ["song", "idx"],
     data() {
         return {
-          isHover: true
+          isHover: false
         };
     },
     created() {},
@@ -33,6 +32,9 @@ export default {
         }
     },
     computed: {
+        isLikedStation() {
+            return this.$store.getters.isLikedStation;
+        }
     },
 }
 </script>

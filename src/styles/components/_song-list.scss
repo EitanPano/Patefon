@@ -2,15 +2,25 @@
     ul {
         display: flex;
         flex-direction: column;
+        margin-top: 0.5em;
     }
 
     .sort-bar {
-        display: flex;
-        justify-content: space-between;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 0.7em 4fr 2fr minmax(em(90px), 1fr);
+        gap: 1em;
+        padding: 0.5em 1em;
         box-shadow: inset 0 -1.5px 0 0 rgba(128, 128, 128, 0.25);
         p {
             font-size: 0.8em;
             color: $clr2;
+        }
+
+        .last {
+            grid-column: 4 / 5;
+            text-align: left;
+            padding-inline-start: 3em;
         }
     }
 

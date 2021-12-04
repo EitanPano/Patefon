@@ -7,7 +7,7 @@
             <p>#</p>
             <p>TITLE</p>
             <p>DATE ADDED</p>
-            <p>⏱</p>
+            <p class="last"><img src="@/assets/icons/time.svg" alt=""></p>
         </div>
         <ul>
             <li v-for="(song, idx) in songs" :key="song._id">

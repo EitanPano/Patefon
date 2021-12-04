@@ -2,37 +2,30 @@
   <aside class="top-bar">
     <!-- <h1>TOP BAR</h1> -->
     <div class="header-btns">
-      <button>
-        <span class="material-icons"> arrow_back_ios </span>
-      </button>
-      <button>
-        <span class="material-icons"> arrow_forward_ios </span>
-      </button>
+      <button><span class="arrow-backward material-icons"> arrow_back_ios </span></button>
+      <button><span class="arrow-forward material-icons"> arrow_forward_ios </span></button>
+      
+        <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
+      
     </div>
+        <form>
+          <label><input class="search-local" type="search" placeholder="Search" v-if="isSearch" @input="filterSongs" v-model="filterBy.txt" /></label>
+        </form>
 
-    <form>
-      <input
-        type="search"
-        placeholder="Search"
-        v-if="isSearch"
-        @input="filterSongs"
-        v-model="filterBy.txt"
-      />
-      <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
-    </form>
+
 
     <div class="account-menu">
       <button class="account-btn clear-btn flex justify-center align-center">
         <template v-if="loggedUser">
           <img src="" v-if="loggedUser.imgUrl" />
           <span class="user-icon material-icons" v-else> account_circle </span>
-          <p>{{ loggedUser.name }}</p>
+          <p class="highlight small">{{ loggedUser.name }}</p>
         </template>
         <template v-else>
           <span class="user-icon material-icons"> account_circle </span>
-          <p>Guest</p>
+          <p class="highlight small">Guest</p>
         </template>
-        <span class="arrow-down material-icons"> keyboard_arrow_down </span>
+        <span class="arrow-down material-icons">⏷</span>
       </button>
     </div>
   </aside>
@@ -46,7 +39,7 @@ export default {
     return {
       isSearch: false,
       loggedUser: {
-        name: "Mark Fishman",
+        name: "Guest",
       },
       filterBy: {
         txt: "",

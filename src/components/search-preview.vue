@@ -1,10 +1,5 @@
 <template>
   <section class="search-preview">
-    <iframe
-      width="100"
-      height="100"
-      :src="`https://www.youtube.com/embed/${youtubeItem.id.videoId}`"
-    ></iframe>
     <img :src="youtubeItem.snippet.thumbnails.default.url" />
     <div>{{ youtubeItem.snippet.title }}</div>
     <div>{{ youtubeItem.duration }}</div>

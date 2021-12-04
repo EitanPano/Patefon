@@ -1,6 +1,38 @@
 .station {
     main {
-        .station-img {}
+        .station-img {
+            width: em(192px);
+            min-width: em(192px);
+            height: em(192px);
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-inline-end: 1.5em;
+            
+
+            background: rgb(157,48,148);
+            background: linear-gradient(135deg, rgba(157,48,148,1) 9%, rgba(246,119,213,1) 49%, rgba(221,178,216,1) 100%);
+            
+
+            & > span {
+                font-size: 4.5em;
+                cursor: default;
+                color: rgb(250, 250, 250);
+                animation: beat 0.6s infinite;
+            }
+
+            @keyframes beat {
+                from {
+                  transform: scale(1);
+                }
+              
+                to {
+                  transform: scale(1.2);
+                }
+              }
+        }
 
         display: flex;
         height: em(260px);
@@ -11,6 +43,7 @@
 
             h1 {
                 margin: 0;
+                color: white;
             }
 
             & > p {
@@ -20,6 +53,8 @@
             & > div {
                 display: flex;
                 align-items: center;
+                margin-top: 0.4em;
+                cursor: default;
                 img {
                     height: 1.5em;
                     width: 1.5em;
@@ -27,13 +62,8 @@
                     background: white;
                     margin-inline-end: 0.25em;
                 }
-                p {
-                    color: $clr2;
-                    font-size: 0.9em;
-                    span {
-                        font-weight: bold;
-                        color: white;
-                    }
+                & > span {
+                    margin-inline-end: 0.2em;
                 }
             }
         }
@@ -41,10 +71,6 @@
             letter-spacing: -0.05em;
         }
 
-        .station-img {
-            background: white;
-            margin-inline-end: 1.5em;
-        }
         @include for-narrow-layout {
             h1 {
                 font-size: 2.5em;
@@ -84,5 +110,3 @@
         }
     }
 }
-
-

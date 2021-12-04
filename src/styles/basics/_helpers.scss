@@ -7,6 +7,43 @@
 
 .ratio-poster { @include aspect-ratio(100, 150); }
 
+// TRANSITIONS 
+.fade-enter-active, .fade-leave-active {
+    transition: all .2s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
+
+// FONTS & SIZES 
+.big {
+    font-size: 1.1em;
+}
+.bigger {
+    font-size: 1.1em;
+}
+.small {
+    font-size: 0.9em;
+}
+.smaller {
+    font-size: 0.8em;
+}
+.line-h-0 {
+    line-height: normal;
+}
+// FONT
+.highlight {
+    font-weight: bold;
+    color: white;
+}
+
+
+
+// MARGIN
+
+.mb-1 {
+    margin-bottom: 1em;
+}
 //FLEX
 
 .flex{
@@ -29,6 +66,11 @@
 
 //Buttons
 
+.btn {
+    width: 2em;
+    height: 2em;
+}
+
 .clear-btn{
     padding: 0;
     border: none;
@@ -46,4 +88,26 @@
     border: none;
     background-color: rgb(24, 177, 75);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
+.btn-edit {
+    border-radius: 50%;
+    margin-inline-start: 1em;
+    background-color: #3f3f3f;
+    color: white;
+
+    &:hover {
+        background-color: #4f4f4f;
+    }
+}
+
+.btn-close {
+    background-color: transparent;
+    color: $clr2;
+    font-size: 1.1em;
+    border-radius: 50%;
+
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.25);
+    }
 }

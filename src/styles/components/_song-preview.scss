@@ -1,10 +1,27 @@
 .song-preview {
-    // position: relative;
+    cursor:default;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 0.7em 4fr 2fr minmax(em(90px), 1fr);
+    gap: 1em;
     padding: 0.5em 1em;
+
+    p {
+        font-size: 0.9em;
+        color: lighten($clr2, 15%);
+        display: flex;
+        align-items: center;
+    }
+
+    .first {
+        width: 1em;
+        margin: 0;
+        padding: 0;
+    }
+
+    .last {
+        grid-column: 4 / 5;
+    }
 
     button {
         background-color: transparent;
@@ -13,13 +30,16 @@
     }
 
     &:hover {
-        background: gray;
+        background-color: #2f2f2fab;
 
     }
 
     .song-details {
         display: flex;
         align-items: center;
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
 
         .song-idx {
             margin-inline-end: 1.2em;
@@ -29,17 +49,24 @@
             height: em(40px);
             width: em(40px);
             object-fit: fill;
+            margin-inline-end: 0.7em;
         }
-
-        display: flex;
-        white-space: nowrap;
-        overflow: hidden;
     }
 
     .song-actions {
+        position: relative;
         display: flex;
-        justify-content: flex-end;
+        justify-content: left;
         align-items: center;
+        .btn {
+            font-size: 1.1em;
+            padding-bottom: 0.2em;
+
+            &.btn-delete {
+                position: absolute;
+                right: -0.4em;
+            }
+        }
         // width: 12em;
     }
 }

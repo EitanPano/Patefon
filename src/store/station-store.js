@@ -7,7 +7,9 @@ export const stationStore = {
   state: {
     loggedUser: userService.getLoggedinUser(),
     likedStation: [],
-    currStation: [],
+    currStation: null,
+    currSong : null,
+    currSongIdx: 0,
     expandedStations: [],
     stations: [],
     searchHistory: [],
@@ -24,6 +26,12 @@ export const stationStore = {
     currStation(state) {
       return state.currStation;
     },
+    currSong (state) {
+        return state.currSong;
+    },
+    currSongIdx (state) {
+      return state.currSongIdx;
+  },
     likedStation(state) {
       return state.likedStation;
     },
@@ -36,6 +44,9 @@ export const stationStore = {
     // getSearchHistory(state) {
     //     if(state.searchHistory.length)
     // },
+    isLikedStation(state) {
+      return (state.filterBy.isLiked) ? true : false;
+    }
   },
   mutations: {
     setStations(state, { stations }) {
@@ -88,11 +99,20 @@ export const stationStore = {
       state.loggedUser = updatedUser;
       console.log("updated user", state.loggedUser);
     },
+    songToPlayer(state,{song,idx,station}) {
+        state.currSong = song;
+        state.currSongIdx = idx;
+        state.currStation = station;
+    },
+    // setInitalStation(state) {
+    //   state.currStation = state.stations[0];
+    //   state.currSong = state.stations[0].songs[0];
+    // }
   },
   actions: {
     async getById({ commit }, { id }) {
       try {
-        const station = stationService.getById(id);
+        const station = await stationService.getById(id);
         if (station) {
           commit({ type: "setCurrStation", station });
           return station;
@@ -104,10 +124,10 @@ export const stationStore = {
         const stations = await stationService.query(filterBy);
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
-        if (filterBy.txt) {
-          type = "setExpandedStations";
-        }
-        commit({ type, stations });
+        if (filterBy.txt) type = "setExpandedStations";
+        commit({type: 'setFilter', filterBy})
+        // console.log("filterBy", filterBy);
+        // console.log("filterBy.txt", filterBy.txt);
       } catch (err) {
         console.log(err);
         throw err;

@@ -2,7 +2,7 @@
   <section class="main-layout home-page">
     <div class="songs-preview-search" v-if="songs">
       <h1>Songs</h1>
-      <song-list :songs="songs" :isSearch="true" />
+      <song-list :songs="songs" :isSearch="true" @songToPlayer="songToPlayer"/>
     </div>
     <div class="search-history-preview" v-if="searchHistory">
       <h1>Recently Searched</h1>
@@ -41,7 +41,11 @@ export default {
     );
     console.log(this.$store.getters.getLoggedInUser);
   },
-  methods: {},
+  methods: {
+         songToPlayer(song,idx) {
+             this.$store.commit({type:'songToPlayer', song,idx,station:{songs :JSON.parse(JSON.stringify(this.songs))}})
+        }
+  },
   computed: {
     stations() {
       //   console.log(this.$store.getters.getExpandedStations.stations, "stations");

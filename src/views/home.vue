@@ -16,6 +16,7 @@ export default {
   },
   created() {
     this.setGuestUser();
+    // this.$store.commit({type:'setInitalStation'});
   },
   data() {
     return {
@@ -30,7 +31,7 @@ export default {
   computed : {
     showStations () {
         return this.$store.getters.getStations;
-    }
+    },
   }
 };
 </script>

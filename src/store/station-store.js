@@ -72,7 +72,7 @@ export const stationStore = {
   actions: {
     async getById({ commit }, { id }) {
       try {
-        const station = stationService.getById(id);
+        const station = await stationService.getById(id);
         if (station) {
           commit({ type: "setCurrStation", station });
           return station;

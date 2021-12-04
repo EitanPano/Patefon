@@ -12,7 +12,7 @@
             </div>
         </main>
         <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" @songToPlayer="songToPlayer" />
-        <song-list v-if="likedSongs && isLikedStation" :songs="likedSongs" />
+        <song-list v-if="likedSongs && isLikedStation" :songs="likedSongs" @songToPlayer="likedSongToPlayer" />
     </section>
 </template>
 
@@ -49,6 +49,9 @@ export default {
     },
          songToPlayer(song,idx) {
              this.$store.commit({type:'songToPlayer', song,idx,station:this.station})
+        },
+            likedSongToPlayer(song,idx) {
+              this.$store.commit({type:'songToPlayer', song,idx,station:{songs :JSON.parse(JSON.stringify(this.likedSongs))}})
         }
     },
     computed: {

@@ -1,7 +1,7 @@
 <template>
     <section class="song-list">
         <div class="actions">
-            <button class="btn btn-play">▶</button>
+            <button class="btn btn-play" @click="songToPlayer">▶</button>
         </div>
         <div class="sort-bar">
             <p>#</p>

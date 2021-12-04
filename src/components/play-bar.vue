@@ -1,23 +1,32 @@
 <template>
     <section class="play-bar">
-        <iframe v-if="showCurrSong" width="500" height="40" :src="`https://www.youtube.com/embed/${showCurrSong.youtubeId}?autoplay=1`"></iframe>
+        <!-- <iframe v-if="showCurrSong" width="500" height="40" :src="`https://www.youtube.com/embed/${showCurrSong.youtubeId}?autoplay=1`"></iframe> -->
+        <youtube-vue :playListData="{station:currStation , song: currSong, idx:currSongIdx }"/>
     </section>
 </template>
 
 <script>
+import youtubeVue from "../components/youtubeVue.vue";
 export default {
+    components: {
+        youtubeVue,
+    },
     data () {
         return {
 
         }
     },
     computed : {
-        showCurrSong () {
+
+    currStation() {
+      return this.$store.getters.currStation;
+    },
+    currSong () {
         return this.$store.getters.currSong;
-        },
-          showCurrStation () {
-        return this.$store.getters.currStation;
-        }
+    },
+    currSongIdx () {
+      return this.$store.getters.currSongIdx;
+  },
     
     }
 }

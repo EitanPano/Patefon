@@ -3,19 +3,16 @@
     <h1>Home page</h1>
     <!-- <station-list :stations="showStations" /> -->
     <station-list v-if="showStations" :stations="showStations" />
-      <youtube-vue :playListData="{station:currStation , song: currSong, idx:currSongIdx }"/>
   </section>
 </template>
 
 <script>
 import { stationService } from "../services/station.service.js";
 import stationList from "../components/station-list.vue";
-import youtubeVue from "../components/youtubeVue.vue";
 export default {
   name: "Home",
   components: {
     stationList,
-    youtubeVue,
   },
   created() {
     this.setGuestUser();
@@ -35,16 +32,6 @@ export default {
     showStations () {
         return this.$store.getters.getStations;
     },
-
-    currStation() {
-      return this.$store.getters.currStation;
-    },
-    currSong () {
-        return this.$store.getters.currSong;
-    },
-    currSongIdx () {
-      return this.$store.getters.currSongIdx;
-  },
   }
 };
 </script>

@@ -103,7 +103,7 @@ export default {
       }
     },
        songToPlayer(song,idx) {
-             this.$store.commit({type:'songToPlayer', song,idx,station:{songs :this.emptyStation.songs}})
+             this.$store.commit({type:'songToPlayer', song,idx,station:{songs :JSON.parse(JSON.stringify(this.emptyStation.songs))}})
         }
   },
 };

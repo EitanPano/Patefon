@@ -36,9 +36,9 @@ export default {
       playingSong : null,
     };
   },
-  created() {
-   console.log(this.playListData)
-  },
+  // created() {
+  //  console.log(this.playListData)
+  // },
   destroyed() {
   if (this.currTimeInterval) clearInterval(this.currTimeInterval);
   },
@@ -114,7 +114,7 @@ export default {
   watch: {
     playListData: {
        handler() {
-        console.log(this.playListData)
+        // console.log(this.playListData)
         if (this.playListData) this.loadPlayList();
         // else if (this.playListData.song) {
         //   this.videoId = this.playListData.song.youtubeId;

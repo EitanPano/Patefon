@@ -7,6 +7,8 @@
         <nav>
             <ul class="main-nav" :class="menuOpen" @click="toggleMenu">
                 <div class="main-links">
+                    <span class="material-icons">home</span>
+                    <span class="material-icons">search</span>
                     <router-link to="/"><span>🏠</span>Home</router-link>
                     <router-link to="/search"><span>🔍</span>Search</router-link>
                     <router-link to="/library"><span>📚</span>Your Library</router-link>

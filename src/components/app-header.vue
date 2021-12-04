@@ -5,6 +5,7 @@
       <button><span class="arrow-backward material-icons"> arrow_back_ios </span></button>
       <button><span class="arrow-forward material-icons"> arrow_forward_ios </span></button>
       
+
         <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
       
     </div>

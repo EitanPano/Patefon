@@ -31,9 +31,9 @@ export default {
             station: null,
         };
     },
-    created () {
-        console.log(this.$route)
-    },
+    // created () {
+    //     console.log(this.$route)
+    // },
     destroyed() {
         this.$store.dispatch({
             type: "setFilter",

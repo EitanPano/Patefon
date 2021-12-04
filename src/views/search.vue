@@ -61,6 +61,7 @@ export default {
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {
+      console.log(this.$store.getters.getSearchHistory);
       return this.$store.getters.getSearchHistory;
     },
   },

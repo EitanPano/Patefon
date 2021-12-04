@@ -9,9 +9,11 @@ import { utilService } from "./util.service";
 
 // TEST DATA
 import { default as stationsDB } from "../data/stationsDB.json";
+// import { search } from "core-js/fn/symbol";
 // import { filter } from 'core-js/core/array';
 
 const KEY = "stationsDB";
+const SEARCH_KEY = "historyDB";
 
 _createStations();
 
@@ -21,6 +23,8 @@ export const stationService = {
   remove,
   save,
   getEmptystation,
+  getHistoryDB,
+  saveHistoryDB,
 };
 
 // Debug technique
@@ -39,43 +43,39 @@ async function query(filterBy = {}) {
       return likedSongs;
     }
     if (filterBy.txt) {
+      console.log(filterBy.txt, "filterBy");
       var expandedStations = stations.reduce(
         function (data, station) {
           var songs =
             station.songs.filter((song) =>
               song.title.toLowerCase().includes(filterBy.txt.toLowerCase())
             ) || [];
-          console.log("songs", songs);
-          console.log("station", station);
+
           if (songs.length) {
             songs.forEach((song) => {
-              if (
-                station.songs.includes(song) &&
-                !data.stations.includes(station)
-              ) {
-                data.stations.push(station);
+              if (station.songs.includes(song) && !data.stations.has(station)) {
+                data.stations.add(station);
+                //   data.stations.push(station);
               }
-              if (data.songs.includes(song)) return;
-              data.songs.push(song);
-              // console.log('went through If');
+              // if (data.songs.has(song)) return;
+              data.songs.add(song);
+              //   data.songs.push(song);
+              //   console.log("went through If");
             });
           }
-          console.log(data);
           return data;
         },
-        { songs: [], stations: [] }
+        { songs: new Set(), stations: new Set() }
       );
-      if (expandedStations.songs.length > 1) {
-        console.log("longer than 1");
+
+      if (expandedStations.songs.size > 1) {
         return expandedStations;
-      } else if (expandedStations.songs.length === 1) {
+      } else if (expandedStations.songs.size === 1) {
         var artistName = expandedStations.songs[0].title;
-        console.log(artistName);
         //with real data after having the artist name we can add more songs of the same artist to the expandedStations . with expandedStations.relatedSongs
         return expandedStations;
       }
     }
-
     return stations;
   } catch (err) {
     console.log(err);
@@ -141,6 +141,23 @@ function _createStation(name, imgUrl, tags, songs) {
     tags,
     songs,
   };
+}
+/////////////////SEARCH HISTORY SUGSHEL CRUD/////////////////////////////
+function saveHistoryDB(historySearch) {
+  localStorageService.store(SEARCH_KEY, historySearch);
+}
+async function getHistoryDB() {
+  try {
+    let songs = await storageService.query(SEARCH_KEY);
+    return songs;
+    var searchHistory = await storageService.query(SEARCH_KEY);
+    console.log(searchHistory);
+    searchHistory = new Set();
+    return searchHistory;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 }
 
 // (async ()=>{

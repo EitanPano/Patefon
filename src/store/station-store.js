@@ -1,40 +1,52 @@
-// import { set } from 'core-js/core/dict';
+// import { set } from "core-js/core/dict";
 
-export { stationService } from "../services/station.service.js";
+import { stationService } from "../services/station.service.js";
+import { userService } from "../services/user.service.js";
 
 export const stationStore = {
   state: {
+    loggedUser: userService.getLoggedinUser(),
     likedStation: [],
     currStation: null,
-    currSong : null,
+    currSong: null,
     currSongIdx: 0,
     expandedStations: [],
     stations: [],
+    searchHistory: [],
     filterBy: "",
   },
   getters: {
     getStations(state) {
-      // console.log(state.stations);
       return state.stations;
     },
     getExpandedStations(state) {
+      console.log("state.expandedStations", state.expandedStations);
       return state.expandedStations;
     },
     currStation(state) {
       return state.currStation;
     },
-    currSong (state) {
-        return state.currSong;
+    currSong(state) {
+      return state.currSong;
     },
-    currSongIdx (state) {
+    currSongIdx(state) {
       return state.currSongIdx;
-  },
+    },
     likedStation(state) {
       return state.likedStation;
     },
+    getSearchHistory(state) {
+      return state.searchHistory;
+    },
+    getLoggedinUser(state) {
+      return state.loggedUser;
+    },
+    // getSearchHistory(state) {
+    //     if(state.searchHistory.length)
+    // },
     isLikedStation(state) {
-      return (state.filterBy.isLiked) ? true : false;
-    }
+      return state.filterBy.isLiked ? true : false;
+    },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -55,14 +67,42 @@ export const stationStore = {
     setExpandedStations(state, { stations }) {
       state.expandedStations = stations;
     },
-    updateStation(state, {updatedStation}) {
-        const idx = state.stations.findIndex(currStation=> currStation._id === updatedStation._id);
-        state.stations.splice(idx,0,updatedStation);
+    setSearchHistory(state, { song }) {
+      console.log(state.searchHistory);
+      if (state.searchHistory.length <= 10) {
+        state.searchHistory.push(song);
+        console.log(state.searchHistory);
+        stationService.saveHistoryDB(state.searchHistory);
+      } else {
+        // stationService.saveHistoryDB(song);
+        // state.searchHistory.push(song);
+        // state.searchHistory.splice(1, state.searchHistory.length - 1);
+      }
+      console.log("Search History:", state.searchHistory);
     },
-    songToPlayer(state,{song,idx,station}) {
-        state.currSong = song;
-        state.currSongIdx = idx;
-        state.currStation = station;
+    updateStation(state, { updatedStation }) {
+      const idx = state.stations.findIndex(
+        (currStation) => currStation._id === updatedStation._id
+      );
+      state.stations.splice(idx, 0, updatedStation);
+    },
+    clearSearch(state) {
+      console.log("hello again");
+      state.expandedStations = "";
+    },
+    setHistorySongs(state, { historySongs }) {
+      state.searchHistory = historySongs;
+      console.log("songs", historySongs);
+      console.log(state.searchHistory);
+    },
+    updateUser(state, { updatedUser }) {
+      state.loggedUser = updatedUser;
+      console.log("updated user", state.loggedUser);
+    },
+    songToPlayer(state, { song, idx, station }) {
+      state.currSong = song;
+      state.currSongIdx = idx;
+      state.currStation = station;
     },
     // setInitalStation(state) {
     //   state.currStation = state.stations[0];
@@ -85,14 +125,20 @@ export const stationStore = {
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
         if (filterBy.txt) type = "setExpandedStations";
-        commit({type: 'setFilter', filterBy})
+        commit({ type, stations });
+        commit({ type: "setFilter", filterBy });
         // console.log("filterBy", filterBy);
         // console.log("filterBy.txt", filterBy.txt);
-        commit({ type, stations });
       } catch (err) {
         console.log(err);
         throw err;
       }
+    },
+    async loadHistorySearch({ commit }) {
+      const historySongs = await stationService.getHistoryDB();
+      // historySongs = new Set();
+      console.log(historySongs);
+      commit({ type: "setHistorySongs", historySongs });
     },
     setFilter({ commit, dispatch }, { filterBy }) {
       commit({ type: "setFilter", filterBy });
@@ -106,16 +152,19 @@ export const stationStore = {
         console.log(err);
       }
     },
-   async updateStationAfterRemoveSong({commit},{station}) {
-        try {
-         const updatedStation =  await stationService.save(station);
-         commit({type:'updateStation',updatedStation})
-        }
-        catch(err) {
-            console.log(err);
-            throw err;
-        }
-    }
+    async updateStationAfterRemoveSong({ commit }, { station }) {
+      try {
+        const updatedStation = await stationService.save(station);
+        commit({ type: "updateStation", updatedStation });
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
+    async likeSong({ commit }, { action }) {
+      const updatedUser = await userService.addSong(action);
+      commit({ type: "updateUser", updatedUser });
+    },
   },
 
   modules: {},

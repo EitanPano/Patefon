@@ -20,13 +20,14 @@
 <script>
 import songPreview from "./song-preview.vue";
 export default {
-    components: {
-        songPreview,
+  components: {
+    songPreview,
+  },
+  props: ["songs", "isSearch"],
+    data() {
+    return {};
     },
     props: ["songs"],
-    data() {
-        return {};
-    },
     created() {},
     methods: {
         removeSong(songId) {
@@ -37,7 +38,7 @@ export default {
         }
     },
     computed: {},
-};
+}
 </script>
 
 <style>

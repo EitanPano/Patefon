@@ -1,21 +1,38 @@
 <template>
   <section class="youtube-vue">
-    <youtube class="youTubePlayer" :video-id="videoId" ref="youtube" @playing="playing"></youtube>
-    <img :src="playingSong.imgUrl" v-if="playingSong">
-    <p v-if="playingSong"> {{playingSong.title}} </p>
+    <youtube
+      class="youTubePlayer"
+      :video-id="videoId"
+      ref="youtube"
+      @playing="playing"
+    ></youtube>
+    <img :src="playingSong.imgUrl" v-if="playingSong" />
+    <p v-if="playingSong">{{ playingSong.title }}</p>
     <button @click="playVideo">play</button>
     <button @click="stopVideo">stop</button>
     <button @click="goPrevSong">Prev</button>
     <button @click="goNextSong">Next</button>
     <button @click="shuffle">Shuffle</button>
     <button @click="loop">Loop</button>
-    <button @click="mute"> Mute </button>
+    <button @click="mute">Mute</button>
     <div>
-    <input @change="seekTo" type="range" v-model="currentTime" min="0" :max="SongDuration" :title="currentTime"/>
-    <input @input="setVolume"  type="range" v-model="songVolume" min="0" max="100" :title="songVolume"/>
+      <input
+        @change="seekTo"
+        type="range"
+        v-model="currentTime"
+        min="0"
+        :max="SongDuration"
+        :title="currentTime"
+      />
+      <input
+        @input="setVolume"
+        type="range"
+        v-model="songVolume"
+        min="0"
+        max="100"
+        :title="songVolume"
+      />
     </div>
-
-   
   </section>
 </template>
 
@@ -31,26 +48,31 @@ export default {
       songVolume: 20,
       isShuffling: false,
       isLooping: false,
-      isMute : false,
-      currTimeInterval : null,
-      playingSong : null,
+      isMute: false,
+      currTimeInterval: null,
+      playingSong: null,
     };
   },
+<<<<<<< HEAD
   // created() {
   //  console.log(this.playListData)
   // },
+=======
+  created() {
+    //  console.log(this.playListData)
+  },
+>>>>>>> 4b79e50bfc16ec7b038a7642106327373f3eb350
   destroyed() {
-  if (this.currTimeInterval) clearInterval(this.currTimeInterval);
+    if (this.currTimeInterval) clearInterval(this.currTimeInterval);
   },
   methods: {
     playVideo() {
-       this.player.setVolume(this.songVolume);
-     if (this.currTimeInterval) clearInterval(this.currTimeInterval);
+      this.player.setVolume(this.songVolume);
+      if (this.currTimeInterval) clearInterval(this.currTimeInterval);
       this.player.playVideo();
-       this.currTimeInterval  = setInterval(() => {
+      this.currTimeInterval = setInterval(() => {
         this.playing();
       }, 1000);
-
     },
     stopVideo() {
       this.player.stopVideo();
@@ -74,11 +96,17 @@ export default {
     playing() {
       console.log("o/ we are watching!!!");
       // all Promises from get are listed here, palying() is recalled when something is the song player changes
-      this.player.getDuration()
+      this.player
+        .getDuration()
         .then((duration) => (this.SongDuration = duration));
-      this.player.getCurrentTime()
+      this.player
+        .getCurrentTime()
         .then((currTime) => (this.currentTime = currTime));
-      this.player.getPlaylistIndex().then(idx => this.playingSong = this.playListData.station.songs[idx])
+      this.player
+        .getPlaylistIndex()
+        .then(
+          (idx) => (this.playingSong = this.playListData.station.songs[idx])
+        );
     },
     goNextSong() {
       this.player.nextVideo();
@@ -101,10 +129,10 @@ export default {
       this.isLooping = !this.isLooping;
     },
     mute() {
-     if(this.isMute) this.player.unMute();
-     else this.player.mute();
-     this.isMute = !this.isMute;
-    }
+      if (this.isMute) this.player.unMute();
+      else this.player.mute();
+      this.isMute = !this.isMute;
+    },
   },
   computed: {
     player() {
@@ -113,7 +141,11 @@ export default {
   },
   watch: {
     playListData: {
+<<<<<<< HEAD
        handler() {
+=======
+      handler() {
+>>>>>>> 4b79e50bfc16ec7b038a7642106327373f3eb350
         // console.log(this.playListData)
         if (this.playListData) this.loadPlayList();
         // else if (this.playListData.song) {
@@ -128,5 +160,4 @@ export default {
 </script>
 
 <style>
-
 </style>

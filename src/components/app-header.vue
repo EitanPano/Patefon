@@ -55,6 +55,10 @@ export default {
   },
   methods: {
     async filterSongs() {
+      if (this.filterBy.txt === "") {
+        console.log("hello");
+        this.$store.commit({ type: "clearSearch" });
+      }
       console.log(this.filterBy.txt, "from appheader cmp");
       try {
         var stations = await this.$store.dispatch({

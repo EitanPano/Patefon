@@ -3,7 +3,7 @@
     <div class="actions">
       <button class="btn btn-play">▶</button>
     </div>
-    <div class="sort-bar">
+    <div class="sort-bar" v-if="!isSearch">
       <p>#</p>
       <p>TITLE</p>
       <p>DATE ADDED</p>
@@ -11,7 +11,12 @@
     </div>
     <ul>
       <li v-for="(song, idx) in songs" :key="song._id">
-        <song-preview :song="song" :idx="idx" @removeSong="removeSong" />
+        <song-preview
+          :song="song"
+          :idx="idx"
+          @removeSong="removeSong"
+          :isSearch="isSearch"
+        />
       </li>
     </ul>
   </section>

@@ -1,10 +1,14 @@
 <template>
   <section class="main-layout home-page">
-    <h1>Search View</h1>
-    <div class="songs-preview-search">
+    <div class="songs-preview-search" v-if="songs">
       <h1>Songs</h1>
-      <song-list :songs="songs" isSearch="true" />
+      <song-list :songs="songs" :isSearch="true" />
     </div>
+    <div class="search-history-preview" v-if="searchHistory">
+      <h1>Recently Searched</h1>
+      <song-list :songs="searchHistory" :isSearch="true" />
+    </div>
+
     <div class="stations-preview-search">
       <h1>Stations</h1>
       <ul class="grid-container">
@@ -29,9 +33,13 @@ export default {
     };
   },
   created() {
-    // eventBusService.$on("getStations", (stations) => {
-    //   this.stations = stations;
-    // });
+    this.$store.dispatch({ type: "loadHistorySearch" });
+    // this.searchHistory = this.$store.getters.getSearchHistory.length;
+    console.log(
+      "this.searchHistory",
+      this.$store.getters.getSearchHistory.length
+    );
+    console.log(this.$store.getters.getLoggedInUser);
   },
   methods: {},
   computed: {
@@ -43,8 +51,8 @@ export default {
       //   console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
-    relatedSongs() {
-      //   return this.$store.getters.getStations.relatedSongs;
+    searchHistory() {
+      return this.$store.getters.getSearchHistory;
     },
   },
   components: {

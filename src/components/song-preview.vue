@@ -1,6 +1,6 @@
 <template>
   <!-- @mouseleave="isHover = false" @mouseover="isHover = true" -->
-  <article class="song-preview">
+  <article class="song-preview" @click="playSong">
     <iframe
       width="100"
       height="100"
@@ -13,7 +13,7 @@
       <p class="song-title">{{ song.title }}</p>
     </div>
     <div class="song-actions">
-      <button v-if="isHover" class="btn btn-like">❤</button>
+      <button v-if="isHover" class="btn btn-like" @click="saveSong">❤</button>
       <p>{{ song.duration }}</p>
       <button
         @click="removeSong(song.id)"
@@ -32,10 +32,24 @@ export default {
   data() {
     return {
       isHover: true,
+      isClickedOnce: false,
     };
   },
   created() {},
   methods: {
+    playSong() {
+      //אני יודע שזה עוד רחוק אבל אני צריך את הפונקצייה כרגע ובעתיד גם ככה תיהיה
+      if (this.isSearch && !this.isClickedOnce) {
+        this.$store.commit({ type: "setSearchHistory", song: this.song });
+        this.isClickedOnce = true;
+      }
+    },
+    saveSong() {
+      this.$store.dispatch({
+        type: "saveSong",
+        action: { song: this.song, type: "like" },
+      });
+    },
     removeSong(songId) {
       if (confirm("Remove Song?")) this.$emit("removeSong", songId);
     },

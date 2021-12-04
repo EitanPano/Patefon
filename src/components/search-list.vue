@@ -16,17 +16,15 @@ export default {
   },
   props: ["youtubeItems"],
   data() {
-    return {
-      
-    };
+    return {};
   },
 
   created() {},
 
   methods: {
- addSong (song) {
-   this.$emit('addSong', song)
- }
+    addSong(song) {
+      this.$emit("addSong", song);
+    },
   },
   computed: {},
 };

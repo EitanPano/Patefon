@@ -8,7 +8,7 @@ export const stationStore = {
     loggedUser: userService.getLoggedinUser(),
     likedStation: [],
     currStation: null,
-    currSong : null,
+    currSong: null,
     currSongIdx: 0,
     expandedStations: [],
     stations: [],
@@ -26,12 +26,12 @@ export const stationStore = {
     currStation(state) {
       return state.currStation;
     },
-    currSong (state) {
-        return state.currSong;
+    currSong(state) {
+      return state.currSong;
     },
-    currSongIdx (state) {
+    currSongIdx(state) {
       return state.currSongIdx;
-  },
+    },
     likedStation(state) {
       return state.likedStation;
     },
@@ -45,8 +45,8 @@ export const stationStore = {
     //     if(state.searchHistory.length)
     // },
     isLikedStation(state) {
-      return (state.filterBy.isLiked) ? true : false;
-    }
+      return state.filterBy.isLiked ? true : false;
+    },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -99,10 +99,10 @@ export const stationStore = {
       state.loggedUser = updatedUser;
       console.log("updated user", state.loggedUser);
     },
-    songToPlayer(state,{song,idx,station}) {
-        state.currSong = song;
-        state.currSongIdx = idx;
-        state.currStation = station;
+    songToPlayer(state, { song, idx, station }) {
+      state.currSong = song;
+      state.currSongIdx = idx;
+      state.currStation = station;
     },
     // setInitalStation(state) {
     //   state.currStation = state.stations[0];
@@ -125,7 +125,8 @@ export const stationStore = {
         let type =
           filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
         if (filterBy.txt) type = "setExpandedStations";
-        commit({type: 'setFilter', filterBy})
+        commit({ type, stations });
+        commit({ type: "setFilter", filterBy });
         // console.log("filterBy", filterBy);
         // console.log("filterBy.txt", filterBy.txt);
       } catch (err) {
@@ -160,7 +161,7 @@ export const stationStore = {
         throw err;
       }
     },
-    async saveSong({ commit }, { action }) {
+    async likeSong({ commit }, { action }) {
       const updatedUser = await userService.addSong(action);
       commit({ type: "updateUser", updatedUser });
     },

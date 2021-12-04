@@ -15,20 +15,18 @@ export const userService = {
   getById,
   _createUser,
 };
-_createUser();
 
 function getLoggedinUser() {
-  if (!localStorage.getItem(KEY)) {
-    var user = userDB;
-    console.log(user);
-    localStorageService.store(KEY, user);
-    _saveUserToStorage(user);
+  let user = JSON.parse(localStorage.getItem(KEY));
+  if (!user) {
+    _createUser();
   }
   return JSON.parse(localStorage.getItem(KEY) || null);
 }
 
 function _createUser() {
   var user = localStorageService.load(KEY);
+  console.log(user);
   if (!user || !user.length) {
     user = userDB;
     localStorageService.store(KEY, user);
@@ -56,9 +54,8 @@ function addSong(action) {
 // }
 
 function _saveUserToStorage(user) {
-  console.log("saving.....", user);
-  // localStorage.setItem(KEY, JSON.stringify(user));
-  localStorageService(KEY, user);
+  localStorage.setItem(KEY, JSON.stringify(user));
+  // localStorageService(KEY, user);
 }
 
 function getById(userId) {

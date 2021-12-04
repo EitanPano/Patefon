@@ -76,7 +76,6 @@ async function query(filterBy = {}) {
         return expandedStations;
       }
     }
-    console.log(stations);
     return stations;
   } catch (err) {
     console.log(err);

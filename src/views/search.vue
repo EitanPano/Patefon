@@ -47,7 +47,7 @@ export default {
         type: "songToPlayer",
         song,
         idx,
-        station: { songs: JSON.parse(JSON.stringify(this.songs)) },
+        station: { songs: JSON.parse(JSON.stringify(Array.from(this.songs))) },
       });
     },
   },

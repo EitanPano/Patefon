@@ -1,18 +1,22 @@
 <template>
     <section class="main-layout station">
         <main>
-            <img class="station-img" src="" alt="">
+            <img v-if="!isLikedStation" class="station-img" :src="stationImg" alt="">
+            <div class="station-img" v-else><span>❤</span></div>
+            <!-- <img class="station-img" src="../assets/images/upload.svg" alt=""> -->
             <div class="flex column">
-                <p>PLAYLIST</p>
-                <h1>Liked Songs</h1>
-                <div class="">
-                    <img class="user-img" src="" alt="">
-                    <p><span>"Created By"</span>  •  {{ likedSongs.length }} Songs</p>
+                <p class="highlight small">PLAYLIST</p>
+                <h1>{{ stationName }}</h1>
+                <!-- <h1>Liked Songs</h1> -->
+                <div v-if="station || isLikedStation">
+                    <!-- <img v-if="user" class="user-img" src="" alt=""> -->
+                    <span class="user-icon material-icons">account_circle</span>
+                    <p class="line-h-0 small" v-if="songsCount && songsCount.length"><span class="highlight">Guest</span>  •  {{ songsCount.length }} Songs</p>
                 </div>
             </div>
         </main>
         <song-list v-if="station" @removeSong="removeSong" :songs="station.songs" />
-        <song-list v-if="likedSongs && isLikedStation" :songs="likedSongs" />
+        <song-list v-else-if="likedSongs && isLikedStation" :songs="likedSongs" />
     </section>
 </template>
 
@@ -57,6 +61,15 @@ export default {
         },
         isLikedStation() {
             return this.$store.getters.isLikedStation;
+        },
+        stationName() {
+            return (this.station) ? this.station.name : 'Liked Songs';
+        },
+        stationImg() {
+            return (this.station && this.station.imgUrl) ? this.station.imgUrl : '../assets/images/upload.svg';
+        },
+        songsCount() {
+            return (this.isLikedStation && this.likedSongs.length) ? this.likedSongs : this.station.songs;
         }
     },
     watch: {
@@ -65,11 +78,11 @@ export default {
             //   console.log('newVal',newVal);
                 try {
                     const id = this.$route.params.id;
-                    const station = await this.$store.dispatch({ type: "getById", id });
                     if (!station && id === "liked") {
                         this.$store.dispatch({type: "loadStations", filterBy: { isLiked: true }});
                         this.station = this.currStation;
                     }
+                    const station = await this.$store.dispatch({ type: "getById", id });
                     this.station = station;
                 } catch (err) {
                     console.log(err);

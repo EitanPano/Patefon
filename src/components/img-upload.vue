@@ -10,35 +10,38 @@
         :class="{ drag: isDragOver, 'not-drag': !isDragOver }"
       >
         <transition name="fade" mode="out-in">
-          <img :src="imageUrl" v-if="imageUrl">
-          <img v-if="!imageUrl"
+          <img :src="passedImgUrl" v-if="passedImgUrl">
+          <!-- <img :src="imageUrl" v-if="imageUrl"> -->
+          <img v-else
             alt="Drop images here"
             v-bind:key="isDragOver"
             :src="
               isDragOver
                 ? require('@/assets/images/box.png')
-                : require('@/assets/images/upload.png')
+                : require('@/assets/images/upload.svg')
             "
           />
         </transition>
-        <h3 class="chooseImgText">Choose an image<span class="light"> or drag it here </span></h3>
+        <h3 class="chooseImgText">Click to add image<span class="light"> or drag it here </span></h3>
       </label>
       <!-- HIDDEN INPUT -->
       <input
         type="file"
         name="img-uploader"
-        id="imgUploader"
         @change="handleFile"
+        id="imgUploader"
       />
     </template>
     <!-- LOADER -->
-    <img  class="loader" v-else :src="require('../assets/images/loader.gif')" alt="" />
+    <img class="loader" v-else :src="require('../assets/images/loader.gif')" alt="" />
   </div>
 </template>
 
 <script>
 import { uploadImg } from "@/services/img-upload.service.js";
 export default {
+  props: ["passedImgUrl"],
+
   data() {
     return {
       isLoading: false,
@@ -47,7 +50,7 @@ export default {
     };
   },
   methods: {
-    dragOver(ev) {
+    dragOver() {
       this.isDragOver = true;
     },
     handleFile(ev) {
@@ -70,63 +73,58 @@ export default {
 </script>
 
 <style scoped>
-.loader {
-  width: 100px;
-  height: 100px;
-}
+ .loader {
+  width: 100%;
+  height: 100%;
+} 
 label {
   cursor: pointer;
   transition: background-color 0.3s;
 }
 label img {
- width: 100px;
+ width: 100%;
+ height: 100%;
 }
 input {
   width: 0;
   height: 0;
 }
 .drag {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: grey;
-  background-color: rgb(245, 245, 245);
-  padding: 30px 5px;
-  width: 100px;
-  height: 100px;
-  border: 1px dashed gray;
-  border-radius: 8px;
-   font-size: 0.5rem;
+  background: #2b2b2b;
+
+  width: 100%;
+  height: 100%;
+
 }
 .not-drag {
-  color: grey;
-  background-color: rgb(216, 216, 216);
+  position: relative;
+  background: #2b2b2b;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px 5px;
-  width: 100px;
-  height: 100px;
-  border: 1px dashed gray;
-  border-radius: 8px;
-  font-size: 0.5rem;
-  font-weight:900;
-}
-.light {
-  font-weight: lighter;
+  width: 100%;
+  height: 100%;
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 .chooseImgText{
   display: none;
   position: absolute;
+  text-align: center;
+  font-size: 0.9em;
+  padding: 1em 1em 0.5em;
+  bottom: 0;
 }
 label:hover .chooseImgText {
   display: block;

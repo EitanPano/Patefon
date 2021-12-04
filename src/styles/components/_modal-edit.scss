@@ -1,0 +1,118 @@
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100%;
+    height: 100%;
+}
+
+.modal-edit {
+    background-color: #282828;
+    padding: 1em 1.5em;
+
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+    width: em(540px);
+    border-radius: 0.3em;
+
+    .btn-save-details {
+        border-radius: 5em;
+        width: 7em;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        background-color: white;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    .p-small {
+        letter-spacing: 0.025em;
+        font-size: 0.7em;
+        font-weight: bold;
+        line-height: 1.8em;
+    }
+
+    .edit-img {
+        width: em(192px);
+        height: em(192px);
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    .edit-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-left: 1em;
+        width: 17.5em;
+        
+
+        .edit-title, .selects-box, .edit-description {
+            width: 100%;
+            outline: none;
+            transition: background-color 0.3s;
+
+            &:focus {
+                background-color: #2f2f2f;
+                box-shadow: inset 0 0 0 1px #5f5f5f;
+            }
+        }
+
+        .selects-box {
+            display: flex;
+            justify-content: space-between;
+
+            & > select {
+                background-color: #3f3f3f;
+                border: none;
+                border-radius: 0.3em;
+                padding: 0.938em 0.5em 0.938em 0.65em;
+                width: 47%;
+                color: #eee;
+                outline: none;
+                transition: background-color 0.3s;
+
+                &:focus {
+                    background-color: #2f2f2f;
+                    box-shadow: inset 0 0 0 1px #5f5f5f;
+                }
+
+                option {
+                    color: white;
+                }
+            }
+        }
+        
+        .edit-title, .edit-description {
+            background-color: #3f3f3f;
+            border: none;
+            border-radius: 0.3em;
+            resize: none;
+            padding: 0.938em;
+    
+            color: #eee;
+    
+            &::placeholder {
+                color: #eee;
+            }
+        }
+    
+        .edit-description {
+            height: em(95px);
+        }
+    
+
+    }
+
+
+
+}

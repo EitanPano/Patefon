@@ -31,7 +31,20 @@
     .main-nav {
         display: flex;
         flex-direction: column;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
+        span {
+            font-size: 1.1em;
+            margin-inline-end: 1.3em;
+            margin-inline-start: 0.2em;
+            
+        }
+        & .span-create {
+            margin-inline-end: 1.1em;
+        }
+        .nav-liked {
+            margin-inline-start: 0.7em;
+        }
         .main-links {
             display: flex;
             flex-direction: column;

@@ -14,7 +14,9 @@ export const stationStore = {
         expandedStations: [],
         stations: [],
         searchHistory: [],
-        filterBy: "",
+        filterBy: {
+            txt: "",
+        },
         isClickedOnce: false,
     },
     getters: {
@@ -54,11 +56,16 @@ export const stationStore = {
             return state.isClickedOnce;
         },
         stationsByGenre(state) {
-            return state.stations.reduce((acc, station) => {
+            var genres = state.stations.reduce((acc, station) => {
                 if (!acc[station.genre]) acc[station.genre] = [station];
                 else acc[station.genre].push(station);
                 return acc;
             }, {});
+            console.log(genres);
+            return genres;
+        },
+        filterBy(state) {
+            return state.filterBy;
         },
     },
     mutations: {
@@ -70,6 +77,9 @@ export const stationStore = {
         },
         setFilter(state, { filterBy }) {
             state.filterBy = filterBy;
+        },
+        setFilterTxt(state, { txt }) {
+            state.filterBy.txt = txt;
         },
         addStation(state, { addedStation }) {
             state.stations.push(addedStation);
@@ -151,6 +161,7 @@ export const stationStore = {
         },
         setFilter({ commit, dispatch }, { filterBy }) {
             commit({ type: "setFilter", filterBy });
+            console.log(filterBy, "filter FROM STRORE");
             dispatch({ type: "loadStations", filterBy });
         },
         async addStation({ commit }, { newStation }) {

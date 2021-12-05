@@ -48,10 +48,12 @@ export default {
       loggedUser: {
         name: "Guest",
       },
-      filterBy: {
-        txt: "",
-      },
     };
+  },
+  computed: {
+    filterBy() {
+      return this.$store.getters.filterBy;
+    },
   },
   methods: {
     async filterSongs() {

@@ -7,14 +7,12 @@
         <nav>
             <ul class="main-nav" :class="menuOpen" @click="toggleMenu">
                 <div class="main-links">
-                    <span class="material-icons">home</span>
-                    <span class="material-icons">search</span>
-                    <router-link to="/"><span>🏠</span>Home</router-link>
-                    <router-link to="/search"><span>🔍</span>Search</router-link>
-                    <router-link to="/library"><span>📚</span>Your Library</router-link>
+                    <router-link to="/"><span class="icon-home material-icons">home</span>Home</router-link>
+                    <router-link to="/search"><span class="icon-search material-icons">search</span>Search</router-link>
+                    <router-link to="/library"><span class="icon-library">📚</span>Your Library</router-link>
                 </div>
-                <router-link to="/edit"><span class="span-create">➕</span>Create Playlist</router-link>
-                <router-link class="nav-liked" to="/station/liked"><span>❤</span>Liked Songs</router-link>
+                <router-link to="/edit"><span class="icon-plus material-icons">add</span>Create Playlist</router-link>
+                <router-link class="nav-liked" to="/station/liked"><span class="icon-heart material-icons">favorite</span>Liked Songs</router-link>
             </ul>
         </nav>
         <div class="burger-menu" @click="toggleMenu" :class="menuOpen">

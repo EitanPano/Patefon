@@ -17,6 +17,11 @@
         width: 1em;
         margin: 0;
         padding: 0;
+        
+        &.play {
+            font-size: 1.1em;
+
+        }
     }
 
     .last {
@@ -59,10 +64,11 @@
         justify-content: left;
         align-items: center;
         .btn {
-            font-size: 1.1em;
+            font-size: 1em;
             padding-bottom: 0.2em;
 
             &.btn-delete {
+                font-size: 0.9em;
                 position: absolute;
                 right: -0.4em;
             }

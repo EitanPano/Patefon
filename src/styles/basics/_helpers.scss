@@ -37,7 +37,10 @@
     color: white;
 }
 
-
+// OVERFLOW
+.overflow-hidden {
+    overflow: hidden;
+}
 
 // MARGIN
 
@@ -78,8 +81,9 @@
 }
 
 .btn-play {
-    padding-left: 0.5em;
-    padding-top: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 2.2em;
     height: 2.2em;
     font-size: 1.1em;

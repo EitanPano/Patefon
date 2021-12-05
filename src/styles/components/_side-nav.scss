@@ -6,6 +6,37 @@
     width: $side-nav;
     background: rgb(0, 0, 0);
 
+    .icon-home, .icon-search {
+        font-size: 2em;
+        margin-inline-end: 0.5em;
+    }
+    
+    .icon-library {
+        font-size: 1.3em;
+        line-height: 1.3em;
+        mix-blend-mode:luminosity;
+        margin-inline-end: 1em;
+    }
+    .icon-heart, .icon-plus {
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        font-size: 1em;
+        width: 1.6em;
+        height: 1.6em;
+        border-radius: 0.1em;
+        margin-inline-end: 1.3em;
+
+    }
+    .icon-plus {
+        background-color: rgb(200, 200, 200);
+        color: #2f2f2f;
+    }
+    .icon-heart {
+        background: rgb(157,48,148);
+        background: linear-gradient(135deg, rgba(157,48,148,1) 9%, rgba(246,119,213,1) 49%, rgba(221,178,216,1) 100%);
+    }
+
     .router-link-exact-active {
         background: rgba(128, 128, 128, 0.35);
         color: white;
@@ -22,7 +53,6 @@
         img {
             width: 3.5em;
         }
-
         h1 {
             margin: 0.3em 0.1em 0;
         }
@@ -33,18 +63,6 @@
         flex-direction: column;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-        span {
-            font-size: 1.1em;
-            margin-inline-end: 1.3em;
-            margin-inline-start: 0.2em;
-            
-        }
-        & .span-create {
-            margin-inline-end: 1.1em;
-        }
-        .nav-liked {
-            margin-inline-start: 0.7em;
-        }
         .main-links {
             display: flex;
             flex-direction: column;
@@ -52,6 +70,8 @@
         }
 
         a {
+            display: flex;
+            align-items: center;
             padding-left: 1em;
             font-size: 0.9em;
             margin: 0 0.5em;

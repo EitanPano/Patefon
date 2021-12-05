@@ -21,7 +21,7 @@ export const stationStore = {
       return state.stations;
     },
     getExpandedStations(state) {
-      console.log("state.expandedStations", state.expandedStations);
+      // console.log("state.expandedStations", state.expandedStations);
       return state.expandedStations;
     },
     currStation(state) {
@@ -103,8 +103,8 @@ export const stationStore = {
     },
     setHistorySongs(state, { historySongs }) {
       state.searchHistory = historySongs;
-      console.log("songs", historySongs);
-      console.log(state.searchHistory);
+      // console.log("songs", historySongs);
+      // console.log(state.searchHistory);
     },
     updateUser(state, { updatedUser }) {
       state.loggedUser = updatedUser;
@@ -144,7 +144,7 @@ export const stationStore = {
     async loadHistorySearch({ commit }) {
       const historySongs = await stationService.getHistoryDB();
       // historySongs = new Set();
-      console.log(historySongs);
+      // console.log(historySongs);
       commit({ type: "setHistorySongs", historySongs });
     },
     setFilter({ commit, dispatch }, { filterBy }) {

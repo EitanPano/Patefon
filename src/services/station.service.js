@@ -43,7 +43,7 @@ async function query(filterBy = {}) {
       return likedSongs;
     }
     if (filterBy.txt) {
-      console.log(filterBy.txt, "filterBy");
+      // console.log(filterBy.txt, "filterBy");
       var expandedStations = stations.reduce(
         function (data, station) {
           var songs =
@@ -78,7 +78,7 @@ async function query(filterBy = {}) {
     }
     return stations;
   } catch (err) {
-    console.log(err);
+      console.log(err);
     throw err;
   }
 }

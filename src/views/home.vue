@@ -1,6 +1,6 @@
 <template>
     <section class="main-layout home-page">
-        <h1>Home page</h1>
+        <h1 class="highlight">Good Evening</h1>
         <div class="station-list-container" v-for="(stations, genre) in stationsByGenre" :key="genre">
             <div class="flex space-between">
                 <h2 class="title">{{ genre }}</h2>

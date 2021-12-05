@@ -5,7 +5,9 @@
     @click="enterStation(station._id)"
     class="station-preview"
   >
-    <img :src="station.imgUrl" />
+    <div>
+      <img :src="station.imgUrl" />
+    </div>
     <p>{{ station.name }}</p>
     <p>By {{ station.createdBy.name }}</p>
     <transition name="fade">

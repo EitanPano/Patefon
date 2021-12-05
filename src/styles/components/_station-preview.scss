@@ -2,6 +2,7 @@
     position: relative;
     // margin: 0 0.5em 0.5em;
     height: 100%;
+    grid-column: span 1;
     display: flex;
     // max-height: 19em;
     flex-direction: column;
@@ -34,6 +35,8 @@
 
     p {
         line-height: normal;
+        white-space: nowrap;
+        overflow: hidden;
         &:nth-child(2){
             margin-top: 1.5em;
             margin-bottom: 0.5em;
@@ -45,14 +48,23 @@
         }
     }
 
-    img{
+    div {
         width: 100%;
-        // height: auto;
-        height: 65%;
-        // max-height: 8em;
-        border-radius: 0.2em;
-        background-color:#2f2f2f;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+        background-color: red;
+        height: 70%;
+        
+        & > img{
+            // object-fit: contain;
+            // position: absolute;
+            height:100%;
+            width: 100%;
+            // height: auto;
+            // max-height: 65%;
+            // min-height: 65%;
+            border-radius: 0.2em;
+            background-color:#2f2f2f;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.8);
+        }
     }
 }
 

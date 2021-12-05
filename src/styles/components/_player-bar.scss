@@ -2,7 +2,7 @@
     .player-grid {
         z-index: 50;
         position: fixed;
-        bottom: 0;
+        bottom: 4.5em;
         left: 0;
         width: 100%;
         height: em(90px);
@@ -51,7 +51,8 @@
                 line-height: 1.5em;
                 &:nth-child(1) {
                     font-size: 0.9em;
-                    font-family: 'Trebuchet MS', 'Lucida Sans Unicode','Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                    font-family: 'Trebuchet MS', 'Lucida Sans Unicode',
+                        'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
                     transition: all 4s linear;
                 }
                 &:nth-child(2) {
@@ -145,4 +146,20 @@ input[type='range']::-webkit-slider-thumb {
     background: #ffffff;
     border-radius: 50%;
     box-shadow: -500px 0 0 500px #3d9c78;
+}
+
+@include for-mobile-layout {
+}
+@include for-narrow-layout {
+}
+@include for-normal-layout {
+    .player-bar {
+        .player-grid {
+            position: fixed;
+            bottom: 0;
+            height: em(90px);
+        }
+    }
+}
+@include for-wide-layout {
 }

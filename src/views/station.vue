@@ -56,7 +56,7 @@ export default {
         type: "songToPlayer",
         song,
         idx,
-        // station: this.station,
+        station: this.currStation,
       });
     },
     likedSongToPlayer(song, idx) {

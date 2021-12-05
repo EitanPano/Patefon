@@ -1,10 +1,9 @@
 .main-layout {
     width: calc(100% - $side-nav);
     margin-left: $side-nav;
-    margin-top: $top-bar;
     margin-bottom: 4em;
-    padding: 0 20px;
-    overflow-x: hidden;
+    padding: $top-bar 1.2vw;
+    // overflow-x: hidden;
 
     grid-template-columns: $layoutPadding 1fr $layoutPadding;
 

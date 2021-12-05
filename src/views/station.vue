@@ -45,8 +45,8 @@ export default {
   methods: {
     async removeSong(songId) {
       try {
-        const idx = this.station.songs.findIndex((song) => song.id === songId);
-        this.station.songs.splice(idx, 1);
+        const idx = this.currStation.songs.findIndex((song) => song.id === songId);
+        this.currStation.songs.splice(idx, 1);
       } catch (err) {
         console.log(err);
       }
@@ -56,7 +56,7 @@ export default {
         type: "songToPlayer",
         song,
         idx,
-        station: this.station,
+        station: this.currStation,
       });
     },
     likedSongToPlayer(song, idx) {
@@ -70,7 +70,7 @@ export default {
     destroyed() {
       this.$store.dispatch({
         type: "updateStationAfterRemoveSong",
-        station: this.station,
+        station: this.currStation,
       });
       this.$store.dispatch({
         type: "setFilter",

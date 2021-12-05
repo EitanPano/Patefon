@@ -35,9 +35,7 @@ export default {
   data() {
     return {};
   },
-  created() {
-    console.log("is search from song list", this.isSearch);
-  },
+  created() {},
   methods: {
     removeSong(songId) {
       this.$emit("removeSong", songId);

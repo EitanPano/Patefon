@@ -2,19 +2,25 @@
   <aside class="top-bar">
     <!-- <h1>TOP BAR</h1> -->
     <div class="header-btns">
-      <button><span class="arrow-backward material-icons"> arrow_back_ios </span></button>
-      <button><span class="arrow-forward material-icons"> arrow_forward_ios </span></button>
-      
-
-        <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
-      
+      <button>
+        <span class="arrow-backward material-icons"> arrow_back_ios </span>
+      </button>
+      <button>
+        <span class="arrow-forward material-icons"> arrow_forward_ios </span>
+      </button>
+      <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
     </div>
-        <form>
-          <label><input class="search-local" type="search" placeholder="Search" v-if="isSearch" @input="filterSongs" v-model="filterBy.txt" /></label>
-        </form>
-
-
-
+    <form>
+      <label
+        ><input
+          class="search-local"
+          type="search"
+          placeholder="Search"
+          v-if="isSearch"
+          @input="filterSongs"
+          v-model="filterBy.txt"
+      /></label>
+    </form>
     <div class="account-menu">
       <button class="account-btn clear-btn flex justify-center align-center">
         <template v-if="loggedUser">

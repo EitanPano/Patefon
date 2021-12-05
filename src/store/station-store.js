@@ -8,6 +8,7 @@ export const stationStore = {
     loggedUser: userService.getLoggedinUser(),
     likedStation: [],
     currStation: null,
+    currStationForPlayer : null,
     currSong: null,
     currSongIdx: 0,
     expandedStations: [],
@@ -25,6 +26,9 @@ export const stationStore = {
     },
     currStation(state) {
       return state.currStation;
+    },
+    currStationForPlayer(state) {
+      return state.currStationForPlayer;
     },
     currSong(state) {
       return state.currSong;
@@ -47,6 +51,13 @@ export const stationStore = {
     isLikedStation(state) {
       return state.filterBy.isLiked ? true : false;
     },
+    stationsByGenre (state) {
+      return state.stations.reduce((acc,station)=> {
+        if (!acc[station.genre]) acc[station.genre] = [station];
+        else acc[station.genre].push(station);
+        return acc;
+      },{});
+    }
   },
   mutations: {
     setStations(state, { stations }) {
@@ -102,12 +113,8 @@ export const stationStore = {
     songToPlayer(state, { song, idx, station }) {
       state.currSong = song;
       state.currSongIdx = idx;
-      state.currStation = station;
+      state.currStationForPlayer = station;
     },
-    // setInitalStation(state) {
-    //   state.currStation = state.stations[0];
-    //   state.currSong = state.stations[0].songs[0];
-    // }
   },
   actions: {
     async getById({ commit }, { id }) {

@@ -6,6 +6,7 @@ import search from '../views/search.vue'
 import library from '../views/library.vue'
 import edit from '../views/edit.vue'
 import station from '../views/station.vue'
+import genre from '../views/genre.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/station/:id?',
     name: 'Station',
     component: station
+  },
+  {
+    path: '/genre/:id',
+    name: 'Genre',
+    component: genre
   },
 
 ]

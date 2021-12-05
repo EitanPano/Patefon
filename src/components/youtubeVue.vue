@@ -33,6 +33,8 @@
         :title="songVolume"
       />
     </div>
+    {{new Date(currentTime*1000).toLocaleTimeString()}}
+    {{SongDuration}}
   </section>
 </template>
 

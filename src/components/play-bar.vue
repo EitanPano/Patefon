@@ -19,7 +19,7 @@ export default {
     computed : {
 
     currStation() {
-      return this.$store.getters.currStation;
+      return this.$store.getters.currStationForPlayer;
     },
     currSong () {
         return this.$store.getters.currSong;

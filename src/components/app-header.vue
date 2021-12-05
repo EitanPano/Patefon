@@ -2,10 +2,10 @@
   <aside class="top-bar">
     <!-- <h1>TOP BAR</h1> -->
     <div class="header-btns">
-      <button>
+      <button @click="goBack()">
         <span class="arrow-backward material-icons"> arrow_back_ios </span>
       </button>
-      <button>
+      <button @click="goNext()">
         <span class="arrow-forward material-icons"> arrow_forward_ios </span>
       </button>
       <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
@@ -48,10 +48,12 @@ export default {
       loggedUser: {
         name: "Guest",
       },
-      filterBy: {
-        txt: "",
-      },
     };
+  },
+  computed: {
+    filterBy() {
+      return this.$store.getters.filterBy;
+    },
   },
   methods: {
     async filterSongs() {
@@ -71,6 +73,20 @@ export default {
         throw err;
       }
     },
+    goBack() {
+      console.log("back");
+    },
+    goNext() {
+      console.log("next");
+    },
+    setCurrPage() {
+      this.$store.commit({ type: "setCurrPage", link: this.$route.params });
+    },
+    setNextPage() {},
+  },
+  created() {
+    console.log(this.$route.name);
+    console.log("hello");
   },
   watch: {
     $route: {

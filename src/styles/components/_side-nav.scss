@@ -1,21 +1,24 @@
 .side-nav {
+    z-index: 50;
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
-    height: 100%;
-    width: $side-nav;
+    height: 4.5em ;
+    width: 100% ;
     background: rgb(0, 0, 0);
+
+    .icon-home,.icon-search,.icon-library,.icon-heart,.icon-plus {
+        margin: 0;
+    }
 
     .icon-home, .icon-search {
         font-size: 2em;
-        margin-inline-end: 0.5em;
     }
     
     .icon-library {
         font-size: 1.3em;
-        line-height: 1.3em;
+        padding-bottom: 0.2em;
         mix-blend-mode:luminosity;
-        margin-inline-end: 1em;
     }
     .icon-heart, .icon-plus {
         display: flex;
@@ -25,8 +28,7 @@
         width: 1.6em;
         height: 1.6em;
         border-radius: 0.1em;
-        margin-inline-end: 1.3em;
-
+        margin-bottom: 0.45em;
     }
     .icon-plus {
         background-color: rgb(200, 200, 200);
@@ -43,6 +45,9 @@
     }
 
     .logo-container {
+        position: fixed;
+        top: 0;
+        left: 1em;
         height: 4.6em;
         padding-right: 2em;
         max-width: $side-nav;
@@ -60,26 +65,39 @@
 
     .main-nav {
         display: flex;
-        flex-direction: column;
+        position: absolute;
+        
+        width: 100%;
+        // align-items: center;
+        // flex-direction: column;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
         .main-links {
             display: flex;
-            flex-direction: column;
+            justify-content: space-around;
+            width: 60%;
+            // flex-direction: column;
             margin-bottom: 1.2em;
+            a {
+                width: 33%;
+            }
         }
 
         a {
+            width: 20%;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding-left: 1em;
+            text-align: center;
+            padding: 0.7em;
             font-size: 0.9em;
-            margin: 0 0.5em;
+            // margin: 0 0.5em;
             font-weight: bold;
-            line-height: 2.8em;
+            // line-height: 2.8em;
             border-radius: 0.25em;
-
             transition: 0.3s;
+            // line-height: 0.5em;
+            margin-top: -0.8em;
 
             &:hover {
                 color: white;
@@ -87,4 +105,94 @@
         }
     }
 
+}
+
+@include for-mobile-layout {
+    
+}
+@include for-narrow-layout {
+    
+}
+@include for-normal-layout {
+    .side-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: $side-nav;
+        background: rgb(0, 0, 0);
+
+        .icon-home, .icon-search {
+            margin-inline-end: 0.5em;
+        }
+        .icon-library {
+            line-height: 1.3em;
+            margin-inline-end: 1em;
+        }
+        .icon-heart, .icon-plus {
+            margin-inline-end: 1.3em;
+        }
+
+        
+
+        .logo-container {
+            position: initial;
+            height: 4.6em;
+            padding-right: 2em;
+            max-width: $side-nav;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            img {
+                width: 3.5em;
+            }
+            h1 {
+                margin: 0.3em 0.1em 0;
+            }
+        }
+
+        .main-nav {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+            .main-links {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 1.2em;
+                width: initial;
+
+                a {
+                    width: initial;
+                }
+            }
+    
+            a {
+                width: initial;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 0 0 0 1em;
+                font-size: 0.9em;
+                margin: 0 0.5em;
+                font-weight: bold;
+                line-height: 2.8em;
+                border-radius: 0.25em;
+    
+                transition: 0.3s;
+
+                span {
+                    margin-bottom: 0;
+                }
+
+                &:hover {
+                    color: white;
+                }
+            }
+        }
+    }
+}
+@include for-wide-layout {
+    
 }

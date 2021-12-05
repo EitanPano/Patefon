@@ -1,6 +1,6 @@
 .main-layout {
-    width: calc(100% - $side-nav);
-    margin-left: $side-nav;
+    // width: calc(100% - $side-nav);
+    // margin-left: $side-nav;
     margin-bottom: 4em;
     padding: $top-bar 1.2vw;
     // overflow-x: hidden;
@@ -30,11 +30,24 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat( auto-fill, minmax(10em, 1fr));
+    grid-template-columns: repeat( auto-fill, minmax(12em, 1fr));
+    // grid-template-rows: repeat(auto-fit, 1fr);
+    grid-auto-rows: 18em;
     padding: 0 0.5em;
     gap: 1.5em;
     grid-auto-flow: dense;
     // grid-template-rows:;
+}
+
+@include for-normal-layout{
+
+    .main-layout {
+        width: calc(100% - $side-nav);
+        margin-left: $side-nav;
+        margin-bottom: 4em;
+        padding: $top-bar 1.2vw;
+    }
+    
 }
 
 

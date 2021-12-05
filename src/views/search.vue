@@ -45,8 +45,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$store.getters.stationsByGenre);
-    console.log(Object.values(this.$store.getters.stationsByGenre));
+    // console.log(this.searchHistory);
   },
   computed: {
     stations() {
@@ -58,6 +57,7 @@ export default {
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {
+      // console.log('getters',this.$store.getters.searchHistory)
       return this.$store.getters.searchHistory;
       // return this.$store.getters.getSearchHistory;
     },

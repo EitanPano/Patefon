@@ -5,7 +5,7 @@ import { userService } from "../services/user.service.js";
 
 export const stationStore = {
     state: {
-        loggedUser: {},
+        loggedUser: null,
         // likedSongs: [],
         currStation: null,
         currStationForPlayer: null,
@@ -94,14 +94,15 @@ export const stationStore = {
             state.stations.splice(idx, 0, updatedStation);
         },
         clearSearch(state) {
-            state.expandedStations = "";
+            // state.expandedStations = "";
+            state.expandedStations = [];
         },
         setHistorySongs(state, { historySongs }) {
             state.searchHistory = historySongs;
         },
         updateUser(state, { updatedUser }) {
             state.loggedUser = updatedUser;
-            console.log("updated user", state.loggedUser);
+            console.log("updated user line 104", state.loggedUser);
         },
         songToPlayer(state, { song, idx, station }) {
             state.currSong = song;

@@ -51,6 +51,7 @@ export default {
           action: { song: this.song, type: "history" },
         });
         this.$store.commit({ type: "setClicked", boolState: true });
+        
         //likeSong->>> BAD NAME FOR DYNAMIC FUNCTION //
         // this.isClickedOnce = true;
         // console.log("is clicked once?", this.isClickedOnce);

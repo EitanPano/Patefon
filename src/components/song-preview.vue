@@ -1,16 +1,6 @@
 <template>
-  <article
-    class="song-preview"
-    @mouseleave="isHover = false"
-    @mouseover="isHover = true"
-  >
-    <button
-      v-if="isHover"
-      @click="songToPlayer(song, idx)"
-      class="size-btn first"
-    >
-      ▶
-    </button>
+  <article class="song-preview" @mouseleave="isHover = false" @mouseover="isHover = true" >
+    <button v-if="isHover" @click="songToPlayer(song, idx)" class="size-btn first play">▶</button>
     <p v-else class="first song-idx">{{ idx + 1 }}</p>
     <div class="song-details">
       <img :src="song.imgUrl" />

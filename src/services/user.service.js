@@ -26,7 +26,6 @@ function getLoggedinUser() {
 
 function _createUser() {
   var user = localStorageService.load(KEY);
-  console.log(user);
   if (!user || !user.length) {
     user = userDB;
     localStorageService.store(KEY, user);

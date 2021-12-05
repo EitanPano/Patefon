@@ -6,6 +6,7 @@ import search from '../views/search.vue'
 import library from '../views/library.vue'
 import edit from '../views/edit.vue'
 import station from '../views/station.vue'
+import genre from '../views/genre.vue'
 
 Vue.use(VueRouter)
 
@@ -40,11 +41,19 @@ const routes = [
     name: 'Station',
     component: station
   },
+  {
+    path: '/genre/:id',
+    name: 'Genre',
+    component: genre
+  },
 
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 export default router

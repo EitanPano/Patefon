@@ -8,6 +8,7 @@ export const stationStore = {
     loggedUser: {},
     // likedSongs: [],
     currStation: null,
+    currStationForPlayer : null,
     currSong: null,
     currSongIdx: 0,
     expandedStations: [],
@@ -21,11 +22,14 @@ export const stationStore = {
       return state.stations;
     },
     getExpandedStations(state) {
-      console.log("state.expandedStations", state.expandedStations);
+      // console.log("state.expandedStations", state.expandedStations);
       return state.expandedStations;
     },
     currStation(state) {
       return state.currStation;
+    },
+    currStationForPlayer(state) {
+      return state.currStationForPlayer;
     },
     currSong(state) {
       return state.currSong;
@@ -33,9 +37,7 @@ export const stationStore = {
     currSongIdx(state) {
       return state.currSongIdx;
     },
-    // likedStation(state) {
-    //   return state.likedStation;
-    // },
+   
     searchHistory(state) {
       return state.loggedUser.searchHistory;
     },
@@ -47,14 +49,17 @@ export const stationStore = {
     },
     getLikedSongs(state) {
       return state.loggedUser.likedSongs;
-      // return state.likedSongs;
     },
     isClicked(state) {
       return state.isClickedOnce;
     },
-    // getSearchHistory(state) {
-    //     if(state.searchHistory.length)
-    // },
+    stationsByGenre (state) {
+      return state.stations.reduce((acc,station)=> {
+        if (!acc[station.genre]) acc[station.genre] = [station];
+        else acc[station.genre].push(station);
+        return acc;
+      },{});
+    }
   },
   mutations: {
     setStations(state, { stations }) {
@@ -97,8 +102,8 @@ export const stationStore = {
     },
     setHistorySongs(state, { historySongs }) {
       state.searchHistory = historySongs;
-      console.log("songs", historySongs);
-      console.log(state.searchHistory);
+      // console.log("songs", historySongs);
+      // console.log(state.searchHistory);
     },
     updateUser(state, { updatedUser }) {
       state.loggedUser = updatedUser;
@@ -107,7 +112,7 @@ export const stationStore = {
     songToPlayer(state, { song, idx, station }) {
       state.currSong = song;
       state.currSongIdx = idx;
-      state.currStation = station;
+      state.currStationForPlayer = station;
     },
     setLoggedUser(state, { user }) {
       state.loggedUser = user;
@@ -116,10 +121,6 @@ export const stationStore = {
     setLikedSongs(state, { user }) {
       state.likedSongs = user.likedSongs;
     },
-    // setInitalStation(state) {
-    //   state.currStation = state.stations[0];
-    //   state.currSong = state.stations[0].songs[0];
-    // }
     setClicked(state, { boolState }) {
       state.isClickedOnce = boolState;
     },
@@ -164,7 +165,7 @@ export const stationStore = {
     async loadHistorySearch({ commit }) {
       const historySongs = await stationService.getHistoryDB();
       // historySongs = new Set();
-      console.log(historySongs);
+      // console.log(historySongs);
       commit({ type: "setHistorySongs", historySongs });
     },
     setFilter({ commit, dispatch }, { filterBy }) {

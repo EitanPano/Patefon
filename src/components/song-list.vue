@@ -1,7 +1,9 @@
 <template>
   <section class="song-list">
     <div class="actions">
-      <button class="btn btn-play" @click="songToPlayer">▶</button>
+      <button class="btn btn-play" @click="songToPlayer">
+        <span class="material-icons">play_arrow</span>
+      </button>
     </div>
     <div class="sort-bar" v-if="!isSearch">
       <p>#</p>

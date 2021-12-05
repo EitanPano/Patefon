@@ -39,17 +39,23 @@
                                 <option value="happy">Happy</option>
                                 <option value="broadcast">Broadcast</option>
                                 <option value="sad">Sad</option>
+                                <option value="original">Original</option>
+                                <option value="fantastic">Fantastic</option>
+                                <option value="curious">Curious</option>
                             </select>
 
                             <select v-model="emptyStation.genre">
                                 <option value="" disabled>Choose Genres</option>
                                 <!-- <option v-for="genre in genres" :key="genre" :value="genre">{{ genre }}</option -->
 
-                                <option value="hiphop">Hip Hop</option>
-                                <option value="rock">Rock</option>
-                                <option value="pop">Pop</option>
-                                <option value="classic">Classic</option>
-                                <option value="jazz">Jazz</option>
+                                <option value="Hip Hop">Hip Hop</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Classic">Classic</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Israeli">Israeli</option>
+                                <option value="Electronic">Electronic</option>
                             </select>
                         </div>
                         <textarea v-model="emptyStation.description" class="edit-description" placeholder="Add an optional description" />
@@ -98,6 +104,7 @@ export default {
         addSong(song) {
             // console.log(song)
             song.isLiked = false;
+            song.createdAt = Date.now();
             this.emptyStation.songs.push(song);
         },
         addTag() {

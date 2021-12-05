@@ -4,7 +4,10 @@
       <h1>Songs</h1>
       <song-list :songs="songs" :isSearch="true" @songToPlayer="songToPlayer" />
     </div>
-    <div class="search-history-preview" v-if="searchHistory && searchHistory.length">
+    <div
+      class="search-history-preview"
+      v-if="searchHistory && searchHistory.length"
+    >
       <h1>Recently Searched</h1>
       <song-list :songs="searchHistory" :isSearch="true" />
     </div>
@@ -47,11 +50,11 @@ export default {
   },
   computed: {
     stations() {
-      console.log(this.$store.getters.getExpandedStations.stations, "stations");
+      // console.log(this.$store.getters.getExpandedStations.stations, "stations");
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
-      console.log(this.$store.getters.getExpandedStations.songs, "songs");
+      // console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {

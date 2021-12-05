@@ -1,26 +1,27 @@
 // SETUP
-@import 'setup/variables';
-@import 'setup/mixins';
-@import 'setup/functions';
+@import "setup/variables";
+@import "setup/mixins";
+@import "setup/functions";
 
 // BASICS
-@import 'basics/helpers';
-@import 'basics/base';
-@import 'basics/layout';
+@import "basics/helpers";
+@import "basics/base";
+@import "basics/layout";
 
 // COMPONENTS
-@import 'components/side-nav';
-@import 'components/player-bar';
-@import 'components/top-bar';
-@import 'components/station-list';
-@import 'components/station-preview';
-@import 'components/song-list';
-@import 'components/song-preview';
-@import 'components/youtube-search';
-@import 'components/youtubeVue';
-@import 'components/modal-edit';
+@import "components/side-nav";
+@import "components/player-bar";
+@import "components/top-bar";
+@import "components/station-list";
+@import "components/station-preview";
+@import "components/song-list";
+@import "components/song-preview";
+@import "components/youtube-search";
+@import "components/youtubeVue";
+@import "components/modal-edit";
+@import "components/genre-preview";
 
 //Views
-@import 'views/home';
-@import 'views/edit';
-@import 'views/station';
+@import "views/home";
+@import "views/edit";
+@import "views/station";

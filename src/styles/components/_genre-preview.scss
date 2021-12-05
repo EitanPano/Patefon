@@ -1,0 +1,14 @@
+.genre-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 190px;
+    padding: 1em;
+    border-radius: 0.3em;
+    font-size: 1.5em;
+    cursor: pointer;
+    p {
+        font-weight: bold;
+        -webkit-text-stroke: 0.2px rgb(131, 131, 131);
+    }
+}

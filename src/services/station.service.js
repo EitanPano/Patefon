@@ -43,34 +43,36 @@ async function query(filterBy = {}) {
       return likedSongs;
     }
     if (filterBy.txt) {
-      console.log(filterBy.txt, "filterBy");
-      var expandedStations = stations.reduce(
-        function (data, station) {
-          var songs =
+      let expandedStations = stations.reduce(
+        (data, station) => {
+          //const regx = new RegExp(filterBy.txt, "i");
+          let songs =
             station.songs.filter((song) =>
               song.title.toLowerCase().includes(filterBy.txt.toLowerCase())
             ) || [];
-
+          //return regx.test(song.title)
           if (songs.length) {
             songs.forEach((song) => {
-              if (station.songs.includes(song) && !data.stations.has(station)) {
-                data.stations.add(station);
-                //   data.stations.push(station);
+              if (
+                station.songs.includes(song) &&
+                !data.stations.includes(station)
+              ) {
+                data.stations.push(station);
               }
-              // if (data.songs.has(song)) return;
-              data.songs.add(song);
-              //   data.songs.push(song);
-              //   console.log("went through If");
+              data.songs.push(song);
             });
           }
           return data;
         },
-        { songs: new Set(), stations: new Set() }
+        { songs: [], stations: [] }
+      );
+      expandedStations.songs = utilService.getExclusiveArr(
+        expandedStations.songs
       );
 
-      if (expandedStations.songs.size > 1) {
+      if (expandedStations.songs.length > 1) {
         return expandedStations;
-      } else if (expandedStations.songs.size === 1) {
+      } else if (expandedStations.songs.length === 1) {
         var artistName = expandedStations.songs[0].title;
         //with real data after having the artist name we can add more songs of the same artist to the expandedStations . with expandedStations.relatedSongs
         return expandedStations;

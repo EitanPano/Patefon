@@ -1,72 +1,75 @@
 .song-preview {
-    cursor:default;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 0.7em 4fr 2fr minmax(em(90px), 1fr);
-    gap: 1em;
-    padding: 0.5em 1em;
+  cursor: default;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.7em 4fr 2fr minmax(em(90px), 1fr);
+  gap: 1em;
+  padding: 0.5em 1em;
 
-    p {
-        font-size: 0.9em;
-        color: lighten($clr2, 15%);
-        display: flex;
-        align-items: center;
+  p {
+    font-size: 0.9em;
+    color: lighten($clr2, 15%);
+    display: flex;
+    align-items: center;
+  }
+
+  .first {
+    width: 1em;
+    margin: 0;
+    padding: 0;
+  }
+
+  .last {
+    grid-column: 4 / 5;
+  }
+
+  button {
+    background-color: transparent;
+    color: white;
+    border: none;
+  }
+
+  &:hover {
+    background-color: #2f2f2fab;
+  }
+
+  .song-details {
+    display: flex;
+    align-items: center;
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+
+    .song-idx {
+      margin-inline-end: 1.2em;
     }
 
-    .first {
-        width: 1em;
-        margin: 0;
-        padding: 0;
+    img {
+      height: em(40px);
+      width: em(40px);
+      object-fit: fill;
+      margin-inline-end: 0.7em;
     }
+  }
 
-    .last {
-        grid-column: 4 / 5;
+  .liked {
+    color: greenyellow;
+  }
+
+  .song-actions {
+    position: relative;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    .btn {
+      font-size: 1.1em;
+      padding-bottom: 0.2em;
+
+      &.btn-delete {
+        position: absolute;
+        right: -0.4em;
+      }
     }
-
-    button {
-        background-color: transparent;
-        color: white;
-        border: none;
-    }
-
-    &:hover {
-        background-color: #2f2f2fab;
-
-    }
-
-    .song-details {
-        display: flex;
-        align-items: center;
-        display: flex;
-        white-space: nowrap;
-        overflow: hidden;
-
-        .song-idx {
-            margin-inline-end: 1.2em;
-        }
-
-        img {
-            height: em(40px);
-            width: em(40px);
-            object-fit: fill;
-            margin-inline-end: 0.7em;
-        }
-    }
-
-    .song-actions {
-        position: relative;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        .btn {
-            font-size: 1.1em;
-            padding-bottom: 0.2em;
-
-            &.btn-delete {
-                position: absolute;
-                right: -0.4em;
-            }
-        }
-        // width: 12em;
-    }
+    // width: 12em;
+  }
 }

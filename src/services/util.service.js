@@ -24,8 +24,23 @@ function checkDuplicate(arr, valueId) {
   } else false;
 }
 
+function getExclusiveArr(arr) {
+  let setLabels = new Set();
+  const exclusiveArr = [];
+
+  // implementing Set on the objects :
+  arr.forEach((obj) => setLabels.add(JSON.stringify(obj)));
+
+  //get the original values before set :
+  setLabels.forEach((label) => {
+    exclusiveArr.push(JSON.parse(label));
+  });
+  return exclusiveArr;
+}
+
 export const utilService = {
   makeId,
   getRandomInt,
   checkDuplicate,
+  getExclusiveArr,
 };

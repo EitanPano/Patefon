@@ -17,16 +17,24 @@
       <p class="song-title">{{ song.title }}</p>
     </div>
     <div class="last song-actions">
-      <button class="btn btn-like" @click="likeSong">❤</button>
+      <button
+        v-if="user"
+        class="btn btn-like"
+        @click="likeSong"
+        v-bind:class="{ liked: isLiked }"
+      >
+        ❤
+      </button>
       <p>{{ song.duration }}</p>
       <button
         @click="removeSong(song.id)"
-        v-if="isHover && !isLikedStation"
+        v-if="isHover"
         class="btn btn-delete"
       >
         ✖
       </button>
     </div>
+    <!-- && !isLikedStation -->
   </article>
 </template>
 
@@ -36,7 +44,6 @@ export default {
   data() {
     return {
       isHover: false,
-      isClickedOnce: false,
     };
   },
   created() {},
@@ -46,9 +53,17 @@ export default {
     },
     songToPlayer(song, idx) {
       this.$emit("songToPlayer", song, idx);
-      if (this.isSearch && !this.isClickedOnce) {
-        this.$store.commit({ type: "setSearchHistory", song: this.song });
-        this.isClickedOnce = true;
+      console.log("isSearch", this.isSearch);
+      console.log("isClicked", this.isClickedOnce);
+      if (this.isSearch && !this.isClicked) {
+        this.$store.dispatch({
+          type: "likeSong",
+          action: { song: this.song, type: "history" },
+        });
+        this.$store.commit({ type: "setClicked", boolState: true });
+        //likeSong->>> BAD NAME FOR DYNAMIC FUNCTION //
+        // this.isClickedOnce = true;
+        // console.log("is clicked once?", this.isClickedOnce);
       }
     },
     likeSong() {
@@ -57,10 +72,28 @@ export default {
         action: { song: this.song, type: "like" },
       });
     },
+    checkIfSongLiked(likedSongs) {
+      var idx = likedSongs.findIndex(
+        (likedSong) => likedSong.id === this.song.id
+      );
+      if (idx < 0) return false;
+      return true;
+    },
   },
   computed: {
     isLikedStation() {
-      return this.$store.getters.isLikedStation;
+      console.log(this.$store.getters.getLoggedinUser, "from song preview");
+      return this.$store.getters.getLoggedinUser;
+    },
+    isLiked() {
+      let likedSongs = this.$store.getters.getLikedSongs;
+      return this.checkIfSongLiked(likedSongs);
+    },
+    isClicked() {
+      return this.$store.getters.isClicked;
+    },
+    user() {
+      return this.$store.getters.getLoggedUser;
     },
   },
 };

@@ -38,11 +38,17 @@ function addSong(action) {
   let user = getLoggedinUser();
 
   if (action.type === "history" && !user.searchHistory.includes(action.song)) {
-    user.searchHistory.push(action.song);
+    var idx = utilService.checkDuplicate(user.searchHistory, action.song.id);
+    if (idx || idx === 0) return;
+    user.searchHistory.unshift(action.song);
+    console.log("pushing history boyz");
+    if (user.searchHistory.length > 5) {
+      user.searchHistory.splice(user.searchHistory.length - 1, 1);
+    }
   } else if (action.type === "like") {
-    var idx = utilService.checkDuplicate(user.savedSongs, action.song.id);
-    if (idx || idx === 0) user.savedSongs.splice(idx, 1);
-    else user.savedSongs.push(action.song);
+    var idx = utilService.checkDuplicate(user.likedSongs, action.song.id);
+    if (idx || idx === 0) user.likedSongs.splice(idx, 1);
+    else user.likedSongs.push(action.song);
   }
   _saveUserToStorage(user);
   return Promise.resolve(user);

@@ -70,7 +70,7 @@ export default {
     },
     stopVideo() {
       this.player.stopVideo();
-      console.log(this.player);
+      // console.log(this.player);
       if (this.currTimeInterval) clearInterval(this.currTimeInterval);
     },
     seekTo() {
@@ -88,7 +88,7 @@ export default {
       this.playVideo();
     },
     playing() {
-      console.log("o/ we are watching!!!");
+      // console.log("o/ we are watching!!!");
       // all Promises from get are listed here, palying() is recalled when something is the song player changes
       this.player
         .getDuration()

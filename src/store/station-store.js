@@ -5,8 +5,8 @@ import { userService } from "../services/user.service.js";
 
 export const stationStore = {
   state: {
-    loggedUser: userService.getLoggedinUser(),
-    likedStation: [],
+    loggedUser: {},
+    // likedSongs: [],
     currStation: null,
     currSong: null,
     currSongIdx: 0,
@@ -14,6 +14,7 @@ export const stationStore = {
     stations: [],
     searchHistory: [],
     filterBy: "",
+    isClickedOnce: false,
   },
   getters: {
     getStations(state) {
@@ -32,21 +33,28 @@ export const stationStore = {
     currSongIdx(state) {
       return state.currSongIdx;
     },
-    likedStation(state) {
-      return state.likedStation;
+    // likedStation(state) {
+    //   return state.likedStation;
+    // },
+    searchHistory(state) {
+      return state.loggedUser.searchHistory;
     },
-    getSearchHistory(state) {
-      return state.searchHistory;
-    },
-    getLoggedinUser(state) {
+    getLoggedUser(state) {
       return state.loggedUser;
+    },
+    isLikedStation(state) {
+      return state.filterBy.isLiked ? true : false;
+    },
+    getLikedSongs(state) {
+      return state.loggedUser.likedSongs;
+      // return state.likedSongs;
+    },
+    isClicked(state) {
+      return state.isClickedOnce;
     },
     // getSearchHistory(state) {
     //     if(state.searchHistory.length)
     // },
-    isLikedStation(state) {
-      return state.filterBy.isLiked ? true : false;
-    },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -60,9 +68,6 @@ export const stationStore = {
     },
     addStation(state, { addedStation }) {
       state.stations.push(addedStation);
-    },
-    setLikedStation(state, { stations }) {
-      state.likedStation = stations;
     },
     setExpandedStations(state, { stations }) {
       state.expandedStations = stations;
@@ -104,10 +109,20 @@ export const stationStore = {
       state.currSongIdx = idx;
       state.currStation = station;
     },
+    setLoggedUser(state, { user }) {
+      state.loggedUser = user;
+      console.log("user from set", state.loggedUser);
+    },
+    setLikedSongs(state, { user }) {
+      state.likedSongs = user.likedSongs;
+    },
     // setInitalStation(state) {
     //   state.currStation = state.stations[0];
     //   state.currSong = state.stations[0].songs[0];
     // }
+    setClicked(state, { boolState }) {
+      state.isClickedOnce = boolState;
+    },
   },
   actions: {
     async getById({ commit }, { id }) {
@@ -123,10 +138,10 @@ export const stationStore = {
       try {
         const stations = await stationService.query(filterBy);
         let type =
-          filterBy && filterBy.isLiked ? "setLikedStation" : "setStations";
-        if (filterBy.txt) type = "setExpandedStations";
+          filterBy && filterBy.txt ? "setExpandedStations" : "setStations";
         commit({ type, stations });
         commit({ type: "setFilter", filterBy });
+        // if (filterBy.txt) type = "setExpandedStations";
         // console.log("filterBy", filterBy);
         // console.log("filterBy.txt", filterBy.txt);
       } catch (err) {
@@ -134,6 +149,18 @@ export const stationStore = {
         throw err;
       }
     },
+    async loadUser({ commit }) {
+      try {
+        let user = await userService.getLoggedinUser();
+        console.log(user);
+        commit({ type: "setLoggedUser", user });
+        commit({ type: "setLikedSongs", user });
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
+    },
+
     async loadHistorySearch({ commit }) {
       const historySongs = await stationService.getHistoryDB();
       // historySongs = new Set();
@@ -162,8 +189,13 @@ export const stationStore = {
       }
     },
     async likeSong({ commit }, { action }) {
-      const updatedUser = await userService.addSong(action);
-      commit({ type: "updateUser", updatedUser });
+      try {
+        const updatedUser = await userService.addSong(action);
+        commit({ type: "updateUser", updatedUser });
+      } catch (err) {
+        console.log(err);
+        throw err;
+      }
     },
   },
 

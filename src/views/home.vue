@@ -23,7 +23,7 @@ export default {
         stationList,
     },
     created() {
-        // this.setGuestUser();
+        this.setGuestUser();
         // this.$store.commit({type:'setInitalStation'});
     },
     data() {

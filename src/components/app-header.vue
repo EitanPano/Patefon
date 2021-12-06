@@ -85,8 +85,6 @@ export default {
     setNextPage() {},
   },
   created() {
-    console.log(this.$route.name);
-    console.log("hello");
   },
   watch: {
     $route: {

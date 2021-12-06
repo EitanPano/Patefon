@@ -21,14 +21,14 @@ export const stationStore = {
     },
     getters: {
         getStations(state) {
-            return state.stations;
+            return JSON.parse(JSON.stringify(state.stations));
         },
         getExpandedStations(state) {
             // console.log("state.expandedStations", state.expandedStations);
             return state.expandedStations;
         },
         currStation(state) {
-            return state.currStation;
+            return JSON.parse(JSON.stringify(state.currStation)) ;
         },
         currStationForPlayer(state) {
             return state.currStationForPlayer;
@@ -50,7 +50,7 @@ export const stationStore = {
             return state.filterBy.isLiked ? true : false;
         },
         getLikedSongs(state) {
-            return state.loggedUser.likedSongs;
+            return JSON.parse(JSON.stringify(state.loggedUser.likedSongs)) ;
         },
         isClicked(state) {
             return state.isClickedOnce;
@@ -61,7 +61,6 @@ export const stationStore = {
                 else acc[station.genre].push(station);
                 return acc;
             }, {});
-            console.log(genres);
             return genres;
         },
         filterBy(state) {
@@ -88,10 +87,12 @@ export const stationStore = {
             state.expandedStations = stations;
         },
         updateStation(state, { updatedStation }) {
-            const idx = state.stations.findIndex(
-                (currStation) => currStation._id === updatedStation._id
-            );
-            state.stations.splice(idx, 0, updatedStation);
+            // const idx = state.stations.findIndex(
+            //     (currStation) => currStation._id === updatedStation._id
+            // );
+            // console.log(idx);
+            // state.stations.splice(idx, 1, updatedStation);
+            state.currStation = updatedStation
         },
         clearSearch(state) {
             // state.expandedStations = "";
@@ -153,7 +154,6 @@ export const stationStore = {
                 throw err;
             }
         },
-
         async loadHistorySearch({ commit }) {
             const historySongs = await stationService.getHistoryDB();
             // historySongs = new Set();
@@ -173,7 +173,7 @@ export const stationStore = {
                 console.log(err);
             }
         },
-        async updateStationAfterRemoveSong({ commit }, { station }) {
+        async updateStation({ commit }, { station }) {
             try {
                 const updatedStation = await stationService.save(station);
                 commit({ type: "updateStation", updatedStation });
@@ -191,6 +191,13 @@ export const stationStore = {
                 throw err;
             }
         },
+        async swapIdxs({commit, dispatch}, {moved}) {
+            try {
+                console.log(moved);
+                moved.element
+            }
+            catch {}
+        }
     },
 
     modules: {},

@@ -37,11 +37,14 @@
             @songToPlayer="likedSongToPlayer"
             @swapped="swapIdxs"
         />
+
+              <chat-room :currStation="currStation" v-if="currStation"/>
     </section>
 </template>
 
 <script>
 import songList from "../components/song-list.vue";
+import chatRoom from "../components/chat-room.vue";
 export default {
     data() {
         return {
@@ -54,8 +57,7 @@ export default {
                 const newStation =  JSON.parse(JSON.stringify(this.currStation)) ;
                 newStation.songs.splice(moved.oldIndex, 1)
                 newStation.songs.splice(moved.newIndex, 0, moved.element)
-                console.log('newStation', newStation);
-
+                // console.log('newStation', newStation);
                 await this.$store.dispatch({type: 'updateStation', station: newStation})
             } catch(err) {
                 console.log(err);
@@ -67,6 +69,8 @@ export default {
                     (song) => song.id === songId
                 );
                 this.currStation.songs.splice(idx, 1);
+                await this.$store.dispatch({type: 'updateStation', station: this.currStation})
+
             } catch (err) {
                 console.log(err);
             }
@@ -144,6 +148,7 @@ export default {
     },
     components: {
         songList,
+        chatRoom,
     },
 };
 </script>

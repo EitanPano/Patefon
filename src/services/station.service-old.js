@@ -1,12 +1,11 @@
 // import { filter } from 'core-js/core/array';
 import { storageService } from "./async-storage.service";
 import { localStorageService } from "./local-storage.service";
-
 import { utilService } from "./util.service";
-import { httpService } from './http.service'
-import { socketService, SOCKET_EVENT_station_UPDATED } from './socket.service'
-const STORAGE_KEY_LOGGEDIN_station = 'loggedinstation'
-var gWatchedstation = null;
+// import { httpService } from './http.service'
+// import { socketService, SOCKET_EVENT_station_UPDATED } from './socket.service'
+// const STORAGE_KEY_LOGGEDIN_station = 'loggedinstation'
+// var gWatchedstation = null;
 
 // TEST DATA
 import { default as stationsDB } from "../data/stationsDB.json";
@@ -16,7 +15,7 @@ import { default as stationsDB } from "../data/stationsDB.json";
 const KEY = "stationsDB";
 const SEARCH_KEY = "historyDB";
 
-// _createStations();
+_createStations();
 
 export const stationService = {
     query,
@@ -33,8 +32,7 @@ window.stationService = stationService;
 
 async function query(filterBy = {}) {
     try {
-        // let stations = await storageService.query(KEY);
-        let stations = httpService.get(`station`,filterBy)
+        let stations = await storageService.query(KEY);
         if (filterBy.isLiked) {
             const likedSongs = [];
             stations.forEach((station) => {
@@ -91,31 +89,31 @@ async function query(filterBy = {}) {
 }
 
 async function getById(stationId) {
-    // const station = await storageService.get(KEY, stationId);
-    const station = await httpService.get(`station/${stationId}`)
+    const station = await storageService.get(KEY, stationId);
+    // const station = await httpService.get(`station/${stationId}`)
     // gWatchedStation = station;
     return station;
 }
 function remove(stationId) {
-    // return storageService.remove(KEY, stationId);
-    return httpService.delete(`station/${stationId}`)
+    return storageService.remove(KEY, stationId);
+    // return httpService.delete(`station/${stationId}`)
 }
 
 async function save(station) {
-    // if (station._id) {
-    //     const addedStation = await storageService.put(KEY, station);
-    //     return addedStation;
-    // } else {
-    //     const addedStation = await storageService.post(KEY, station);
-    //     return addedStation;
-    // }
+    if (station._id) {
+        const addedStation = await storageService.put(KEY, station);
+        return addedStation;
+    } else {
+        const addedStation = await storageService.post(KEY, station);
+        return addedStation;
+    }
 
-    if (station._id) station = await httpService.put(`station/${station._id}`, station)
-    else station = await httpService.post(`station/`, station)
+    // if (station._id) station = await httpService.put(`station/${station._id}`, station)
+    // else station = await httpService.post(`station/`, station)
 
     // Handle case in which admin updates other station's details
     // console.log(station)
-    return station;
+    // return station;
 }
 
 function getEmptystation() {

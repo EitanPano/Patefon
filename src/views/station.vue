@@ -43,9 +43,13 @@
       <h2 @click="goToSearch" class="search-link">Start Exploring🔍</h2>
     </div>
 
-              <chat-room :currStation="currStation" v-if="currStation"/>
-              <share-listen :currStation="currStation" v-if="currStation" @songToPlayer="songToPlayer" />
-    </section>
+    <chat-room :currStation="currStation" v-if="currStation" />
+    <share-listen
+      :currStation="currStation"
+      v-if="currStation"
+      @songToPlayer="songToPlayer"
+    />
+  </section>
 </template>
 
 <script>
@@ -53,10 +57,10 @@ import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
 export default {
-        components: {
-        songList,
-        chatRoom,
-        shareListen
+  components: {
+    songList,
+    chatRoom,
+    shareListen,
   },
   data() {
     return {
@@ -119,60 +123,60 @@ export default {
       console.log("searching...");
       this.$router.push(`/search`);
     },
-  destroyed() {
-    this.$store.dispatch({
-      type: "updateStation",
-      station: this.currStation,
-    });
-    this.$store.dispatch({
-      type: "setFilter",
-      filterBy: {},
-    });
-    this.isLikedStation = false;
-  },
-  computed: {
-    currStation() {
-      return this.$store.getters.currStation;
+    destroyed() {
+      this.$store.dispatch({
+        type: "updateStation",
+        station: this.currStation,
+      });
+      this.$store.dispatch({
+        type: "setFilter",
+        filterBy: {},
+      });
+      this.isLikedStation = false;
     },
-    stationName() {
-      return this.currStation ? this.currStation.name : "Liked Songs";
-    },
-    stationImg() {
-      return this.currStation && this.currStation.imgUrl
-        ? this.currStation.imgUrl
-        : "../assets/images/upload.svg";
-    },
-    songsCount() {
-      return this.isLikedStation ? this.likedSongs : this.currStation.songs;
-    },
-    likedSongs() {
-      console.log();
-      return this.$store.getters.likedSongs;
-      return this.$store.getters.getLoggedUser.songs;
-    },
-  },
-  watch: {
-    "$route.params.id": {
-      async handler() {
-        try {
-          const id = this.$route.params.id;
-          if (id === "liked") {
-            this.isLikedStation = true;
-            console.log("id=liked");
-            await this.$store.dispatch({
-              type: "loadUser",
-            });
-          } else {
-            await this.$store.dispatch({ type: "getById", id });
-          }
-        } catch (err) {
-          console.log(err);
-        }
+     },
+    computed: {
+      currStation() {
+        return this.$store.getters.currStation;
       },
-      immediate: true,
+      stationName() {
+        return this.currStation ? this.currStation.name : "Liked Songs";
+      },
+      stationImg() {
+        return this.currStation && this.currStation.imgUrl
+          ? this.currStation.imgUrl
+          : "../assets/images/upload.svg";
+      },
+      songsCount() {
+        return this.isLikedStation ? this.likedSongs : this.currStation.songs;
+      },
+      likedSongs() {
+        console.log();
+        return this.$store.getters.likedSongs;
+        return this.$store.getters.getLoggedUser.songs;
+      },
     },
-  },
-  }
+    watch: {
+      "$route.params.id": {
+        async handler() {
+          try {
+            const id = this.$route.params.id;
+            if (id === "liked") {
+              this.isLikedStation = true;
+              console.log("id=liked");
+              await this.$store.dispatch({
+                type: "loadUser",
+              });
+            } else {
+              await this.$store.dispatch({ type: "getById", id });
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        },
+        immediate: true,
+      },
+    },
 };
 </script>
 

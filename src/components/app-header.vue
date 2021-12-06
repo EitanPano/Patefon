@@ -48,11 +48,14 @@ export default {
       loggedUser: {
         name: "Guest",
       },
+      // filterBy:{
+      //   txt:''
+      // }
     };
   },
   computed: {
     filterBy() {
-      return this.$store.getters.filterBy;
+      return JSON.parse(JSON.stringify(this.$store.getters.filterBy));
     },
   },
   methods: {
@@ -61,7 +64,7 @@ export default {
         console.log("hello");
         this.$store.commit({ type: "clearSearch" });
       }
-      console.log(this.filterBy.txt, "from appheader cmp");
+      // console.log(this.filterBy.txt, "from appheader cmp");
       try {
         var stations = await this.$store.dispatch({
           type: "loadStations",
@@ -84,8 +87,7 @@ export default {
     },
     setNextPage() {},
   },
-  created() {
-  },
+  created() {},
   watch: {
     $route: {
       async handler() {

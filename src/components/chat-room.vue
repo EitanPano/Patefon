@@ -18,7 +18,6 @@ export default {
         }
     },
     created () {
-    
   socketService.emit('chat topic', this.currStation._id)
         socketService.on('chat addMsg', msg => {
         this.chatMsgs.push(msg)

@@ -34,7 +34,8 @@ window.stationService = stationService;
 async function query(filterBy = {}) {
     try {
         // let stations = await storageService.query(KEY);
-        let stations = httpService.get(`station`,filterBy)
+        let stations = await httpService.get(`station`,filterBy)
+        // console.log(stations);
         if (filterBy.isLiked) {
             const likedSongs = [];
             stations.forEach((station) => {

@@ -30,6 +30,7 @@
               :idx="idx"
               @removeSong="removeSong"
               @songToPlayer="songToPlayer"
+              @saveToHistory="saveToHistory"
               @likeSong="likeSong"
               :isSearch="isSearch"
             />
@@ -49,15 +50,13 @@ export default {
     draggable,
   },
   display: "Transitions",
-  props: ["songs", "isSearch"],
+  props: ["songs", "isSearch", "isSearchHistory"],
   data() {
     return {
       drag: false,
     };
   },
-  created() {
-    console.log("songs from list,", this.songs);
-  },
+  created() {},
   methods: {
     removeSong(songId) {
       this.$emit("removeSong", songId);
@@ -75,6 +74,9 @@ export default {
     drop() {
       this.drag = false;
       console.log("dropping");
+    },
+    saveToHistory(action) {
+      this.$emit("saveToHistory", action);
     },
     likeSong(action) {
       this.$emit("likeSong", action);

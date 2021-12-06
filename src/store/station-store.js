@@ -6,14 +6,14 @@ import { userService } from "../services/user.service.js";
 export const stationStore = {
     state: {
         loggedUser: null,
-        // likedSongs: [],
+        likedSongs: [],
+        searchHistory: [],
         currStation: null,
         currStationForPlayer: null,
         currSong: null,
         currSongIdx: 0,
         expandedStations: [],
         stations: [],
-        searchHistory: [],
         filterBy: {
             txt: "",
         },
@@ -24,7 +24,6 @@ export const stationStore = {
             return JSON.parse(JSON.stringify(state.stations));
         },
         getExpandedStations(state) {
-            // console.log("state.expandedStations", state.expandedStations);
             return state.expandedStations;
         },
         currStation(state) {
@@ -41,7 +40,11 @@ export const stationStore = {
         },
 
         searchHistory(state) {
-            return state.loggedUser.searchHistory;
+            // console.log('search history from store',state.searchHistory);
+            return state.searchHistory;
+        },
+        likedSongs(state){
+            return state.likedSongs
         },
         getLoggedUser(state) {
             return state.loggedUser;
@@ -66,6 +69,7 @@ export const stationStore = {
         filterBy(state) {
             return state.filterBy;
         },
+      
     },
     mutations: {
         setStations(state, { stations }) {
@@ -119,11 +123,25 @@ export const stationStore = {
         setClicked(state, { boolState }) {
             state.isClickedOnce = boolState;
         },
+        updateSearchHistory(state,{searchHistory}){
+            console.log(searchHistory.searchHistory);
+            state.searchHistory=searchHistory.searchHistory
+            console.log('state: searchHistory:',state.searchHistory);
+        },
+        updateLikedSongs(state,{likedSongs}){
+            console.log(likedSongs.likedSongs);
+            state.likedSongs=likedSongs.likedSongs
+        },
+        clearExpandedStations(state){
+            state.expandedStations.stations=[]
+            state.expandedStations.songs=[]
+        }
     },
     actions: {
         async getById({ commit }, { id }) {
             try {
                 const station = await stationService.getById(id);
+                
                 if (station) {
                     commit({ type: "setCurrStation", station });
                     return station;
@@ -186,6 +204,10 @@ export const stationStore = {
             try {
                 const updatedUser = await userService.updateUser(action);
                 commit({ type: "updateUser", updatedUser });
+                if(action.type==="history")
+                commit({type:"updateSearchHistory", searchHistory:{searchHistory:updatedUser.searchHistory}})
+                else if(action.type==='like')
+                commit({type:"updateLikedSongs",likedSongs:{likedSongs:updatedUser.likedSongs}})
             } catch (err) {
                 console.log(err);
                 throw err;

@@ -10,6 +10,7 @@ var gWatchedstation = null;
 
 // TEST DATA
 import { default as stationsDB } from "../data/stationsDB.json";
+// import { util } from "vue/types/umd";
 // import { search } from "core-js/fn/symbol";
 // import { filter } from 'core-js/core/array';
 
@@ -34,7 +35,7 @@ window.stationService = stationService;
 async function query(filterBy = {}) {
     try {
         // let stations = await storageService.query(KEY);
-        let stations = httpService.get(`station`,filterBy)
+        let stations = await httpService.get(`station`,filterBy)
         if (filterBy.isLiked) {
             const likedSongs = [];
             stations.forEach((station) => {
@@ -62,18 +63,15 @@ async function query(filterBy = {}) {
                                 !data.stations.includes(station)
                             ) {
                                 data.stations.push(station);
-                            }
+                            }if(data.songs.length<=10)
                             data.songs.push(song);
                         });
                     }
                     return data;
-                },
-                { songs: [], stations: [] }
+                },{ songs: [], stations: [] }
             );
-            expandedStations.songs = utilService.getExclusiveArr(
-                expandedStations.songs
-            );
-            console.log(expandedStations.songs);
+            expandedStations.songs = utilService.getExclusiveArr(expandedStations.songs);
+            expandedStations.stations=utilService.getExclusiveArr(expandedStations.stations)
 
             if (expandedStations.songs.length > 1) {
                 return expandedStations;

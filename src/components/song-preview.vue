@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  props: ["song", "idx", "isSearch"],
+  props: ["song", "idx", "isSearch", "isSearchHistory"],
   data() {
     return {
       isHover: false,
@@ -52,23 +52,12 @@ export default {
       if (confirm("Remove Song?")) this.$emit("removeSong", songId);
     },
     songToPlayer(song, idx) {
-      this.$emit("songToPlayer", song, idx);
-      console.log("isSearch", this.isSearch);
-      console.log("isClicked", this.isClickedOnce);
-      if (this.isSearch && !this.isClicked) {
-        this.$store.dispatch({
-          type: "likeSong",
-          action: { song: this.song, type: "history" },
-        });
-        this.$store.commit({ type: "setClicked", boolState: true });
-
-        //likeSong->>> BAD NAME FOR DYNAMIC FUNCTION //
-        // this.isClickedOnce = true;
-        // console.log("is clicked once?", this.isClickedOnce);
+      this.$emit("songToPlayer", song, idx, this.isSearchHistory);
+      if (this.isSearch) {
+        this.$emit("saveToHistory", { song: this.song, type: "history" });
       }
     },
     likeSong() {
-      console.log("liking");
       this.$emit("likeSong", { song: this.song, type: "like" });
     },
     checkIfSongLiked(likedSongs) {
@@ -87,9 +76,6 @@ export default {
     isLiked() {
       let likedSongs = this.$store.getters.getLikedSongs;
       return this.checkIfSongLiked(likedSongs);
-    },
-    isClicked() {
-      return this.$store.getters.isClicked;
     },
     user() {
       return this.$store.getters.getLoggedUser;

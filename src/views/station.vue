@@ -117,8 +117,8 @@ export default {
                 : this.currStation.songs;
         },
         likedSongs() {
-            return this.$store.getters.getLikedSongs;
-            // return this.$store.getters.getLoggedUser.songs;
+            return this.$store.getters.LikedSongs;
+            return this.$store.getters.getLoggedUser.songs;
         },
     },
     watch: {

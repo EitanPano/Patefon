@@ -39,12 +39,14 @@
         />
 
               <chat-room :currStation="currStation" v-if="currStation"/>
+              <share-listen :currStation="currStation" v-if="currStation" @songToPlayer="songToPlayer" />
     </section>
 </template>
 
 <script>
 import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
+import shareListen from "../components/share-listen.vue";
 export default {
     data() {
         return {
@@ -149,6 +151,7 @@ export default {
     components: {
         songList,
         chatRoom,
+        shareListen
     },
 };
 </script>

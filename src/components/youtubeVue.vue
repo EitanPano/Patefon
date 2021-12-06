@@ -54,6 +54,7 @@
 
 
 <script>
+import {socketService} from "../services/socket.service.js";
 export default {
     props: ["playListData"],
     data() {
@@ -82,6 +83,7 @@ export default {
             this.currTimeInterval = setInterval(() => {
                 this.playing();
             }, 1000);
+        
         },
         stopVideo() {
             this.player.stopVideo();
@@ -128,6 +130,7 @@ export default {
         },
         setVolume() {
             this.player.setVolume(this.songVolume);
+              this.shareListen()
         },
         shuffle() {
             if (this.isShuffling) this.player.setShuffle(false);
@@ -148,6 +151,10 @@ export default {
         likeSong() {
             alert('N/A')
         },
+          shareListen() {
+           const stationSongIdx = {station :this.playListData.station, idx:this.playListData.idx }
+            socketService.emit('send share-listen',  stationSongIdx) 
+            }
 
     },
     computed: {

@@ -1,5 +1,5 @@
  <template>
-  <section class="main-layout">
+  <section class="main-layout layout-padding">
     <h1 class="full highlight">{{ genre }}</h1>
     <div class="grid-container">
       <template v-for="station in stationsByGenre[genre]">

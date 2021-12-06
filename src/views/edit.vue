@@ -5,76 +5,77 @@
             <div class="flex column">
                 <div>
                     <p class="highlight small">PLAYLIST</p>
-                    <button class="btn btn-edit big" @click="isModalOpen = true"><span>✎</span></button>
+                    <button class="btn btn-edit big" @click="isModalOpen = true" >
+                        <span>✎</span>
+                    </button>
                 </div>
                 <h1 @click="isModalOpen = true">My playlist</h1>
-                <div>
+                <div class="flex space-between">
                     <span class="highlight small">Guest</span>
-                    <button class="btn-save-details" @click="saveStation">Add +</button>
+                    <button class="btn-create" @click="saveStation" disabled="emptyStation" > CREATE </button>
                 </div>
             </div>
         </main>
 
         <transition name="fade">
-        <!-- Modal Start -->
-        <div @click="isModalOpen = false" v-if="isModalOpen" class="modal-wrapper">
-            <div @click.stop v-if="isModalOpen" class="modal-edit flex column">
-
-                <div class="mb-1 flex space-between align-center">
-                    <h2>Edit Details</h2>
-                    <button @click="isModalOpen = false" class="btn btn-close">✖</button>
-                </div>
-                <div class="flex space-between mb-1">
-                    <img-upload :passedImgUrl="emptyStation.imgUrl" class="edit-img" @imageSaved="saveImageUrl" />
-
-                    <div class="edit-details">
-                        <label><input class="edit-title" type="text" v-model="emptyStation.name" placeholder="My Playlist #"/></label>
-
-                        <div class="selects-box">
-                            <select @change="addTag" v-model="tag">
-                                <option value="" disabled>Choose Tags</option>
-                                <!-- <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option -->
-                                <option value="cool">Cool</option>
-                                <option value="chill">Chill</option>
-                                <option value="happy">Happy</option>
-                                <option value="broadcast">Broadcast</option>
-                                <option value="sad">Sad</option>
-                                <option value="original">Original</option>
-                                <option value="fantastic">Fantastic</option>
-                                <option value="curious">Curious</option>
-                            </select>
-
-                            <select v-model="emptyStation.genre">
-                                <option value="" disabled>Choose Genres</option>
-                                <!-- <option v-for="genre in genres" :key="genre" :value="genre">{{ genre }}</option -->
-
-                                <option value="Hip Hop">Hip Hop</option>
-                                <option value="Rock">Rock</option>
-                                <option value="Pop">Pop</option>
-                                <option value="Classic">Classic</option>
-                                <option value="Jazz">Jazz</option>
-                                <option value="Easy">Easy</option>
-                                <option value="Israeli">Israeli</option>
-                                <option value="Electronic">Electronic</option>
-                            </select>
-                        </div>
-                        <textarea v-model="emptyStation.description" class="edit-description" placeholder="Add an optional description" />
+            <!-- Modal Start -->
+            <div @click="isModalOpen = false" v-if="isModalOpen" class="modal-wrapper" >
+                <div @click.stop v-if="isModalOpen" class="modal-edit flex column" >
+                    <div class="mb-1 flex space-between align-center">
+                        <h2>Edit Details</h2>
+                        <button @click="isModalOpen = false" class="btn btn-close" >✖</button>
                     </div>
-                </div>
-                <div class="mb-1 flex space-between">
-                    <!-- v-if="emptyStation.tags.length" -->
-                    <p>Tags : <span v-for="tag in emptyStation.tags" :key="tag">{{ tag }}, </span></p>
-                    <button class="btn-save-details" @click="isModalOpen = false">SAVE</button>
-                </div>
-                <p class="p-small">By proceeding, you agree to give Patefon access to the image you choose to upload. Please make sure you have the right to upload the image.</p>
+                    <div class="flex space-between mb-1">
+                        <img-upload :passedImgUrl="emptyStation.imgUrl" class="edit-img" @imageSaved="saveImageUrl" />
 
+                        <div class="edit-details">
+                            <label><input class="edit-title" type="text" v-model="emptyStation.name" placeholder="My Playlist #" /></label>
+
+                            <div class="selects-box">
+                                <select @change="addTag" v-model="tag">
+                                    <option value="" disabled>
+                                        Choose Tags
+                                    </option>
+                                    <option v-for="tag in tags" :key="tag" :value="tag">{{ tag }}</option>
+                                </select>
+
+                                <select v-model="emptyStation.genre">
+                                    <option value="" disabled>
+                                        Choose Genres
+                                    </option>
+                                    <option v-for="genre in genres" :key="genre" :value="genre">{{ genre }}</option>
+                                </select>
+                            </div>
+                            <textarea v-model="emptyStation.description" class="edit-description" placeholder="Add an optional description" />
+                        </div>
+                    </div>
+                    <div class="mb-1 flex space-between">
+                        <!-- v-if="emptyStation.tags.length" -->
+                        <p>
+                            Tags :
+                            <span v-for="tag in emptyStation.tags" :key="tag"
+                                >{{ tag }},
+                            </span>
+                        </p>
+                        <button class="btn-save-details" @click="isModalOpen = false" >SAVE</button>
+                    </div>
+                    <p class="p-small">
+                        By proceeding, you agree to give Patefon access to the
+                        image you choose to upload. Please make sure you have
+                        the right to upload the image.
+                    </p>
+                </div>
             </div>
-        </div>
-        <!-- Modal End -->
+            <!-- Modal End -->
         </transition>
 
-      <song-list v-if="emptyStation.songs.length" :songs="emptyStation.songs" @removeSong="removeSong" @songToPlayer="songToPlayer" />
-      <youtube-search @addSong="addSong" />
+        <song-list
+            v-if="emptyStation.songs.length"
+            :songs="emptyStation.songs"
+            @removeSong="removeSong"
+            @songToPlayer="songToPlayer"
+        />
+        <youtube-search @addSong="addSong" />
     </section>
 </template>
 
@@ -94,7 +95,8 @@ export default {
             emptyStation: null,
             tag: "",
             isModalOpen: false,
-
+            genres: ["Hip Hop", "Rock", "Pop", "Classic", "Jazz", "Easy", "Israeli", "Electronic"],
+            tags: ["Cool", "Chill", "Happy", "Broadcast", "Sad", "Original", "Fantastic", "Curious"]
         };
     },
     created() {
@@ -122,10 +124,12 @@ export default {
             this.emptyStation.songs.splice(idx, 1);
         },
         async saveStation() {
-            this.emptyStation.createdBy = JSON.parse(sessionStorage.getItem("loggedInUser"));
-            this.emptyStation.imgUrl = (this.emptyStation.imgUrl)
-            ? this.emptyStation.imgUrl
-            : 'https://res.cloudinary.com/nir-cloudinary/image/upload/v1638537772/upload.1be8b030_yhazsy.svg'
+            this.emptyStation.createdBy = JSON.parse(
+                sessionStorage.getItem("loggedInUser")
+            );
+            this.emptyStation.imgUrl = this.emptyStation.imgUrl
+                ? this.emptyStation.imgUrl
+                : "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638537772/upload.1be8b030_yhazsy.svg";
 
             console.log(this.emptyStation);
             try {
@@ -139,9 +143,16 @@ export default {
                 console.log(err);
             }
         },
-        songToPlayer(song,idx) {
-            this.$store.commit({type:'songToPlayer', song,idx,station:{songs :JSON.parse(JSON.stringify(this.emptyStation.songs))}})
-        }
+        songToPlayer(song, idx) {
+            this.$store.commit({
+                type: "songToPlayer",
+                song,
+                idx,
+                station: {
+                    songs: JSON.parse(JSON.stringify(this.emptyStation.songs)),
+                },
+            });
+        },
     },
 };
 </script>

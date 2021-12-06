@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 0.7em 4fr 2fr minmax(em(90px), 1fr);
     gap: 1em;
-    padding: 0.5em 1em;
+    padding: 0.4em 0 0.4em 1.4em;
 
     p {
         font-size: 0.9em;
@@ -57,7 +57,7 @@
         img {
             height: em(40px);
             width: em(40px);
-            object-fit: fill;
+            object-fit: cover;
             margin-inline-end: 0.7em;
         }
     }

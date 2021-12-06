@@ -162,7 +162,7 @@ export const stationStore = {
         },
         setFilter({ commit, dispatch }, { filterBy }) {
             commit({ type: "setFilter", filterBy });
-            console.log(filterBy, "filter FROM STRORE");
+            // console.log(filterBy, "filter FROM STRORE");
             dispatch({ type: "loadStations", filterBy });
         },
         async addStation({ commit }, { newStation }) {

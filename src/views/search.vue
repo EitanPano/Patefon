@@ -1,7 +1,7 @@
 <template>
-  <section class="main-layout home-page">
+  <section class="search main-layout layout-padding">
     <div class="songs-preview-search" v-if="songs">
-      <h1>Songs</h1>
+      <h1 class="highlight">Songs</h1>
       <song-list
         :songs="songs"
         :isSearch="true"
@@ -14,7 +14,7 @@
       class="search-history-preview"
       v-if="searchHistory && searchHistory.length && !stations && !songs"
     >
-      <h1>Recently Searched</h1>
+      <h2 class="highlight">Recently Searched</h2>
       <song-list
         :songs="searchHistory"
         :isSearch="true"
@@ -23,7 +23,7 @@
     </div>
 
     <div class="stations-preview-search" v-if="stations">
-      <h1>Appears In</h1>
+      <h2 class="highlight">Appears In</h2>
       <ul class="grid-container">
         <li v-for="station in stations" :key="station._id">
           <station-preview class="station-card" :station="station" />
@@ -31,11 +31,11 @@
       </ul>
     </div>
 
-    <div class="genres-preview-search" v-if="!stations && !songs">
-      <h1>Browse By Genres</h1>
-      <ul class="grid-container">
-        <li v-for="(value, genre, idx) in stationsByGenre" :key="idx">
-          <genre-preview :genre="genre" />
+    <div v-if="!stations && !songs">
+      <h2 class="highlight">Browse By Genres</h2>
+      <ul class="genre-container">
+        <li class="genre-list" v-for="(value, genre, idx) in stationsByGenre" :key="idx">
+          <genre-preview :genre="genre" :imgUrl="value[0].imgUrl" />
         </li>
       </ul>
     </div>
@@ -64,7 +64,7 @@ export default {
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
-      console.log(this.$store.getters.getExpandedStations.songs, "songs");
+      // console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {

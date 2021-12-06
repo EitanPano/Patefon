@@ -1,0 +1,53 @@
+.search-preview {
+    cursor: default;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 2fr 1fr;
+    gap: 1em;
+    padding: 0.4em 1.4em;
+    align-items: center;
+
+    &:hover {
+        background-color: #333;
+        .btn-add {
+            color: white;
+            box-shadow: inset 0 0 0 1.5px white;
+        }
+
+        p, .second {
+            color: #fff;
+        }
+    }
+
+    p, .second {
+        color: $clr2;
+    }
+
+    .second {
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    .last {
+        // display: flex;
+        // justify-content: center;
+        // align-content: center;
+        grid-column: 3 / 4;
+    }
+    
+    .song-details {
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        display: flex;
+        align-items: center;
+        display: flex;
+        white-space: nowrap;
+        overflow: hidden;
+
+        img {
+            height: em(45px);
+            width: em(45px);
+            object-fit: cover;
+            margin-inline-end: 0.7em;
+        }
+    }
+}

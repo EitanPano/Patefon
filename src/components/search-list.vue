@@ -1,34 +1,20 @@
 <template>
-  <section class="search-list">
-    <ul>
-      <li v-for="youtubeItem in youtubeItems" :key="youtubeItem.id.videoId">
-        <search-preview :youtubeItem="youtubeItem" @addSong="addSong" />
-      </li>
+    <ul class="search-list">
+        <search-preview v-for="youtubeItem in youtubeItems" :key="youtubeItem.id.videoId" :youtubeItem="youtubeItem" @addSong="addSong" />
     </ul>
-  </section>
 </template>
 
 <script>
 import searchPreview from "./search-preview.vue";
 export default {
-  components: {
-    searchPreview,
-  },
-  props: ["youtubeItems"],
-  data() {
-    return {};
-  },
-
-  created() {},
-
-  methods: {
-    addSong(song) {
-      this.$emit("addSong", song);
+    components: {
+        searchPreview,
     },
-  },
-  computed: {},
+    props: ["youtubeItems"],
+    methods: {
+        addSong(song) {
+            this.$emit("addSong", song);
+        },
+    },
 };
 </script>
-
-<style>
-</style>

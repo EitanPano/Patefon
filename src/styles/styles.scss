@@ -16,12 +16,13 @@
 @import "components/station-preview";
 @import "components/song-list";
 @import "components/song-preview";
-@import "components/youtube-search";
+@import "components/global-search";
+@import "components/search-preview";
 @import "components/youtubeVue";
 @import "components/modal-edit";
-@import "components/genre-preview";
 
 //Views
 @import "views/home";
 @import "views/edit";
 @import "views/station";
+@import "views/search";

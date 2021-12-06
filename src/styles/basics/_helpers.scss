@@ -48,35 +48,67 @@
 }
 
 // MARGIN
-
+.mb-0 {
+    margin-bottom: 0;
+}
 .mb-1 {
     margin-bottom: 1em;
 }
+
+// PADDING
+.layout-padding {
+    padding: 4.5em 1vw 0;
+}
 //FLEX
 
-.flex{
+.flex {
     display: flex;
     &.column{
-        display: flex;
         flex-direction: column;
     }
-}
-.justify-center{
-    justify-content: center;
+    &.justify-center{
+        justify-content: center;
+    }
+    
+    &.align-center{
+        align-items: center;
+    }
+    &.space-between{
+        justify-content: space-between;
+    }
+    &.wrap {
+        flex-wrap: wrap;
+    }
 }
 
-.align-center{
-    align-items: center;
-}
-.space-between{
-    justify-content: space-between;
-}
+
+
+
 
 //Buttons
 
 .btn {
     width: 2em;
     height: 2em;
+}
+
+.btn-create {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.25em;
+    // border: none;
+    border-radius: 0.1em;
+}
+
+.btn-add {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: transparent;
+    width: rem(100px);
+    height: rem(36px);
+
+    color: $clr2;
+    box-shadow: inset 0 0 0 1.5px #454545;
+    border-radius: 2em;
 }
 
 .btn-blend {

@@ -2,7 +2,8 @@
     // width: calc(100% - $side-nav);
     // margin-left: $side-nav;
     margin-bottom: 4em;
-    padding: $top-bar 1.2vw;
+    // padding-top: $top-bar;
+    // padding: $top-bar 2vw;
     // overflow-x: hidden;
 
     grid-template-columns: $layoutPadding 1fr $layoutPadding;
@@ -32,7 +33,7 @@
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax(12em, 1fr));
     // grid-template-rows: repeat(auto-fit, 1fr);
-    grid-auto-rows: 18em;
+    grid-auto-rows: 17em;
     padding: 0 0.5em;
     gap: 1.5em;
     grid-auto-flow: dense;
@@ -45,7 +46,6 @@
         width: calc(100% - $side-nav);
         margin-left: $side-nav;
         margin-bottom: 4em;
-        padding: $top-bar 1.2vw;
     }
     
 }

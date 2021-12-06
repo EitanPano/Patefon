@@ -36,10 +36,10 @@
     p {
         line-height: normal;
         white-space: nowrap;
-        overflow: hidden;
         &:nth-child(2){
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
+            overflow: hidden;
+            margin-top: 1.2em;
+            margin-bottom: 0.3em;
             font-weight: bold;
         }
         &:nth-child(3){

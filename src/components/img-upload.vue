@@ -122,7 +122,7 @@ input {
   display: none;
   position: absolute;
   text-align: center;
-  font-size: 0.9em;
+  font-size: 0.8em;
   padding: 1em 1em 0.5em;
   bottom: 0;
 }

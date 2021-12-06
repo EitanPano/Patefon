@@ -1,10 +1,10 @@
 <template>
-    <section class="main-layout home-page">
+    <section class="main-layout layout-padding home-page">
         <h1 class="highlight">Good Evening</h1>
         <div class="station-list-container" v-for="(stations, genre) in stationsByGenre" :key="genre">
             <div class="flex space-between">
-                <h2 class="title">{{ genre }}</h2>
-                <button class="btn-blend bold" @click="goToGenrePage(genre)">SEE ALL</button>
+                <h2 class="title mb-0">{{ genre }}</h2>
+                <button class="btn-blend bold mt-1" @click="goToGenrePage(genre)">SEE ALL</button>
             </div>
             <station-list
                 v-if="stationsByGenre"

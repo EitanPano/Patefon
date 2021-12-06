@@ -1,5 +1,5 @@
 <template>
-  <section class="main-layout">
+  <section class="main-layout layout-padding">
     <h1 class="full">Playlists</h1>
     <div class="grid-container full">
       <aside @click="goLikedSongs" class="btn-liked-songs">

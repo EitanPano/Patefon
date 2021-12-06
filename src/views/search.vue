@@ -7,18 +7,30 @@
         :isSearch="true"
         @songToPlayer="songToPlayer"
         @likeSong="updateUser"
+        @saveToHistory="updateUser"
       />
+    </div>
+
+    <div class="no-result-msg" v-if="!songs && filterBy">
+      <h1>No Result for "{{ filterBy }}"</h1>
     </div>
 
     <div
       class="search-history-preview"
-      v-if="searchHistory && searchHistory.length && !stations && !songs"
+      v-if="
+        searchHistory &&
+        searchHistory.length &&
+        !stations &&
+        !songs &&
+        !filterBy
+      "
     >
       <h1>Recently Searched</h1>
       <song-list
         :songs="searchHistory"
+        @songToPlayer="songToPlayerHistory"
         :isSearch="true"
-        @songToPlayer="songToPlayer"
+        @likeSong="updateUser"
       />
     </div>
 
@@ -31,7 +43,7 @@
       </ul>
     </div>
 
-    <div class="genres-preview-search" v-if="!stations && !songs">
+    <div class="genres-preview-search" v-if="!stations && !songs && !filterBy">
       <h1>Browse By Genres</h1>
       <ul class="grid-container">
         <li v-for="(value, genre, idx) in stationsByGenre" :key="idx">
@@ -60,15 +72,16 @@ export default {
   },
   computed: {
     stations() {
-      // console.log(this.$store.getters.getExpandedStations.stations, "stations");
+      console.log(this.$store.getters.getExpandedStations.stations, "stations");
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
-      console.log(this.$store.getters.getExpandedStations.songs, "songs");
+      // console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {
-      // console.log('getters',this.$store.getters.searchHistory)
+      // console.log("getters", this.$store.getters.searchHistory);
+      // console.log(this.$store.getters.searchHistory);
       return this.$store.getters.searchHistory;
       // return this.$store.getters.getSearchHistory;
     },
@@ -76,10 +89,28 @@ export default {
       return this.$store.getters.stationsByGenre;
       // return Object.values(this.$store.getters.stationsByGenre);
     },
+    isClicked() {
+      return this.$store.getters.isClicked;
+    },
+    filterBy() {
+      // console.log("filterBy.txt", this.$store.getters.filterBy.txt);
+      return this.$store.getters.filterBy.txt;
+    },
   },
   methods: {
+    songToPlayerHistory(song, idx) {
+      // console.log("song from player", song);
+      this.$store.commit({
+        type: "songToPlayer",
+        song,
+        idx,
+        station: {
+          songs: JSON.parse(JSON.stringify(Array.from(this.searchHistory))),
+        },
+      });
+    },
     songToPlayer(song, idx) {
-      console.log(song);
+      // console.log("song from player", song);
       this.$store.commit({
         type: "songToPlayer",
         song,
@@ -90,7 +121,16 @@ export default {
       });
     },
     updateUser(action) {
-      console.log("updating");
+      if (!this.isClicked && action.type === "history") {
+        console.log("history");
+        this.$store.dispatch({
+          type: "updateUser",
+          action,
+        });
+        this.$store.commit({ type: "setClicked", boolState: true });
+        return;
+      }
+      console.log("getting there anyway");
       this.$store.dispatch({
         type: "updateUser",
         action,
@@ -104,6 +144,7 @@ export default {
       filterBy: { txt: "" },
     });
     this.$store.commit({ type: "clearSearch" });
+    // this.$store.commit({ type: "clearExpandedStations" });
   },
   components: {
     eventBusService,

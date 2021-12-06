@@ -10,7 +10,7 @@ const KEY = "userDB";
 
 export const userService = {
     getLoggedinUser,
-    addSong,
+    updateUser,
     //   removeSong,
     getById,
     _createUser,
@@ -32,10 +32,9 @@ function _createUser() {
     }
 }
 
-function addSong(action) {
+function updateUser(action) {
     console.log(action);
     let user = getLoggedinUser();
-
     if (
         action.type === "history" &&
         !user.searchHistory.includes(action.song)

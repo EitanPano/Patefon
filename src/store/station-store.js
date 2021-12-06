@@ -182,9 +182,9 @@ export const stationStore = {
                 throw err;
             }
         },
-        async likeSong({ commit }, { action }) {
+        async updateUser({ commit }, { action }) {
             try {
-                const updatedUser = await userService.addSong(action);
+                const updatedUser = await userService.updateUser(action);
                 commit({ type: "updateUser", updatedUser });
             } catch (err) {
                 console.log(err);

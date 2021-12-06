@@ -1,6 +1,16 @@
 <template>
-  <article class="song-preview" @mouseleave="isHover = false" @mouseover="isHover = true" >
-    <button v-if="isHover" @click="songToPlayer(song, idx)" class="size-btn first play">▶</button>
+  <article
+    class="song-preview"
+    @mouseleave="isHover = false"
+    @mouseover="isHover = true"
+  >
+    <button
+      v-if="isHover"
+      @click="songToPlayer(song, idx)"
+      class="size-btn first play"
+    >
+      ▶
+    </button>
     <p v-else class="first song-idx">{{ idx + 1 }}</p>
     <div class="song-details">
       <img :src="song.imgUrl" />
@@ -51,17 +61,15 @@ export default {
           action: { song: this.song, type: "history" },
         });
         this.$store.commit({ type: "setClicked", boolState: true });
-        
+
         //likeSong->>> BAD NAME FOR DYNAMIC FUNCTION //
         // this.isClickedOnce = true;
         // console.log("is clicked once?", this.isClickedOnce);
       }
     },
     likeSong() {
-      this.$store.dispatch({
-        type: "likeSong",
-        action: { song: this.song, type: "like" },
-      });
+      console.log("liking");
+      this.$emit("likeSong", { song: this.song, type: "like" });
     },
     checkIfSongLiked(likedSongs) {
       var idx = likedSongs.findIndex(

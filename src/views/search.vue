@@ -2,15 +2,26 @@
   <section class="main-layout home-page">
     <div class="songs-preview-search" v-if="songs">
       <h1>Songs</h1>
-      <song-list :songs="songs" :isSearch="true" @songToPlayer="songToPlayer" />
+      <song-list
+        :songs="songs"
+        :isSearch="true"
+        @songToPlayer="songToPlayer"
+        @likeSong="updateUser"
+      />
     </div>
+
     <div
       class="search-history-preview"
       v-if="searchHistory && searchHistory.length && !stations && !songs"
     >
       <h1>Recently Searched</h1>
-      <song-list :songs="searchHistory" :isSearch="true" />
+      <song-list
+        :songs="searchHistory"
+        :isSearch="true"
+        @songToPlayer="songToPlayer"
+      />
     </div>
+
     <div class="stations-preview-search" v-if="stations">
       <h1>Appears In</h1>
       <ul class="grid-container">
@@ -53,7 +64,7 @@ export default {
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
-      // console.log(this.$store.getters.getExpandedStations.songs, "songs");
+      console.log(this.$store.getters.getExpandedStations.songs, "songs");
       return this.$store.getters.getExpandedStations.songs;
     },
     searchHistory() {
@@ -68,6 +79,7 @@ export default {
   },
   methods: {
     songToPlayer(song, idx) {
+      console.log(song);
       this.$store.commit({
         type: "songToPlayer",
         song,
@@ -75,6 +87,13 @@ export default {
         station: {
           songs: JSON.parse(JSON.stringify(Array.from(this.songs))),
         },
+      });
+    },
+    updateUser(action) {
+      console.log("updating");
+      this.$store.dispatch({
+        type: "updateUser",
+        action,
       });
     },
   },

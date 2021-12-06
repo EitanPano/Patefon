@@ -1,95 +1,98 @@
 <template>
-    <section class="song-list">
-        <div class="actions">
-            <button class="btn btn-play" @click="songToPlayer">
-                <span class="material-icons">play_arrow</span>
-            </button>
-        </div>
-        <div class="sort-bar" v-if="!isSearch">
-            <p>#</p>
-            <p>TITLE</p>
-            <p>DATE ADDED</p>
-            <p class="last"><img src="@/assets/icons/time.svg" alt="" /></p>
-        </div>
+  <section class="song-list">
+    <div class="actions">
+      <button class="btn btn-play" @click="songToPlayer">
+        <span class="material-icons">play_arrow</span>
+      </button>
+    </div>
+    <div class="sort-bar" v-if="!isSearch">
+      <p>#</p>
+      <p>TITLE</p>
+      <p>DATE ADDED</p>
+      <p class="last"><img src="@/assets/icons/time.svg" alt="" /></p>
+    </div>
 
-        <ul>
-            <draggable
-                class="list-group"
-                tag="ul"
-                :value="currStationSongs"
-                v-bind="dragOptions"
-                @start="grab"
-                @end="drop"
-                @change="swapped($event.moved)"
-            >
-                <!-- @change="testLog($event)" -->
-                <transition-group
-                    type="transition"
-                    :name="!drag ? 'flip-list' : null"
-                >
-                    <li class="list-group-item" v-for="(song, idx) in songs" :key="idx">
-                        <song-preview
-                            :song="song"
-                            :idx="idx"
-                            @removeSong="removeSong"
-                            @songToPlayer="songToPlayer"
-                            :isSearch="isSearch"
-                        />
-                    </li>
-                </transition-group>
-            </draggable>
-        </ul>
-    </section>
+    <ul>
+      <draggable
+        class="list-group"
+        tag="ul"
+        :value="currStationSongs"
+        v-bind="dragOptions"
+        @start="grab"
+        @end="drop"
+        @change="swapped($event.moved)"
+      >
+        <!-- @change="testLog($event)" -->
+        <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+          <li class="list-group-item" v-for="(song, idx) in songs" :key="idx">
+            <song-preview
+              :song="song"
+              :idx="idx"
+              @removeSong="removeSong"
+              @songToPlayer="songToPlayer"
+              @likeSong="likeSong"
+              :isSearch="isSearch"
+            />
+          </li>
+        </transition-group>
+      </draggable>
+    </ul>
+  </section>
 </template>
 
 <script>
 import draggable from "vuedraggable";
 import songPreview from "./song-preview.vue";
 export default {
-    components: {
-        songPreview,
-        draggable,
+  components: {
+    songPreview,
+    draggable,
+  },
+  display: "Transitions",
+  props: ["songs", "isSearch"],
+  data() {
+    return {
+      drag: false,
+    };
+  },
+  created() {
+    console.log("songs from list,", this.songs);
+  },
+  methods: {
+    removeSong(songId) {
+      this.$emit("removeSong", songId);
     },
-    display: "Transitions",
-    props: ["songs", "isSearch"],
-    data() {
-        return {
-            drag: false
-        };
+    songToPlayer(song, idx) {
+      this.$emit("songToPlayer", song, idx);
     },
-    created() {},
-    methods: {
-        removeSong(songId) {
-            this.$emit("removeSong", songId);
-        },
-        songToPlayer(song, idx) {
-            this.$emit("songToPlayer", song, idx);
-        },
-        swapped(moved) {
-            this.$emit('swapped', moved)
-        },
-        grab() {
-            this.drag = true
-            console.log('holding');
-        },
-        drop() {
-            this.drag = false
-            console.log('dropping');
-        }
+    swapped(moved) {
+      this.$emit("swapped", moved);
     },
-    computed: {
-        dragOptions() {
-            return {
-                animation: 200,
-                group: "description",
-                disabled: false,
-                ghostClass: "ghost",
-            };
-        },
-        currStationSongs() {
-            return this.$store.getters.currStation.songs ;
-        },
+    grab() {
+      this.drag = true;
+      console.log("holding");
     },
+    drop() {
+      this.drag = false;
+      console.log("dropping");
+    },
+    likeSong(action) {
+      this.$emit("likeSong", action);
+    },
+  },
+  computed: {
+    dragOptions() {
+      return {
+        animation: 200,
+        group: "description",
+        disabled: false,
+        ghostClass: "ghost",
+      };
+    },
+    currStationSongs() {
+      return this.$store.getters.currStation.songs;
+    },
+  },
 };
 </script>
 

@@ -5,8 +5,8 @@
       <aside @click="goLikedSongs" class="btn-liked-songs">
         <p>Lorem ipsum dolor sit amet consectetur</p>
         <h2>Liked Songs</h2>
-        <p>
-          <span>{{ likedSongsCount }}</span> liked songs
+        <p v-if="likedSongs">
+          <span>{{ likedSongs.length }}</span> liked songs
         </p>
       </aside>
       <template v-for="station in stations">
@@ -34,8 +34,9 @@ export default {
     stations() {
       return this.$store.getters.getStations;
     },
-    likedSongsCount() {
-      return this.$store.getters.getLikedSongs.length;
+    likedSongs() {
+      // console.log(this.$store.getters.likedSongs);
+      return this.$store.getters.likedSongs;
     },
   },
   components: {

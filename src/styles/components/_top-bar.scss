@@ -60,6 +60,28 @@
       }
     }
   }
+  .login-signup-btn{
+    button{
+      color: white;
+      padding: 0;
+      border: none;
+      background: none;
+      margin-right: 15px;
+      margin-left: 15px;
+      font-size: 1em;
+
+    }
+    :first-child{
+      margin-right: 30px;
+      // width:120px;
+      white-space: nowrap;
+    }
+
+    :hover{
+      color: rgb(89, 255, 47);
+    }
+  
+  }
 
   .account-menu {
     background-color: $clr1;

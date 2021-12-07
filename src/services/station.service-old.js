@@ -71,7 +71,7 @@ async function query(filterBy = {}) {
             expandedStations.songs = utilService.getExclusiveArr(
                 expandedStations.songs
             );
-            console.log(expandedStations.songs);
+            // console.log(expandedStations.songs);
 
             if (expandedStations.songs.length > 1) {
                 return expandedStations;

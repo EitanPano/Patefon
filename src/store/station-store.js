@@ -5,9 +5,9 @@ import { userService } from "../services/user.service.js";
 
 export const stationStore = {
     state: {
-        loggedUser: null,
-        likedSongs: [],
-        searchHistory: [],
+        // loggedUser: null,
+        // likedSongs: [],
+        // searchHistory: [],
         currStation: null,
         currStationForPlayer: null,
         currSong: null,
@@ -24,6 +24,7 @@ export const stationStore = {
             return JSON.parse(JSON.stringify(state.stations));
         },
         getExpandedStations(state) {
+            console.log('state.expandedStations',state.expandedStations);
             return state.expandedStations;
         },
         currStation(state) {
@@ -46,15 +47,11 @@ export const stationStore = {
         likedSongs(state){
             return state.likedSongs
         },
-        getLoggedUser(state) {
-            return state.loggedUser;
-        },
+        
         isLikedStation(state) {
             return state.filterBy.isLiked ? true : false;
         },
-        getLikedSongs(state) {
-            return JSON.parse(JSON.stringify(state.loggedUser.likedSongs)) ;
-        },
+       
         isClicked(state) {
             return state.isClickedOnce;
         },
@@ -172,12 +169,12 @@ export const stationStore = {
                 throw err;
             }
         },
-        async loadHistorySearch({ commit }) {
-            const historySongs = await stationService.getHistoryDB();
-            // historySongs = new Set();
-            // console.log(historySongs);
-            commit({ type: "setHistorySongs", historySongs });
-        },
+        // async loadHistorySearch({ commit }) {
+        //     const historySongs = await stationService.getHistoryDB();
+        //     // historySongs = new Set();
+        //     // console.log(historySongs);
+        //     commit({ type: "setHistorySongs", historySongs });
+        // },
         setFilter({ commit, dispatch }, { filterBy }) {
             commit({ type: "setFilter", filterBy });
             // console.log(filterBy, "filter FROM STRORE");
@@ -195,19 +192,6 @@ export const stationStore = {
             try {
                 const updatedStation = await stationService.save(station);
                 commit({ type: "updateStation", updatedStation });
-            } catch (err) {
-                console.log(err);
-                throw err;
-            }
-        },
-        async updateUser({ commit }, { action }) {
-            try {
-                const updatedUser = await userService.updateUser(action);
-                commit({ type: "updateUser", updatedUser });
-                if(action.type==="history")
-                commit({type:"updateSearchHistory", searchHistory:{searchHistory:updatedUser.searchHistory}})
-                else if(action.type==='like')
-                commit({type:"updateLikedSongs",likedSongs:{likedSongs:updatedUser.likedSongs}})
             } catch (err) {
                 console.log(err);
                 throw err;

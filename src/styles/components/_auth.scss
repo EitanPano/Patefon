@@ -1,0 +1,107 @@
+.auth-actions {
+    position: absolute;
+    top: 1.2em;
+    right: 1em;
+    a {
+        font-size: 1.1em;
+        margin: 0 0.5em;
+    }
+    button {
+        border: none;
+        border-radius: 0.2em;
+        background: transparent;
+        
+    }
+}
+.auth {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 75;
+    width: 20em;
+    margin: 0 auto;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #808080;
+
+
+    form {
+        width: 100%;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5em;
+        border: 3px solid rgb(240, 240, 240);
+        background-color: fade-out( $clr1, 0.1);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+        h1,h2,h4 {
+            color: white;
+            text-align: center;
+        }
+        h1{
+            font-size: 2em;
+        }
+        
+      
+
+        label {
+            font-size: 1.1em;
+        }
+
+        input {
+            font-size: 1em;
+            display: flex;
+            justify-content: space-between;
+            margin: 0.3em;
+            width: 12em;
+            padding: 0.2em;
+            border: none;
+            outline: none;
+            border-radius: 0.3em;
+            box-shadow: 0 0 0 3px gray;
+            transition: 0.2s;
+            
+            &:focus {
+                box-shadow: 0 0 0 3px $clr1;
+                
+            }
+        }
+
+        button {
+            margin: 0.2em;
+        }
+
+        span {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1em;
+        }
+    }
+}
+.main-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // background: linear-gradient(180deg, rgba(255,255,255,0.8) 3%, rgba(39,114,133,0.8) 61%, rgba(1,7,10,0.8) 89%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(39,114,133,0.8) 20%, rgba(1,7,10,0.8) 65%);
+    // background: linear-gradient(180deg, rgba(222,223,228,0.2976540958180147) 0%, rgba(39,114,133,0.8) 20%, rgba(1,7,10,0.8) 65%);
+    // filter: blur(1px);
+    // z-index: 10;
+    overflow: hidden;
+    backdrop-filter: blur(1px);
+    cursor: pointer;
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity .6s;
+}

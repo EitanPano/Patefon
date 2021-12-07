@@ -7,7 +7,7 @@ import library from '../views/library.vue'
 import edit from '../views/edit.vue'
 import station from '../views/station.vue'
 import genre from '../views/genre.vue'
-
+import auth from '../views/user-auth.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,11 +15,25 @@ const routes = [
     path: '/',
     name: 'Home',
     component: home
+    // children:[
+    // { 
+    //    path:'/auth',
+    //    name:'Authorization',
+    //    component:auth
+    // }
+    // ]
   },
   {
     path: '/search',
     name: 'Search',
-    component: search
+    component: search,
+    children:[
+      { 
+         path:'/auth',
+         name:'Authorization',
+         component:auth
+      }
+      ]
   },
   {
     path: '/library',

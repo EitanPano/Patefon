@@ -46,10 +46,17 @@
     <div v-if="!stations && !songs">
       <h2 class="highlight">Browse By Genres</h2>
       <ul class="genre-container">
-        <li class="genre-list" v-for="(value, genre, idx) in stationsByGenre" :key="idx">
+        <li
+          class="genre-list"
+          v-for="(value, genre, idx) in stationsByGenre"
+          :key="idx"
+        >
           <genre-preview :genre="genre" :imgUrl="value[0].imgUrl" />
         </li>
       </ul>
+    </div>
+    <div>
+      <router-view></router-view>
     </div>
   </section>
 </template>
@@ -72,7 +79,7 @@ export default {
   },
   computed: {
     stations() {
-      console.log(this.$store.getters.getExpandedStations.stations, "stations");
+      // console.log(this.$store.getters.getExpandedStations.stations, "stations");
       return this.$store.getters.getExpandedStations.stations;
     },
     songs() {
@@ -122,7 +129,7 @@ export default {
     },
     updateUser(action) {
       if (!this.isClicked && action.type === "history") {
-        console.log("history");
+        // console.log("history");
         this.$store.dispatch({
           type: "updateUser",
           action,

@@ -21,12 +21,22 @@
           v-model="filterBy.txt"
       /></label>
     </form>
-    <div class="account-menu">
+
+    <div
+      class="login-signup-btn flex justify-center align-center"
+      v-if="!loggedUser"
+    >
+      <button class="">Continue As Guest</button> |
+      <button class="" @click="goToLoginPage">Login</button>
+    </div>
+    <!-- @click="logginGuest" -->
+
+    <div class="account-menu" v-else>
       <button class="account-btn clear-btn flex justify-center align-center">
-        <template v-if="loggedUser">
+        <template v-if="loggedUser.username != 'guest'">
           <img src="" v-if="loggedUser.imgUrl" />
           <span class="user-icon material-icons" v-else> account_circle </span>
-          <p class="highlight small">{{ loggedUser.name }}</p>
+          <p class="highlight small">{{ fullName }}</p>
         </template>
         <template v-else>
           <span class="user-icon material-icons"> account_circle </span>
@@ -45,9 +55,9 @@ export default {
   data() {
     return {
       isSearch: false,
-      loggedUser: {
-        name: "Guest",
-      },
+      // loggedUser: {
+      //   name: "Guest",
+      // },
       // filterBy:{
       //   txt:''
       // }
@@ -57,11 +67,22 @@ export default {
     filterBy() {
       return JSON.parse(JSON.stringify(this.$store.getters.filterBy));
     },
+    loggedUser() {
+      // console.log(this.$store.getters.loggedUser);
+      return this.$store.getters.loggedUser;
+    },
+    fullName() {
+      var strArr = this.loggedUser.fullname.split(" ");
+      var capitalizeArr = strArr.map((name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1);
+      });
+      return capitalizeArr.join(" ");
+    },
   },
   methods: {
     async filterSongs() {
       if (this.filterBy.txt === "") {
-        console.log("hello");
+        // console.log("hello");
         this.$store.commit({ type: "clearSearch" });
       }
       // console.log(this.filterBy.txt, "from appheader cmp");
@@ -86,6 +107,13 @@ export default {
       this.$store.commit({ type: "setCurrPage", link: this.$route.params });
     },
     setNextPage() {},
+    // logginGuest() {},
+    goToLoginPage() {
+      this.$router.push(`/auth`);
+    },
+    goToSignupPage() {
+      this.$router.push(`/auth`);
+    },
   },
   created() {},
   watch: {

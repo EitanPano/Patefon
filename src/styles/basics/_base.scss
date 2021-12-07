@@ -44,12 +44,6 @@ p {
     line-height: em(36px);
 }
 
-.station-preview {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    img{
-        width: 150px;
-        height: 170px;
-    }
+img {
+    object-fit: cover;
 }

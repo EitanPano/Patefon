@@ -1,8 +1,37 @@
 .edit {
-    &.station {
-       h1 {
-           cursor: pointer;
-       }
-   }
-}
 
+
+    .options {
+        background-color: #151515e1;
+        padding: 1.2em 0 0 2.2vw;
+
+        hr {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;            
+        }
+
+        .btn-options {
+            height: 3.3em;
+            width: 3.3em;
+            border-radius: 50%;
+            margin-bottom: 3em;
+            transition: 0.2s;
+            span {
+                font-size: 1.5em;
+                letter-spacing: 0.2em;
+            }
+
+            &:hover {
+                color: white;
+                background: rgba(70, 70, 70, 0.5);
+                box-shadow: 0 0 20px 0 black;
+            }
+        }
+    }
+    &.station {
+        h1 {
+            cursor: pointer;
+        }
+    }
+}

@@ -33,7 +33,7 @@
     display: grid;
     grid-template-columns: repeat( auto-fill, minmax(12em, 1fr));
     // grid-template-rows: repeat(auto-fit, 1fr);
-    grid-auto-rows: 17em;
+    // grid-auto-rows: 17em;
     padding: 0 0.5em;
     gap: 1.5em;
     grid-auto-flow: dense;

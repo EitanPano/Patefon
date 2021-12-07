@@ -10,7 +10,8 @@
   justify-content: space-between;
   width: calc(100% - $side-nav);
   margin-left: $side-nav;
-  margin-top: 0.15em;
+
+  transition: all 0.2s;
 
   .header-btns {
     display: flex;

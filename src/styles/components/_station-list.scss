@@ -18,8 +18,6 @@
         display: grid;
         gap: 20px;
         grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
-        grid-auto-rows: 260px;
-
         grid-auto-flow: column;
     }
 }

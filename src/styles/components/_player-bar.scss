@@ -124,7 +124,7 @@
 }
 
 input[type='range'] {
-    overflow: hidden;
+    // overflow: hidden;
     width: 80px;
     -webkit-appearance: none;
     background-color: #3a3a3a;
@@ -135,17 +135,26 @@ input[type='range']::-webkit-slider-runnable-track {
     height: 0.4em;
     -webkit-appearance: none;
     color: #13bba4;
-    // margin-top: -px;
+    margin-top: 1px;
+    overflow: hidden;
 }
 
 input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 0.5em;
-    height: 1em;
+    width: 0.45em;
+    height: 0.9em;
     margin-top: -5px;
     background: #ffffff;
-    border-radius: 50%;
+    // border-radius: 50%;
     box-shadow: -500px 0 0 500px #3d9c78;
+    
+    &::before {
+        content: '';
+        height: 20px;
+        width: 20px;
+        background-color: white;
+        color: blue;
+    }
 }
 
 @include for-mobile-layout {

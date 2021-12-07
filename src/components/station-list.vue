@@ -33,21 +33,21 @@ export default {
     update(station) {
       this.$emit("update", station);
     },
-    computed: {
-      fixedStations() {
-        if (this.widthOutput <= 600) return this.stations.slice(0, 2);
-        else if (this.widthOutput <= 768) return this.stations.slice(0, 3);
-        else if (this.widthOutput <= 845) return this.stations.slice(0, 2);
-        else if (this.widthOutput <= 1050) return this.stations.slice(0, 3);
-        else if (this.widthOutput <= 1250) return this.stations.slice(0, 4);
-        else if (this.widthOutput <= 1450) return this.stations.slice(0, 5);
-        else if (this.widthOutput <= 1650) return this.stations.slice(0, 6);
-        else if (this.widthOutput <= 1850) return this.stations.slice(0, 7);
-        else if (this.widthOutput <= 2050) return this.stations.slice(0, 8);
-        else if (this.widthOutput <= 2250) return this.stations.slice(0, 9);
-        else if (this.widthOutput <= 2450) return this.stations.slice(0, 10);
-        // else if (this.widthOutput >= 1000) return this.stations.slice(0, 4)
-      },
+  },
+  computed: {
+    fixedStations() {
+      if (this.widthOutput <= 600) return this.stations.slice(0, 2);
+      else if (this.widthOutput <= 768) return this.stations.slice(0, 3);
+      else if (this.widthOutput <= 845) return this.stations.slice(0, 2);
+      else if (this.widthOutput <= 1050) return this.stations.slice(0, 3);
+      else if (this.widthOutput <= 1250) return this.stations.slice(0, 4);
+      else if (this.widthOutput <= 1450) return this.stations.slice(0, 5);
+      else if (this.widthOutput <= 1650) return this.stations.slice(0, 6);
+      else if (this.widthOutput <= 1850) return this.stations.slice(0, 7);
+      else if (this.widthOutput <= 2050) return this.stations.slice(0, 8);
+      else if (this.widthOutput <= 2250) return this.stations.slice(0, 9);
+      else if (this.widthOutput <= 2450) return this.stations.slice(0, 10);
+      // else if (this.widthOutput >= 1000) return this.stations.slice(0, 4)
     },
   },
 };

@@ -44,11 +44,11 @@
     </div>
 
     <chat-room :currStation="currStation" v-if="currStation" />
-    <share-listen
+    <!-- <share-listen
       :currStation="currStation"
       v-if="currStation"
       @songToPlayer="songToPlayer"
-    />
+    /> -->
   </section>
 </template>
 
@@ -56,6 +56,7 @@
 import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
+import { socketService } from '../services/socket.service';
 export default {
   components: {
     songList,
@@ -133,6 +134,8 @@ export default {
         filterBy: {},
       });
       this.isLikedStation = false;
+
+      socketService.off('get share-listen');
     },
      },
     computed: {

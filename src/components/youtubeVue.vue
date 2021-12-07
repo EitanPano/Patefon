@@ -27,16 +27,17 @@
         <button @click="goPrevSong">
           <span class="material-icons">skip_previous</span>
         </button>
-        <button v-if="isPlayed" @click="stopVideo" class="btn btn-play">
+        <button v-if="isPlayed" @click="pauseVideo" class="btn btn-play">
           <span class="material-icons">pause</span>
         </button>
-        <button v-else @click="playVideo" class="btn btn-play">
+        <button v-else @click="play" class="btn btn-play">
           <span class="material-icons">play_arrow</span>
         </button>
         <button @click="goNextSong">
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
+         <button @click="share"> Share </button>
       </div>
       <div class="durations flex space-between">
         <p>00:00</p>
@@ -85,13 +86,47 @@ export default {
       currTimeInterval: null,
       playingSong: null,
       isPlayed: false,
+      songIdx : 0,
+      playList : [],
+      socketCounterToTopics : null,
     };
+  },
+  created() {
+  // socketService.emit('chat topic', this.currStation._id)
+
+        socketService.on('get share-listen', (playerData) => {
+           this.player.loadPlaylist({
+           playlist: [playerData.playList],
+          index:playerData.songIdx,
+          startSeconds: playerData.currentTime,
+           });
+          this.songVolume = playerData.songVolume;
+          this.currentTime = playerData.currentTime;
+          // this.playingSong =  this.playListData.station.songs[index]
+          // this.player.playVideoAt(playerData.currentTime);
+           this.playVideo();
+      })
+
+           socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
+             console.log(socketCounterToTopics)
+             if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
+             console.log('bigger')
+              this.play();
+             this.socketCounterToTopics = socketCounterToTopics;
+      })
+
   },
   destroyed() {
     if (this.currTimeInterval) clearInterval(this.currTimeInterval);
   },
   methods: {
+    play () {
+      const playerData = {songIdx :this.songIdx, playList:this.playList, playingSong:this.playingSong,currentTime:this.currentTime,songVolume:this.songVolume }
+      socketService.emit('send share-listen',  playerData) 
+      this.playVideo()
+    },
     playVideo() {
+      // this.player.getPlayerState().then(state=> console.log(state))
       this.player.setVolume(this.songVolume);
       if (this.currTimeInterval) clearInterval(this.currTimeInterval);
       this.player.playVideo();
@@ -100,14 +135,23 @@ export default {
         this.playing();
       }, 1000);
     },
-    stopVideo() {
-      this.player.stopVideo();
-      // console.log(this.player);
+    pauseVideo() {
+      this.player.pauseVideo();
+      console.log(this.player);
       if (this.currTimeInterval) clearInterval(this.currTimeInterval);
       this.isPlayed = !this.isPlayed;
+
+        // this.player.getPlayerState().then(state=> console.log(state))
+      // this.player.getIframe().then(state=> console.log(state))
+      // console.log(this.songIdx);
+      // console.log(this.playList);
+      // console.log(this.playingSong);
+      // console.log(this.currentTime);
+      // console.log(this.songVolume);
     },
     seekTo() {
       this.player.seekTo(this.currentTime);
+      this.play()
     },
     loadPlayList() {
       let songIds = this.playListData.station.songs.map(
@@ -119,6 +163,10 @@ export default {
         startSeconds: 0,
       });
       this.playVideo();
+      setTimeout( () => {
+ this.play();
+      },1000)
+     
     },
     playing() {
       // console.log("o/ we are watching!!!");
@@ -134,12 +182,29 @@ export default {
         .then(
           (idx) => (this.playingSong = this.playListData.station.songs[idx])
         );
+            this.player
+        .getPlaylistIndex()
+        .then(
+          (idx) => (this.songIdx = idx)
+        );
+                this.player
+        .getPlaylist()
+        .then(
+          (playList) => (this.playList = playList)
+        );
     },
+
     goNextSong() {
       this.player.nextVideo();
+              setTimeout( () => {
+ this.play();
+      },1000)
     },
     goPrevSong() {
       this.player.previousVideo();
+              setTimeout( () => {
+ this.play();
+      },1000)
     },
     setVolume() {
       this.player.setVolume(this.songVolume);
@@ -163,6 +228,9 @@ export default {
     likeSong() {
       alert("N/A");
     },
+    share () {
+         socketService.emit('send announcements', this.playListData.station._id);
+    }
   },
   computed: {
     player() {

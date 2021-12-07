@@ -37,7 +37,8 @@ export default {
     computed: {
         fixedStations() {
             if (this.widthOutput <= 600) return this.stations.slice(0, 2);
-            else if (this.widthOutput <= 850) return this.stations.slice(0, 3);
+            else if (this.widthOutput <= 768) return this.stations.slice(0, 3);
+            else if (this.widthOutput <= 845) return this.stations.slice(0, 2);
             else if (this.widthOutput <= 1050) return this.stations.slice(0, 3);
             else if (this.widthOutput <= 1250) return this.stations.slice(0, 4);
             else if (this.widthOutput <= 1450) return this.stations.slice(0, 5);

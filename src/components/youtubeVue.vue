@@ -108,9 +108,9 @@ export default {
       })
 
            socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
-             console.log(socketCounterToTopics)
+            //  console.log(socketCounterToTopics)
              if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
-             console.log('bigger')
+            //  console.log('bigger')
               this.play();
              this.socketCounterToTopics = socketCounterToTopics;
       })
@@ -215,7 +215,7 @@ export default {
       this.isShuffling = !this.isShuffling;
     },
     loop() {
-      console.log(this.isLooping);
+      // console.log(this.isLooping);
       if (this.isLooping) this.player.setLoop(false);
       else this.player.setLoop(true);
       this.isLooping = !this.isLooping;

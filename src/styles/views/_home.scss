@@ -1,6 +1,49 @@
+.bg-animator {
+    position: absolute;
+    top: -50vh;
+    height: 50vh;
+    width: 100%;
+    z-index: -1;
+
+    animation: myDisco 15s infinite;
+}
 
 
+.home-page {
+    // animation: myDisco 5s ease infinite;
+    
+    // @keyframes color-me-in {
+    //     0% {
+    //       background: orange;
+    //     }
+    //     /* Adding a step in the middle */
+    //     50% {
+    //       background: blue;
+    //     }
+    //     100% {
+    //       background: black;
+    //     }
+    //   }
 
-.home-page{
-    background: rgb(0,0,0);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 90%, rgba(80,156,125,1) 100%);}
+    
+}
+@keyframes myDisco {
+    0% {
+        box-shadow: 0 45vh 50vh 0 rgb(165, 44, 195);
+    }
+    10% {
+        shadow: 0 45vh 50vh 0 rgb(0, 183, 255);
+    }
+    40% {
+        box-shadow: 0 45vh 50vh 0 rgb(0, 200, 123);
+    }
+    60% {
+        box-shadow: 0 45vh 50vh 0 rgb(200, 123, 0);
+    }
+    80% {
+        box-shadow: 0 45vh 50vh 0 rgb(200, 0, 0);
+    }
+    100% {
+        box-shadow: 0 45vh 50vh 0 rgb(165, 44, 195);
+    }
+}

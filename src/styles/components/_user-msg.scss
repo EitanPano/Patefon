@@ -1,0 +1,22 @@
+.alert {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 125;
+    position: fixed;
+    top: 5em;
+    right: calc(50% - 6em);
+    padding: 1em;
+    color: #eee;
+
+    border: 2px solid white;
+    border-radius: 0.4em;
+    font-size: 0.9em;
+    font-weight: bold;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
+}
+
+.alert-success {
+    background-color: #5f5f5f;
+}
+.alert-danger {
+    background-color: rgb(126, 20, 20);
+}

@@ -1,6 +1,9 @@
+import Vue from 'vue';
 
-// export const eventBusService = new Vue();
-// export const SHOW_MSG = 'show-msg';
-// export function showMsg(txt, type = 'success') {
-//     eventBusService.$emit(SHOW_MSG, { txt, type });
-// }
+export const SHOW_MSG = 'show-msg';
+
+export const eventBusService = new Vue();
+
+export function showMsg(txt, type = 'success') {
+    eventBusService.$emit(SHOW_MSG, { txt, type });
+}

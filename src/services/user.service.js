@@ -91,7 +91,7 @@ async function updateDetails(action){
             action.song.id
         );
         if (idx || idx === 0) return;
-        user.searchHistory.push(action.song);
+        user.searchHistory.unshift(action.song);
         console.log('action.song',action.song);
         console.log("pushing history boyz");
         console.log(user.searchHistory);

@@ -29,6 +29,9 @@ export const userStore = {
           state.loggedUser=loggedUser
           console.log('loggedUser from setUser in user store:',state.loggedUser);
       },
+      updateUser(state,{updatedUser}){
+          state.loggedUser=updatedUser
+      }
     //   setLikedSongs(state, { likedSongs }) {
     //     state.likedSongs = likedSongs;
     //   },
@@ -80,7 +83,7 @@ export const userStore = {
         try {
             const updatedUser = await userService.updateDetails(action);
             console.log(updatedUser,'Updated user?');
-            commit({ type: "setUser", updatedUser });
+            commit({ type: "updateUser", updatedUser });
             // if(action.type==="history")
             // commit({type:"setSearchHistory", searchHistory:updatedUser.searchHistory})
             // else if(action.type==='like')

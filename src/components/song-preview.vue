@@ -9,37 +9,32 @@
       @click="songToPlayer(song, idx)"
       class="size-btn first play"
     >
-        <button
-            v-if="isHover"
-            @click="songToPlayer(song, idx)"
-            class="size-btn first play"
-        >
-            ▶
-        </button>
-        <p v-else class="first song-idx">{{ idx + 1 }}</p>
-        <div class="song-details">
-            <img :src="song.imgUrl" />
-            <p class="song-title">{{ song.title }}</p>
-        </div>
-        <div class="last song-actions">
-            <button
-                class="btn btn-like"
-                @click="likeSong"
-                v-bind:class="{ liked: isLiked }"
-            >
-                ❤
-            </button>
-            <p>{{ song.duration }}</p>
-            <button
-                @click="removeSong(song.id)"
-                v-if="isHover"
-                class="btn btn-delete"
-            >
-                ✖
-            </button>
-        </div>
-        <!-- && !isLikedStation -->
-    </article>
+      ▶
+    </button>
+    <p v-else class="first song-idx">{{ idx + 1 }}</p>
+    <div class="song-details">
+      <img :src="song.imgUrl" />
+      <p class="song-title">{{ song.title }}</p>
+    </div>
+    <div class="last song-actions">
+      <button
+        class="btn btn-like"
+        @click="likeSong"
+        v-bind:class="{ liked: isLiked }"
+      >
+        ❤
+      </button>
+      <p>{{ song.duration }}</p>
+      <button
+        @click="removeSong(song.id)"
+        v-if="isHover"
+        class="btn btn-delete"
+      >
+        ✖
+      </button>
+    </div>
+    <!-- && !isLikedStation -->
+  </article>
 </template>
 
 <script>

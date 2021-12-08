@@ -21,6 +21,7 @@
             &:hover {
                 color: white;
             }
+            
         }
 
         .player-left {
@@ -171,6 +172,12 @@ input[type='range']::-webkit-slider-thumb {
             position: fixed;
             bottom: 0;
             height: em(90px);
+            .liked {
+                color: greenyellow;
+                &:hover {
+                    color: greenyellow;
+                }
+              }
         }
     }
 }

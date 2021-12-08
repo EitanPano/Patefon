@@ -41,9 +41,7 @@
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
-        <<<<<<< HEAD
         <button @click="share">Share</button>
-        ======= >>>>>>> 3b1f4b27aab551cde96d0530fa39d547789a1a0e
       </div>
       <div class="durations flex space-between">
         <p>{{ this.showSongCurrentTime }}</p>
@@ -240,6 +238,15 @@ export default {
     share() {
       socketService.emit("send announcements", this.playListData.station._id);
     },
+    checkIfSongLiked(likedSongs) {
+      console.log(likedSongs);
+      var idx = likedSongs.findIndex(
+        (likedSong) => likedSong.id === this.playListData.song.id
+      );
+      console.log(idx);
+      if (idx < 0) return false;
+      return true;
+    },
   },
   computed: {
     player() {
@@ -255,15 +262,9 @@ export default {
     },
     isLiked() {
       let likedSongs = this.$store.getters.likedSongs;
-      console.log("song:", this.playListData.song);
-      console.log("liked songs", likedSongs);
-      if (likedSongs.includes(this.playListData.song)) {
-        console.log("does");
-        return true;
-      } else {
-        console.log("doesnt");
-        return false;
-      }
+      if (likedSongs && likedSongs.length)
+        return this.checkIfSongLiked(likedSongs);
+      else return false;
     },
     showSongDuration() {
       let min = parseInt(this.songDuration / 60);

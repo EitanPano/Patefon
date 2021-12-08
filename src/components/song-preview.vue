@@ -16,7 +16,7 @@
       <img :src="song.imgUrl" />
       <p class="song-title">{{ song.title }}</p>
     </div>
-      <p>{{ showSongCreatedAt }}</p>
+    <p>{{ showSongCreatedAt }}</p>
     <div class="last song-actions">
       <button
         class="btn btn-like"
@@ -28,7 +28,7 @@
       <p>{{ song.duration }}</p>
       <button
         @click="removeSong(song.id)"
-        v-if="isHover"
+        v-if="isHover && !isSearch"
         class="btn btn-delete"
       >
         ✖
@@ -79,15 +79,21 @@ export default {
     user() {
       return this.$store.getters.getLoggedUser;
     },
-    showSongCreatedAt () {
-      if (Date.now() - this.song.createdAt < 1000*60*5) return 'Just Now';
-      else  if (Date.now() - this.song.createdAt < 1000*60*60) return 'Last Hour';
-      else  if (Date.now() - this.song.createdAt < 1000*60*60*24) return 'Today';
-      else  if (Date.now() - this.song.createdAt < 1000*60*60*24*2) return 'Yesturday';
-      else  if (Date.now() - this.song.createdAt < 1000*60*60*24*7) return 'Week Ago';
-      else  if (Date.now() - this.song.createdAt < 1000*60*60*24*28) return 'Month Ago';
-       else  if (Date.now() - this.song.createdAt > 1000*60*60*24*28) return 'Long Time';
-    }
+    showSongCreatedAt() {
+      if (Date.now() - this.song.createdAt < 1000 * 60 * 5) return "Just Now";
+      else if (Date.now() - this.song.createdAt < 1000 * 60 * 60)
+        return "Last Hour";
+      else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24)
+        return "Today";
+      else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24 * 2)
+        return "Yesturday";
+      else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24 * 7)
+        return "Week Ago";
+      else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24 * 28)
+        return "Month Ago";
+      else if (Date.now() - this.song.createdAt > 1000 * 60 * 60 * 24 * 28)
+        return "Long Time";
+    },
   },
 };
 </script>

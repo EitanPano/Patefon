@@ -18,7 +18,6 @@
         </div>
         <div class="last song-actions">
             <button
-                v-if="user"
                 class="btn btn-like"
                 @click="likeSong"
                 v-bind:class="{ liked: isLiked }"
@@ -69,12 +68,8 @@ export default {
     },
   },
   computed: {
-    isLikedStation() {
-      console.log(this.$store.getters.getLoggedinUser, "from song preview");
-      return this.$store.getters.getLoggedinUser;
-    },
     isLiked() {
-      let likedSongs = this.$store.getters.getLikedSongs;
+      let likedSongs = this.$store.getters.likedSongs;
       return this.checkIfSongLiked(likedSongs);
     },
     user() {

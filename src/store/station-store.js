@@ -44,9 +44,6 @@ export const stationStore = {
             // console.log('search history from store',state.searchHistory);
             return state.searchHistory;
         },
-        likedSongs(state){
-            return state.likedSongs
-        },
         
         isLikedStation(state) {
             return state.filterBy.isLiked ? true : false;
@@ -114,9 +111,9 @@ export const stationStore = {
         setLoggedUser(state, { user }) {
             state.loggedUser = user;
         },
-        setLikedSongs(state, { user }) {
-            state.likedSongs = user.likedSongs;
-        },
+        // setLikedSongs(state, { user }) {
+        //     state.likedSongs = user.likedSongs;
+        // },
         setClicked(state, { boolState }) {
             state.isClickedOnce = boolState;
         },
@@ -163,7 +160,7 @@ export const stationStore = {
             try {
                 let user = await userService.getLoggedinUser();
                 commit({ type: "setLoggedUser", user });
-                commit({ type: "setLikedSongs", user });
+                // commit({ type: "setLikedSongs", user });
             } catch (err) {
                 console.log(err);
                 throw err;

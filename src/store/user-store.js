@@ -12,7 +12,7 @@ export const userStore = {
         loggedUser(state) {
             return state.loggedUser;
         },
-        getLikedSongs(state) {
+        likedSongs(state) {
             return JSON.parse(JSON.stringify(state.likedSongs)) ;
         },
     },

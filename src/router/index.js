@@ -8,6 +8,7 @@ import edit from '../views/edit.vue'
 import station from '../views/station.vue'
 import genre from '../views/genre.vue'
 import auth from '../views/user-auth.vue'
+import liked from '../views/liked.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,7 +31,7 @@ const routes = [
     children:[
       { 
          path:'/auth',
-         name:'Authorization',
+         name:'Auth',
          component:auth
       }
       ]
@@ -45,11 +46,11 @@ const routes = [
     name: 'Edit',
     component: edit
   },
-  // {
-  //   path: '/station/liked',
-  //   name: 'likedStation',
-  //   component: station
-  // },
+  {
+    path: '/station/liked',
+    name: 'likedStation',
+    component: liked
+  },
   {
     path: '/station/:id?',
     name: 'Station',

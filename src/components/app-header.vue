@@ -10,13 +10,7 @@
       </button>
       <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
     </div>
-    <div
-      class="login-signup-btn flex justify-center align-center"
-      v-if="!loggedUser"
-    >
-      <button class="">Continue As Guest</button> |
-      <button class="" @click="goToLoginPage">Login</button>
-    </div>
+
     <form>
       <label
         ><input
@@ -28,7 +22,7 @@
           v-model="filterBy.txt"
       /></label>
     </form>
-    <div class="account-menu">
+    <div @click="isUserMenu = !isUserMenu" class="account-menu">
       <button class="account-btn clear-btn flex justify-center align-center">
         <template v-if="loggedUser">
           <img src="" v-if="loggedUser.imgUrl" />
@@ -42,15 +36,22 @@
         <span class="arrow-down material-icons">⏷</span>
       </button>
     </div>
+
+    <transition name="fade">
+      <div class="user-menu" v-if="isUserMenu">
+        <router-link to="/auth">Sign In</router-link>
+        <router-link to="/auth">Profile</router-link>
+        <router-link to="/auth">About</router-link>
+      </div>
+    </transition>
   </aside>
 </template>
 
 <script>
-// import func from "vue-editor-bridge";
-import { eventBusService } from "../services/event-bus.service.js";
 export default {
   data() {
     return {
+      isUserMenu: false,
       isSearch: false,
       scrollOffsetY: null,
     };
@@ -104,22 +105,19 @@ export default {
         throw err;
       }
     },
-    goBack() {
-      console.log("back");
-    },
-    goNext() {
-      console.log("next");
-    },
+    // goBack() {
+    // console.log("back");
+    // },
+    // goNext() {
+    // console.log("next");
+    // },
     setCurrPage() {
       this.$store.commit({
         type: "setCurrPage",
         link: this.$route.params,
       });
     },
-    setNextPage() {},
-    goToLoginPage() {
-      this.$router.push(`/auth`);
-    },
+    // setNextPage() {},
   },
   watch: {
     $route: {

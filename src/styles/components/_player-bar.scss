@@ -7,7 +7,7 @@
         width: 100%;
         height: em(90px);
         display: grid;
-        grid-template-columns: 30% 1fr 30%;
+        grid-template-columns: 25% 1fr 25%;
 
         padding: 0 1em;
         background: #171717;
@@ -70,7 +70,8 @@
 
         .player-main {
             grid-column: 2 / 3;
-            // justify-content: center;
+            
+
 
             display: flex;
             flex-direction: column;
@@ -97,12 +98,14 @@
 
             & > .durations {
                 align-items: center;
-                justify-content: space-between;
+                justify-content: space-evenly;
                 position: relative;
                 top: 0.5em;
 
                 p {
                     margin: 0 0.5em;
+                    font-size: 0.8em;
+                    color: $clr2;
                 }
                 input {
                     width: 75%;
@@ -118,6 +121,7 @@
 
             input {
                 width: 50%;
+                max-width: 10em;
             }
         }
     }

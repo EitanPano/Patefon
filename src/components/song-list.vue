@@ -14,9 +14,9 @@
 
     <ul>
       <draggable
+        :value="songs"
         class="list-group"
         tag="ul"
-        :value="currStationSongs"
         v-bind="dragOptions"
         @start="grab"
         @end="drop"
@@ -91,10 +91,9 @@ export default {
         ghostClass: "ghost",
       };
     },
-    currStationSongs() {
-      console.log(this.$store.getters.currStation.songs, "currstationsongs");
-      return this.$store.getters.currStation.songs;
-    },
+    // currStationSongs() {
+    //     return this.$store.getters.currStation.songs;
+    // },
   },
 };
 </script>

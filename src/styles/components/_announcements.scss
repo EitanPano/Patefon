@@ -1,7 +1,10 @@
 .announcements {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     p {
-        font-size: 0.7rem;
-        margin: auto;
+        font-size: 0.8rem;
         cursor: pointer;
     }
 }

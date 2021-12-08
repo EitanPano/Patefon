@@ -37,19 +37,18 @@
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
-         <button @click="share"> Share </button>
       </div>
       <div class="durations flex space-between">
-        <p>00:00</p>
+        <p>{{this.showSongCurrentTime}}</p>
         <input
           @change="seekTo"
           type="range"
           v-model="currentTime"
           min="0"
-          :max="SongDuration"
+          :max="songDuration"
           :title="currentTime"
         />
-        <p>00:00</p>
+        <p>{{this.showSongDuration}}</p>
       </div>
     </div>
     <div class="player-right">
@@ -78,7 +77,7 @@ export default {
     return {
       videoId: "lG0Ys-2d4MA",
       currentTime: 0,
-      SongDuration: 0,
+      songDuration: 0,
       songVolume: 20,
       isShuffling: false,
       isLooping: false,
@@ -180,7 +179,7 @@ export default {
       // all Promises from get are listed here, palying() is recalled when something is the song player changes
       this.player
         .getDuration()
-        .then((duration) => (this.SongDuration = duration));
+        .then((duration) => (this.songDuration = duration));
       this.player
         .getCurrentTime()
         .then((currTime) => (this.currentTime = currTime));
@@ -235,9 +234,6 @@ export default {
     likeSong() {
       alert("N/A");
     },
-    share () {
-         socketService.emit('send announcements', this.playListData.station._id);
-    }
   },
   computed: {
     player() {
@@ -251,6 +247,20 @@ export default {
         else return "volume_mute";
       }
     },
+    showSongDuration() {
+      let min = parseInt(this.songDuration/60);
+      if (min<10) min = '0' + min;
+      let sec = parseInt(this.songDuration % 60);
+      if (sec<10) sec = '0' + sec;
+      return min + ':' + sec;
+    },
+        showSongCurrentTime() {
+      let min = parseInt(this.currentTime/60);
+      if (min<10) min = '0' + min;
+      let sec = parseInt(this.currentTime % 60);
+      if (sec<10) sec = '0' + sec;
+      return min + ':' + sec;
+    }
   },
   watch: {
     playListData: {

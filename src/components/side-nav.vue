@@ -13,6 +13,8 @@
                 </div>
                 <router-link to="/edit"><span class="icon-plus material-icons">add</span>{{ createPlaylistName }}</router-link>
                 <router-link class="nav-liked" to="/station/liked"><span class="icon-heart material-icons">favorite</span>{{ likedSongsName }}</router-link>
+                <!-- <hr/> -->
+                <button class="share-listening" @click="share"> Share Listening </button>
                  <announcements/>
             </ul>
               
@@ -28,6 +30,7 @@
 
 <script>
 import announcements from '../components/announcements.vue';
+import {socketService} from '../services/socket.service.js';
 export default {
     components : {
 announcements
@@ -42,6 +45,9 @@ announcements
         toggleMenu() {
             this.isMenuOpen = !this.isMenuOpen;
         },
+           share () {
+         socketService.emit('send announcements', this.currStationForPlayer._id);
+    }
     },
     created() {
         this.widthOutput = window.innerWidth;
@@ -61,7 +67,11 @@ announcements
         },
         likedSongsName() {
             return (this.widthOutput > 768) ? 'Liked Songs' : 'Liked'
+        },
+        currStationForPlayer() {
+            return this.$store.getters.currStationForPlayer;
         }
+        
     },
 
 };

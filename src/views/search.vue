@@ -128,8 +128,8 @@ export default {
       });
     },
     updateUser(action) {
-      console.log(action);
-      console.log("eeeeeeeeeeeeeeeee");
+      // console.log(action);
+      // console.log("eeeeeeeeeeeeeeeee");
       if (!this.isClicked && action.type === "history") {
         // console.log("history");
         this.$store.dispatch({

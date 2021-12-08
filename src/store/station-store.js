@@ -5,9 +5,6 @@ import { userService } from "../services/user.service.js";
 
 export const stationStore = {
     state: {
-        // loggedUser: null,
-        // likedSongs: [],
-        // searchHistory: [],
         currStation: [],
         currStationForPlayer: [],
         currSong: null,

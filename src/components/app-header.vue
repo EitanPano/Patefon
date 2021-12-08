@@ -27,7 +27,7 @@
         <template v-if="loggedUser">
           <img src="" v-if="loggedUser.imgUrl" />
           <span class="user-icon material-icons" v-else> account_circle </span>
-          <p class="highlight small">{{ loggedUser.name }}</p>
+          <p class="highlight small">{{ loggedUser.username }}</p>
         </template>
         <template v-else>
           <span class="user-icon material-icons"> account_circle </span>
@@ -39,7 +39,10 @@
 
     <transition name="fade">
       <div class="user-menu" v-if="isUserMenu">
-        <router-link to="/auth">Sign In</router-link>
+        <router-link to="/auth" v-if="loggedUser.username === 'guest'"
+          >Sign In</router-link
+        >
+        <a v-else @click="logout">Log Out</a>
         <router-link to="/auth">Profile</router-link>
         <router-link to="/auth">About</router-link>
       </div>
@@ -87,6 +90,10 @@ export default {
   methods: {
     handleScroll() {
       this.scrollOffsetY = window.scrollY;
+    },
+    logout() {
+      this.$store.dispatch({ type: "setLogout" });
+      console.log("lol");
     },
     async filterSongs() {
       if (this.filterBy.txt === "") {

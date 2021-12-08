@@ -71,13 +71,15 @@ export const userStore = {
              console.log(err);
          }
      },
-     setLogout({commit}){
-            authService.logout()
-            .then((msg)=> {
-              const user = userService.getEmptyUser()
-              commit({type:'setUser',user})
-              return msg
-            })
+    async setLogout({commit}){
+        //   await authService.logout()
+          let loggedUser = await authService.loginGuestUser()
+              commit({type:'setUser',loggedUser})
+            // .then((msg)=> {
+            //   const user = userService.getEmptyUser()
+            //   commit({type:'setUser',user})
+            //   return msg
+            // })
      },
      async updateUser({ commit }, { action }) {
         try {

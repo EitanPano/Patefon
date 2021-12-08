@@ -1,7 +1,25 @@
 .chat-room {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    align-items: center;
-    gap: 10px;
+    position: fixed;
+    right: 15px;
+    bottom: 100px;
+    z-index: 10;
+    .chat {
+        padding: 0.5em;
+        height: 30vh;
+        width: 30vh;
+        display: flex;
+        flex-direction: column;
+        // justify-content: end;
+        background-color: whitesmoke;
+      
+        align-items: center;
+        gap: 5px;
+        overflow-y:auto;
+        p {
+           max-width: 15ch;
+           color: black;
+        }
+    }
+ 
+
 }

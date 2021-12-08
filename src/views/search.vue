@@ -88,7 +88,7 @@ export default {
     },
     searchHistory() {
       // console.log("getters", this.$store.getters.searchHistory);
-      // console.log(this.$store.getters.searchHistory);
+      console.log(this.$store.getters.searchHistory);
       return this.$store.getters.searchHistory;
       // return this.$store.getters.getSearchHistory;
     },
@@ -128,6 +128,8 @@ export default {
       });
     },
     updateUser(action) {
+      console.log(action);
+      console.log("eeeeeeeeeeeeeeeee");
       if (!this.isClicked && action.type === "history") {
         // console.log("history");
         this.$store.dispatch({

@@ -4,25 +4,52 @@ import {authService} from "../services/auth.service.js"
 
 export const userStore = {
     state: {
-        loggedUser: null,
-        likedSongs: [],
-        searchHistory: [],
+        loggedUser:null,
+        // likedSongs:[],
+        // searchHistory: [],
     },
     getters:{
         loggedUser(state) {
             return state.loggedUser;
         },
-        getLikedSongs(state) {
-            return JSON.parse(JSON.stringify(state.likedSongs)) ;
+        likedSongs(state) {
+            console.log('liked songs from store:',state.loggedUser.likedSongs);
+            return state.loggedUser.likedSongs
+            // return JSON.parse(JSON.stringify(state.likedSongs)) ;
+        },
+        searchHistory(state) {
+            console.log('search history from store:',state.loggedUser.searchHistory);
+            return state.loggedUser.searchHistory
+            // console.log('search history from store',state.searchHistory);
+            // return state.searchHistory;
         },
     },
     mutations:{
       setUser(state,{loggedUser}){
           state.loggedUser=loggedUser
           console.log('loggedUser from setUser in user store:',state.loggedUser);
+      },
+      updateUser(state,{updatedUser}){
+          state.loggedUser=updatedUser
       }
+    //   setLikedSongs(state, { likedSongs }) {
+    //     state.likedSongs = likedSongs;
+    //   },
+    //   setSearchHistory(state, { searchHistory }) {
+    //     state.searchHistory = searchHistory;
+    //   },
     },
     actions:{
+        async setInitialLogin({commit}){
+            try{
+                let loggedUser = await authService.initialLogin();
+                console.log('initial login from store:',loggedUser);
+                commit({type:'setUser',loggedUser})
+                return loggedUser
+            }catch(err){
+                console.log(err);
+            }
+        },
      async setLogin({commit} ,{user}){
          try{
             console.log('from user store:',user);
@@ -57,10 +84,10 @@ export const userStore = {
             const updatedUser = await userService.updateDetails(action);
             console.log(updatedUser,'Updated user?');
             commit({ type: "updateUser", updatedUser });
-            if(action.type==="history")
-            commit({type:"updateSearchHistory", searchHistory:{searchHistory:updatedUser.searchHistory}})
-            else if(action.type==='like')
-            commit({type:"updateLikedSongs",likedSongs:{likedSongs:updatedUser.likedSongs}})
+            // if(action.type==="history")
+            // commit({type:"setSearchHistory", searchHistory:updatedUser.searchHistory})
+            // else if(action.type==='like')
+            // commit({type:"setLikedSongs",likedSongs:updatedUser.likedSongs})
         } catch (err) {
             console.log(err);
             throw err;

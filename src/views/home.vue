@@ -1,5 +1,6 @@
 <template>
     <section class="main-layout layout-padding home-page">
+        <div class="bg-animator"></div>
         <h1 class="highlight">Good Evening</h1>
         <div class="station-list-container" v-for="(stations, genre) in stationsByGenre" :key="genre">
             <div class="flex space-between">

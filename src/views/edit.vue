@@ -141,6 +141,7 @@
 </template>
 
 <script>
+import { showMsg } from "../services/event-bus.service.js";
 import SongList from "../components/song-list.vue";
 import youtubeSearch from "../components/youtube-search.vue";
 import { stationService } from "../services/station.service";
@@ -193,6 +194,7 @@ export default {
       song.isLiked = false;
       song.createdAt = Date.now();
       this.emptyStation.songs.push(song);
+      showMsg('Songname has been added')
     },
     addTag() {
       if (this.emptyStation.tags.includes(this.tag)) return;
@@ -222,6 +224,7 @@ export default {
         });
         this.emptyStation = stationService.getEmptystation();
         this.$router.push("/");
+        showMsg('Station has been added')
       } catch (err) {
         console.log(err);
       }

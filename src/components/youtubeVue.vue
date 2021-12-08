@@ -41,19 +41,21 @@
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
+        <<<<<<< HEAD
         <button @click="share">Share</button>
+        ======= >>>>>>> 3b1f4b27aab551cde96d0530fa39d547789a1a0e
       </div>
       <div class="durations flex space-between">
-        <p>00:00</p>
+        <p>{{ this.showSongCurrentTime }}</p>
         <input
           @change="seekTo"
           type="range"
           v-model="currentTime"
           min="0"
-          :max="SongDuration"
+          :max="songDuration"
           :title="currentTime"
         />
-        <p>00:00</p>
+        <p>{{ this.showSongDuration }}</p>
       </div>
     </div>
     <div class="player-right">
@@ -82,7 +84,7 @@ export default {
     return {
       videoId: "lG0Ys-2d4MA",
       currentTime: 0,
-      SongDuration: 0,
+      songDuration: 0,
       songVolume: 20,
       isShuffling: false,
       isLooping: false,
@@ -188,7 +190,7 @@ export default {
       // all Promises from get are listed here, palying() is recalled when something is the song player changes
       this.player
         .getDuration()
-        .then((duration) => (this.SongDuration = duration));
+        .then((duration) => (this.songDuration = duration));
       this.player
         .getCurrentTime()
         .then((currTime) => (this.currentTime = currTime));
@@ -262,6 +264,20 @@ export default {
         console.log("doesnt");
         return false;
       }
+    },
+    showSongDuration() {
+      let min = parseInt(this.songDuration / 60);
+      if (min < 10) min = "0" + min;
+      let sec = parseInt(this.songDuration % 60);
+      if (sec < 10) sec = "0" + sec;
+      return min + ":" + sec;
+    },
+    showSongCurrentTime() {
+      let min = parseInt(this.currentTime / 60);
+      if (min < 10) min = "0" + min;
+      let sec = parseInt(this.currentTime % 60);
+      if (sec < 10) sec = "0" + sec;
+      return min + ":" + sec;
     },
   },
   watch: {

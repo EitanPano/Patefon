@@ -1,4 +1,5 @@
 import { httpService } from './http.service';
+import { userService } from './user.service';
 // import {storageService} from './async-storage.service'
 
 const STORAGE_KEY = 'user'
@@ -12,6 +13,9 @@ export const authService = {
     login,
     logout,
     signup,
+    initialLogin,
+    loginGuestUser
+
 }
 
 
@@ -19,6 +23,7 @@ async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username)
     // return _saveLocalUser(user)
     try{
+        
         console.log(userCred);
         const user = await httpService.post(`${AUTH_URL}login`, userCred)
         // socketService.emit('set-user-socket', user._id);
@@ -27,8 +32,21 @@ async function login(userCred) {
         else console.log('Logging in have failed');
     }catch(err){
         console.log(err);
-
     }
+}
+async function initialLogin(){
+    let user=userService.getLoggedinUser()
+    console.log(user);
+    if(!user){
+        user= await loginGuestUser()
+        console.log(user);
+        return user
+    }else return user
+}
+
+async function loginGuestUser(){
+   var guestUser= await login({username:'guest',password:1234});
+   return guestUser
 }
 
 async function logout() {

@@ -92,6 +92,7 @@ export default {
       };
     },
     currStationSongs() {
+      console.log(this.$store.getters.currStation.songs, "currstationsongs");
       return this.$store.getters.currStation.songs;
     },
   },

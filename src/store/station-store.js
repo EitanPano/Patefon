@@ -8,7 +8,7 @@ export const stationStore = {
         // loggedUser: null,
         // likedSongs: [],
         // searchHistory: [],
-        currStation: null,
+        currStation: [],
         currStationForPlayer: null,
         currSong: null,
         currSongIdx: 0,
@@ -39,15 +39,6 @@ export const stationStore = {
         currSongIdx(state) {
             return state.currSongIdx;
         },
-
-        searchHistory(state) {
-            // console.log('search history from store',state.searchHistory);
-            return state.searchHistory;
-        },
-        likedSongs(state){
-            return state.likedSongs
-        },
-        
         isLikedStation(state) {
             return state.filterBy.isLiked ? true : false;
         },
@@ -99,24 +90,15 @@ export const stationStore = {
             // state.expandedStations = "";
             state.expandedStations = [];
         },
-        setHistorySongs(state, { historySongs }) {
-            state.searchHistory = historySongs;
-        },
-        updateUser(state, { updatedUser }) {
-            state.loggedUser = updatedUser;
-            console.log("updated user line 104", state.loggedUser);
-        },
         songToPlayer(state, { song, idx, station }) {
             state.currSong = song;
             state.currSongIdx = idx;
             state.currStationForPlayer = station;
         },
-        setLoggedUser(state, { user }) {
-            state.loggedUser = user;
-        },
-        setLikedSongs(state, { user }) {
-            state.likedSongs = user.likedSongs;
-        },
+        // setLoggedUser(state, { user }) {
+        //     state.loggedUser = user;
+        // },
+       
         setClicked(state, { boolState }) {
             state.isClickedOnce = boolState;
         },
@@ -159,22 +141,6 @@ export const stationStore = {
                 throw err;
             }
         },
-        async loadUser({ commit }) {
-            try {
-                let user = await userService.getLoggedinUser();
-                commit({ type: "setLoggedUser", user });
-                commit({ type: "setLikedSongs", user });
-            } catch (err) {
-                console.log(err);
-                throw err;
-            }
-        },
-        // async loadHistorySearch({ commit }) {
-        //     const historySongs = await stationService.getHistoryDB();
-        //     // historySongs = new Set();
-        //     // console.log(historySongs);
-        //     commit({ type: "setHistorySongs", historySongs });
-        // },
         setFilter({ commit, dispatch }, { filterBy }) {
             commit({ type: "setFilter", filterBy });
             // console.log(filterBy, "filter FROM STRORE");

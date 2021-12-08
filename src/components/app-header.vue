@@ -9,13 +9,13 @@
         <span class="arrow-forward material-icons"> arrow_forward_ios </span>
       </button>
       <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
-      <div
-        class="login-signup-btn flex justify-center align-center"
-        v-if="!loggedUser"
-      >
-        <button class="">Continue As Guest</button> |
-        <button class="" @click="goToLoginPage">Login</button>
-      </div>
+    </div>
+    <div
+      class="login-signup-btn flex justify-center align-center"
+      v-if="!loggedUser"
+    >
+      <button class="">Continue As Guest</button> |
+      <button class="" @click="goToLoginPage">Login</button>
     </div>
     <form>
       <label

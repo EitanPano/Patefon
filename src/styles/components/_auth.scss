@@ -97,7 +97,7 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.8) 0%, rgba(39,114,133,0.8) 20%, rgba(1,7,10,0.8) 65%);
     // background: linear-gradient(180deg, rgba(222,223,228,0.2976540958180147) 0%, rgba(39,114,133,0.8) 20%, rgba(1,7,10,0.8) 65%);
     // filter: blur(1px);
-    // z-index: 10;
+    z-index: 1000;
     overflow: hidden;
     backdrop-filter: blur(1px);
     cursor: pointer;

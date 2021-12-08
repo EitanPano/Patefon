@@ -1,41 +1,42 @@
 <template>
-    <article
-        class="song-preview"
-        @mouseleave="isHover = false"
-        @mouseover="isHover = true"
+  <article
+    class="song-preview"
+    @mouseleave="isHover = false"
+    @mouseover="isHover = true"
+  >
+    <button
+      v-if="isHover"
+      @click="songToPlayer(song, idx)"
+      class="size-btn first play"
     >
-        <button
-            v-if="isHover"
-            @click="songToPlayer(song, idx)"
-            class="size-btn first play"
-        >
-            ▶
-        </button>
-        <p v-else class="first song-idx">{{ idx + 1 }}</p>
-        <div class="song-details">
-            <img :src="song.imgUrl" />
-            <p class="song-title">{{ song.title }}</p>
-        </div>
-        <div class="last song-actions">
-            <button
-                v-if="user"
-                class="btn btn-like"
-                @click="likeSong"
-                v-bind:class="{ liked: isLiked }"
-            >
-                ❤
-            </button>
-            <p>{{ song.duration }}</p>
-            <button
-                @click="removeSong(song.id)"
-                v-if="isHover"
-                class="btn btn-delete"
-            >
-                ✖
-            </button>
-        </div>
-        <!-- && !isLikedStation -->
-    </article>
+      ▶
+    </button>
+    <p v-else class="first song-idx">{{ idx + 1 }}</p>
+    <div class="song-details">
+      <img :src="song.imgUrl" />
+      <p class="song-title">{{ song.title }}</p>
+    </div>
+    <div class="last song-actions">
+      <button
+        class="btn btn-like"
+        @click="likeSong"
+        v-bind:class="{ liked: isLiked }"
+      >
+        ❤
+      </button>
+      <!-- v-if="user" -->
+
+      <p>{{ song.duration }}</p>
+      <button
+        @click="removeSong(song.id)"
+        v-if="isHover"
+        class="btn btn-delete"
+      >
+        ✖
+      </button>
+    </div>
+    <!-- && !isLikedStation -->
+  </article>
 </template>
 
 <script>
@@ -74,8 +75,10 @@ export default {
       return this.$store.getters.getLoggedinUser;
     },
     isLiked() {
-      let likedSongs = this.$store.getters.getLikedSongs;
-      return this.checkIfSongLiked(likedSongs);
+      let likedSongs = this.$store.getters.likedSongs;
+      if (likedSongs && likedSongs.length)
+        return this.checkIfSongLiked(likedSongs);
+      else return false;
     },
     user() {
       return this.$store.getters.getLoggedUser;

@@ -52,7 +52,7 @@ async function update(user) {
 }
 
 function _saveLocalUser(user) {
-    sessionStorage.setItem(USER_URL, JSON.stringify(user))
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user))
     return user
 }
 
@@ -81,6 +81,7 @@ async function updateDetails(action){
     let user =  await getLoggedinUser();
     // console.log(user,'after await');
     // console.log(user.searchHistory,'searchHistory');
+    console.log(user,'from user service in update details');
     if (
         action.type === "history" &&
         !user.searchHistory.includes(action.song)
@@ -90,15 +91,19 @@ async function updateDetails(action){
             action.song.id
         );
         if (idx || idx === 0) return;
-        user.searchHistory.unshift(action.song);
-        // console.log("pushing history boyz");
-        if (user.searchHistory.length > 5) {
+        user.searchHistory.push(action.song);
+        console.log('action.song',action.song);
+        console.log("pushing history boyz");
+        console.log(user.searchHistory);
+        console.log(user.searchHistory.length);
+        if (user.searchHistory.length > 4) {
+            console.log('length bigger than 5');
             user.searchHistory.splice(user.searchHistory.length - 1, 1);
         }
     } else if (action.type === "like") {
         var idx = utilService.checkDuplicate(user.likedSongs, action.song.id);
         if (idx || idx === 0) user.likedSongs.splice(idx, 1);
-        else user.likedSongs.push(action.song);
+        else user.likedSongs.unshift(action.song);
     }
    let updatedUser=await update(user);
 //    console.log('updatedUser from service,',updatedUser);

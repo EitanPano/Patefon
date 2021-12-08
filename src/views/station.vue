@@ -56,7 +56,7 @@
 import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
-import { socketService } from '../services/socket.service';
+import { socketService } from "../services/socket.service";
 export default {
   components: {
     songList,
@@ -135,51 +135,51 @@ export default {
       });
       this.isLikedStation = false;
 
-      socketService.off('get share-listen');
+      socketService.off("get share-listen");
     },
-     },
-    computed: {
-      currStation() {
-        return this.$store.getters.currStation;
-      },
-      stationName() {
-        return this.currStation ? this.currStation.name : "Liked Songs";
-      },
-      stationImg() {
-        return this.currStation && this.currStation.imgUrl
-          ? this.currStation.imgUrl
-          : "../assets/images/upload.svg";
-      },
-      songsCount() {
-        return this.isLikedStation ? this.likedSongs : this.currStation.songs;
-      },
-      likedSongs() {
-        console.log();
-        return this.$store.getters.likedSongs;
-        return this.$store.getters.getLoggedUser.songs;
-      },
+  },
+  computed: {
+    currStation() {
+      return this.$store.getters.currStation;
     },
-    watch: {
-      "$route.params.id": {
-        async handler() {
-          try {
-            const id = this.$route.params.id;
-            if (id === "liked") {
-              this.isLikedStation = true;
-              console.log("id=liked");
-              await this.$store.dispatch({
-                type: "loadUser",
-              });
-            } else {
-              await this.$store.dispatch({ type: "getById", id });
-            }
-          } catch (err) {
-            console.log(err);
+    stationName() {
+      return this.currStation ? this.currStation.name : "Liked Songs";
+    },
+    stationImg() {
+      return this.currStation && this.currStation.imgUrl
+        ? this.currStation.imgUrl
+        : "../assets/images/upload.svg";
+    },
+    songsCount() {
+      return this.isLikedStation ? this.likedSongs : this.currStation.songs;
+    },
+    likedSongs() {
+      console.log();
+      return this.$store.getters.likedSongs;
+      return this.$store.getters.getLoggedUser.songs;
+    },
+  },
+  watch: {
+    "$route.params.id": {
+      async handler() {
+        try {
+          const id = this.$route.params.id;
+          if (id === "liked") {
+            this.isLikedStation = true;
+            // console.log("id=liked");
+            // await this.$store.dispatch({
+            //   type: "loadUser",
+            // });
+          } else {
+            await this.$store.dispatch({ type: "getById", id });
           }
-        },
-        immediate: true,
+        } catch (err) {
+          console.log(err);
+        }
       },
+      immediate: true,
     },
+  },
 };
 </script>
 

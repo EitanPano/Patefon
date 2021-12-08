@@ -96,23 +96,29 @@ export default {
 
         socketService.on('get share-listen', (playerData) => {
            this.player.loadPlaylist({
-           playlist: [playerData.playList],
+          //  playlist: [playerData.playList],
+          playlist: playerData.playList,
+      
           index:playerData.songIdx,
           startSeconds: playerData.currentTime,
            });
-          this.songVolume = playerData.songVolume;
+          // this.songVolume = playerData.songVolume;
           this.currentTime = playerData.currentTime;
           // this.playingSong =  this.playListData.station.songs[index]
           // this.player.playVideoAt(playerData.currentTime);
            this.playVideo();
       })
 
-           socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
-            //  console.log(socketCounterToTopics)
-             if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
-            //  console.log('bigger')
+      //      socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
+      //       //  console.log(socketCounterToTopics)
+      //        if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
+      //       //  console.log('bigger')
+      //         this.play();
+      //        this.socketCounterToTopics = socketCounterToTopics;
+      // })
+
+                socketService.on('get socketCounterToTopics', (msg) => {
               this.play();
-             this.socketCounterToTopics = socketCounterToTopics;
       })
 
   },
@@ -158,7 +164,8 @@ export default {
         (song) => song.youtubeId
       );
       this.player.loadPlaylist({
-        playlist: [songIds],
+        // playlist: [songIds],
+        playlist: songIds,
         index: this.playListData.idx,
         startSeconds: 0,
       });

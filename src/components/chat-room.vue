@@ -1,8 +1,16 @@
 <template>
 <section class="chat-room">
+  <button @click="openChatModal" v-if="!isChatModalOpen"> Show Chat </button>
+  <div v-if="isChatModalOpen"> 
+        <form @submit.prevent="sendChatMsg">
      <input type="textarea" v-model="chatMsg"/>
-    <button @click="sendChatMsg"> Send Chat Message </button>
-    {{chatMsgs}}
+     </form>
+    <!-- {{chatMsgs}} -->
+    <ul>
+      <li v-for="chatMsg in chatMsgs" :key="chatMsg"> {{user.name}} : {{chatMsg}} </li>
+      </ul>
+       <button @click="openChatModal"> Close Chat </button>
+      </div>
     </section>
 </template>
 
@@ -14,7 +22,9 @@ export default {
     data() {
         return {
       chatMsg : '',
-      chatMsgs : []
+      chatMsgs : [],
+      user : null,
+      isChatModalOpen : false,
         }
     },
     created () {
@@ -23,13 +33,17 @@ export default {
         socketService.on('chat addMsg', msg => {
         this.chatMsgs.push(msg)
       })
-      },100)
-
+      },1000)
+      this.user = JSON.parse(sessionStorage.getItem('loggedInUser'))
     },
     methods: {
          sendChatMsg() {
         socketService.emit('chat newMsg', this.chatMsg) 
+        this.chatMsg = '';
     },
+    openChatModal() {
+      this.isChatModalOpen = !this.isChatModalOpen;
+    }
     }
 }
 </script>

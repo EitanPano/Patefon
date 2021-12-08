@@ -20,6 +20,7 @@
         </div>
       </div>
     </main>
+      <chat-room :currStation="currStation" v-if="currStation" />
     <song-list
       v-if="currStation && !isLikedStation"
       :songs="currStation.songs"
@@ -43,12 +44,6 @@
       <h2 @click="goToSearch" class="search-link">Start Exploring🔍</h2>
     </div>
 
-    <chat-room :currStation="currStation" v-if="currStation" />
-    <!-- <share-listen
-      :currStation="currStation"
-      v-if="currStation"
-      @songToPlayer="songToPlayer"
-    /> -->
   </section>
 </template>
 
@@ -68,6 +63,7 @@ export default {
       isLikedStation: null,
     };
   },
+
   methods: {
     async swapIdxs(moved) {
       try {
@@ -172,6 +168,7 @@ export default {
               });
             } else {
               await this.$store.dispatch({ type: "getById", id });
+              //  this.songToPlayer(this.currStation.songs[0],0)
             }
           } catch (err) {
             console.log(err);

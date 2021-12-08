@@ -46,7 +46,9 @@ export default {
       isHover: false,
     };
   },
-  created() {},
+  created() {
+  
+  },
   methods: {
     removeSong(songId) {
       if (confirm("Remove Song?")) this.$emit("removeSong", songId);

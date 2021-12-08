@@ -15,7 +15,11 @@
           {{ playListData.station.name }}
         </p>
       </div>
-      <button v-if="playingSong" @click="likeSong">
+      <button
+        v-if="playingSong"
+        v-bind:class="{ liked: isLiked }"
+        @click="likeSong"
+      >
         <span class="material-icons">favorite</span>
       </button>
     </div>
@@ -37,7 +41,7 @@
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
-         <button @click="share"> Share </button>
+        <button @click="share">Share</button>
       </div>
       <div class="durations flex space-between">
         <p>00:00</p>
@@ -71,7 +75,7 @@
 
 
 <script>
-import {socketService} from "../services/socket.service.js";
+import { socketService } from "../services/socket.service.js";
 export default {
   props: ["playListData"],
   data() {
@@ -86,50 +90,55 @@ export default {
       currTimeInterval: null,
       playingSong: null,
       isPlayed: false,
-      songIdx : 0,
-      playList : [],
-      socketCounterToTopics : null,
+      songIdx: 0,
+      playList: [],
+      socketCounterToTopics: null,
     };
   },
   created() {
-  // socketService.emit('chat topic', this.currStation._id)
+    // socketService.emit('chat topic', this.currStation._id)
 
-        socketService.on('get share-listen', (playerData) => {
-           this.player.loadPlaylist({
-          //  playlist: [playerData.playList],
-          playlist: playerData.playList,
-      
-          index:playerData.songIdx,
-          startSeconds: playerData.currentTime,
-           });
-          // this.songVolume = playerData.songVolume;
-          this.currentTime = playerData.currentTime;
-          // this.playingSong =  this.playListData.station.songs[index]
-          // this.player.playVideoAt(playerData.currentTime);
-           this.playVideo();
-      })
+    socketService.on("get share-listen", (playerData) => {
+      this.player.loadPlaylist({
+        //  playlist: [playerData.playList],
+        playlist: playerData.playList,
 
-      //      socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
-      //       //  console.log(socketCounterToTopics)
-      //        if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
-      //       //  console.log('bigger')
-      //         this.play();
-      //        this.socketCounterToTopics = socketCounterToTopics;
-      // })
+        index: playerData.songIdx,
+        startSeconds: playerData.currentTime,
+      });
+      // this.songVolume = playerData.songVolume;
+      this.currentTime = playerData.currentTime;
+      // this.playingSong =  this.playListData.station.songs[index]
+      // this.player.playVideoAt(playerData.currentTime);
+      this.playVideo();
+    });
 
-                socketService.on('get socketCounterToTopics', (msg) => {
-              this.play();
-      })
+    //      socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
+    //       //  console.log(socketCounterToTopics)
+    //        if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
+    //       //  console.log('bigger')
+    //         this.play();
+    //        this.socketCounterToTopics = socketCounterToTopics;
+    // })
 
+    socketService.on("get socketCounterToTopics", (msg) => {
+      this.play();
+    });
   },
   destroyed() {
     if (this.currTimeInterval) clearInterval(this.currTimeInterval);
   },
   methods: {
-    play () {
-      const playerData = {songIdx :this.songIdx, playList:this.playList, playingSong:this.playingSong,currentTime:this.currentTime,songVolume:this.songVolume }
-      socketService.emit('send share-listen',  playerData) 
-      this.playVideo()
+    play() {
+      const playerData = {
+        songIdx: this.songIdx,
+        playList: this.playList,
+        playingSong: this.playingSong,
+        currentTime: this.currentTime,
+        songVolume: this.songVolume,
+      };
+      socketService.emit("send share-listen", playerData);
+      this.playVideo();
     },
     playVideo() {
       // this.player.getPlayerState().then(state=> console.log(state))
@@ -147,7 +156,7 @@ export default {
       if (this.currTimeInterval) clearInterval(this.currTimeInterval);
       this.isPlayed = !this.isPlayed;
 
-        // this.player.getPlayerState().then(state=> console.log(state))
+      // this.player.getPlayerState().then(state=> console.log(state))
       // this.player.getIframe().then(state=> console.log(state))
       // console.log(this.songIdx);
       // console.log(this.playList);
@@ -157,7 +166,7 @@ export default {
     },
     seekTo() {
       this.player.seekTo(this.currentTime);
-      this.play()
+      this.play();
     },
     loadPlayList() {
       let songIds = this.playListData.station.songs.map(
@@ -170,10 +179,9 @@ export default {
         startSeconds: 0,
       });
       this.playVideo();
-      setTimeout( () => {
- this.play();
-      },1000)
-     
+      setTimeout(() => {
+        this.play();
+      }, 1000);
     },
     playing() {
       // console.log("o/ we are watching!!!");
@@ -189,29 +197,21 @@ export default {
         .then(
           (idx) => (this.playingSong = this.playListData.station.songs[idx])
         );
-            this.player
-        .getPlaylistIndex()
-        .then(
-          (idx) => (this.songIdx = idx)
-        );
-                this.player
-        .getPlaylist()
-        .then(
-          (playList) => (this.playList = playList)
-        );
+      this.player.getPlaylistIndex().then((idx) => (this.songIdx = idx));
+      this.player.getPlaylist().then((playList) => (this.playList = playList));
     },
 
     goNextSong() {
       this.player.nextVideo();
-              setTimeout( () => {
- this.play();
-      },1000)
+      setTimeout(() => {
+        this.play();
+      }, 1000);
     },
     goPrevSong() {
       this.player.previousVideo();
-              setTimeout( () => {
- this.play();
-      },1000)
+      setTimeout(() => {
+        this.play();
+      }, 1000);
     },
     setVolume() {
       this.player.setVolume(this.songVolume);
@@ -233,11 +233,11 @@ export default {
       this.isMute = !this.isMute;
     },
     likeSong() {
-      alert("N/A");
+      this.$emit("likeSong", { song: this.playListData.song, type: "like" });
     },
-    share () {
-         socketService.emit('send announcements', this.playListData.station._id);
-    }
+    share() {
+      socketService.emit("send announcements", this.playListData.station._id);
+    },
   },
   computed: {
     player() {
@@ -249,6 +249,18 @@ export default {
         if (this.songVolume >= 66) return "volume_up";
         else if (this.songVolume >= 25) return "volume_down";
         else return "volume_mute";
+      }
+    },
+    isLiked() {
+      let likedSongs = this.$store.getters.likedSongs;
+      console.log("song:", this.playListData.song);
+      console.log("liked songs", likedSongs);
+      if (likedSongs.includes(this.playListData.song)) {
+        console.log("does");
+        return true;
+      } else {
+        console.log("doesnt");
+        return false;
       }
     },
   },

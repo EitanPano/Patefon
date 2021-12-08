@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { utilService } from "../services/util.service.js";
 export default {
   props: ["song", "idx", "isSearch", "isSearchHistory"],
   data() {
@@ -45,9 +46,7 @@ export default {
       isHover: false,
     };
   },
-  created() {
-  
-  },
+  created() {},
   methods: {
     removeSong(songId) {
       if (confirm("Remove Song?")) this.$emit("removeSong", songId);

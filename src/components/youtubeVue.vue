@@ -41,9 +41,7 @@
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
-        <<<<<<< HEAD
         <button @click="share">Share</button>
-        ======= >>>>>>> 3b1f4b27aab551cde96d0530fa39d547789a1a0e
       </div>
       <div class="durations flex space-between">
         <p>{{ this.showSongCurrentTime }}</p>

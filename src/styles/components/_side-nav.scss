@@ -48,7 +48,7 @@
         position: fixed;
         top: 0;
         left: 1em;
-        height: 4.6em;
+        height: 3.75em;
         padding-right: 2em;
         max-width: $side-nav;
         display: flex;
@@ -59,7 +59,10 @@
             width: 3.5em;
         }
         h1 {
-            margin: 0.3em 0.1em 0;
+            font-family: OleoScript;
+            color: white;
+            letter-spacing: 0.05em;
+            margin: 0 0.25em;
         }
     }
 
@@ -128,28 +131,32 @@
         .icon-library {
             line-height: 1.3em;
             margin-inline-end: 1em;
+            margin-inline-start: 0.1em;
         }
         .icon-heart, .icon-plus {
             margin-inline-end: 1.3em;
+            margin-inline-start: 0.15em;
         }
 
         
 
         .logo-container {
             position: initial;
-            height: 4.6em;
             padding-right: 2em;
+            height: 5em;
             max-width: $side-nav;
             display: flex;
             align-items: center;
             justify-content: center;
-    
+
             img {
                 width: 3.5em;
             }
             h1 {
-                margin: 0.3em 0.1em 0;
+
+                margin: 0.5em 0.25em;
             }
+
         }
 
         .main-nav {

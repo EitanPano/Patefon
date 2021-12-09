@@ -1,7 +1,7 @@
 .search {
+    margin-bottom: 11em;
     .genre-container {
         grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
-        // grid-auto-rows: 10em;
         display: flex;
         flex-direction: column;
         display: grid;
@@ -10,11 +10,9 @@
 
     .genre-list {
         aspect-ratio: 1 / 1;
-        
     }
     
     .genre-preview {
-        // aspect-ratio: 1 / 1;
         position: relative;
         width: 100%;
         height: 100%;
@@ -49,11 +47,6 @@
         .genre-container {
             grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));            
         }
-
-    //     .genre-preview {
-    //         width: 100%;
-    //         height: 100%;
-    //     }
     }
 }
 
@@ -61,18 +54,21 @@
     .search {
         .genre-container {
             padding: 0 0.5em;
-
         }
+    }
+}
+
+@include for-normal-layout {
+    .search {
+        margin-bottom: 6.5em;
     }
 }
 
 @include for-wide-layout {
     .search {
-        padding: $top-bar 0.5em;
+        padding: 4.5em 0.5em 0;
         .genre-container {
             grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
-            // grid-auto-rows: 13em;
-            
         }
 
         .genre-preview {

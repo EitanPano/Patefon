@@ -4,7 +4,8 @@
     display: grid;
     grid-template-columns: 0.7em 4fr 2fr minmax(em(90px), 1fr);
     gap: 1em;
-    padding: 0.4em 0 0.4em 1.4em;
+    padding: 0.4em 1em 0.4em 1.4em;
+    // margin-right: 5em;
 
     p {
         font-size: 0.9em;
@@ -78,7 +79,8 @@
             &.btn-delete {
                 font-size: 0.9em;
                 position: absolute;
-                right: 0;
+                bottom: 0.4em;
+                left: 4.5em;
             }
         }
         // width: 12em;

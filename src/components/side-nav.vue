@@ -14,7 +14,7 @@
                 <router-link to="/edit"><span class="icon-plus material-icons">add</span>{{ createPlaylistName }}</router-link>
                 <router-link class="nav-liked" to="/station/liked"><span class="icon-heart material-icons">favorite</span>{{ likedSongsName }}</router-link>
                 <!-- <hr/> -->
-                <button class="share-listening" @click="share"> Share Listening </button>
+                <button class="btn-share-listen" @click="share"> Share Listening </button>
                  <announcements/>
             </ul>
               

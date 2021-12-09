@@ -1,5 +1,7 @@
 .station {
+    min-height: 92.5vh;
     padding-top: $top-bar;
+    padding-bottom: 6em;
     background: linear-gradient(0deg, rgba(0,0,0,1) 35%, rgba(47,0,78,1) 63%, rgb(157, 80, 147) 100%);
     main {
         padding-inline-start: 2.2vw;
@@ -13,14 +15,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             margin-inline-end: 1.5em;
-            
-
             background: rgb(157,48,148);
             background: linear-gradient(135deg, rgba(157,48,148,1) 9%, rgba(246,119,213,1) 49%, rgba(221,178,216,1) 100%);
             
-
             & > span {
                 font-size: 4.5em;
                 cursor: default;

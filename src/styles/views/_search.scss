@@ -1,5 +1,75 @@
 .search {
     margin-bottom: 11em;
+
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: all 0.3s;
+        transform: translateY(0);
+    }
+    .fade-enter,
+    .fade-leave-to {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    .song-preview {
+        .song-details {
+            min-width: 12.5em;
+            border-radius: 0.3em;
+        }
+    }
+
+    .songs-preview-search {
+        flex-grow: 1;
+        ul {
+            margin-top: 0;
+        }
+    }
+
+    .top-search-result {
+        flex-grow: 0;
+
+        article {
+            position: relative;
+            cursor: pointer;
+            background: #151515;
+            padding: 1.5em 1.5em 0;
+            width: 100%;
+            min-width: 25em;
+            height: 13.45em;
+            // max-width: 30em;
+            border-radius: 0.3em;
+
+            transition: 0.2s;
+            img {
+                aspect-ratio: 1 / 1;
+                // object-fit: contain;
+                width: 6em;
+                height: 6em;
+                border-radius: 0.3em;
+
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+            }
+            p {
+                font-size: 1.8em;
+            }
+            &:hover {
+                background-color: #2f2f2f;
+            }
+
+            .btn-play {
+                position: absolute;
+                right: 1em;
+                bottom: 1em;
+                width: 3em;
+                height: 3em;
+
+                span {
+                    font-size: 2em;
+                }
+            }
+        }
+    }
+
     .genre-container {
         grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
         display: flex;
@@ -11,7 +81,7 @@
     .genre-list {
         aspect-ratio: 1 / 1;
     }
-    
+
     .genre-preview {
         position: relative;
         width: 100%;
@@ -38,14 +108,14 @@
 
             transform: rotate(20deg);
         }
-    } 
+    }
 }
 
 @include for-mobile-layout {
     .search {
         padding: $top-bar 0.5em;
         .genre-container {
-            grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));            
+            grid-template-columns: repeat(auto-fill, minmax(7em, 1fr));
         }
     }
 }
@@ -67,6 +137,14 @@
 @include for-wide-layout {
     .search {
         padding: 4.5em 0.5em 0;
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+            gap: 1.5em;
+        }
+
         .genre-container {
             grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
         }

@@ -7,6 +7,32 @@
 
 .ratio-poster { @include aspect-ratio(100, 150); }
 
+// GRADIENTS
+.grad-red {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(125,38,38,1) 81%, rgba(193,44,44,1) 100%);
+}
+.grad-sky {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(38,112,125,1) 81%, rgba(44,165,193,1) 100%);
+}
+.grad-mint {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(38,125,100,1) 81%, rgba(44,193,153,1) 100%);
+}
+.grad-orange {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(125,78,38,1) 81%, rgba(193,112,44,1) 100%);
+}
+.grad-blue {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(38,71,125,1) 81%, rgba(44,80,193,1) 100%);
+}
+.grad-pink {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(125,38,103,1) 81%, rgba(193,44,148,1) 100%);
+}
+.grad-purple {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(107,38,125,1) 81%, rgba(149,44,193,1) 100%);
+}
+.grad-green {
+    background: linear-gradient(0deg, rgba(29,29,29,1) 47%, rgba(43,113,61,1) 81%, rgba(51,154,63,1) 100%);
+}
+
 // TRANSITIONS 
 .fade-enter-active, .fade-leave-active {
     transition: all .2s;
@@ -60,7 +86,7 @@
 
 // PADDING
 .layout-padding {
-    padding: 4.5em 1vw 0;
+    padding: 4.5em 1vw 4.5em 2vw;
 }
 
 .pl-1 {

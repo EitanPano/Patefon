@@ -169,10 +169,10 @@ export default {
         "Mix",
         "Israeli",
         "Electronic",
-         "Latin",
-         "Hits",
-         "Prog",
-         "Raggae"
+        "Latin",
+        "Hits",
+        "Prog",
+        "Raggae",
       ],
       tags: [
         "Cool",
@@ -218,9 +218,9 @@ export default {
     async saveStation() {
       const user = JSON.parse(sessionStorage.getItem("user"));
       this.emptyStation.createdBy = {
-        userId : user._id,
-        name : user.username,
-      }
+        userId: user._id,
+        name: user.username,
+      };
       this.emptyStation.imgUrl = this.emptyStation.imgUrl
         ? this.emptyStation.imgUrl
         : "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638537772/upload.1be8b030_yhazsy.svg";
@@ -237,7 +237,7 @@ export default {
           station: addedStation,
         });
         this.emptyStation = stationService.getEmptystation();
-        this.$router.push("/");
+        this.$router.push("/library");
         showMsg("Station has been added");
       } catch (err) {
         console.log(err);

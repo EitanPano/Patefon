@@ -61,11 +61,21 @@ export default {
       // );
       // return stationsArr;
       let stations = this.$store.getters.getStations;
-      let filteredStations = stations.filter((station) => {
+      let filteredCreatedStations = stations.filter((station) => {
         console.log(station.createdBy.userId);
-        console.log(this.$store.getters.loggedUser._id);
+        console.log(this.$store.getters.loggedUser.userId);
         return station.createdBy.userId === this.$store.getters.loggedUser._id;
       });
+
+      let filteredLikedStations =
+        this.$store.getters.loggedUser.likedStations.forEach((id) => {
+          let filteredStations = stations.filter(
+            (station) => station._id === id
+          );
+          return filteredStations;
+        });
+      console.log(filteredLikedStations);
+
       return filteredStations;
     },
     likedSongs() {

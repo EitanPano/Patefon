@@ -127,6 +127,7 @@ export const stationStore = {
         async loadStations({ commit }, { filterBy }) {
             try {
                 const stations = await stationService.query(filterBy);
+                // console.log(stations);
                 let type =
                     filterBy && filterBy.txt
                         ? "setExpandedStations"

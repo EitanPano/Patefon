@@ -227,9 +227,14 @@ export default {
 
       console.log(this.emptyStation);
       try {
-        await this.$store.dispatch({
+        let addedStation = await this.$store.dispatch({
           type: "addStation",
           newStation: this.emptyStation,
+        });
+        console.log("added station", addedStation);
+        await this.$store.dispatch({
+          type: "updateUserCreatedStations",
+          station: addedStation,
         });
         this.emptyStation = stationService.getEmptystation();
         this.$router.push("/");

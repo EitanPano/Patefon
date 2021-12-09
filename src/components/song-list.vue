@@ -4,8 +4,15 @@
       <button class="btn btn-play" @click="songToPlayer">
         <span class="material-icons">play_arrow</span>
       </button>
-      <button @click="testLog()" class="btn-blend btn-like">
-        <span class="material-icons">favorite_border</span>
+      <button
+        @click="likeStation()"
+        class="btn-blend btn-like"
+        v-bind:class="{ liked: isLikedStation }"
+      >
+        <span v-if="!isLikedStation" class="material-icons"
+          >favorite_border</span
+        >
+        <span v-else class="material-icons">favorite</span>
       </button>
       <button @click="testLog()" class="btn-options btn-blend">
         <span>•••</span>
@@ -57,7 +64,7 @@ export default {
     draggable,
   },
   display: "Transitions",
-  props: ["songs", "isSearch", "isSearchHistory", "isLiked"],
+  props: ["songs", "isSearch", "isSearchHistory", "isLiked", "isLikedStation"],
   data() {
     return {
       drag: false,
@@ -90,6 +97,10 @@ export default {
     },
     likeSong(action) {
       this.$emit("likeSong", action);
+    },
+    likeStation() {
+      this.$emit("likeStation");
+      // this.$emit("checkIfStationLiked");
     },
   },
   computed: {

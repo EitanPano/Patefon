@@ -1,5 +1,5 @@
 <template>
-  <section class="main-layout station" ref="stationRef">
+  <section :class="bgColor" class="main-layout station">
     <main>
       <img class="station-img" :src="this.currStation.imgUrl" alt="" />
       <div class="flex column">
@@ -10,16 +10,26 @@
           <p class="line-h-0 small" v-if="songsCount && songsCount.length">
             <span class="highlight">Guest</span> • {{ songsCount.length }} Songs
           </p>
+          <p
+            class="line-h-0-small"
+            v-if="currStation.likesCounter && currStation.likesCounter.length"
+          >
+            <span class="highlight"
+              >• {{ currStation.likesCounter }} Likes
+            </span>
+          </p>
         </div>
       </div>
     </main>
-      <chat-room :currStation="currStation" v-if="currStation" />
+    <chat-room :currStation="currStation" v-if="currStation" />
     <song-list
       :songs="currStation.songs"
       @removeSong="removeSong"
       @songToPlayer="songToPlayer"
       @swapped="swapIdxs"
       @likeSong="updateUser"
+      @likeStation="updateUserLikedStations"
+      :isLikedStation="isLikedStation"
     />
   <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> 🖱 {{otherMouseCoords.user}} </div> -->
   <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);"><path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 01.103.557L8.528 15.467a.5.5 0 01-.917-.007L5.57 10.694.803 8.652a.5.5 0 01-.006-.916l12.728-5.657a.5.5 0 01.556.103z" clip-rule="evenodd"></path></svg>{{otherMouseCoords.user}}</div>
@@ -44,6 +54,16 @@ export default {
       mouseMoveInterval : null,
       myMouseCoords : null,
       otherMouseCoords : null,
+      gradients: [
+        "grad-red",
+        "grad-sky",
+        "grad-mint",
+        "grad-orange",
+        "grad-blue",
+        "grad-pink",
+        "grad-purple",
+        "grad-green",
+      ],
     };
   },
   mounted() {
@@ -104,9 +124,18 @@ export default {
     },
     updateUser(action) {
       console.log("updating");
+
+      // console.log(action);
       this.$store.dispatch({
         type: "updateUser",
         action,
+      });
+    },
+    updateUserLikedStations() {
+      console.log("hello");
+      this.$store.dispatch({
+        type: "updateUserLikedStations",
+        station: this.currStation,
       });
     },
     goToSearch() {
@@ -125,8 +154,22 @@ export default {
       socketService.off("get share-listen");
       clearInterval(this.mouseMoveInterval);
     },
+    checkIfStationLiked(likedStations) {
+      var idx = likedStations.findIndex(
+        (likedStation) => likedStation === this.currStation._id
+      );
+      if (idx < 0) return false;
+      return true;
+    },
   },
+
   computed: {
+    isLikedStation() {
+      let likedStations = this.$store.getters.likedStations;
+      if (likedStations && likedStations.length)
+        return this.checkIfStationLiked(likedStations);
+      else return false;
+    },
     currStation() {
       return this.$store.getters.currStation;
     },
@@ -135,6 +178,10 @@ export default {
     },
     songsCount() {
       return this.currStation.songs;
+    },
+    bgColor() {
+      const idx = Math.floor(Math.random() * this.gradients.length);
+      return this.gradients[idx];
     },
   },
   watch: {

@@ -3,7 +3,7 @@
     grid-column: span 1;
     display: flex;
     flex-direction: column;
-    background: #222;
+    background: #151515;
     padding: 1em;
     border-radius: 0.3em;
     cursor: pointer;
@@ -26,8 +26,8 @@
 
     .btn-play {
         position: absolute;
-        top: 55%;
-        right: 15%;
+        bottom: 1em;
+        right: 1em;
     }
 
     p {

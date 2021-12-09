@@ -91,6 +91,7 @@ async function query(filterBy = {}) {
 async function getById(stationId) {
     // const station = await storageService.get(KEY, stationId);
     const station = await httpService.get(`station/${stationId}`)
+    console.log(station);
     // gWatchedStation = station;
     return station;
 }

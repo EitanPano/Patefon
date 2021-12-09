@@ -17,7 +17,9 @@ export const userService = {
     remove,
     getLoggedinUser,
     getById,
-    updateDetails
+    updateDetails,
+    updateUserLikedStations,
+    updateUserCreatedStations
 }
 
 function getLoggedinUser() {
@@ -81,7 +83,7 @@ function getEmptyUser() {
 async function updateDetails(action){
     console.log(action);
     let user =  await getLoggedinUser();
-    // console.log(user,'after await');
+    console.log(user,'after await');
     // console.log(user.searchHistory,'searchHistory');
     console.log(user,'from user service in update details');
     if (
@@ -92,7 +94,7 @@ async function updateDetails(action){
             user.searchHistory,
             action.song.id
         );
-        if (idx || idx === 0) return;
+        if (idx || idx === 0) return user;
         user.searchHistory.unshift(action.song);
         console.log('action.song',action.song);
         console.log("pushing history boyz");
@@ -110,4 +112,23 @@ async function updateDetails(action){
    let updatedUser=await update(user);
 //    console.log('updatedUser from service,',updatedUser);
    return updatedUser
+}
+
+async function updateUserLikedStations(station){
+    let user= await getLoggedinUser()
+    let idx = utilService.checkDuplicateWith_id(
+        user.likedStations,
+        station._id
+    );
+    if (idx || idx === 0) user.likedStations.splice(idx, 1);
+    else user.likedStations.unshift(station._id);
+    let updatedUser=await update(user);
+    return updatedUser;
+}
+
+async function updateUserCreatedStations(station){
+    let user=await getLoggedinUser()
+    user.createdStations.unshift(station._id);
+    let updatedUser=await update(user);
+    return updatedUser;
 }

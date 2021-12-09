@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <landing-page v-if="isLanding" @explore="isLanding = !isLanding" />
         <user-msg />
         <app-header />
         <side-nav />
@@ -9,15 +10,19 @@
 </template>
 
 <script>
+import landingPage from "./components/landing.vue";
 import userMsg from "./components/user-msg.vue";
 import appHeader from "./components/app-header.vue";
 import sideNav from "./components/side-nav.vue";
 import playBar from "./components/play-bar.vue";
 export default {
     data() {
-        return {};
+        return {
+            isLanding: true
+        };
     },
     components: {
+        landingPage,
         appHeader,
         sideNav,
         playBar,

@@ -1,6 +1,7 @@
 .song-list {
     background: rgba(0, 0, 0, 0.2);
     padding: 0 0 0 2.2vw;
+    border-radius: 0.2em;
 
 
     .actions {
@@ -9,7 +10,10 @@
             margin-left: 1em;
             letter-spacing: 0.2em;
         }
-
+        .liked {
+            color: greenyellow;
+            
+        }
         .btn-like {
             margin-left: 1.4em;
             span {

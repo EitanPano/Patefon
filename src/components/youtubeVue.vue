@@ -11,8 +11,8 @@
       <img :src="playingSong.imgUrl" v-if="playingSong" />
       <div class="overflow-hidden">
         <p v-if="playingSong">{{ playingSong.title }}</p>
-        <p v-if="playingSong && playListData">
-          {{ playListData.station.name }}
+        <p v-if="playingSong && localPlayListData">
+          {{ localPlayListData.station.name }}
         </p>
       </div>
       <button
@@ -41,7 +41,6 @@
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
-        <button @click="share">Share</button>
       </div>
       <div class="durations flex space-between">
         <p>{{ this.showSongCurrentTime }}</p>
@@ -60,7 +59,6 @@
       <button @click="mute">
         <span class="material-icons">{{ volumeIcon }}</span>
       </button>
-
       <input
         @input="setVolume"
         type="range"
@@ -73,14 +71,13 @@
   </section>
 </template>
 
-
 <script>
 import { socketService } from "../services/socket.service.js";
 export default {
   props: ["playListData"],
   data() {
     return {
-      videoId: "lG0Ys-2d4MA",
+      videoId: "",
       currentTime: 0,
       songDuration: 0,
       songVolume: 20,
@@ -92,34 +89,20 @@ export default {
       isPlayed: false,
       songIdx: 0,
       playList: [],
-      socketCounterToTopics: null,
+      localPlayListData: null,
     };
   },
   created() {
-    // socketService.emit('chat topic', this.currStation._id)
-
     socketService.on("get share-listen", (playerData) => {
       this.player.loadPlaylist({
-        //  playlist: [playerData.playList],
         playlist: playerData.playList,
-
         index: playerData.songIdx,
         startSeconds: playerData.currentTime,
       });
-      // this.songVolume = playerData.songVolume;
+      this.localPlayListData = playerData.localPlayListData;
       this.currentTime = playerData.currentTime;
-      // this.playingSong =  this.playListData.station.songs[index]
-      // this.player.playVideoAt(playerData.currentTime);
       this.playVideo();
     });
-
-    //      socketService.on('get socketCounterToTopics', (socketCounterToTopics) => {
-    //       //  console.log(socketCounterToTopics)
-    //        if (this.socketCounterToTopics && socketCounterToTopics[this.playListData.station._id] > this.socketCounterToTopics[this.playListData.station._id] )
-    //       //  console.log('bigger')
-    //         this.play();
-    //        this.socketCounterToTopics = socketCounterToTopics;
-    // })
 
     socketService.on("get socketCounterToTopics", (msg) => {
       this.play();
@@ -136,12 +119,12 @@ export default {
         playingSong: this.playingSong,
         currentTime: this.currentTime,
         songVolume: this.songVolume,
+        localPlayListData: this.localPlayListData,
       };
       socketService.emit("send share-listen", playerData);
       this.playVideo();
     },
     playVideo() {
-      // this.player.getPlayerState().then(state=> console.log(state))
       this.player.setVolume(this.songVolume);
       if (this.currTimeInterval) clearInterval(this.currTimeInterval);
       this.player.playVideo();
@@ -155,27 +138,18 @@ export default {
       console.log(this.player);
       if (this.currTimeInterval) clearInterval(this.currTimeInterval);
       this.isPlayed = !this.isPlayed;
-
-      // this.player.getPlayerState().then(state=> console.log(state))
-      // this.player.getIframe().then(state=> console.log(state))
-      // console.log(this.songIdx);
-      // console.log(this.playList);
-      // console.log(this.playingSong);
-      // console.log(this.currentTime);
-      // console.log(this.songVolume);
     },
     seekTo() {
       this.player.seekTo(this.currentTime);
       this.play();
     },
     loadPlayList() {
-      let songIds = this.playListData.station.songs.map(
+      let songIds = this.localPlayListData.station.songs.map(
         (song) => song.youtubeId
       );
       this.player.loadPlaylist({
-        // playlist: [songIds],
         playlist: songIds,
-        index: this.playListData.idx,
+        index: this.localPlayListData.idx,
         startSeconds: 0,
       });
       this.playVideo();
@@ -184,8 +158,6 @@ export default {
       }, 1000);
     },
     playing() {
-      // console.log("o/ we are watching!!!");
-      // all Promises from get are listed here, palying() is recalled when something is the song player changes
       this.player
         .getDuration()
         .then((duration) => (this.songDuration = duration));
@@ -195,7 +167,8 @@ export default {
       this.player
         .getPlaylistIndex()
         .then(
-          (idx) => (this.playingSong = this.playListData.station.songs[idx])
+          (idx) =>
+            (this.playingSong = this.localPlayListData.station.songs[idx])
         );
       this.player.getPlaylistIndex().then((idx) => (this.songIdx = idx));
       this.player.getPlaylist().then((playList) => (this.playList = playList));
@@ -222,7 +195,6 @@ export default {
       this.isShuffling = !this.isShuffling;
     },
     loop() {
-      // console.log(this.isLooping);
       if (this.isLooping) this.player.setLoop(false);
       else this.player.setLoop(true);
       this.isLooping = !this.isLooping;
@@ -233,10 +205,10 @@ export default {
       this.isMute = !this.isMute;
     },
     likeSong() {
-      this.$emit("likeSong", { song: this.playListData.song, type: "like" });
-    },
-    share() {
-      socketService.emit("send announcements", this.playListData.station._id);
+      this.$emit("likeSong", {
+        song: this.localPlayListData.song,
+        type: "like",
+      });
     },
     checkIfSongLiked(likedSongs) {
       console.log(likedSongs);
@@ -284,15 +256,13 @@ export default {
   watch: {
     playListData: {
       handler() {
-        // console.log(this.playListData)
-        if (this.playListData) this.loadPlayList();
-
-        // else if (this.playListData.song) {
-        //   this.videoId = this.playListData.song.youtubeId;
-        //   this.playVideo();
-        // }
+        if (this.playListData) {
+          this.localPlayListData = JSON.parse(
+            JSON.stringify(this.playListData)
+          );
+          this.loadPlayList();
+        }
       },
-      // immediate: true,
     },
   },
 };

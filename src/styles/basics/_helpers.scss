@@ -102,6 +102,66 @@
     height: 2em;
 }
 
+.btn-send {
+    color: $clr2;
+    transform: rotateY(180deg);
+    background-color: transparent;
+    margin-left: 1em;
+
+    span {
+        font-size: 2.1em;
+    }
+
+    &:hover {
+        color: white;
+    }
+
+}
+
+.btn-chat {
+    font-size: 1.25em;
+    padding: 0.5em;
+    border-radius: 50%;
+    display: flex;
+    color: #eee;
+    background-color: rgb(50, 50, 50);
+    opacity: 0.85;
+    transition: all 0.3s;
+    span {
+        transition: all 0.3s;
+        font-size: 2em;
+        transform: rotateY(180deg);
+    }
+    
+    &:hover {
+        opacity: 1;
+        span {
+            color: #fff;
+            transform: rotateY(0deg);
+            
+        }
+    }
+}
+
+.btn-share-listen {
+    margin: 1.5em;
+    padding: 0.5em;
+
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    background-color: rgb(46, 167, 116);
+    border-radius: 0.35em;
+    color: $clr2;
+    box-shadow: 0 0 5px 0 white;
+    transition: all 0.2s;
+    &:hover {
+        background-color: rgb(71, 206, 138);
+        color: white;
+        box-shadow: 0 0 10px 0 white;
+    }
+}
+
 .btn-create {
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;

@@ -27,7 +27,7 @@
       </div>
     </main>
 
-    <div class="options">
+    <div v-if="!emptyStation.songs.length" class="options">
       <button @click="testLog()" class="btn-options btn-blend">
         <span>•••</span>
       </button>
@@ -247,17 +247,19 @@ export default {
 <style>
 .style-chooser.select-multiple {
   width: 55%;
-  height: 2.5em;
+  height: 3em;
 }
+
 .style-chooser {
   width: 40%;
-  height: 2.5em;
+  height: 3em;
 }
 
 .style-chooser .vs__actions {
   position: absolute;
   right: 0;
   height: 100%;
+  z-index: 20;
 
   background: #3f3f3f;
 }
@@ -270,11 +272,13 @@ export default {
   color: white;
   white-space: nowrap;
   font-size: 0.9em;
+  height: 3em;
   /* font-weight: bold; */
 }
 .select-multiple .vs__selected-options {
   overflow: hidden;
-  margin-top: -2px;
+  height: 80%;
+  /* margin-top: -2px; */
   max-width: 90%;
 }
 

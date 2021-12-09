@@ -1,5 +1,5 @@
 <template>
-  <section class="main-layout station">
+  <section :class="bgColor" class="main-layout station">
     <main>
       <img class="station-img" :src="this.currStation.imgUrl" alt="" />
       <div class="flex column">
@@ -48,6 +48,16 @@ export default {
   data() {
     return {
       // isLikedStation: null,
+      gradients: [
+        "grad-red",
+        "grad-sky",
+        "grad-mint",
+        "grad-orange",
+        "grad-blue",
+        "grad-pink",
+        "grad-purple",
+        "grad-green",
+      ],
     };
   },
 
@@ -127,6 +137,7 @@ export default {
       return true;
     },
   },
+
   computed: {
     isLikedStation() {
       let likedStations = this.$store.getters.likedStations;
@@ -142,6 +153,10 @@ export default {
     },
     songsCount() {
       return this.currStation.songs;
+    },
+    bgColor() {
+      const idx = Math.floor(Math.random() * this.gradients.length);
+      return this.gradients[idx];
     },
   },
   watch: {

@@ -27,7 +27,7 @@
         <template v-if="loggedUser">
           <img src="" v-if="loggedUser.imgUrl" />
           <span class="user-icon material-icons" v-else> account_circle </span>
-          <p class="highlight small">{{ loggedUser.username }}</p>
+          <p class="highlight small">{{ fullName }}</p>
         </template>
         <template v-else>
           <span class="user-icon material-icons"> account_circle </span>
@@ -75,16 +75,20 @@ export default {
       return this.$store.getters.loggedUser;
     },
     fullName() {
-      var strArr = this.loggedUser.fullname.split(" ");
-      var capitalizeArr = strArr.map((name) => {
-        return name.charAt(0).toUpperCase() + name.slice(1);
-      });
-      return capitalizeArr.join(" ");
+      const username = this.loggedUser.username;
+      return username[0].toUpperCase() + username.slice(1);
+      // if (this.logged.username.includes(" "))
+      //   var strArr = this.loggedUser.username.split(" ");
+      // var capitalizeArr = strArr.map((name) => {
+      //   return name.charAt(0).toUpperCase() + name.slice(1);
+      // });
+      // return capitalizeArr.join(" ");
     },
     topBar() {
       if (this.scrollOffsetY < 60) return "transparent";
       else if (this.scrollOffsetY < 120) return "rgba(50,50,50,0.5)";
-      else return "rgba(50,50,50,0.97); box-shadow: inset 8em 0 3em 0 rgb(20, 20, 20);";
+      else
+        return "rgba(50,50,50,0.97); box-shadow: inset 8em 0 3em 0 rgb(20, 20, 20);";
     },
   },
   methods: {

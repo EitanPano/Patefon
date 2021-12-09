@@ -1,8 +1,14 @@
 <template>
-    <section class="song-list">
-        <div class="actions">
-            <button v-if="!isSearch" :class="searchList" class="btn btn-play" @click="songToPlayer">
+    <section class="song-list" :class="searchList">
+        <div v-if="!isSearch" class="flex actions">
+            <button class="btn btn-play" @click="songToPlayer">
                 <span class="material-icons">play_arrow</span>
+            </button>
+            <button @click="testLog()" class="btn-blend btn-like">
+                <span class="material-icons">favorite_border</span>
+            </button>
+            <button @click="testLog()" class="btn-options btn-blend">
+                <span>•••</span>
             </button>
         </div>
         <div class="sort-bar" v-if="!isSearch">
@@ -50,6 +56,9 @@ export default {
     },
     created() {},
     methods: {
+        testLog() {
+            alert('N/A');
+        },
         removeSong(songId) {
             this.$emit("removeSong", songId);
         },
@@ -84,7 +93,7 @@ export default {
             };
         },
         searchList() {
-            return this.isSearch ? 'pl-0' : ''
+            return this.isSearch ? 'pl-0' : '';
         }
         // currStationSongs() {
         //     return this.$store.getters.currStation.songs;

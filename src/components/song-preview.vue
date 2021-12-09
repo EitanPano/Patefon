@@ -28,7 +28,7 @@
       <p>{{ song.duration }}</p>
       <button
         @click="removeSong(song.id)"
-        v-if="isHover"
+        v-if="isHover && !isSearch"
         class="btn btn-delete"
       >
         ✖
@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { utilService } from "../services/util.service.js";
 export default {
   props: ["song", "idx", "isSearch", "isSearchHistory"],
   data() {

@@ -84,7 +84,7 @@ export default {
     topBar() {
       if (this.scrollOffsetY < 60) return "transparent";
       else if (this.scrollOffsetY < 120) return "rgba(50,50,50,0.5)";
-      else return "rgba(50,50,50,0.97)";
+      else return "rgba(50,50,50,0.97); box-shadow: inset 8em 0 3em 0 rgb(20, 20, 20);";
     },
   },
   methods: {

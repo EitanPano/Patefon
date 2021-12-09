@@ -102,11 +102,25 @@ export const userStore = {
             throw err;
         }
     },
-    async updateUserStations({commit},{station}){
-        console.log(station,'from store');
-        const updatedUser=await userService.updateUserStations(station)
-        console.log(updatedUser,'user from store after action');
-        commit({ type: "updateUser", updatedUser });
+    async updateUserLikedStations({commit},{station}){
+        try{
+            console.log(station,'from store');
+            const updatedUser=await userService.updateUserLikedStations(station)
+            console.log(updatedUser,'user from store after action');
+            commit({ type: "updateUser", updatedUser });
+        }catch(err){
+            console.log(err);
+        }
+    },
+    async updateUserCreatedStations({commit},{station}){
+        try{
+            console.log('added station from store if undefined i know the prob',station);
+            const updatedUser=await userService.updateUserCreatedStations(station)
+            console.log(updatedUser,'user from store after action');
+            commit({ type: "updateUser", updatedUser });
+        }catch(err){
+            console.log(err);
+        }
     }
 
     },

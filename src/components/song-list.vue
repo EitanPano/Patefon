@@ -9,7 +9,10 @@
         class="btn-blend btn-like"
         v-bind:class="{ liked: isLikedStation }"
       >
-        <span class="material-icons">favorite_border</span>
+        <span v-if="!isLikedStation" class="material-icons"
+          >favorite_border</span
+        >
+        <span v-else class="material-icons">favorite</span>
       </button>
       <button @click="testLog()" class="btn-options btn-blend">
         <span>•••</span>

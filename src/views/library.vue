@@ -9,30 +9,64 @@
           <span>{{ likedSongs.length }}</span> liked songs
         </p>
       </aside>
-      <template v-for="station in stations">
+      <template v-for="station in userStations">
         <station-preview :station="station" :key="station._id" />
       </template>
+      <!-- <pre>{{ userStations }}</pre> -->
     </div>
   </section>
 </template>
 
 <script>
 import stationPreview from "@/components/station-preview.vue";
+import { stationService } from "../services/station.service.js";
 export default {
-  methods: {
-    goLikedSongs() {
-      this.$router.push("station/liked");
-    },
-  },
   created() {
     this.$store.dispatch({
       type: "loadStations",
       filterBy: { isLiked: false },
     });
   },
+  methods: {
+    goLikedSongs() {
+      this.$router.push("station/liked");
+    },
+    convertIdsToStations(likedIds, createdIds) {
+      console.log("hello");
+      let idsArr = createdIds.concat(likedIds);
+      let stationsArr = idsArr.map(async function (id) {
+        try {
+          let station = await stationService.getById(id);
+          return station;
+        } catch (err) {
+          console.log();
+        }
+      });
+      console.log(stationsArr);
+      return stationsArr;
+    },
+  },
   computed: {
     stations() {
       return this.$store.getters.getStations;
+    },
+    userStations() {
+      // let likedStationsIds = this.$store.getters.likedStations;
+      // let createdStationsIds = this.$store.getters.createdStations;
+      // console.log(likedStationsIds);
+      // console.log(createdStationsIds);
+      // var stationsArr = this.convertIdsToStations(
+      //   likedStationsIds,
+      //   createdStationsIds
+      // );
+      // return stationsArr;
+      let stations = this.$store.getters.getStations;
+      let filteredStations = stations.filter((station) => {
+        console.log(station.createdBy.userId);
+        console.log(this.$store.getters.loggedUser._id);
+        return station.createdBy.userId === this.$store.getters.loggedUser._id;
+      });
+      return filteredStations;
     },
     likedSongs() {
       // console.log(this.$store.getters.likedSongs);
@@ -41,6 +75,7 @@ export default {
   },
   components: {
     stationPreview,
+    stationService,
   },
 };
 </script>

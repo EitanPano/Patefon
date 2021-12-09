@@ -28,7 +28,7 @@
       @songToPlayer="songToPlayer"
       @swapped="swapIdxs"
       @likeSong="updateUser"
-      @likeStation="updateUserStations"
+      @likeStation="updateUserLikedStations"
       :isLikedStation="isLikedStation"
     />
   </section>
@@ -107,10 +107,10 @@ export default {
         action,
       });
     },
-    updateUserStations() {
+    updateUserLikedStations() {
       console.log("hello");
       this.$store.dispatch({
-        type: "updateUserStations",
+        type: "updateUserLikedStations",
         station: this.currStation,
       });
     },

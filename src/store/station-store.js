@@ -148,6 +148,7 @@ export const stationStore = {
             try {
                 const addedStation = await stationService.save(newStation);
                 commit({ type: "addStation", addedStation });
+                return addedStation
             } catch (err) {
                 console.log(err);
             }

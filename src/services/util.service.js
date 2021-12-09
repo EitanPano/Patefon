@@ -40,6 +40,7 @@ function getExclusiveArr(arr) {
     exclusiveArr.push(JSON.parse(label));
   });
   // console.log('array after changes',exclusiveArr);
+  
 
   return exclusiveArr;
 }

@@ -184,6 +184,7 @@ export default {
   },
   created() {
     this.emptyStation = stationService.getEmptystation();
+    // this.emptyStation.createdBy = this.$store.getters.loggedUser.username;
   },
   methods: {
     testLog() {
@@ -194,7 +195,7 @@ export default {
       song.isLiked = false;
       song.createdAt = Date.now();
       this.emptyStation.songs.push(song);
-      showMsg('Songname has been added')
+      showMsg("Songname has been added");
     },
     addTag() {
       if (this.emptyStation.tags.includes(this.tag)) return;
@@ -224,7 +225,7 @@ export default {
         });
         this.emptyStation = stationService.getEmptystation();
         this.$router.push("/");
-        showMsg('Station has been added')
+        showMsg("Station has been added");
       } catch (err) {
         console.log(err);
       }

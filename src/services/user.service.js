@@ -70,8 +70,10 @@ function getEmptyUser() {
         email:'',
         likedSongs:[],
         searchHistory:[],
+        stations:[],
         likedStations:[],
-        following:[]
+        createdStations:[]
+
     
     }
 }

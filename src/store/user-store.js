@@ -23,6 +23,12 @@ export const userStore = {
             // console.log('search history from store',state.searchHistory);
             // return state.searchHistory;
         },
+        createdStations(state){
+            return state.loggedUser.createdStations
+        },
+        likedStations(state){
+            return state.loggedUser.likedStations
+        }
     },
     mutations:{
       setUser(state,{loggedUser}){

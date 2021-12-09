@@ -24,7 +24,7 @@ export default {
         stationList,
     },
     created() {
-        this.setGuestUser();
+        // this.setGuestUser();
         // this.$store.commit({type:'setInitalStation'});
     },
     data() {
@@ -34,16 +34,16 @@ export default {
         };
     },
     methods: {
-        setGuestUser() {
-            sessionStorage.setItem(
-                "loggedInUser",
-                JSON.stringify({
-                    name: "Patefon",
-                    imgUrl: "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638375320/patefon_olzyeg.png",
-                    id: "111",
-                })
-            );
-        },
+        // setGuestUser() {
+        //     sessionStorage.setItem(
+        //         "loggedInUser",
+        //         JSON.stringify({
+        //             name: "Patefon",
+        //             imgUrl: "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638375320/patefon_olzyeg.png",
+        //             id: "111",
+        //         })
+        //     );
+        // },
         goToGenrePage(genre) {
             this.$router.push(`/genre/${genre}`);
         },

@@ -1,5 +1,5 @@
 <template>
-  <section class="main-layout station">
+  <section class="main-layout station" ref="stationRef">
     <main>
       <img class="station-img" :src="this.currStation.imgUrl" alt="" />
       <div class="flex column">
@@ -21,7 +21,8 @@
       @swapped="swapIdxs"
       @likeSong="updateUser"
     />
-
+  <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> 🖱 {{otherMouseCoords.user}} </div> -->
+  <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);"><path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 01.103.557L8.528 15.467a.5.5 0 01-.917-.007L5.57 10.694.803 8.652a.5.5 0 01-.006-.916l12.728-5.657a.5.5 0 01.556.103z" clip-rule="evenodd"></path></svg>{{otherMouseCoords.user}}</div>
   </section>
 </template>
 
@@ -30,6 +31,7 @@ import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
 import { socketService } from "../services/socket.service";
+
 export default {
   components: {
     songList,
@@ -39,9 +41,30 @@ export default {
   data() {
     return {
       isLikedStation: null,
+      mouseMoveInterval : null,
+      myMouseCoords : null,
+      otherMouseCoords : null,
     };
   },
-
+  mounted() {
+    // this.$refs.stationRef.addEventListener('mousemove', ev=> {
+    //   console.log(ev.offsetX, ev.offsetY)
+    // })
+    const user = JSON.parse(sessionStorage.getItem('user'));
+      window.addEventListener('mousemove', ev=> {
+      //     console.log(ev);
+      // console.log(ev.clientX, ev.clientY);
+      // this.myMouseCoords = {x:ev.offsetX,y:ev.offsetY,user: user.username};
+      this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: user.username};
+    })
+      this.mouseMoveInterval = setInterval ( ()=>{
+        socketService.emit('send mousemove',this.myMouseCoords )
+      },100)
+      socketService.on('get mousemove',mouseCoords => {
+        // console.log(mouseCoords)
+        this.otherMouseCoords = mouseCoords;
+      } )
+  },
   methods: {
     async swapIdxs(moved) {
       try {
@@ -100,6 +123,7 @@ export default {
         filterBy: {},
       });
       socketService.off("get share-listen");
+      clearInterval(this.mouseMoveInterval);
     },
   },
   computed: {

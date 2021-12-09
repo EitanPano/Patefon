@@ -166,9 +166,13 @@ export default {
         "Pop",
         "Classic",
         "Jazz",
-        "Easy",
+        "Mix",
         "Israeli",
         "Electronic",
+         "Latin",
+         "Hits",
+         "Prog",
+         "Raggae"
       ],
       tags: [
         "Cool",
@@ -212,7 +216,11 @@ export default {
       this.emptyStation.songs.splice(idx, 1);
     },
     async saveStation() {
-      this.emptyStation.createdBy = JSON.parse(sessionStorage.getItem("user"));
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      this.emptyStation.createdBy = {
+        userId : user._id,
+        name : user.username,
+      }
       this.emptyStation.imgUrl = this.emptyStation.imgUrl
         ? this.emptyStation.imgUrl
         : "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638537772/upload.1be8b030_yhazsy.svg";

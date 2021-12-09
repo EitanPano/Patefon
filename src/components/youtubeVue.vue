@@ -123,6 +123,7 @@ export default {
       };
       socketService.emit("send share-listen", playerData);
       this.playVideo();
+  
     },
     playVideo() {
       this.player.setVolume(this.songVolume);

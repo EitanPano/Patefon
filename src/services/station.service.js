@@ -126,6 +126,7 @@ function getEmptystation() {
         createdAt: Date.now(),
         createdBy: {},
         songs: [],
+        likesCounter : 0,
     };
 }
 

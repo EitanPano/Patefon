@@ -15,6 +15,7 @@ export default {
         return {
       StationIdsAndNames : [],
       newMsg : null,
+      user : null,
         }
     },
     created () {
@@ -23,7 +24,6 @@ export default {
         const stationName = this.getStations.find(station=> station._id === msg).name;
           this.StationIdsAndNames.unshift({id:msg,stationName});
       })
- 
     },
     methods : {
       goToStation(stationId) {

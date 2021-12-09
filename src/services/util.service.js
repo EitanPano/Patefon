@@ -17,7 +17,24 @@ function checkDuplicate(arr, valueId) {
   // console.log(arr);
   if (arr.length) {
     // console.log("went trought if");
-    let idx = arr.findIndex((val) => val.id === valueId);
+    let idx = arr.findIndex((val) =>val.id === valueId
+    );
+    console.log(idx);
+    // console.log(idx);
+    if (idx < 0) return false;
+    else return idx;
+  } else false;
+}
+function checkDuplicateWith_id(arr, valueId){
+  console.log(arr);
+  if (arr.length) {
+    // console.log("went trought if");
+    let idx = arr.findIndex((val) =>{ 
+      console.log('val id:',val);
+      console.log(('currstaion id',valueId));
+     return val === valueId}
+      );
+    console.log(idx);
     // console.log(idx);
     if (idx < 0) return false;
     else return idx;
@@ -57,4 +74,5 @@ export const utilService = {
   getRandomInt,
   checkDuplicate,
   getExclusiveArr,
+  checkDuplicateWith_id
 };

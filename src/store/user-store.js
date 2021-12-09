@@ -36,6 +36,7 @@ export const userStore = {
           console.log('loggedUser from setUser in user store:',state.loggedUser);
       },
       updateUser(state,{updatedUser}){
+          console.log('updatedUser',updatedUser);
           state.loggedUser=updatedUser
       }
     //   setLikedSongs(state, { likedSongs }) {
@@ -101,6 +102,12 @@ export const userStore = {
             throw err;
         }
     },
+    async updateUserStations({commit},{station}){
+        console.log(station,'from store');
+        const updatedUser=await userService.updateUserStations(station)
+        console.log(updatedUser,'user from store after action');
+        commit({ type: "updateUser", updatedUser });
+    }
 
     },
     modules: {

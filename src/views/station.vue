@@ -10,18 +10,27 @@
           <p class="line-h-0 small" v-if="songsCount && songsCount.length">
             <span class="highlight">Guest</span> • {{ songsCount.length }} Songs
           </p>
+          <p
+            class="line-h-0-small"
+            v-if="currStation.likesCounter && currStation.likesCounter.length"
+          >
+            <span class="highlight"
+              >• {{ currStation.likesCounter }} Likes
+            </span>
+          </p>
         </div>
       </div>
     </main>
-      <chat-room :currStation="currStation" v-if="currStation" />
+    <chat-room :currStation="currStation" v-if="currStation" />
     <song-list
       :songs="currStation.songs"
       @removeSong="removeSong"
       @songToPlayer="songToPlayer"
       @swapped="swapIdxs"
       @likeSong="updateUser"
+      @likeStation="updateUserStations"
+      :isLikedStation="isLikedStation"
     />
-
   </section>
 </template>
 
@@ -38,7 +47,7 @@ export default {
   },
   data() {
     return {
-      isLikedStation: null,
+      // isLikedStation: null,
     };
   },
 
@@ -81,9 +90,18 @@ export default {
     },
     updateUser(action) {
       console.log("updating");
+
+      // console.log(action);
       this.$store.dispatch({
         type: "updateUser",
         action,
+      });
+    },
+    updateUserStations() {
+      console.log("hello");
+      this.$store.dispatch({
+        type: "updateUserStations",
+        station: this.currStation,
       });
     },
     goToSearch() {
@@ -101,8 +119,21 @@ export default {
       });
       socketService.off("get share-listen");
     },
+    checkIfStationLiked(likedStations) {
+      var idx = likedStations.findIndex(
+        (likedStation) => likedStation === this.currStation._id
+      );
+      if (idx < 0) return false;
+      return true;
+    },
   },
   computed: {
+    isLikedStation() {
+      let likedStations = this.$store.getters.likedStations;
+      if (likedStations && likedStations.length)
+        return this.checkIfStationLiked(likedStations);
+      else return false;
+    },
     currStation() {
       return this.$store.getters.currStation;
     },

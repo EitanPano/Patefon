@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <landing-page v-if="isLanding" @explore="isLanding = !isLanding" />
+        <landing-page v-if="!isLanded && isLanding" @explore="land" />
         <user-msg />
         <app-header />
         <side-nav />
@@ -28,6 +28,17 @@ export default {
         playBar,
         userMsg,
     },
+    methods: {
+        land() {
+            this.isLanding = false
+            sessionStorage.setItem('isLanded', true)
+        }
+    },
+    computed: {
+        isLanded() {
+            return JSON.parse(sessionStorage.getItem('isLanded'))
+        }
+    }
 };
 </script>
 

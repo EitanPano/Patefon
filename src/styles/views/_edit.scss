@@ -1,10 +1,11 @@
 .edit {
+    background: linear-gradient(0deg, rgba(10,10,10,1) 54%, rgba(77,77,77,1) 89%, rgba(94,94,94,1) 100%);
     .song-list {
-        background: #111111aa;
+        box-shadow: inset 0 0 20px 0 black;
     }
 
     .options {
-        background-color: #151515e1;
+        background-color: #151515c9;
         padding: 1.2em 0 0 2.2vw;
 
         hr {

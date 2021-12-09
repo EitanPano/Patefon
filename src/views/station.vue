@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       isLikedStation: null,
+      user : null,
       mouseMoveInterval : null,
       myMouseCoords : null,
       otherMouseCoords : null,
@@ -67,16 +68,11 @@ export default {
     };
   },
   mounted() {
-    // this.$refs.stationRef.addEventListener('mousemove', ev=> {
-    //   console.log(ev.offsetX, ev.offsetY)
+     this.user = JSON.parse(sessionStorage.getItem('user'));
+    //   window.addEventListener('mousemove', ev=> {
+    //   this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: user.username};
     // })
-    const user = JSON.parse(sessionStorage.getItem('user'));
-      window.addEventListener('mousemove', ev=> {
-      //     console.log(ev);
-      // console.log(ev.clientX, ev.clientY);
-      // this.myMouseCoords = {x:ev.offsetX,y:ev.offsetY,user: user.username};
-      this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: user.username};
-    })
+  window.addEventListener('mousemove',this.getWindowOffset)
       this.mouseMoveInterval = setInterval ( ()=>{
         socketService.emit('send mousemove',this.myMouseCoords )
       },100)
@@ -153,6 +149,7 @@ export default {
       });
       socketService.off("get share-listen");
       clearInterval(this.mouseMoveInterval);
+           window.removeEventListener('mousemove', this.getWindowOffset)
     },
     checkIfStationLiked(likedStations) {
       var idx = likedStations.findIndex(
@@ -161,6 +158,9 @@ export default {
       if (idx < 0) return false;
       return true;
     },
+    getWindowOffset (ev) {
+ this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: this.user.username};
+    }
   },
 
   computed: {

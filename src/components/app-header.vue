@@ -38,10 +38,8 @@
     </div>
 
     <transition name="fade">
-      <div class="user-menu" v-if="isUserMenu">
-        <router-link to="/auth" v-if="loggedUser.username === 'guest'"
-          >Sign In</router-link
-        >
+      <div @click="isUserMenu = false" class="user-menu" v-if="isUserMenu">
+        <router-link to="/auth" v-if="loggedUser.username === 'guest'">Sign In</router-link>
         <a v-else @click="logout">Log Out</a>
         <router-link to="/auth">Profile</router-link>
         <router-link to="/auth">About</router-link>

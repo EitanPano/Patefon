@@ -1,5 +1,5 @@
 <template>
-  <section class="main-layout station">
+  <section class="main-layout station grad-pink">
     <main>
       <div class="station-img"><span>❤</span></div>
       <div class="flex column">

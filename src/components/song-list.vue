@@ -1,61 +1,4 @@
 <template>
-  <<<<<<< HEAD
-  <section class="song-list" :class="searchList">
-    <div v-if="!isSearch" class="flex actions">
-      <button class="btn btn-play" @click="songToPlayer">
-        <span class="material-icons">play_arrow</span>
-      </button>
-      <button
-        @click="likeStation()"
-        class="btn-blend btn-like"
-        v-bind:class="{ liked: isLikedStation }"
-      >
-        <span v-if="!isLikedStation" class="material-icons"
-          >favorite_border</span
-        >
-        <span v-else class="material-icons">favorite</span>
-      </button>
-      <button @click="testLog()" class="btn-options btn-blend">
-        <span>•••</span>
-      </button>
-    </div>
-    <div class="sort-bar" v-if="!isSearch">
-      <p>#</p>
-      <p>TITLE</p>
-      <p v-if="fixedGrid">DATE ADDED</p>
-      <p class="last"><img src="@/assets/icons/time.svg" alt="" /></p>
-    </div>
-
-    <ul>
-      <draggable
-        :value="songs"
-        class="list-group"
-        tag="ul"
-        v-bind="dragOptions"
-        @start="grab"
-        @end="drop"
-        @change="swapped($event.moved)"
-      >
-        <!-- @change="testLog($event)" -->
-        <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-          <li class="list-group-item" v-for="(song, idx) in songs" :key="idx">
-            <song-preview
-              :song="song"
-              :idx="idx"
-              @removeSong="removeSong"
-              @songToPlayer="songToPlayer"
-              @saveToHistory="saveToHistory"
-              @likeSong="likeSong"
-              :isSearch="isSearch"
-              :isLikedPage="isLiked"
-              :fixedGrid="fixedGrid"
-            />
-          </li>
-        </transition-group>
-      </draggable>
-    </ul>
-  </section>
-  =======
   <section id="drop-zone" class="song-list" :class="searchList">
     <div v-if="!isSearch" class="flex actions">
       <button class="btn btn-play" @click="songToPlayer">
@@ -112,7 +55,6 @@
     </draggable>
     <!-- </ul> -->
   </section>
-  >>>>>>> d15a2113abf3226196e63a70e91666cb358bba2e
 </template>
 
 <script>

@@ -66,6 +66,7 @@ import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
 import { socketService } from "../services/socket.service";
 import youtubeSearch from "../components/youtube-search.vue";
+
 export default {
   components: {
     songList,
@@ -182,8 +183,11 @@ export default {
       var idx = likedStations.findIndex(
         (likedStation) => likedStation === this.currStation._id
       );
-      if (idx < 0) return false;
-      return true;
+      if (idx < 0) {
+        return false;
+      } else {
+        return true;
+      }
     },
     getWindowOffset(ev) {
       this.myMouseCoords = {

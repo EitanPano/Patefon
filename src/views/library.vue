@@ -6,7 +6,7 @@
         <!-- <p v-for="song in likedSongs.slice(0, 4)" :key="song.id">
           <span class="inline">&nbsp;•{{ song.title }}&nbsp;• </span>
         </p> -->
-        <p>{{ likedSongsForPreview }}</p>
+        <p class="ease-bold">{{ likedSongsForPreview }}</p>
         <h2>Liked Songs</h2>
         <p v-if="likedSongs">
           <span>{{ likedSongs.length }}</span> liked songs
@@ -74,9 +74,11 @@ export default {
     likedSongsForPreview() {
       let songs = this.$store.getters.likedSongs.slice(0, 5);
       let titles = songs.map((song) => song.title);
-      console.log(titles.join("•").length);
-      // if(titles.join("•").length)
-      return titles.join("•");
+      if (titles.join("•").length > 150) {
+        titles = titles.join("•").slice(0, 150) + "...";
+        return titles;
+      }
+      return titles.join("•") + "...";
     },
   },
   components: {
@@ -89,5 +91,10 @@ export default {
 <style>
 .inline {
   display: inline-block;
+}
+.ease-bold {
+  color: rgba(181, 207, 182, 0.842);
+  font-weight: bold;
+  font-size: 0.9em;
 }
 </style>

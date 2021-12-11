@@ -8,7 +8,7 @@
         <div>
           <span class="user-icon material-icons">account_circle</span>
           <p class="line-h-0 small">
-            <span class="highlight">Guest</span> • {{ songsCount.length }} Songs
+            <span class="highlight">{{ loggedUserName }}</span> • {{ songsCount.length }} Songs
           </p>
         </div>
       </div>
@@ -76,6 +76,11 @@ export default {
     },
   },
   computed: {
+    loggedUserName() {
+      const name = this.$store.getters.loggedUser.username
+      console.log('name', name);
+      return name[0].toUpperCase() + name.slice(1);
+    },
     likedSongs() {
       console.log(this.$store.getters.likedSongs);
       return this.$store.getters.likedSongs;

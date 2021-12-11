@@ -5,7 +5,9 @@
         <app-header />
         <side-nav />
         <play-bar />
+        <transition name="page">
         <router-view />
+        </transition>
     </div>
 </template>
 

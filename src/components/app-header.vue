@@ -88,11 +88,10 @@ export default {
     },
     logout() {
       this.$store.dispatch({ type: "setLogout" });
-      console.log("lol");
+
     },
     async filterSongs() {
       if (this.filterBy.txt === "") {
-        console.log("hello");
         this.$store.commit({ type: "clearSearch" });
       }
       try {

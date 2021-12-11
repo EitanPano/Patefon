@@ -189,7 +189,6 @@ export default {
             alert("N/A");
         },
         addSong(song) {
-            // console.log(song)
             song.isLiked = false;
             song.createdAt = Date.now();
             this.emptyStation.songs.push(song);
@@ -220,13 +219,11 @@ export default {
             this.emptyStation.imgUrl = this.emptyStation.imgUrl
                 ? this.emptyStation.imgUrl
                 : "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638537772/upload.1be8b030_yhazsy.svg";
-            console.log(this.emptyStation);
             try {
                 let addedStation = await this.$store.dispatch({
                     type: "addStation",
                     newStation: this.emptyStation,
                 });
-                console.log("added station", addedStation);
                 await this.$store.dispatch({
                     type: "updateUserCreatedStations",
                     station: addedStation,

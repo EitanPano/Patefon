@@ -33,7 +33,6 @@ function _createUser() {
 }
 
 function updateUser(action) {
-    console.log(action);
     let user = getLoggedinUser();
     if (
         action.type === "history" &&
@@ -45,7 +44,6 @@ function updateUser(action) {
         );
         if (idx || idx === 0) return;
         user.searchHistory.unshift(action.song);
-        console.log("pushing history boyz");
         if (user.searchHistory.length > 5) {
             user.searchHistory.splice(user.searchHistory.length - 1, 1);
         }

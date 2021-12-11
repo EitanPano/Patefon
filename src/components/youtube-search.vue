@@ -43,7 +43,6 @@ export default {
                     );
                     prmDurations.push(prm);
                 }
-                //    console.log(prmDurations)
                 Promise.all(prmDurations).then((durations) => {
                     for (var i = 0; i < durations.length; i++) {
                         youtubeItems[i].duration = durations[i];

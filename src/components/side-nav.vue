@@ -56,7 +56,6 @@ announcements
         window.addEventListener("resize", () => {
             this.widthOutput = window.innerWidth;
         });
-        console.log('currPath',this.$route.name);
     },
     computed: {
         menuOpen() {

@@ -55,7 +55,6 @@ export default {
         const newStation = JSON.parse(JSON.stringify(this.currStation));
         newStation.songs.splice(moved.oldIndex, 1);
         newStation.songs.splice(moved.newIndex, 0, moved.element);
-        // console.log('newStation', newStation);
         await this.$store.dispatch({
           type: "updateStation",
           station: newStation,
@@ -73,7 +72,6 @@ export default {
       });
     },
     updateUser(action) {
-      console.log("updating");
       this.$store.dispatch({ type: "updateUser", action });
     },
   },

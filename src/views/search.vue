@@ -77,9 +77,6 @@ export default {
             stationsForPreview: [],
         };
     },
-    created() {
-        // console.log(this.searchHistory);
-    },
     computed: {
         topResultName() {
             const text = this.songs[0].title;
@@ -96,7 +93,6 @@ export default {
         },
         searchHistory() {
             // console.log("getters", this.$store.getters.searchHistory);
-            console.log(this.$store.getters.searchHistory);
             return this.$store.getters.searchHistory;
             // return this.$store.getters.getSearchHistory;
         },
@@ -138,8 +134,7 @@ export default {
             });
         },
         updateUser(action) {
-            // console.log(action);
-            // console.log("eeeeeeeeeeeeeeeee");
+
             if (!this.isClicked && action.type === "history") {
                 // console.log("history");
                 this.$store.dispatch({
@@ -149,7 +144,6 @@ export default {
                 this.$store.commit({ type: "setClicked", boolState: true });
                 return;
             }
-            console.log("getting there anyway");
             this.$store.dispatch({
                 type: "updateUser",
                 action,

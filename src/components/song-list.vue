@@ -106,11 +106,9 @@ export default {
         },
         grab() {
             this.drag = true;
-            console.log("holding");
         },
         drop() {
             this.drag = false;
-            console.log("dropping");
         },
         saveToHistory(action) {
             this.$emit("saveToHistory", action);

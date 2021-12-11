@@ -148,7 +148,6 @@ export default {
         },
         pauseVideo() {
             this.player.pauseVideo();
-            console.log(this.player);
             if (this.currTimeInterval) clearInterval(this.currTimeInterval);
             this.isPlayed = !this.isPlayed;
         },
@@ -235,11 +234,9 @@ export default {
             });
         },
         checkIfSongLiked(likedSongs) {
-            console.log(likedSongs);
             var idx = likedSongs.findIndex(
                 (likedSong) => likedSong.id === this.playListData.song.id
             );
-            console.log(idx);
             if (idx < 0) return false;
             return true;
         },

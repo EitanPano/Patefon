@@ -18,7 +18,6 @@ export default {
     created () {
   // socketService.emit('chat topic', this.currStation._id)
         socketService.on('get share-listen', (stationSongIdx) => {
-          console.log(stationSongIdx)
           this.songToPlayer(stationSongIdx.station, stationSongIdx.idx)
       })
     },

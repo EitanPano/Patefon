@@ -10,7 +10,7 @@
         </p>
       </aside>
       <template v-for="station in userStations">
-        <station-preview :station="station[0]" :key="station._id" />
+        <station-preview :station="station" :key="station._id" />
       </template>
       <!-- <pre>{{ userStations }}</pre> -->
     </div>
@@ -32,17 +32,15 @@ export default {
       this.$router.push("station/liked");
     },
     convertIdsToStations(likedIds, createdIds) {
-      console.log("hello");
       let idsArr = createdIds.concat(likedIds);
       let stationsArr = idsArr.map(async function (id) {
         try {
           let station = await stationService.getById(id);
           return station;
         } catch (err) {
-          console.log();
+          console.log(err);
         }
       });
-      console.log(stationsArr);
       return stationsArr;
     },
   },
@@ -60,12 +58,11 @@ export default {
           let filteredStations = stations.filter(
             (station) => station._id === id
           );
-          return filteredStations;
+          return filteredStations[0];
         });
       let stationsForPreview = filteredCreatedStations.concat(
         filteredLikedStations
       );
-      console.log(stationsForPreview);
       return stationsForPreview;
     },
     likedSongs() {

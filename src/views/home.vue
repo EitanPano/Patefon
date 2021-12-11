@@ -76,7 +76,6 @@ export default {
       let mostLikedStations = this.findMostLikedStations(
         this.$store.getters.getStations
       );
-      console.log(mostLikedStations);
       return mostLikedStations;
     },
   },

@@ -25,9 +25,6 @@ export default {
       isHover: false,
     };
   },
-  created() {
-    console.log("station from staion-preview:", this.station);
-  },
   methods: {
     enterStation(stationId) {
       this.$router.push("/station/" + stationId);

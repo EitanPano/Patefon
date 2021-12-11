@@ -23,23 +23,18 @@ async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username)
     // return _saveLocalUser(user)
     try{
-        
-        console.log(userCred);
         const user = await httpService.post(`${AUTH_URL}login`, userCred)
         // socketService.emit('set-user-socket', user._id);
         // console.log('user from service',user);
         if (user) return _saveLocalUser(user)
-        else console.log('Logging in have failed');
     }catch(err){
         console.log(err);
     }
 }
 async function initialLogin(){
     let user=userService.getLoggedinUser()
-    console.log(user);
     if(!user){
         user= await loginGuestUser()
-        console.log(user);
         return user
     }else return user
 }
@@ -80,6 +75,5 @@ async function signup(userCred) {
     // console.log('user data from service before post',userCred);
     const user = await httpService.post(`${AUTH_URL}signup`, userCred)
     // socketService.emit('set-user-socket', user._id);
-    console.log('new user signedUp',userCred);
     return _saveLocalUser(user)
 }

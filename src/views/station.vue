@@ -91,7 +91,6 @@ export default {
   },
   created() {
     socketService.on('get update stations' ,msg => {
-               console.log('erereerer')
             window.location.reload();
             })
   },
@@ -115,7 +114,6 @@ export default {
         const newStation = JSON.parse(JSON.stringify(this.currStation));
         newStation.songs.splice(moved.oldIndex, 1);
         newStation.songs.splice(moved.newIndex, 0, moved.element);
-        // console.log('newStation', newStation);
         await this.$store.dispatch({
           type: "updateStationDrag",
           station: newStation,moved
@@ -147,8 +145,6 @@ export default {
       });
     },
     updateUser(action) {
-      console.log("updating");
-      // console.log(action);
       this.$store.dispatch({
         type: "updateUser",
         action,

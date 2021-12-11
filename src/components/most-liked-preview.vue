@@ -3,9 +3,10 @@
     @mouseleave="isHover = false"
     @mouseenter="isHover = true"
     @click="enterStation(station._id)"
-    class="station-preview"
+    class="most-liked-preview"
   >
-    <div>
+    <div class="flex justify-center align-center space-between">
+      <p>{{ station.name }}</p>
       <img :src="station.imgUrl" />
       <transition name="fade">
         <button class="btn btn-play" v-if="isHover">
@@ -13,8 +14,6 @@
         </button>
       </transition>
     </div>
-    <p>{{ station.name }}</p>
-    <p>By {{ station.createdBy.name }}</p>
   </article>
 </template>
 

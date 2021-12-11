@@ -10,7 +10,7 @@
         </p>
       </aside>
       <template v-for="station in userStations">
-        <station-preview :station="station" :key="station._id" />
+        <station-preview :station="station[0]" :key="station._id" />
       </template>
       <!-- <pre>{{ userStations }}</pre> -->
     </div>
@@ -62,21 +62,22 @@ export default {
       // return stationsArr;
       let stations = this.$store.getters.getStations;
       let filteredCreatedStations = stations.filter((station) => {
-        console.log(station.createdBy.userId);
-        console.log(this.$store.getters.loggedUser.userId);
+        // console.log(station.createdBy.userId);
+        // console.log(this.$store.getters.loggedUser._id);
         return station.createdBy.userId === this.$store.getters.loggedUser._id;
       });
 
       let filteredLikedStations =
-        this.$store.getters.loggedUser.likedStations.forEach((id) => {
+        this.$store.getters.loggedUser.likedStations.map((id) => {
           let filteredStations = stations.filter(
             (station) => station._id === id
           );
           return filteredStations;
         });
-      console.log(filteredLikedStations);
-
-      return filteredStations;
+      let stationsForPreview = filteredCreatedStations.concat(
+        filteredLikedStations
+      );
+      return stationsForPreview;
     },
     likedSongs() {
       // console.log(this.$store.getters.likedSongs);

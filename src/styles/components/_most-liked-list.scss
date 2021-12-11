@@ -1,0 +1,12 @@
+.most-liked-station-container{
+
+
+    .most-liked-station-list{
+        grid-template-columns: repeat(3, minmax(15em, 1fr));
+        row-gap: 16px;
+        column-gap: 26px;
+        display: grid;
+        overflow-y: hidden;
+        
+    }
+}

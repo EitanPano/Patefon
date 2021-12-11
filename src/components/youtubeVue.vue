@@ -15,7 +15,11 @@
                     {{ localPlayListData.station.name }}
                 </p>
             </div>
-            <button v-if="playingSong" :class="{ liked: isLiked }" @click.stop="likeSong" >
+            <button
+                v-if="playingSong"
+                v-bind:class="{ liked: isLiked }"
+                @click="likeSong"
+            >
                 <span class="material-icons">favorite</span>
             </button>
         </div>
@@ -27,7 +31,11 @@
                 <button @click="goPrevSong">
                     <span class="material-icons">skip_previous</span>
                 </button>
-                <button v-if="isPlayed" @click="pauseVideo" class="btn btn-play" >
+                <button
+                    v-if="isPlayed"
+                    @click="pauseVideo"
+                    class="btn btn-play"
+                >
                     <span class="material-icons">pause</span>
                 </button>
                 <button v-else @click="play" class="btn btn-play">
@@ -42,7 +50,14 @@
             </div>
             <div class="durations flex space-between">
                 <p>{{ this.showSongCurrentTime }}</p>
-                <input @change="seekTo" type="range" v-model="currentTime" min="0" :max="songDuration" :title="currentTime" />
+                <input
+                    @change="seekTo"
+                    type="range"
+                    v-model="currentTime"
+                    min="0"
+                    :max="songDuration"
+                    :title="currentTime"
+                />
                 <p>{{ this.showSongDuration }}</p>
             </div>
         </div>
@@ -50,12 +65,19 @@
             <button @click="mute">
                 <span class="material-icons">{{ volumeIcon }}</span>
             </button>
-            <input @input="setVolume" type="range" v-model="songVolume" min="0" max="100" :title="songVolume" />
+            <input
+                @input="setVolume"
+                type="range"
+                v-model="songVolume"
+                min="0"
+                max="100"
+                :title="songVolume"
+            />
         </div>
     </section>
 </template>
-
 <script>
+import { showMsg } from "../services/event-bus.service.js";
 import { socketService } from "../services/socket.service.js";
 export default {
     props: ["playListData"],
@@ -76,6 +98,7 @@ export default {
             localPlayListData: null,
 
             scrollOffsetY: null,
+
         };
     },
     created() {
@@ -89,7 +112,6 @@ export default {
             this.currentTime = playerData.currentTime;
             this.playVideo();
         });
-
         socketService.on("get socketCounterToTopics", (msg) => {
             this.play();
         });
@@ -97,10 +119,13 @@ export default {
     },
     destroyed() {
         if (this.currTimeInterval) clearInterval(this.currTimeInterval);
-        window.removeEventListener("scroll", this.handleScroll);
     },
     methods: {
         play() {
+            if (!this.localPlayListData) {
+                showMsg("Please play a song, from a playlist");
+                return;
+            }
             const playerData = {
                 songIdx: this.songIdx,
                 playList: this.playList,
@@ -132,13 +157,14 @@ export default {
             this.play();
         },
         loadPlayList() {
+            const startTime = this.currentTime ? this.currentTime : 0;
             let songIds = this.localPlayListData.station.songs.map(
                 (song) => song.youtubeId
             );
             this.player.loadPlaylist({
                 playlist: songIds,
                 index: this.localPlayListData.idx,
-                startSeconds: 0,
+                startSeconds: startTime,
             });
             this.playVideo();
             setTimeout(() => {
@@ -164,14 +190,21 @@ export default {
                 .getPlaylist()
                 .then((playList) => (this.playList = playList));
         },
-
         goNextSong() {
+            if (!this.localPlayListData) {
+                showMsg("Please play a song, from a playlist");
+                return;
+            }
             this.player.nextVideo();
             setTimeout(() => {
                 this.play();
             }, 1000);
         },
         goPrevSong() {
+            if (!this.localPlayListData) {
+                showMsg("Please play a song, from a playlist");
+                return;
+            }
             this.player.previousVideo();
             setTimeout(() => {
                 this.play();
@@ -266,6 +299,5 @@ export default {
     },
 };
 </script>
-
 <style>
 </style>

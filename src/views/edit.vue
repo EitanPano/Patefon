@@ -1,18 +1,29 @@
 <template>
     <section class="edit main-layout station">
         <main>
-            <img-upload :passedImgUrl="emptyStation.imgUrl" class="station-img" @imageSaved="saveImageUrl" />
+            <img-upload
+                :passedImgUrl="emptyStation.imgUrl"
+                class="station-img"
+                @imageSaved="saveImageUrl"
+            />
             <div class="flex column">
                 <div>
                     <p class="highlight small">PLAYLIST</p>
-                    <button class="btn btn-edit big" @click="isModalOpen = true" >
+                    <button
+                        class="btn btn-edit big"
+                        @click="isModalOpen = true"
+                    >
                         <span>✎</span>
                     </button>
                 </div>
                 <h1 @click="isModalOpen = true">My playlist</h1>
                 <div class="flex space-between">
                     <span class="highlight small">Guest</span>
-                    <button class="btn-create" @click="saveStation" :disabled="!emptyStation.songs.length" >
+                    <button
+                        class="btn-create"
+                        @click="saveStation"
+                        :disabled="!emptyStation.songs.length"
+                    >
                         CREATE
                     </button>
                 </div>
@@ -26,29 +37,53 @@
             <hr class="margin-0 pl-1" />
         </div>
 
-        <song-list v-if="emptyStation.songs.length" :songs="emptyStation.songs" @removeSong="removeSong" @songToPlayer="songToPlayer" />
+        <song-list
+            v-if="emptyStation.songs.length"
+            :songs="emptyStation.songs"
+            @removeSong="removeSong"
+            @songToPlayer="songToPlayer"
+        />
         <youtube-search @addSong="addSong" />
 
         <!-- Modal Start -->
         <transition name="fade">
-            <div @click="isModalOpen = false" v-if="isModalOpen" class="modal-wrapper" >
-                <div @click.stop v-if="isModalOpen" class="modal-edit flex column" >
+            <div
+                @click="isModalOpen = false"
+                v-if="isModalOpen"
+                class="modal-wrapper"
+            >
+                <div
+                    @click.stop
+                    v-if="isModalOpen"
+                    class="modal-edit flex column"
+                >
                     <div class="mb-1 flex space-between align-center">
                         <h2>Edit Details</h2>
-                        <button @click="isModalOpen = false" class="btn btn-close" >
+                        <button
+                            @click="isModalOpen = false"
+                            class="btn btn-close"
+                        >
                             ✖
                         </button>
                     </div>
                     <div class="edit-main flex space-between mb-1">
-                        <img-upload :passedImgUrl="emptyStation.imgUrl" class="edit-img" @imageSaved="saveImageUrl" />
+                        <img-upload
+                            :passedImgUrl="emptyStation.imgUrl"
+                            class="edit-img"
+                            @imageSaved="saveImageUrl"
+                        />
 
                         <div class="edit-details">
                             <label>
-                                <input class="edit-title" type="text" v-model="emptyStation.name" placeholder="My Playlist #" />
+                                <input
+                                    class="edit-title"
+                                    type="text"
+                                    v-model="emptyStation.name"
+                                    placeholder="My Playlist #"
+                                />
                             </label>
 
                             <div class="selects-box">
-
                                 <v-select
                                     v-model="emptyStation.tags"
                                     id="mySelect"
@@ -65,7 +100,6 @@
                                     :options="genres"
                                     placeholder="Genre"
                                 ></v-select>
-
                             </div>
                             <textarea
                                 v-model="emptyStation.description"
@@ -82,7 +116,12 @@
                                 >{{ tag }},
                             </span>
                         </p>
-                        <button class="btn-save-details" @click="isModalOpen = false" > SAVE </button>
+                        <button
+                            class="btn-save-details"
+                            @click="isModalOpen = false"
+                        >
+                            SAVE
+                        </button>
                     </div>
                     <p class="p-small">
                         By proceeding, you agree to give Patefon access to the
@@ -103,7 +142,6 @@ import youtubeSearch from "../components/youtube-search.vue";
 import { stationService } from "../services/station.service";
 import imgUpload from "../components/img-upload.vue";
 import vSelect from "vue-select";
-
 export default {
     components: {
         youtubeSearch,
@@ -155,7 +193,7 @@ export default {
             song.isLiked = false;
             song.createdAt = Date.now();
             this.emptyStation.songs.push(song);
-            showMsg("Songname has been added");
+            showMsg(song.title + " has been added");
         },
         addTag() {
             if (this.emptyStation.tags.includes(this.tag)) return;
@@ -175,12 +213,13 @@ export default {
             const user = JSON.parse(sessionStorage.getItem("user"));
             this.emptyStation.createdBy = {
                 userId: user._id,
-                name: user.username,
+                name:
+                    user.username.charAt(0).toUpperCase() +
+                    user.username.slice(1, user.username.length),
             };
             this.emptyStation.imgUrl = this.emptyStation.imgUrl
                 ? this.emptyStation.imgUrl
                 : "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638537772/upload.1be8b030_yhazsy.svg";
-
             console.log(this.emptyStation);
             try {
                 let addedStation = await this.$store.dispatch({
@@ -193,7 +232,7 @@ export default {
                     station: addedStation,
                 });
                 this.emptyStation = stationService.getEmptystation();
-                this.$router.push("/");
+                this.$router.push("/library");
                 showMsg("Station has been added");
             } catch (err) {
                 console.log(err);

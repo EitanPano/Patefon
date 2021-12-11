@@ -10,8 +10,12 @@
                     <p class="line-h-0 small" v-if="songsCount && songsCount.length" >
                         <span class="highlight">Guest</span> • {{ songsCount.length }} Songs
                     </p>
-                    <p class="line-h-0-small" v-if="currStation.likesCounter &&currStation.likesCounter.length">
-                        <span class="highlight">• {{ currStation.likesCounter }} Likes</span>
+                    <p
+                        class="line-h-0-small"
+                        v-if="currStation.likesCounter && currStation.likesCounter.length " >
+                        <span class="highlight"
+                            >• {{ currStation.likesCounter }} Likes
+                        </span>
                     </p>
                 </div>
             </div>
@@ -26,18 +30,12 @@
             @likeStation="updateUserLikedStations"
             :isLikedStation="isLikedStation"
         />
-        <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> 🖱 {{otherMouseCoords.user}} </div> -->
-        <div v-if="otherMouseCoords" class="socketMouse" :style="{ left: otherMouseCoords.x + 'px', top: otherMouseCoords.y + 'px', }" >
-            <svg
-                stroke="currentColor"
-                fill="currentColor"
-                stroke-width="0"
-                viewBox="0 0 16 16"
-                height="1em"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-                style="transform: rotate(-90deg)"
-            >
+        <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> :three_button_mouse: {{otherMouseCoords.user}} </div> -->
+        <div
+            v-if="otherMouseCoords"
+            class="socketMouse"
+            :style="{left: otherMouseCoords.x + 'px',top: otherMouseCoords.y + 'px'}">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg)" >
                 <path
                     fill-rule="evenodd"
                     d="M14.082 2.182a.5.5 0 01.103.557L8.528 15.467a.5.5 0 01-.917-.007L5.57 10.694.803 8.652a.5.5 0 01-.006-.916l12.728-5.657a.5.5 0 01.556.103z"
@@ -47,13 +45,11 @@
         </div>
     </section>
 </template>
-
 <script>
 import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
 import { socketService } from "../services/socket.service";
-
 export default {
     components: {
         songList,
@@ -62,7 +58,7 @@ export default {
     },
     data() {
         return {
-            isLikedStation: null,
+            // isLikedStation: null,
             user: null,
             mouseMoveInterval: null,
             myMouseCoords: null,
@@ -78,6 +74,12 @@ export default {
                 "grad-green",
             ],
         };
+    },
+    created() {
+        socketService.on("get update stations", (msg) => {
+            console.log("erereerer");
+            window.location.reload();
+        });
     },
     mounted() {
         this.user = JSON.parse(sessionStorage.getItem("user"));
@@ -101,8 +103,9 @@ export default {
                 newStation.songs.splice(moved.newIndex, 0, moved.element);
                 // console.log('newStation', newStation);
                 await this.$store.dispatch({
-                    type: "updateStation",
+                    type: "updateStationDrag",
                     station: newStation,
+                    moved,
                 });
             } catch (err) {
                 console.log(err);
@@ -132,7 +135,6 @@ export default {
         },
         updateUser(action) {
             console.log("updating");
-
             // console.log(action);
             this.$store.dispatch({
                 type: "updateUser",
@@ -178,7 +180,6 @@ export default {
             };
         },
     },
-
     computed: {
         isLikedStation() {
             let likedStations = this.$store.getters.likedStations;
@@ -215,6 +216,5 @@ export default {
     },
 };
 </script>
-
 <style>
 </style>

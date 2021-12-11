@@ -1,7 +1,7 @@
 <template>
 <section class="announcements">
     <!-- {{chatMsgs}} -->
-    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="StationIdsAndName.id+idx" @click="goToStation(StationIdsAndName.id)" > Listen With Me at: {{StationIdsAndName.stationName}} </p>
+    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >Listen With {{StationIdsAndName.from}} at: {{StationIdsAndName.stationName}} </p>
     <!-- <p v-html="chatMsgs"> </p> -->
     </section>
 </template>
@@ -14,22 +14,24 @@ export default {
     data() {
         return {
       StationIdsAndNames : [],
-      newMsg : null,
+      msgStationId : '',
       user : null,
         }
     },
     created () {
         socketService.on('get announcements', msg => {
-        this.newMsg = msg
-        const stationName = this.getStations.find(station=> station._id === msg).name;
-          this.StationIdsAndNames.unshift({id:msg,stationName});
+        this.msgStationId = msg.stationId;
+        // console.log(this.msgStationId)
+        this.user = msg.from;
+        const stationName = this.getStations.find(station=> station._id === msg.stationId);
+          this.StationIdsAndNames.unshift({id:this.msgStationId,stationName:stationName.name,from:this.user});
       })
     },
     methods : {
       goToStation(stationId) {
         this.$router.push('/station/' + stationId);
          socketService.emit('chat topic', stationId)
-        this.newMsg = null;
+        // this.newMsg = null;
       }
     },
     computed: {

@@ -1,6 +1,14 @@
 <template>
-    <article class="song-preview" @mouseleave="isHover = false" @mouseover="isHover = true" >
-        <button v-if="isHover" @click="songToPlayer(song, idx)" class="size-btn first play" >
+    <article
+        class="song-preview"
+        @mouseleave="isHover = false"
+        @mouseover="isHover = true"
+    >
+        <button
+            v-if="isHover"
+            @click="songToPlayer(song, idx)"
+            class="size-btn first play"
+        >
             ▶
         </button>
         <p v-else class="first song-idx">{{ idx + 1 }}</p>
@@ -10,19 +18,31 @@
         </div>
         <p v-if="fixedGrid">{{ showSongCreatedAt }}</p>
         <div class="last song-actions">
-            <button class="btn btn-like" @click="likeSong" v-bind:class="{ liked: isLiked }" >
+            <button
+                class="btn btn-like"
+                @click="likeSong"
+                v-bind:class="{ liked: isLiked }"
+            >
                 ❤
             </button>
-            <p>{{ song.duration }}</p>
-            <button @click="removeSong(song.id)" v-if="isHover && !isSearch && !isLiked" class="btn btn-delete" >
+            <p v-if="!isOpenRemoveModal">{{ song.duration }}</p>
+            <button
+                @click="openRemoveModal"
+                v-if="isHover && !isSearch && !isLiked && !isOpenRemoveModal"
+                class="btn btn-delete"
+            >
                 ✖
             </button>
+            <div class="removeModal" v-if="isOpenRemoveModal">
+                Are You Sure? <button @click="removeSong(song.id)">🗑</button>
+            </div>
         </div>
         <!-- && !isLikedStation -->
     </article>
 </template>
 
 <script>
+import { showMsg } from "../services/event-bus.service.js";
 export default {
     props: [
         "song",
@@ -35,12 +55,13 @@ export default {
     data() {
         return {
             isHover: false,
+            isOpenRemoveModal: false,
         };
     },
-    created() {},
     methods: {
         removeSong(songId) {
-            if (confirm("Remove Song?")) this.$emit("removeSong", songId);
+            this.$emit("removeSong", songId);
+            showMsg(this.song.title + " has been removed");
         },
         songToPlayer(song, idx) {
             this.$emit("songToPlayer", song, idx, this.isSearchHistory);
@@ -60,6 +81,12 @@ export default {
             );
             if (idx < 0) return false;
             return true;
+        },
+        openRemoveModal() {
+            this.isOpenRemoveModal = true;
+            setTimeout(() => {
+                this.isOpenRemoveModal = false;
+            }, 2000);
         },
     },
     computed: {

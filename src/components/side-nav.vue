@@ -27,6 +27,7 @@
 <script>
 import announcements from '../components/announcements.vue';
 import {socketService} from '../services/socket.service.js';
+import { showMsg } from "../services/event-bus.service.js";
 export default {
     components : {
 announcements
@@ -34,15 +35,20 @@ announcements
     data() {
         return {
             isMenuOpen: false,
-            widthOutput: null
-        };
+            widthOutput: null,
+            user : JSON.parse(sessionStorage.getItem('user')),
+        }
     },
     methods: {
         toggleMenu() {
             this.isMenuOpen = !this.isMenuOpen;
         },
            share () {
-         socketService.emit('send announcements', this.currStationForPlayer._id);
+        if (this.currStationForPlayer.length === 0) {
+        showMsg("Please play a song, from a playlist");
+        return
+      }
+         socketService.emit('send announcements', {stationId: this.currStationForPlayer._id, from:this.user.username});
     }
     },
     created() {

@@ -91,7 +91,6 @@ async function query(filterBy = {}) {
 async function getById(stationId) {
     // const station = await storageService.get(KEY, stationId);
     const station = await httpService.get(`station/${stationId}`)
-    console.log(station);
     // gWatchedStation = station;
     return station;
 }
@@ -108,13 +107,12 @@ async function save(station) {
     //     const addedStation = await storageService.post(KEY, station);
     //     return addedStation;
     // }
-
-    if (station._id) station = await httpService.put(`station/${station._id}`, station)
-    else station = await httpService.post(`station/`, station)
-
+    var returnedStation = null;
+    if (station._id) returnedStation = await httpService.put(`station/${station._id}`, station)
+    else returnedStation = await httpService.post(`station/`, station)
     // Handle case in which admin updates other station's details
     // console.log(station)
-    return station;
+    return returnedStation;
 }
 
 function getEmptystation() {

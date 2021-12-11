@@ -16,9 +16,14 @@
             justify-content: center;
             align-items: center;
             margin-inline-end: 1.5em;
-            background: rgb(157,48,148);
-            background: linear-gradient(135deg, rgba(157,48,148,1) 9%, rgba(246,119,213,1) 49%, rgba(221,178,216,1) 100%);
-            
+            background: rgb(157, 48, 148);
+            background: linear-gradient(
+                135deg,
+                rgba(157, 48, 148, 1) 9%,
+                rgba(246, 119, 213, 1) 49%,
+                rgba(221, 178, 216, 1) 100%
+            );
+
             & > span {
                 font-size: 4.5em;
                 cursor: default;
@@ -28,13 +33,13 @@
 
             @keyframes beat {
                 from {
-                  transform: scale(1);
+                    transform: scale(1);
                 }
-              
+
                 to {
-                  transform: scale(1.2);
+                    transform: scale(1.2);
                 }
-              }
+            }
         }
 
         display: flex;
@@ -49,7 +54,8 @@
                 color: white;
             }
             & > p {
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+                    sans-serif;
             }
             & > div {
                 display: flex;
@@ -113,7 +119,7 @@
             }
         }
     }
-    .search-link{
+    .search-link {
         text-decoration: underline;
         cursor: pointer;
     }
@@ -124,6 +130,23 @@
     top: 0;
     left: 0;
     z-index: 100;
-    color:blue;
-    font-size: 1.0rem;
+    color: blue;
+    font-size: 1rem;
+}
+
+@include for-mobile-layout {
+    .station {
+        padding-top: 0;
+        main {
+            // height: 51vh;
+            .station-img {
+                max-width: em(128px);
+                max-height: em(128px);
+                min-width: em(128px);
+                min-height: em(128px);
+                // min-width: em(160px);
+                // min-height: em(160px);
+            }
+        }
+    }
 }

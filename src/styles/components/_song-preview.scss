@@ -86,4 +86,25 @@
         // width: 12em;
     }
     // width: 12em;
+
+    .removeModal {
+        position: relative;
+        // left:40px;
+        // right: 15vw;
+        // background-color: lightblue;
+        width: 150px;
+        height: 40px;
+        // z-index: 100;
+       
+        button {
+            font-size: 1.5rem;
+        }
+    }
+}
+@include for-mobile-layout {
+    .song-preview {
+        .song-details {
+            grid-column: 2 / 4;
+        }
+    }
 }

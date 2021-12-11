@@ -2,6 +2,7 @@
 
 import { stationService } from "../services/station.service.js";
 import { userService } from "../services/user.service.js";
+import { socketService } from "../services/socket.service";
 
 export const stationStore = {
     state: {
@@ -81,7 +82,15 @@ export const stationStore = {
             // );
             // console.log(idx);
             // state.stations.splice(idx, 1, updatedStation);
+
             state.currStation = updatedStation
+        },
+        updateStationDrag(state, { updatedStation,moved }) {
+            state.currStation = updatedStation
+            if (state.currStationForPlayer) {
+                state.currStationForPlayer = state.currStation;
+                if (moved.oldIndex === state.currSongIdx)state.currSongIdx = moved.newIndex;
+            } 
         },
         clearSearch(state) {
             // state.expandedStations = "";
@@ -117,14 +126,15 @@ export const stationStore = {
         async getById({ commit }, { id }) {
             try {
                 const station = await stationService.getById(id);
-                
                 if (station) {
                     commit({ type: "setCurrStation", station });
                     return station;
                 }
-            } catch {}
+            } catch {
+
+            }
         },
-        async loadStations({ commit }, { filterBy }) {
+        async loadStations({ commit,dispatch }, { filterBy }) {
             try {
                 const stations = await stationService.query(filterBy);
                 // console.log(stations);
@@ -156,7 +166,18 @@ export const stationStore = {
         async updateStation({ commit }, { station }) {
             try {
                 const updatedStation = await stationService.save(station);
-                commit({ type: "updateStation", updatedStation });
+                commit({ type: "updateStation", updatedStation});
+                socketService.emit('send update stations', 'update store at all sockets')
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
+        },
+        async updateStationDrag({ commit }, { station,moved }) {
+            try {
+                const updatedStation = await stationService.save(station);
+                commit({ type: "updateStationDrag", updatedStation,moved});
+                socketService.emit('send update stations', 'update store at all sockets')
             } catch (err) {
                 console.log(err);
                 throw err;

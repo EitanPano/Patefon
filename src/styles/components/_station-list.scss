@@ -22,4 +22,12 @@
     }
 }
 
+@include for-mobile-layout {
+    .station-list-container {
+        .station-list {
+            grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+        }
+    }
+}
+
 

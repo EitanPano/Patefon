@@ -31,7 +31,7 @@
       @likeStation="updateUserLikedStations"
       :isLikedStation="isLikedStation"
     />
-    <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> 🖱 {{otherMouseCoords.user}} </div> -->
+    <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> :three_button_mouse: {{otherMouseCoords.user}} </div> -->
     <div
       v-if="otherMouseCoords"
       class="socketMouse"
@@ -59,13 +59,11 @@
     </div>
   </section>
 </template>
-
 <script>
 import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
 import { socketService } from "../services/socket.service";
-
 export default {
   components: {
     songList,
@@ -75,10 +73,10 @@ export default {
   data() {
     return {
       // isLikedStation: null,
-      user: null,
-      mouseMoveInterval: null,
-      myMouseCoords: null,
-      otherMouseCoords: null,
+      user : null,
+      mouseMoveInterval : null,
+      myMouseCoords : null,
+      otherMouseCoords : null,
       gradients: [
         "grad-red",
         "grad-sky",
@@ -90,6 +88,12 @@ export default {
         "grad-green",
       ],
     };
+  },
+  created() {
+    socketService.on('get update stations' ,msg => {
+               console.log('erereerer')
+            window.location.reload();
+            })
   },
   mounted() {
     this.user = JSON.parse(sessionStorage.getItem("user"));
@@ -113,8 +117,8 @@ export default {
         newStation.songs.splice(moved.newIndex, 0, moved.element);
         // console.log('newStation', newStation);
         await this.$store.dispatch({
-          type: "updateStation",
-          station: newStation,
+          type: "updateStationDrag",
+          station: newStation,moved
         });
       } catch (err) {
         console.log(err);
@@ -144,7 +148,6 @@ export default {
     },
     updateUser(action) {
       console.log("updating");
-
       // console.log(action);
       this.$store.dispatch({
         type: "updateUser",
@@ -190,7 +193,6 @@ export default {
       };
     },
   },
-
   computed: {
     isLikedStation() {
       let likedStations = this.$store.getters.likedStations;
@@ -227,6 +229,5 @@ export default {
   },
 };
 </script>
-
 <style>
 </style>

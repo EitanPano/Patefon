@@ -15,8 +15,8 @@
                     </button>
                 </div>
                 <ul>
-                    <li v-for="(chatMsg, idx) in chatMsgs" :key="chatMsg + idx">
-                        <p>{{ user.username }} : {{ chatMsg }}</p>
+                    <li v-for="(chatMsg, idx) in chatMsgs" :key="chatMsg.msg + idx">
+                        <p>{{ chatMsg.from }} : {{ chatMsg.msg }}</p>
                     </li>
                 </ul>
                 <form class="chat-form" @submit.prevent="sendChatMsg">
@@ -53,7 +53,7 @@ export default {
     },
     methods: {
         sendChatMsg() {
-            socketService.emit("chat newMsg", this.chatMsg);
+            socketService.emit("chat newMsg", {msg:this.chatMsg, from:this.user.username});
             this.chatMsg = "";
         },
         openChatModal() {

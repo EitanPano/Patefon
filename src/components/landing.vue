@@ -11,6 +11,7 @@
             <div class="bubble s2 small"></div>
             <div class="bubble s3 small"></div>
             <div class="bubble s4 small"></div>
+            <div class="bubble s5 small"></div>
             <div class="bubble m1 medium"></div>
             <div class="bubble b1 big"></div>
         </section>

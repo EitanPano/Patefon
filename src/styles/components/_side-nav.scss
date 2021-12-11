@@ -3,26 +3,32 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    height: 4.5em ;
-    width: 100% ;
+    height: 4.5em;
+    width: 100%;
     background: rgb(0, 0, 0);
 
-    .icon-home,.icon-search,.icon-library,.icon-heart,.icon-plus {
+    .icon-home,
+    .icon-search,
+    .icon-library,
+    .icon-heart,
+    .icon-plus {
         margin: 0;
     }
 
-    .icon-home, .icon-search {
+    .icon-home,
+    .icon-search {
         font-size: 2em;
     }
-    
+
     .icon-library {
-        font-size: 1.3em;
-        padding-bottom: 0.2em;
-        mix-blend-mode:luminosity;
+        font-size: 1.5em;
+        padding-bottom: 0.15em;
+        mix-blend-mode: luminosity;
     }
-    .icon-heart, .icon-plus {
+    .icon-heart,
+    .icon-plus {
         display: flex;
-        align-items:center;
+        align-items: center;
         justify-content: center;
         font-size: 1em;
         width: 1.6em;
@@ -35,8 +41,13 @@
         color: #2f2f2f;
     }
     .icon-heart {
-        background: rgb(157,48,148);
-        background: linear-gradient(135deg, rgba(157,48,148,1) 9%, rgba(246,119,213,1) 49%, rgba(221,178,216,1) 100%);
+        background: rgb(157, 48, 148);
+        background: linear-gradient(
+            135deg,
+            rgba(157, 48, 148, 1) 9%,
+            rgba(246, 119, 213, 1) 49%,
+            rgba(221, 178, 216, 1) 100%
+        );
     }
 
     .router-link-exact-active {
@@ -47,7 +58,7 @@
     .logo-container {
         position: fixed;
         top: 0;
-        left: 1em;
+        left: 0.5em;
         height: 3.75em;
         padding-right: 2em;
         max-width: $side-nav;
@@ -63,17 +74,31 @@
             color: white;
             letter-spacing: 0.05em;
             margin: 0 0.25em;
+            display: none;
         }
     }
 
     .main-nav {
         display: flex;
         position: absolute;
-        
         width: 100%;
         // align-items: center;
         // flex-direction: column;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        .share-listen {
+            position: fixed;
+            left: calc(50% - 6em);
+            width: 12em;
+            padding: 0.5em;
+            top: 0.5em;
+            text-align: center;
+
+            .btn-share-listen {
+                width: 100%;
+                color: white;
+            }
+        }
 
         .main-links {
             display: flex;
@@ -107,14 +132,11 @@
             }
         }
     }
-
 }
 
 @include for-mobile-layout {
-    
 }
 @include for-narrow-layout {
-    
 }
 @include for-normal-layout {
     .side-nav {
@@ -125,20 +147,19 @@
         width: $side-nav;
         background: rgb(0, 0, 0);
 
-        .icon-home, .icon-search {
+        .icon-home,
+        .icon-search {
             margin-inline-end: 0.5em;
         }
         .icon-library {
             line-height: 1.3em;
-            margin-inline-end: 1em;
-            margin-inline-start: 0.1em;
+            margin-inline-end: 0.6em;
         }
-        .icon-heart, .icon-plus {
+        .icon-heart,
+        .icon-plus {
             margin-inline-end: 1.3em;
             margin-inline-start: 0.15em;
         }
-
-        
 
         .logo-container {
             position: initial;
@@ -153,17 +174,27 @@
                 width: 3.5em;
             }
             h1 {
-
                 margin: 0.5em 0.25em;
+                display: initial;
             }
-
         }
 
         .main-nav {
             display: flex;
             flex-direction: column;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
+
+            .share-listen {
+                position: relative;
+                width: 100%;
+                left: 0;
+                padding: 1.5em;
+                .btn-share-listen {
+                    // position: absolute;
+                    width: 100%;
+                }
+            }
+
             .main-links {
                 display: flex;
                 flex-direction: column;
@@ -174,7 +205,7 @@
                     width: initial;
                 }
             }
-    
+
             a {
                 width: initial;
                 display: flex;
@@ -186,7 +217,7 @@
                 font-weight: bold;
                 line-height: 2.8em;
                 border-radius: 0.25em;
-    
+
                 transition: 0.3s;
 
                 span {
@@ -200,6 +231,6 @@
         }
     }
 }
+
 @include for-wide-layout {
-    
 }

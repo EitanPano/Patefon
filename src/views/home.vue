@@ -33,6 +33,7 @@
 <script>
 import { stationService } from "../services/station.service.js";
 import stationList from "../components/station-list.vue";
+import { socketService } from "../services/socket.service";
 import mostLikedPreview from "../components/most-liked-preview.vue";
 export default {
   name: "Home",

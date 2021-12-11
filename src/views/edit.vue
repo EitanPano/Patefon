@@ -199,7 +199,7 @@ export default {
       song.isLiked = false;
       song.createdAt = Date.now();
       this.emptyStation.songs.push(song);
-      showMsg("Songname has been added");
+      showMsg(song.title+" has been added");
     },
     addTag() {
       if (this.emptyStation.tags.includes(this.tag)) return;
@@ -219,7 +219,7 @@ export default {
       const user = JSON.parse(sessionStorage.getItem("user"));
       this.emptyStation.createdBy = {
         userId : user._id,
-        name : user.username,
+        name : user.username.charAt(0).toUpperCase() + user.username.slice(1,user.username.length),
       }
       this.emptyStation.imgUrl = this.emptyStation.imgUrl
         ? this.emptyStation.imgUrl

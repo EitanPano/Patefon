@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      isLikedStation: null,
+      // isLikedStation: null,
       user : null,
       mouseMoveInterval : null,
       myMouseCoords : null,
@@ -66,6 +66,12 @@ export default {
         "grad-green",
       ],
     };
+  },
+  created() {
+    socketService.on('get update stations' ,msg => {
+               console.log('erereerer')
+            window.location.reload();
+            })
   },
   mounted() {
      this.user = JSON.parse(sessionStorage.getItem('user'));
@@ -89,8 +95,8 @@ export default {
         newStation.songs.splice(moved.newIndex, 0, moved.element);
         // console.log('newStation', newStation);
         await this.$store.dispatch({
-          type: "updateStation",
-          station: newStation,
+          type: "updateStationDrag",
+          station: newStation,moved
         });
       } catch (err) {
         console.log(err);

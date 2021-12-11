@@ -19,37 +19,37 @@
     <p>{{ showSongCreatedAt }}</p>
     <div class="last song-actions">
       <button
+        v-if="!isOpenRemoveModal"
         class="btn btn-like"
         @click="likeSong"
         v-bind:class="{ liked: isLiked }"
       >
         ❤
       </button>
-      <p>{{ song.duration }}</p>
-      <button
-        @click="removeSong(song.id)"
-        v-if="isHover && !isSearch && !isLiked"
-        class="btn btn-delete"
-      >
-        ✖
-      </button>
+      <p v-if="!isOpenRemoveModal">{{ song.duration }}</p>
+       <button @click="openRemoveModal" v-if="isHover && !isSearch && !isLiked && !isOpenRemoveModal" class="btn btn-delete" > ✖</button>
+       <div class="removeModal" v-if="isOpenRemoveModal"> Are You Sure? <button @click="removeSong(song.id)"> 🗑</button></div>
+      <!-- <button @click="removeSong(song.id)" v-if="isHover && !isSearch && !isLiked" class="btn btn-delete" > ✖</button> -->
     </div>
     <!-- && !isLikedStation -->
   </article>
 </template>
 
 <script>
+import { showMsg } from "../services/event-bus.service.js";
 export default {
   props: ["song", "idx", "isSearch", "isSearchHistory", "isLikedPage"],
   data() {
     return {
       isHover: false,
+      isOpenRemoveModal : false,
     };
   },
   created() {},
   methods: {
     removeSong(songId) {
-      if (confirm("Remove Song?")) this.$emit("removeSong", songId);
+     this.$emit("removeSong", songId);
+     showMsg(this.song.title + ' has been removed');
     },
     songToPlayer(song, idx) {
       this.$emit("songToPlayer", song, idx, this.isSearchHistory);
@@ -67,6 +67,12 @@ export default {
       if (idx < 0) return false;
       return true;
     },
+    openRemoveModal() {
+      this.isOpenRemoveModal = true;
+      setTimeout( () => {
+        this.isOpenRemoveModal = false;
+      },2000)
+    }
   },
   computed: {
     isLiked() {

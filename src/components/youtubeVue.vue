@@ -28,16 +28,16 @@
         <button @click="shuffle">
           <span class="material-icons">shuffle</span>
         </button>
-        <button @click="goPrevSong">
-          <span class="material-icons">skip_previous</span>
+        <button @click="goPrevSong" >
+          <span class="material-icons" >skip_previous</span>
         </button>
-        <button v-if="isPlayed" @click="pauseVideo" class="btn btn-play">
+        <button v-if="isPlayed" @click="pauseVideo" class="btn btn-play" >
           <span class="material-icons">pause</span>
         </button>
-        <button v-else @click="play" class="btn btn-play">
+        <button v-else @click="play" class="btn btn-play" >
           <span class="material-icons">play_arrow</span>
         </button>
-        <button @click="goNextSong">
+        <button @click="goNextSong" >
           <span class="material-icons">skip_next</span>
         </button>
         <button @click="loop"><span class="material-icons">loop</span></button>
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+import { showMsg } from "../services/event-bus.service.js";
 import { socketService } from "../services/socket.service.js";
 export default {
   props: ["playListData"],
@@ -113,6 +114,10 @@ export default {
   },
   methods: {
     play() {
+      if (!this.localPlayListData) {
+            showMsg("Please play a song, from a playlist");
+        return
+      }
       const playerData = {
         songIdx: this.songIdx,
         playList: this.playList,
@@ -145,13 +150,14 @@ export default {
       this.play();
     },
     loadPlayList() {
+      const startTime = (this.currentTime)? this.currentTime:0;
       let songIds = this.localPlayListData.station.songs.map(
         (song) => song.youtubeId
       );
       this.player.loadPlaylist({
         playlist: songIds,
         index: this.localPlayListData.idx,
-        startSeconds: 0,
+        startSeconds: startTime,
       });
       this.playVideo();
       setTimeout(() => {
@@ -176,12 +182,20 @@ export default {
     },
 
     goNextSong() {
+        if (!this.localPlayListData) {
+        showMsg("Please play a song, from a playlist");
+        return
+      }
       this.player.nextVideo();
       setTimeout(() => {
         this.play();
       }, 1000);
     },
     goPrevSong() {
+        if (!this.localPlayListData) {
+         showMsg("Please play a song, from a playlist");
+        return
+      }
       this.player.previousVideo();
       setTimeout(() => {
         this.play();

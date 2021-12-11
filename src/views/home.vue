@@ -18,14 +18,13 @@
 <script>
 import { stationService } from "../services/station.service.js";
 import stationList from "../components/station-list.vue";
+import { socketService } from "../services/socket.service";
 export default {
     name: "Home",
     components: {
         stationList,
     },
     created() {
-        // this.setGuestUser();
-        // this.$store.commit({type:'setInitalStation'});
     },
     data() {
         return {
@@ -34,16 +33,6 @@ export default {
         };
     },
     methods: {
-        // setGuestUser() {
-        //     sessionStorage.setItem(
-        //         "loggedInUser",
-        //         JSON.stringify({
-        //             name: "Patefon",
-        //             imgUrl: "https://res.cloudinary.com/nir-cloudinary/image/upload/v1638375320/patefon_olzyeg.png",
-        //             id: "111",
-        //         })
-        //     );
-        // },
         goToGenrePage(genre) {
             this.$router.push(`/genre/${genre}`);
         },

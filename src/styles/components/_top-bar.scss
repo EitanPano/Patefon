@@ -3,7 +3,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    padding: 0 1em 0 $side-nav;
+    padding: 0 0.5em 0 4.5em;
     z-index: 50;
     display: flex;
     align-items: center;
@@ -15,9 +15,7 @@
     transition: all 0.2s;
 
     .header-btns {
-        display: flex;
-        min-width: 5em;
-        justify-content: space-between;
+        display: none;
         button {
             background-color: #151515;
             color: white;
@@ -44,6 +42,7 @@
     form {
         height: em(40px);
         display: flex;
+        min-width: 8em;
         width: 100%;
 
         margin: 0 1em;
@@ -55,6 +54,8 @@
                 display: flex;
                 width: 100%;
                 max-width: em(364px);
+                margin: 0 auto;
+
                 padding: 1em;
                 border-radius: 2em;
                 border: none;
@@ -62,41 +63,25 @@
             }
         }
     }
-    .login-signup-btn {
-        button {
-            color: white;
-            padding: 0;
-            border: none;
-            background: none;
-            margin-right: 15px;
-            margin-left: 15px;
-            font-size: 1em;
-        }
-        :first-child {
-            margin-right: 30px;
-            // width:120px;
-            white-space: nowrap;
-        }
-
-        :hover {
-            color: rgb(89, 255, 47);
-        }
-    }
 
     .account-menu {
         background-color: $clr1;
         border-radius: 2.5em;
+        p {
+            display: none;
+        }
 
         .arrow-down {
             color: white;
             padding-bottom: 0.5em;
             font-size: 1.3em;
             margin: 0 0.4em;
+            display: none;
         }
         .user-icon {
             color: $clr2;
             font-size: 2.5em;
-            margin-inline-end: 0.1em;
+            margin-inline-end: 0em;
         }
     }
 }
@@ -105,5 +90,33 @@
     .top-bar {
         width: calc(100% - $side-nav);
         padding: 0 1em;
+        // padding: 0 1em 0 $side-nav;
+
+        .header-btns {
+            display: flex;
+            min-width: 5em;
+            justify-content: space-between;
+        }
+
+        .account-menu {
+            p,
+            .arrow-down {
+                display: initial;
+            }
+            .user-icon {
+                color: $clr2;
+                font-size: 2.5em;
+                margin-inline-end: 0.15em;
+            }
+        }
+        form {
+            label {
+                .search-local {
+                    margin: initial;
+                }
+            }
+        }
+
+
     }
 }

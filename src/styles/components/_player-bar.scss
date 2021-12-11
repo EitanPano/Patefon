@@ -21,21 +21,20 @@
             &:hover {
                 color: white;
             }
-            
         }
 
         .player-left {
-            position: relative;
-            grid-column: 1 / 2;
+            // position: relative;
+            // grid-column: 1 / 2;
             align-items: center;
             white-space: nowrap;
             cursor: default;
-            width: 80%;
-            max-width: 15em;
+            // width: 80%;
+            // max-width: 15em;
 
             button {
                 position: relative;
-                left: 2em;
+                // left: 2em;
 
                 span {
                     font-size: 1.5em;
@@ -71,8 +70,6 @@
 
         .player-main {
             grid-column: 2 / 3;
-            
-
 
             display: flex;
             flex-direction: column;
@@ -152,7 +149,7 @@ input[type='range']::-webkit-slider-thumb {
     background: #ffffff;
     // border-radius: 50%;
     box-shadow: -500px 0 0 500px #3d9c78;
-    
+
     &::before {
         content: '';
         height: 20px;
@@ -163,6 +160,55 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 @include for-mobile-layout {
+    .player-bar {
+        .player-grid {
+            grid-template-columns: 1fr;
+            padding: 0;
+
+            .player-left {
+                padding: 0 0.5em 0 1em;
+                position: fixed;
+                // margin: auto;
+                width: 100%;
+                top: 3.75em;
+                justify-content: space-between;
+
+                transition: all 0.2s;
+                &.scroll-bg {
+                    background-color: #333333a8;
+                }
+                img {
+                    padding: 0.2em;
+                    width: 2.4em;
+                    height: 2.4em;
+                    margin-inline-end: 1em;
+                }
+                button {
+                    margin-inline-start: 1.1em;
+                }
+            }
+
+            .player-main {
+                grid-column: auto;
+                padding: 0 2.5em;
+            }
+
+            .player-right {
+                // width:;
+                position: fixed;
+                right: -1em;
+                
+                button {
+                    position: fixed;
+                    right: 1.5em;
+                }
+                input {
+                    width: 4.7em;
+                    transform: rotate(270deg);
+                }
+            }
+        }
+    }
 }
 @include for-narrow-layout {
 }
@@ -177,7 +223,7 @@ input[type='range']::-webkit-slider-thumb {
                 &:hover {
                     color: greenyellow;
                 }
-              }
+            }
         }
     }
 }

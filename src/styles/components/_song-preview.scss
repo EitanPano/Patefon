@@ -87,3 +87,10 @@
     }
     // width: 12em;
 }
+@include for-mobile-layout {
+    .song-preview {
+        .song-details {
+            grid-column: 2 / 4;
+        }
+    }
+}

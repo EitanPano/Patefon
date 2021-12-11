@@ -8,7 +8,7 @@
         <div>
           <span class="user-icon material-icons">account_circle</span>
           <p class="line-h-0 small" v-if="songsCount && songsCount.length">
-            <span class="highlight">Guest</span> • {{ songsCount.length }} Songs
+            <span class="highlight">{{currStation.createdBy.name}}</span> • {{ songsCount.length }} Songs
           </p>
           <p
             class="line-h-0-small"
@@ -57,6 +57,7 @@
         ></path></svg
       >{{ otherMouseCoords.user }}
     </div>
+      <youtube-search @addSong="addSong" />
   </section>
 </template>
 <script>
@@ -64,11 +65,13 @@ import songList from "../components/song-list.vue";
 import chatRoom from "../components/chat-room.vue";
 import shareListen from "../components/share-listen.vue";
 import { socketService } from "../services/socket.service";
+import youtubeSearch from "../components/youtube-search.vue";
 export default {
   components: {
     songList,
     chatRoom,
     shareListen,
+    youtubeSearch
   },
   data() {
     return {
@@ -188,6 +191,19 @@ export default {
         user: this.user.username,
       };
     },
+    async addSong(song) {
+      // let currStationCopy = JSON.parse(JSON.stringify(currStation));
+           try {
+        this.currStation.songs.push(song)
+        await this.$store.dispatch({
+          type: "updateStation",
+          station: this.currStation,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      
+    }
   },
   computed: {
     isLikedStation() {

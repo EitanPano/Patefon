@@ -31,8 +31,32 @@
       @likeStation="updateUserLikedStations"
       :isLikedStation="isLikedStation"
     />
-  <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> 🖱 {{otherMouseCoords.user}} </div> -->
-  <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(-90deg);"><path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 01.103.557L8.528 15.467a.5.5 0 01-.917-.007L5.57 10.694.803 8.652a.5.5 0 01-.006-.916l12.728-5.657a.5.5 0 01.556.103z" clip-rule="evenodd"></path></svg>{{otherMouseCoords.user}}</div>
+    <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> 🖱 {{otherMouseCoords.user}} </div> -->
+    <div
+      v-if="otherMouseCoords"
+      class="socketMouse"
+      :style="{
+        left: otherMouseCoords.x + 'px',
+        top: otherMouseCoords.y + 'px',
+      }"
+    >
+      <svg
+        stroke="currentColor"
+        fill="currentColor"
+        stroke-width="0"
+        viewBox="0 0 16 16"
+        height="1em"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+        style="transform: rotate(-90deg)"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M14.082 2.182a.5.5 0 01.103.557L8.528 15.467a.5.5 0 01-.917-.007L5.57 10.694.803 8.652a.5.5 0 01-.006-.916l12.728-5.657a.5.5 0 01.556.103z"
+          clip-rule="evenodd"
+        ></path></svg
+      >{{ otherMouseCoords.user }}
+    </div>
   </section>
 </template>
 
@@ -74,18 +98,18 @@ export default {
             })
   },
   mounted() {
-     this.user = JSON.parse(sessionStorage.getItem('user'));
+    this.user = JSON.parse(sessionStorage.getItem("user"));
     //   window.addEventListener('mousemove', ev=> {
     //   this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: user.username};
     // })
-  window.addEventListener('mousemove',this.getWindowOffset)
-      this.mouseMoveInterval = setInterval ( ()=>{
-        socketService.emit('send mousemove',this.myMouseCoords )
-      },100)
-      socketService.on('get mousemove',mouseCoords => {
-        // console.log(mouseCoords)
-        this.otherMouseCoords = mouseCoords;
-      } )
+    window.addEventListener("mousemove", this.getWindowOffset);
+    this.mouseMoveInterval = setInterval(() => {
+      socketService.emit("send mousemove", this.myMouseCoords);
+    }, 100);
+    socketService.on("get mousemove", (mouseCoords) => {
+      // console.log(mouseCoords)
+      this.otherMouseCoords = mouseCoords;
+    });
   },
   methods: {
     async swapIdxs(moved) {
@@ -155,7 +179,7 @@ export default {
       });
       socketService.off("get share-listen");
       clearInterval(this.mouseMoveInterval);
-           window.removeEventListener('mousemove', this.getWindowOffset)
+      window.removeEventListener("mousemove", this.getWindowOffset);
     },
     checkIfStationLiked(likedStations) {
       var idx = likedStations.findIndex(
@@ -164,9 +188,13 @@ export default {
       if (idx < 0) return false;
       return true;
     },
-    getWindowOffset (ev) {
- this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: this.user.username};
-    }
+    getWindowOffset(ev) {
+      this.myMouseCoords = {
+        x: ev.clientX,
+        y: ev.clientY,
+        user: this.user.username,
+      };
+    },
   },
 
   computed: {

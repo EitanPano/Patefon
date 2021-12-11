@@ -169,10 +169,10 @@ export default {
         "Mix",
         "Israeli",
         "Electronic",
-         "Latin",
-         "Hits",
-         "Prog",
-         "Raggae"
+        "Latin",
+        "Hits",
+        "Prog",
+        "Raggae",
       ],
       tags: [
         "Cool",
@@ -237,7 +237,7 @@ export default {
           station: addedStation,
         });
         this.emptyStation = stationService.getEmptystation();
-        this.$router.push("/");
+        this.$router.push("/library");
         showMsg("Station has been added");
       } catch (err) {
         console.log(err);

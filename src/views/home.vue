@@ -8,13 +8,11 @@
         v-if="mostLikedStations && mostLikedStations.length"
       >
         <li v-for="station in mostLikedStations" :key="station._id">
-          <most-liked-preview
-            :station="station"
-            @remove="remove"
-            @update="update"
-          />
+          <most-liked-preview :station="station" />
         </li>
       </ul>
+      <!-- @remove="remove"
+            @update="update" -->
     </div>
     <div
       class="station-list-container"

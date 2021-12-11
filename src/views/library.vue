@@ -51,22 +51,10 @@ export default {
       return this.$store.getters.getStations;
     },
     userStations() {
-      // let likedStationsIds = this.$store.getters.likedStations;
-      // let createdStationsIds = this.$store.getters.createdStations;
-      // console.log(likedStationsIds);
-      // console.log(createdStationsIds);
-      // var stationsArr = this.convertIdsToStations(
-      //   likedStationsIds,
-      //   createdStationsIds
-      // );
-      // return stationsArr;
       let stations = this.$store.getters.getStations;
       let filteredCreatedStations = stations.filter((station) => {
-        // console.log(station.createdBy.userId);
-        // console.log(this.$store.getters.loggedUser._id);
         return station.createdBy.userId === this.$store.getters.loggedUser._id;
       });
-
       let filteredLikedStations =
         this.$store.getters.loggedUser.likedStations.map((id) => {
           let filteredStations = stations.filter(
@@ -77,6 +65,7 @@ export default {
       let stationsForPreview = filteredCreatedStations.concat(
         filteredLikedStations
       );
+      console.log(stationsForPreview);
       return stationsForPreview;
     },
     likedSongs() {

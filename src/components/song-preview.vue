@@ -25,7 +25,7 @@
             >
                 ❤
             </button>
-            <p v-if="!isOpenRemoveModal">{{ song.duration }}</p>
+            <p>{{ song.duration }}</p>
             <button
                 @click="openRemoveModal"
                 v-if="isHover && !isSearch && !isLiked && !isOpenRemoveModal"
@@ -34,7 +34,7 @@
                 ✖
             </button>
             <div class="removeModal" v-if="isOpenRemoveModal">
-                Are You Sure? <button @click="removeSong(song.id)">🗑</button>
+                 <button @click="removeSong(song.id)">🗑</button>
             </div>
         </div>
         <!-- && !isLikedStation -->

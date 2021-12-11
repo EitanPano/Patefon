@@ -1,7 +1,7 @@
 <template>
     <section class="chat-room">
-        <button v-if="!isChatModalOpen" class="btn-chat">
-            <span class="material-icons" @click="openChatModal">textsms</span>
+        <button v-if="!isChatModalOpen" class="btn-chat" @click="openChatModal">
+            <span class="material-icons" >textsms</span>
         </button>
         <transition name="rise">
             <div v-if="isChatModalOpen" class="chat">

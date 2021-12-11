@@ -1,5 +1,5 @@
 <template>
-    <section class="song-list" :class="searchList">
+    <section id="drop-zone" class="song-list" :class="searchList">
         <div v-if="!isSearch" class="flex actions">
             <button class="btn btn-play" @click="songToPlayer">
                 <span class="material-icons">play_arrow</span>
@@ -25,10 +25,10 @@
             <p class="last"><img src="@/assets/icons/time.svg" alt="" /></p>
         </div>
 
-        <ul>
+        <!-- <ul> -->
             <draggable
                 :value="songs"
-                class="list-group"
+                class="drop-zone"
                 tag="ul"
                 v-bind="dragOptions"
                 @start="grab"
@@ -59,7 +59,7 @@
                     </li>
                 </transition-group>
             </draggable>
-        </ul>
+        <!-- </ul> -->
     </section>
 </template>
 

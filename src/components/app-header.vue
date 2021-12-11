@@ -5,7 +5,11 @@
       <button @click="goBack()">
         <span class="arrow-backward material-icons"> arrow_back_ios </span>
       </button>
-      <button @click="goNext()">
+      <button
+        :disabled="isDisabled"
+        v-bind:class="{ disabled: isDisabled }"
+        @click="goNext()"
+      >
         <span class="arrow-forward material-icons"> arrow_forward_ios </span>
       </button>
       <!-- <div class="library-bar flex" v-if="isLibrary"></div> -->
@@ -39,7 +43,9 @@
 
     <transition name="fade">
       <div @click="isUserMenu = false" class="user-menu" v-if="isUserMenu">
-        <router-link to="/auth" v-if="loggedUser.username === 'guest'">Sign In</router-link>
+        <router-link to="/auth" v-if="loggedUser.username === 'guest'"
+          >Sign In</router-link
+        >
         <a v-else @click="logout">Log Out</a>
         <router-link to="/auth">Profile</router-link>
         <router-link to="/auth">About</router-link>
@@ -55,6 +61,8 @@ export default {
       isUserMenu: false,
       isSearch: false,
       scrollOffsetY: null,
+      currPage: null,
+      isDisabled: false,
     };
   },
   created() {
@@ -77,18 +85,36 @@ export default {
     },
     topBar() {
       if (this.scrollOffsetY < 60) return "transparent; box-shadow: none;";
-      else if (this.scrollOffsetY < 120) return "rgba(50,50,50,0.5); box-shadow: none;";
+      else if (this.scrollOffsetY < 120)
+        return "rgba(50,50,50,0.5); box-shadow: none;";
       else
         return "rgba(50,50,50,0.97); box-shadow: inset 8em 0 3em 0 rgb(20, 20, 20);";
     },
   },
   methods: {
+    goBack() {
+      console.log("hello");
+      this.$router.go(-1);
+    },
+    goNext() {
+      console.log("hello?");
+      switch (this.currPage) {
+        case "Home":
+          this.$router.push("/search");
+          break;
+        case "Search":
+          this.$router.push("/library");
+          break;
+        case "Library":
+          this.$router.push("/");
+          break;
+      }
+    },
     handleScroll() {
       this.scrollOffsetY = window.scrollY;
     },
     logout() {
       this.$store.dispatch({ type: "setLogout" });
-
     },
     async filterSongs() {
       if (this.filterBy.txt === "") {
@@ -99,7 +125,6 @@ export default {
           type: "loadStations",
           filterBy: this.filterBy,
         });
-
       } catch (err) {
         console.log(err);
         throw err;
@@ -117,8 +142,21 @@ export default {
     $route: {
       async handler() {
         try {
-          if (this.$route.name === "Search") this.isSearch = true;
-          else this.isSearch = false;
+          if (this.$route.name === "Home") this.currPage = "Home";
+          else if (this.$route.name === "Library") this.currPage = "Library";
+          else if (this.$route.name === "Search") {
+            this.isSearch = true;
+            this.currPage = "Search";
+          } else this.isSearch = false;
+
+          if (
+            this.$route.name === "Edit" ||
+            this.$route.name === "likedStation" ||
+            this.$route.name === "Station" ||
+            this.$route.name === "Genre"
+          )
+            this.isDisabled = true;
+          else this.isDisabled = false;
         } catch (err) {
           console.log(err);
         }

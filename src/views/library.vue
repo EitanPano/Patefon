@@ -3,7 +3,10 @@
     <h1 class="full highlight">Playlists</h1>
     <div class="grid-container full">
       <aside @click="goLikedSongs" class="btn-liked-songs">
-        <p>Lorem ipsum dolor sit amet consectetur</p>
+        <!-- <p v-for="song in likedSongs.slice(0, 4)" :key="song.id">
+          <span class="inline">&nbsp;•{{ song.title }}&nbsp;• </span>
+        </p> -->
+        <p>{{ likedSongsForPreview }}</p>
         <h2>Liked Songs</h2>
         <p v-if="likedSongs">
           <span>{{ likedSongs.length }}</span> liked songs
@@ -66,8 +69,14 @@ export default {
       return stationsForPreview;
     },
     likedSongs() {
-      // console.log(this.$store.getters.likedSongs);
       return this.$store.getters.likedSongs;
+    },
+    likedSongsForPreview() {
+      let songs = this.$store.getters.likedSongs.slice(0, 5);
+      let titles = songs.map((song) => song.title);
+      console.log(titles.join("•").length);
+      // if(titles.join("•").length)
+      return titles.join("•");
     },
   },
   components: {
@@ -78,4 +87,7 @@ export default {
 </script>
 
 <style>
+.inline {
+  display: inline-block;
+}
 </style>

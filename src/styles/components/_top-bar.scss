@@ -16,7 +16,12 @@
 
     .header-btns {
         display: none;
+        .disabled{
+            background-color: #333333a8;
+            cursor: not-allowed;
+        }
         button {
+            
             background-color: #151515;
             color: white;
             border: none;

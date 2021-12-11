@@ -8,15 +8,15 @@
         <div>
           <span class="user-icon material-icons">account_circle</span>
           <p class="line-h-0 small" v-if="songsCount && songsCount.length">
-            <span class="highlight">{{currStation.createdBy.name}}</span> • {{ songsCount.length }} Songs
+            <span class="highlight">{{ currStation.createdBy.name }}</span> •
+            {{ songsCount.length }} Songs
           </p>
+
           <p
-            class="line-h-0-small"
-            v-if="currStation.likesCounter && currStation.likesCounter.length"
+            class="line-h-0 small"
+            v-if="currStation && currStation.likesCounter"
           >
-            <span class="highlight"
-              >• {{ currStation.likesCounter }} Likes
-            </span>
+            <span> &nbsp;• {{ currStation.likesCounter }} Likes </span>
           </p>
         </div>
       </div>
@@ -57,7 +57,7 @@
         ></path></svg
       >{{ otherMouseCoords.user }}
     </div>
-      <youtube-search @addSong="addSong" />
+    <youtube-search @addSong="addSong" />
   </section>
 </template>
 <script>
@@ -71,15 +71,15 @@ export default {
     songList,
     chatRoom,
     shareListen,
-    youtubeSearch
+    youtubeSearch,
   },
   data() {
     return {
       // isLikedStation: null,
-      user : null,
-      mouseMoveInterval : null,
-      myMouseCoords : null,
-      otherMouseCoords : null,
+      user: null,
+      mouseMoveInterval: null,
+      myMouseCoords: null,
+      otherMouseCoords: null,
       gradients: [
         "grad-red",
         "grad-sky",
@@ -93,9 +93,9 @@ export default {
     };
   },
   created() {
-    socketService.on('get update stations' ,msg => {
-            window.location.reload();
-            })
+    socketService.on("get update stations", (msg) => {
+      window.location.reload();
+    });
   },
   mounted() {
     this.user = JSON.parse(sessionStorage.getItem("user"));
@@ -119,7 +119,8 @@ export default {
         newStation.songs.splice(moved.newIndex, 0, moved.element);
         await this.$store.dispatch({
           type: "updateStationDrag",
-          station: newStation,moved
+          station: newStation,
+          moved,
         });
       } catch (err) {
         console.log(err);
@@ -193,8 +194,8 @@ export default {
     },
     async addSong(song) {
       // let currStationCopy = JSON.parse(JSON.stringify(currStation));
-           try {
-        this.currStation.songs.push(song)
+      try {
+        this.currStation.songs.push(song);
         await this.$store.dispatch({
           type: "updateStation",
           station: this.currStation,
@@ -202,8 +203,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      
-    }
+    },
   },
   computed: {
     isLikedStation() {

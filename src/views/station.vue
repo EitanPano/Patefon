@@ -21,7 +21,6 @@
         </div>
       </div>
     </main>
-    <chat-room :currStation="currStation" v-if="currStation" />
     <song-list
       :songs="currStation.songs"
       @removeSong="removeSong"
@@ -31,7 +30,9 @@
       @likeStation="updateUserLikedStations"
       :isLikedStation="isLikedStation"
     />
+    <youtube-search @addSong="addSong" />
     <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> :three_button_mouse: {{otherMouseCoords.user}} </div> -->
+    <chat-room :currStation="currStation" v-if="currStation" />
     <div
       v-if="otherMouseCoords"
       class="socketMouse"
@@ -57,7 +58,6 @@
         ></path></svg
       >{{ otherMouseCoords.user }}
     </div>
-    <youtube-search @addSong="addSong" />
   </section>
 </template>
 <script>
@@ -199,7 +199,9 @@ export default {
     async addSong(song) {
       // let currStationCopy = JSON.parse(JSON.stringify(currStation));
       try {
-        this.currStation.songs.push(song);
+        if (song.idx !== null || song.idx === 0) {
+          this.currStation.songs.splice(song.idx, 0, song);
+        } else this.currStation.songs.push(song);
         await this.$store.dispatch({
           type: "updateStation",
           station: this.currStation,

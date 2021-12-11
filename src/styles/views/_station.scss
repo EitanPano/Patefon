@@ -3,8 +3,17 @@
     padding-top: $top-bar;
     padding-bottom: 6em;
 
-    .song-list {
-        min-height: 58vh;
+    // .song-list {
+    //     min-height: 58vh;
+    // }
+
+    .global-search {
+        padding-left: calc(2.2vw + 1.4em) ;
+        background: rgba(21, 21, 21, 0.35);
+
+        .btn-add {
+            margin-left: 1.5vw;
+        }
     }
 
     main {

@@ -30,7 +30,7 @@
                 </div>
             </div>
         </main>
-        
+
         <song-list
             :songs="currStation.songs"
             @removeSong="removeSong"
@@ -208,8 +208,7 @@ export default {
             try {
                 if (song.idx !== null || song.idx === 0) {
                     this.currStation.songs.splice(song.idx, 0, song);
-                }
-                else this.currStation.songs.push(song);
+                } else this.currStation.songs.push(song);
                 await this.$store.dispatch({
                     type: "updateStation",
                     station: this.currStation,

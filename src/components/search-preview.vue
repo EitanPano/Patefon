@@ -1,5 +1,6 @@
 <template>
         <!-- v-model="testArr" -->
+        <!-- ref="dropZone"  -->
     <draggable
         class="list-group"
         tag="ul"
@@ -54,9 +55,13 @@ export default {
             this.drag = true;
         },
         drop(ev) {
-            console.log(ev.to);
-            this.addSong(this.youtubeItem, ev.newIndex)
-            this.drag = false;
+            console.log(ev);
+            if (ev.to.parentElement.className === 'drop-zone') {
+                ev.originalEvent.path[2].style.display = 'none';
+                // ev.from.originalEvent.path[2].hidden = true
+                this.addSong(this.youtubeItem, ev.newIndex)
+                this.drag = false;
+            }
         },
     },
     computed: {

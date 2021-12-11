@@ -8,8 +8,8 @@
         @click="likeStation()"
         class="btn-blend btn-like"
         v-bind:class="{ liked: isLikedStation }"
-        v-if="notUsersStation"
       >
+        <!-- v-if="notUsersStation" -->
         <span v-if="!isLikedStation" class="material-icons"
           >favorite_border</span
         >

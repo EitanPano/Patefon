@@ -107,8 +107,9 @@ export default {
         grab() {
             this.drag = true;
         },
-        drop() {
+        drop(ev) {
             this.drag = false;
+            console.log(ev)
         },
         saveToHistory(action) {
             this.$emit("saveToHistory", action);

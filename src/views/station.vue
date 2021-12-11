@@ -33,11 +33,11 @@
     />
     <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> :three_button_mouse: {{otherMouseCoords.user}} </div> -->
     <div
-      v-if="otherMouseCoords"
+      v-if="otherMouseCoords && otherScreen"
       class="socketMouse"
       :style="{
-        left: otherMouseCoords.x + 'px',
-        top: otherMouseCoords.y + 'px',
+        left: otherMouseCoords.x*(myScreen.x/otherScreen.x) + 'px',
+        top: otherMouseCoords.y*(myScreen.y/otherScreen.y) + 'px',
       }"
     >
       <svg
@@ -80,6 +80,8 @@ export default {
       mouseMoveInterval : null,
       myMouseCoords : null,
       otherMouseCoords : null,
+      myScreen : {x:window.innerWidth, y:window.innerHeight},
+      otherScreen : null,
       gradients: [
         "grad-red",
         "grad-sky",
@@ -104,11 +106,12 @@ export default {
     // })
     window.addEventListener("mousemove", this.getWindowOffset);
     this.mouseMoveInterval = setInterval(() => {
-      socketService.emit("send mousemove", this.myMouseCoords);
+      socketService.emit("send mousemove", {mousecoord:this.myMouseCoords,screen:{x:window.innerWidth,y:window.innerHeight}});
     }, 100);
     socketService.on("get mousemove", (mouseCoords) => {
       // console.log(mouseCoords)
-      this.otherMouseCoords = mouseCoords;
+      this.otherMouseCoords = mouseCoords.mousecoord;
+      this.otherScreen = mouseCoords.screen;
     });
   },
   methods: {

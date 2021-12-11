@@ -74,9 +74,10 @@ function getEmptyUser() {
         searchHistory:[],
         stations:[],
         likedStations:[],
-        createdStations:[]
-
-    
+        createdStations:[],
+        following : [],
+        isAdmin : false,
+        
     }
 }
 

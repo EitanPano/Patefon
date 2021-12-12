@@ -142,21 +142,13 @@ export default {
     $route: {
       async handler() {
         try {
-          if (this.$route.name === "Home") this.currPage = "Home";
-          else if (this.$route.name === "Library") this.currPage = "Library";
-          else if (this.$route.name === "Search") {
-            this.isSearch = true;
-            this.currPage = "Search";
-          } else this.isSearch = false;
-
-          if (
-            this.$route.name === "Edit" ||
-            this.$route.name === "likedStation" ||
-            this.$route.name === "Station" ||
-            this.$route.name === "Genre"
-          )
-            this.isDisabled = true;
-          else this.isDisabled = false;
+          this.currPage = this.$route.name;
+          this.isSearch = (this.currPage === 'Search')
+          this.isDisabled = (
+            this.currPage !== 'Search' &&
+            this.currPage !== 'Home' &&
+            this.currPage !== 'Library'
+            )
         } catch (err) {
           console.log(err);
         }

@@ -1,7 +1,8 @@
 <template>
 <section class="announcements">
     <!-- {{chatMsgs}} -->
-    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >Listen With {{StationIdsAndName.from}} at: {{StationIdsAndName.stationName}} </p>
+    <!-- <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >Listen With {{StationIdsAndName.from}} at: {{StationIdsAndName.stationName}} </p> -->
+    <p v-if="StationIdsAndNames.length" @click="goToStation(StationIdsAndNames[0].id)" >Listen With {{StationIdsAndNames[0].from}} at: {{StationIdsAndNames[0].stationName}} </p>
     <!-- <p v-html="chatMsgs"> </p> -->
     </section>
 </template>
@@ -31,7 +32,7 @@ export default {
       goToStation(stationId) {
         this.$router.push('/station/' + stationId);
          socketService.emit('chat topic', stationId)
-        // this.newMsg = null;
+        this.StationIdsAndNames = [];
       }
     },
     computed: {

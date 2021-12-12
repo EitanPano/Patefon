@@ -34,11 +34,11 @@
     <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> :three_button_mouse: {{otherMouseCoords.user}} </div> -->
     <chat-room :currStation="currStation" v-if="currStation" />
     <div
-      v-if="otherMouseCoords"
+      v-if="otherMouseCoords && myMouseCoords && otherMouseRatio && myScreen"
       class="socketMouse"
       :style="{
-        left: otherMouseCoords.x + 'px',
-        top: otherMouseCoords.y + 'px',
+        left: myScreen.x*otherMouseRatio.x + 'px',
+        top: myScreen.y*otherMouseRatio.y + 'px',
       }"
     >
       <svg
@@ -79,8 +79,10 @@ export default {
       // isLikedStation: null,
       user: null,
       mouseMoveInterval: null,
-      myMouseCoords: null,
+      myMouseCoords: {x:200,y:200},
       otherMouseCoords: null,
+      otherMouseRatio : null,
+      myScreen : {x:200,y:200},
       gradients: [
         "grad-red",
         "grad-sky",
@@ -99,17 +101,27 @@ export default {
     });
   },
   mounted() {
-    this.user = JSON.parse(sessionStorage.getItem("user"));
-    //   window.addEventListener('mousemove', ev=> {
-    //   this.myMouseCoords = {x:ev.clientX,y:ev.clientY,user: user.username};
-    // })
+    // this.user = JSON.parse(sessionStorage.getItem("user"));
+    // window.addEventListener("mousemove", this.getWindowOffset);
+    // this.mouseMoveInterval = setInterval(() => {
+    //   socketService.emit("send mousemove", this.myMouseCoords);
+    // }, 100);
+    // socketService.on("get mousemove", (mouseCoords) => {
+    //   this.otherMouseCoords = mouseCoords;
+    // });
+
+        this.user = JSON.parse(sessionStorage.getItem("user"));
     window.addEventListener("mousemove", this.getWindowOffset);
     this.mouseMoveInterval = setInterval(() => {
-      socketService.emit("send mousemove", this.myMouseCoords);
+       this.myScreen = {x:window.innerWidth, y:window.innerHeight};
+      //  console.log(this.myScreen)
+      socketService.emit("send mousemove", {mymouseCoords :this.myMouseCoords, ratio : {x:this.myMouseCoords.x/this.myScreen.x, y:this.myMouseCoords.y/this.myScreen.y} });
     }, 100);
     socketService.on("get mousemove", (mouseCoords) => {
-      // console.log(mouseCoords)
-      this.otherMouseCoords = mouseCoords;
+      this.otherMouseCoords = mouseCoords.mymouseCoords;
+      // console.log(this.otherMouseCoords)
+      this.otherMouseRatio = mouseCoords.ratio;
+      // console.log(this.otherMouseRatio)
     });
   },
   methods: {
@@ -176,8 +188,10 @@ export default {
         filterBy: {},
       });
       socketService.off("get share-listen");
+      socketService.off("get mousemove");
       clearInterval(this.mouseMoveInterval);
       window.removeEventListener("mousemove", this.getWindowOffset);
+      this.otherMouseRatio = {x:0,y:0};
     },
     checkIfStationLiked(likedStations) {
       var idx = likedStations.findIndex(
@@ -199,6 +213,7 @@ export default {
     async addSong(song) {
       // let currStationCopy = JSON.parse(JSON.stringify(currStation));
       try {
+        song.createdAt = Date.now();
         if (song.idx !== null || song.idx === 0) {
           this.currStation.songs.splice(song.idx, 0, song);
         } else this.currStation.songs.push(song);

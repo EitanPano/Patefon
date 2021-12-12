@@ -209,7 +209,9 @@ export default {
             this.emptyStation.songs.splice(idx, 1);
         },
         async saveStation() {
-            const user = JSON.parse(sessionStorage.getItem("user"));
+            if (!this.emptyStation.name) this.emptyStation.name = 'Playlist #' + this.loggedUser.createdStations.length+1;
+            if(!this.emptyStation.genre) this.emptyStation.genre = 'Random';
+            const user = this.loggedUser;
             this.emptyStation.createdBy = {
                 userId: user._id,
                 name:
@@ -246,6 +248,11 @@ export default {
             });
         },
     },
+    computed : {
+        loggedUser() {
+            return this.$store.getters.loggedUser;
+        }
+    }
 };
 </script>
 

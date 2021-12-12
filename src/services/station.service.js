@@ -118,7 +118,7 @@ async function save(station) {
 function getEmptystation() {
     return {
         name: "",
-        description: "",
+        description: "no description",
         imgUrl: "",
         tags: [],
         genre: "",

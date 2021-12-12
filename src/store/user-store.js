@@ -3,7 +3,7 @@ import { authService } from '../services/auth.service.js';
 
 export const userStore = {
     state: {
-        loggedUser: null,
+        loggedUser: {},
     },
     getters: {
         loggedUser(state) {
@@ -36,6 +36,7 @@ export const userStore = {
         async setInitialLogin({ commit }) {
             try {
                 let loggedUser = await authService.initialLogin();
+                console.log(loggedUser)
                 commit({ type: 'setUser', loggedUser });
                 return loggedUser;
             } catch (err) {

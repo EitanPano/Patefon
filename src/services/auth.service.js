@@ -22,26 +22,26 @@ export const authService = {
 async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username)
     // return _saveLocalUser(user)
-    try{
+    try {
         const user = await httpService.post(`${AUTH_URL}login`, userCred)
+        console.log(user);
         // socketService.emit('set-user-socket', user._id);
         // console.log('user from service',user);
         if (user) return _saveLocalUser(user)
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 }
-async function initialLogin(){
-    let user=userService.getLoggedinUser()
-    if(!user){
-        user= await loginGuestUser()
-        return user
-    }else return user
+async function initialLogin() {
+    const user = await loginGuestUser()
+    console.log(user);
+    return user
 }
 
-async function loginGuestUser(){
-   var guestUser= await login({username:'guest',password:1234});
-   return guestUser
+
+async function loginGuestUser() {
+    const guestUser = await login({ username: 'guest', password: '1234' });
+    return guestUser
 }
 
 async function logout() {

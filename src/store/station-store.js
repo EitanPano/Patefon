@@ -129,8 +129,8 @@ export const stationStore = {
                     commit({ type: "setCurrStation", station });
                     return station;
                 }
-            } catch {
-
+            } catch (err){
+                console.log(err);
             }
         },
         async loadStations({ commit,dispatch }, { filterBy }) {

@@ -1,7 +1,8 @@
 <template>
 <section class="announcements">
     <!-- {{chatMsgs}} -->
-    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >Listen with {{StationIdsAndName.from[0].toUpperCase() + StationIdsAndName.from.slice(1)}} at: {{StationIdsAndName.stationName}} </p>
+    <h3 v-if="windowWidth > 768"> BROADCASTS </h3>
+    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >{{StationIdsAndName.from[0].toUpperCase() + StationIdsAndName.from.slice(1)}} - <span class="fake-btn">{{StationIdsAndName.stationName}}</span> </p>
     <!-- <p v-if="StationIdsAndNames.length" @click="goToStation(StationIdsAndNames[0].id)" >Listen With {{StationIdsAndNames[0].from}} at: {{StationIdsAndNames[0].stationName}} </p> -->
     <!-- <p v-html="chatMsgs"> </p> -->
     </section>
@@ -42,6 +43,10 @@ export default {
     computed: {
       getStations() {
       return this.$store.getters.getStations;
+      },
+      windowWidth() {
+        console.log(window.innerWidth);
+        return window.innerWidth
       }
     
     }

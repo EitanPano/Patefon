@@ -13,8 +13,11 @@ import "./styles/styles.scss";
 Vue.config.productionTip = false;
 
 new Vue({
-  created() {
-    this.$store.dispatch({type:'setInitialLogin'})
+  async created() {
+    // setTimeout( ()=>{
+    //   this.$store.dispatch({type:'setInitialLogin'})
+    // },500) 
+    await this.$store.dispatch({type:'setInitialLogin'})
     this.$store.dispatch({ type: "loadStations", filterBy: {} });
   },
   router,

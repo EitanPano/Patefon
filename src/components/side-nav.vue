@@ -36,7 +36,6 @@ announcements
         return {
             isMenuOpen: false,
             widthOutput: null,
-            user : JSON.parse(sessionStorage.getItem('user')),
         }
     },
     methods: {

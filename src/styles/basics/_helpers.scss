@@ -267,8 +267,14 @@
     }
 }
 
+.cursor-text {
+    line-height: 0;
+    font-size: 0.9em;
+}
+
 @include for-mobile-layout {
     .layout-padding {
         padding: 4.5em 2vw 10em 2vw;
     }
 }
+

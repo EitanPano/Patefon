@@ -23,7 +23,7 @@
                 @click="likeSong"
                 v-bind:class="{ liked: isLiked }"
             >
-                ❤
+                <span class="material-icons"> favorite </span>
             </button>
             <p>{{ song.duration }}</p>
             <button
@@ -74,6 +74,8 @@ export default {
         },
         likeSong() {
             this.$emit("likeSong", { song: this.song, type: "like" });
+            if (this.isLiked) showMsg('Song has been unliked');
+            else showMsg('Song has been liked');
         },
         checkIfSongLiked(likedSongs) {
             var idx = likedSongs.findIndex(
@@ -101,25 +103,25 @@ export default {
         },
         showSongCreatedAt() {
             if (Date.now() - this.song.createdAt < 1000 * 60 * 5)
-                return "Just Now";
+                return "just now";
             else if (Date.now() - this.song.createdAt < 1000 * 60 * 60)
-                return "Last Hour";
+                return "last hour";
             else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24)
-                return "Today";
+                return "today";
             else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24 * 2)
-                return "Yesturday";
+                return "yesturday";
             else if (Date.now() - this.song.createdAt < 1000 * 60 * 60 * 24 * 7)
-                return "Week Ago";
+                return "a week ago";
             else if (
                 Date.now() - this.song.createdAt <
                 1000 * 60 * 60 * 24 * 28
             )
-                return "Month Ago";
+                return "a month ago";
             else if (
                 Date.now() - this.song.createdAt >
                 1000 * 60 * 60 * 24 * 28
             )
-                return "Long Time";
+                return "a year ago";
         },
     },
 };

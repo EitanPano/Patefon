@@ -1,7 +1,7 @@
 <template>
 <section class="announcements">
     <!-- {{chatMsgs}} -->
-    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >Listen With {{StationIdsAndName.from}} at: {{StationIdsAndName.stationName}} </p>
+    <p v-for="(StationIdsAndName,idx) in StationIdsAndNames" :key="idx" @click="goToStation(StationIdsAndName.id)" >Listen with {{StationIdsAndName.from}} at: {{StationIdsAndName.stationName}} </p>
     <!-- <p v-html="chatMsgs"> </p> -->
     </section>
 </template>

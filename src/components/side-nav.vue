@@ -48,7 +48,7 @@ announcements
         showMsg("Please play a song, from a playlist");
         return
       }
-         socketService.emit('send announcements', {stationId: this.currStationForPlayer._id, from:this.user.username});
+         socketService.emit('send announcements', {stationId: this.currStationForPlayer._id, from: this.loggedUser.username});
     }
     },
     created() {
@@ -72,6 +72,9 @@ announcements
         },
         currStationForPlayer() {
             return this.$store.getters.currStationForPlayer;
+        },
+        loggedUser() {
+            return this.$store.getters.loggedUser;
         }
         
     },

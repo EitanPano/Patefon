@@ -5,6 +5,7 @@
         <span class="material-icons">play_arrow</span>
       </button>
       <button
+        v-if="$route.name !== 'likedStation'"
         @click="likeStation()"
         class="btn-blend btn-like"
         v-bind:class="{ liked: isLikedStation }"

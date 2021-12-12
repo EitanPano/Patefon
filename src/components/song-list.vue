@@ -127,6 +127,7 @@ export default {
       let currStation = this.$store.getters.currStation;
       let usersCreatedStations = this.$store.getters.createdStations;
       let idx = usersCreatedStations.findIndex((id) => id === currStation._id);
+      console.log(idx);
       if (idx || idx === 0) return false;
       else return true;
     },

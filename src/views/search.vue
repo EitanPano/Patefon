@@ -84,33 +84,26 @@ export default {
             return text.match(pattern).toString();
         },
         stations() {
-            // console.log(this.$store.getters.getExpandedStations.stations, "stations");
             return this.$store.getters.getExpandedStations.stations;
         },
         songs() {
-            // console.log(this.$store.getters.getExpandedStations.songs, "songs");
             return this.$store.getters.getExpandedStations.songs;
         },
         searchHistory() {
-            // console.log("getters", this.$store.getters.searchHistory);
             return this.$store.getters.searchHistory;
-            // return this.$store.getters.getSearchHistory;
         },
         stationsByGenre() {
             return this.$store.getters.stationsByGenre;
-            // return Object.values(this.$store.getters.stationsByGenre);
         },
         isClicked() {
             return this.$store.getters.isClicked;
         },
         filterBy() {
-            // console.log("filterBy.txt", this.$store.getters.filterBy.txt);
             return this.$store.getters.filterBy.txt;
         },
     },
     methods: {
         songToPlayerHistory(song, idx) {
-            // console.log("song from player", song);
             this.$store.commit({
                 type: "songToPlayer",
                 song,
@@ -123,7 +116,6 @@ export default {
             });
         },
         songToPlayer(song, idx) {
-            // console.log("song from player", song);
             this.$store.commit({
                 type: "songToPlayer",
                 song,
@@ -136,7 +128,6 @@ export default {
         updateUser(action) {
 
             if (!this.isClicked && action.type === "history") {
-                // console.log("history");
                 this.$store.dispatch({
                     type: "updateUser",
                     action,
@@ -157,7 +148,6 @@ export default {
             filterBy: { txt: "" },
         });
         this.$store.commit({ type: "clearSearch" });
-        // this.$store.commit({ type: "clearExpandedStations" });
     },
     components: {
         eventBusService,

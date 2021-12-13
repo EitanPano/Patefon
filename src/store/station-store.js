@@ -76,12 +76,6 @@ export const stationStore = {
             state.expandedStations = stations;
         },
         updateStation(state, { updatedStation }) {
-            // const idx = state.stations.findIndex(
-            //     (currStation) => currStation._id === updatedStation._id
-            // );
-            // console.log(idx);
-            // state.stations.splice(idx, 1, updatedStation);
-
             state.currStation = updatedStation
         },
         updateStationDrag(state, { updatedStation,moved }) {

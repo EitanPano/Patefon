@@ -23,7 +23,6 @@ export default {
     created () {
         socketService.on('get announcements', msg => {
         this.msgStationId = msg.stationId;
-        // console.log(this.msgStationId)
         this.user = msg.from;
         const stationName = this.getStations.find(station=> station._id === msg.stationId);
           this.StationIdsAndNames.unshift({id:this.msgStationId,stationName:stationName.name,from:this.user});
@@ -45,7 +44,6 @@ export default {
       return this.$store.getters.getStations;
       },
       windowWidth() {
-        console.log(window.innerWidth);
         return window.innerWidth
       }
     

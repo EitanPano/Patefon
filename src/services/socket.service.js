@@ -21,11 +21,6 @@ function createSocketService() {
   const socketService = {
     async setup() {
       socket = io(baseUrl)
-
-      // socket.on('chat addMsg', msg => {
-      //   console.log('Emitting Chat msg', msg);
-      // })
-
     },
     on(eventName, cb) {
       socket.on(eventName, cb)
@@ -76,11 +71,3 @@ function createDummySocketService() {
   }
   return socketService
 }
-
-
-// Basic Tests
-// function cb(x) {console.log(x)}
-// socketService.on('baba', cb)
-// socketService.emit('baba', 'DATA')
-// socketService.off('baba', cb)
-

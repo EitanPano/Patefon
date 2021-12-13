@@ -10,7 +10,6 @@ export const fetchService = {
 async function fetchYoutubeVideos(input) {
         try {
             const res = await axios.get(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=8&type=video&q=${input}&key=AIzaSyAKwr9TBCz-rA1NOUbslW5YHmLYG2IZXpg`);
-            // console.log(res.data);
             return res.data;
       }
         catch(err) {
@@ -22,7 +21,6 @@ async function fetchYoutubeVideos(input) {
 async function fetchYoutubeDuration(input) {
     try {
         const res = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${input}&part=contentDetails&key=AIzaSyAKwr9TBCz-rA1NOUbslW5YHmLYG2IZXpg`);
-        //  console.log(res.data);
          const duration = res.data.items[0].contentDetails.duration;
             const idxMin = duration.indexOf('M');
             const idxSec = duration.indexOf('S');

@@ -78,13 +78,10 @@ export default {
   computed: {
     loggedUserName() {
       const name = this.$store.getters.loggedUser.username
-      console.log('name', name);
       return name[0].toUpperCase() + name.slice(1);
     },
     likedSongs() {
-      console.log(this.$store.getters.likedSongs);
       return this.$store.getters.likedSongs;
-      //     return this.$store.getters.getLoggedUser.songs;
     },
     songsCount() {
       return this.likedSongs;

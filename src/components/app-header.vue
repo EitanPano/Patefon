@@ -92,11 +92,9 @@ export default {
   },
   methods: {
     goBack() {
-      console.log("hello");
       this.$router.go(-1);
     },
     goNext() {
-      console.log("hello?");
       switch (this.currPage) {
         case "Home":
           this.$router.push("/search");

@@ -35,15 +35,9 @@ async function getById(userId) {
 }
 
 function getUsers() {
-    // return axios.get(USER_URL, { withCredentials: true })
-    //     .then(res => res.data)
-    //     .then((users)=> {
-    //         console.log('got Users:',users);
-    //         return users
-    //     })
-        return httpService.get(`user`)
-
+    return httpService.get(`user`)
 }
+
 async function update(user) {
     // await storageService.put('user', user)
     user = await httpService.put(`user/${user._id}`, user)

@@ -34,7 +34,7 @@
     <!-- <div v-if="otherMouseCoords" class="socketMouse" :style="{left:otherMouseCoords.x + 'px', top:otherMouseCoords.y + 'px'}"> :three_button_mouse: {{otherMouseCoords.user}} </div> -->
     <chat-room :currStation="currStation" v-if="currStation" />
     <div
-      v-if="otherMouseCoords && myMouseCoords && otherMouseRatio && myScreen"
+      v-if="otherMouseCoords && otherMouseCoords.user && myMouseCoords && otherMouseRatio && myScreen"
       class="socketMouse"
       :style="{
         left: myScreen.x * otherMouseRatio.x + 'px',
@@ -116,24 +116,12 @@ export default {
     socketService.on("get update stations", (msg) => {
       window.location.reload();
     });
-    console.log("hello");
-    console.log(this.currStation._id);
   },
   mounted() {
-    // this.user = JSON.parse(sessionStorage.getItem("user"));
-    // window.addEventListener("mousemove", this.getWindowOffset);
-    // this.mouseMoveInterval = setInterval(() => {
-    //   socketService.emit("send mousemove", this.myMouseCoords);
-    // }, 100);
-    // socketService.on("get mousemove", (mouseCoords) => {
-    //   this.otherMouseCoords = mouseCoords;
-    // });
-
     this.user = JSON.parse(sessionStorage.getItem("user"));
     window.addEventListener("mousemove", this.getWindowOffset);
     this.mouseMoveInterval = setInterval(() => {
       this.myScreen = { x: window.innerWidth, y: window.innerHeight };
-      //  console.log(this.myScreen)
       socketService.emit("send mousemove", {
         mymouseCoords: this.myMouseCoords,
         ratio: {
@@ -141,12 +129,10 @@ export default {
           y: this.myMouseCoords.y / this.myScreen.y,
         },
       });
-    }, 100);
+    }, 50);
     socketService.on("get mousemove", (mouseCoords) => {
       this.otherMouseCoords = mouseCoords.mymouseCoords;
-      // console.log(this.otherMouseCoords)
       this.otherMouseRatio = mouseCoords.ratio;
-      // console.log(this.otherMouseRatio)
     });
   },
   methods: {
@@ -193,14 +179,12 @@ export default {
       });
     },
     updateUserLikedStations() {
-      console.log("hello");
       this.$store.dispatch({
         type: "updateUserLikedStations",
         station: this.currStation,
       });
     },
     goToSearch() {
-      console.log("searching...");
       this.$router.push(`/search`);
     },
     destroyed() {

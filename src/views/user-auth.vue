@@ -61,18 +61,16 @@ export default {
   },
   created() {
     this.newUser = userService.getEmptyUser();
-    // console.log(this.newUser);
   },
   methods: {
     login() {
-      // console.log(this.user);
+
       this.$store.dispatch({ type: "setLogin", user: this.user }).then(() => {
         this.$router.push("/");
         //Logged In Succesfully
       });
     },
     signup() {
-      // console.log(this.newUser);
       this.$store
         .dispatch({ type: "setSignup", newUserData: this.newUser })
         .then(() => {
@@ -82,9 +80,9 @@ export default {
       this.newUser = userService.getEmptyUser;
     },
     switchForm() {
-      // console.log("switching");
+
       this.isSignUp = !this.isSignUp;
-      // console.log(this.isSignUp);
+
     },
     exitLoginModal() {
       this.$router.push("/search");

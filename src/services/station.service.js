@@ -100,18 +100,11 @@ function remove(stationId) {
 }
 
 async function save(station) {
-    // if (station._id) {
-    //     const addedStation = await storageService.put(KEY, station);
-    //     return addedStation;
-    // } else {
-    //     const addedStation = await storageService.post(KEY, station);
-    //     return addedStation;
-    // }
     var returnedStation = null;
     if (station._id) returnedStation = await httpService.put(`station/${station._id}`, station)
     else returnedStation = await httpService.post(`station/`, station)
     // Handle case in which admin updates other station's details
-    // console.log(station)
+
     return returnedStation;
 }
 
@@ -155,10 +148,6 @@ async function getHistoryDB() {
     try {
         let songs = await storageService.query(SEARCH_KEY);
         return songs;
-        var searchHistory = await storageService.query(SEARCH_KEY);
-        console.log(searchHistory);
-        searchHistory = new Set();
-        return searchHistory;
     } catch (err) {
         console.log(err);
         throw err;

@@ -34,7 +34,6 @@ function checkDuplicateWith_id(arr, valueId){
 function getExclusiveArr(arr) {
   let setLabels = new Set();
   const exclusiveArr = [];
-  // console.log('array before changes',arr);
 
   // implementing Set on the objects :
   arr.forEach((obj) => {

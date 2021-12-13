@@ -55,7 +55,6 @@ export default {
             this.drag = true;
         },
         drop(ev) {
-            console.log(ev);
             if (ev.to.parentElement.className === 'drop-zone') {
                 ev.originalEvent.path[2].style.display = 'none';
                 // ev.from.originalEvent.path[2].hidden = true

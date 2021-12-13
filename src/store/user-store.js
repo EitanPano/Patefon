@@ -36,7 +36,6 @@ export const userStore = {
         async setInitialLogin({ commit }) {
             try {
                 let loggedUser = await authService.initialLogin();
-                console.log(loggedUser)
                 commit({ type: 'setUser', loggedUser });
                 return loggedUser;
             } catch (err) {

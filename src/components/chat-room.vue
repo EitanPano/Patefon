@@ -2,6 +2,7 @@
     <section class="chat-room">
         <button v-if="!isChatModalOpen" class="btn-chat" @click="openChatModal">
             <span class="material-icons" >textsms</span>
+            <div class="notification small highlight" v-if="chatMsgs.length">{{chatMsgs.length}}</div>
         </button>
         <transition name="rise">
             <div v-if="isChatModalOpen" class="chat">

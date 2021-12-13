@@ -82,11 +82,17 @@
     overflow: hidden;
 }
 
-
 // MARGIN
 .margin-0 {
     margin: 0;
 }
+.ml-0 {
+    margin-left: 0;
+}
+.ml-05 {
+    margin-left: 0.5em;
+}
+
 .mb-0 {
     margin-bottom: 0;
 }
@@ -126,6 +132,7 @@
         flex-wrap: wrap;
     }
 }
+
 
 
 
@@ -272,9 +279,25 @@
     font-size: 0.9em;
 }
 
+// NOTIFICATION
+.notification {
+    position: fixed;
+    background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    right: 1em;
+    bottom: 8.5em;
+
+}
+
 @include for-mobile-layout {
     .layout-padding {
         padding: 6.5em 2vw 10em 2vw;
+    }
+    .notification {
+        bottom: 12em;
     }
 }
 

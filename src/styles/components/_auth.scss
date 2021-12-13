@@ -20,7 +20,6 @@
     flex-direction: column;
     border-radius: 0.25em;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.9);
-    z-index: -1;
 
     > a {
         padding: 0.6em 0.7em;
@@ -28,9 +27,7 @@
         font-size: 0.9em;
         color: #fff;;
         border-radius: 0.3em;
-        // font-weight: bold;
         transition: all 0.1s;
-
 
         &:hover {
             background-color: #3f3f3f;

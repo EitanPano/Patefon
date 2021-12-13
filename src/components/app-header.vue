@@ -47,8 +47,7 @@
           >Sign In</router-link
         >
         <a v-else @click="logout">Log Out</a>
-        <router-link to="/auth">Profile</router-link>
-        <router-link to="/auth">About</router-link>
+        <router-link to="/about">About</router-link>
       </div>
     </transition>
   </aside>

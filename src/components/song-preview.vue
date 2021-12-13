@@ -23,7 +23,7 @@
                 @click="likeSong"
                 v-bind:class="{ liked: isLiked }"
             >
-                <span class="material-icons"> favorite </span>
+                <span class="material-icons big flex"> favorite </span>
             </button>
             <p>{{ song.duration }}</p>
             <button

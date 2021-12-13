@@ -1,0 +1,69 @@
+.about {
+    .welcome {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p {
+            line-height:  1.5em;
+        }
+    }
+
+    article {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 2em;
+    }
+}
+
+.bg-cover {
+
+}
+
+section .links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto;
+}
+.links a > img {
+    height: em(40px);
+    width: em(40px);
+    background-color: rgb(200, 200, 200);
+}
+.links a, .links img {
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+div.welcome {
+    display: flex;
+    font-weight: bold;
+    justify-content: flex-end;
+    padding: 2em 2em;
+}
+
+.welcome li {
+    padding: 4px 0;
+    min-width: 250px;
+}
+.skill-progress-pool {
+    height: 8px;
+    background-color: aliceblue;
+    box-shadow: 0 0 5px 2px rgb(255, 255, 255);
+    border-radius: 2em;
+}
+.progress-pool-bar {
+    display: block;
+    height: 100%;
+    background-color: rgba(165, 102, 202, 0.918);
+}
+
+
+
+.welcome img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}

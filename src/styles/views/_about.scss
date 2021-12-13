@@ -1,4 +1,17 @@
 .about {
+    max-width: calc(100% - $side-nav);
+    .about-bg {
+        z-index: -1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        // width: calc(100% - $side-nav - 4vw);
+
+        
+    }
+
     .welcome {
         display: flex;
         align-items: center;

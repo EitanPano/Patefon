@@ -1,6 +1,7 @@
 <template>
     <section class="main-layout layout-padding about">
         <h1>Development Team :</h1>
+        <img class="about-bg" src="../assets/images/developers/about-bg.jpg" alt="">
         <developer-info v-for="dev in developers" :key="dev.fullName" :devInfo="dev" />
 
     </section>
@@ -48,7 +49,7 @@ export default {
                 {
                     fullName: 'Mark Fishman',
                     age: '23',
-                    imgUrl: 'git_profile.jpg',
+                    imgUrl: 'profile-mark.jpg',
                     socialLinks: {
                         facebook: 'https://www.facebook.com/mark.fishman.35',
                         github: 'https://github.com/markfishman1',

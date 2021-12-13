@@ -1,5 +1,5 @@
 <template>
-    <div class="eitan space">
+    <div>
         <div>
             <div class="welcome">
                 <ul>

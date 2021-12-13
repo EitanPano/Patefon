@@ -33,9 +33,12 @@ async function login(userCred) {
     }
 }
 async function initialLogin() {
-    const user = await loginGuestUser()
+let user=userService.getLoggedinUser()
+if(!user){
+    user = await loginGuestUser()
     console.log(user);
     return user
+}else return user
 }
 
 

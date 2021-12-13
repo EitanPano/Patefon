@@ -5,12 +5,11 @@
         <span class="material-icons">play_arrow</span>
       </button>
       <button
-        v-if="$route.name !== 'likedStation'"
+        v-if="notUsersStation && $route.name !== 'likedStation'"
         @click="likeStation()"
         class="btn-blend btn-like"
         v-bind:class="{ liked: isLikedStation }"
       >
-        <!-- v-if="notUsersStation" -->
         <span v-if="!isLikedStation" class="material-icons"
           >favorite_border</span
         >
@@ -127,9 +126,8 @@ export default {
     notUsersStation() {
       let currStation = this.$store.getters.currStation;
       let usersCreatedStations = this.$store.getters.createdStations;
-      let idx = usersCreatedStations.findIndex((id) => id === currStation._id);
-      console.log(idx);
-      if (idx || idx === 0) return false;
+      let station = usersCreatedStations.find((id) => id === currStation._id);
+      if (station) return false;
       else return true;
     },
     searchList() {

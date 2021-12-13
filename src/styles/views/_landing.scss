@@ -15,7 +15,8 @@
     h1 {
         font-family: OleoScript;
         font-size: 8vh;
-        margin-top: 10vh;
+        margin-top: 12vh;
+        margin-bottom: 0;
         color: #fff;
         text-shadow: 0 0 10px #fff;
     }
@@ -29,8 +30,8 @@
     }
     
     img {
-        width: 35vh;
-        height: 35vh;
+        width: 28vh;
+        height: 28vh;
         opacity: 0.9;
         
         animation: fade 5s infinite;
@@ -39,6 +40,7 @@
     p {
         font-size: 3vh;
         font-family: LuckiestGuy;
+        margin-top: 3vh;
         margin-bottom: 4vh;
         text-shadow: 0 0 3px #fff;
         line-height: 3vh;

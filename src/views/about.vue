@@ -1,6 +1,6 @@
 <template>
     <section class="main-layout layout-padding about">
-        <h1>Development Team :</h1>
+        <h1 class="highlight">Development Team :</h1>
         <img class="about-bg" src="../assets/images/developers/about-bg.jpg" alt="">
         <developer-info v-for="dev in developers" :key="dev.fullName" :devInfo="dev" />
 

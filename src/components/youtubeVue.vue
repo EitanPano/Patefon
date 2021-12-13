@@ -17,8 +17,8 @@
             </div>
             <button
                 v-if="playingSong"
-                v-bind:class="{ liked: isLiked }"
                 @click="likeSong"
+                v-bind:class="{ liked: isLiked }"
             >
                 <span class="material-icons">favorite</span>
             </button>
@@ -258,9 +258,13 @@ export default {
         },
         isLiked() {
             let likedSongs = this.$store.getters.likedSongs;
-            if (likedSongs && likedSongs.length)
-                return this.checkIfSongLiked(likedSongs);
-            else return false;
+            if (likedSongs && likedSongs.length) {
+                let song = likedSongs.find(song=> song.id === this.localPlayListData.song.id)
+                if (song) return true;
+                else return false;
+            } else return false;
+                // return this.checkIfSongLiked(likedSongs);
+            // else return false;
         },
         showSongDuration() {
             let min = parseInt(this.songDuration / 60);
@@ -280,7 +284,7 @@ export default {
             if (this.scrollOffsetY < 60) return "transparent; box-shadow: none;";
             else if (this.scrollOffsetY < 120) return "rgba(50,50,50,0.5); box-shadow: none;";
             else return "rgba(50,50,50,0.4); box-shadow: inset 8em 0 3em 0 rgb(20, 20, 20);";
-        }
+        },
     },
     watch: {
         playListData: {

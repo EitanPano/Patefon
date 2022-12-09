@@ -2,4 +2,4 @@
 
 Link to our website
 
-https://patefon.herokuapp.com/#/
+https://patefon-7o0l.onrender.com
